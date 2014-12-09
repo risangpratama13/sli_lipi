@@ -868,7 +868,7 @@ class Ion_auth_model extends CI_Model
 	 * @return bool
 	 * @author Mathew
 	 **/
-	public function register($username, $password, $email, $additional_data = array(), $groups = array())
+	public function register($username, $password, $additional_data = array(), $groups = array())
 	{
 		$this->trigger_events('pre_register');
 
@@ -923,7 +923,6 @@ class Ion_auth_model extends CI_Model
 		$data = array(
 		    'username'   => $username,
 		    'password'   => $password,
-		    'email'      => $email,
 		    'ip_address' => $ip_address,
 		    'created_on' => time(),
 		    'active'     => ($manual_activation === false ? 1 : 0)
@@ -982,7 +981,7 @@ class Ion_auth_model extends CI_Model
 
 		$this->trigger_events('extra_where');
 
-		$query = $this->db->select($this->identity_column . ', username, email, id, password, active, last_login')
+		$query = $this->db->select($this->identity_column . ', username, id, password, active, last_login')
 		                  ->where($this->identity_column, $identity)
 		                  ->limit(1)
 		    			  ->order_by('id', 'desc')
@@ -1723,7 +1722,6 @@ class Ion_auth_model extends CI_Model
 		$session_data = array(
 		    'identity'             => $user->{$this->identity_column},
 		    'username'             => $user->username,
-		    'email'                => $user->email,
 		    'user_id'              => $user->id, //everyone likes to overwrite id so we'll use user_id
 		    'old_last_login'       => $user->last_login
 		);
@@ -1810,7 +1808,7 @@ class Ion_auth_model extends CI_Model
 
 		//get the user
 		$this->trigger_events('extra_where');
-		$query = $this->db->select($this->identity_column.', id, username, email, last_login')
+		$query = $this->db->select($this->identity_column.', id, username, last_login')
 		                  ->where($this->identity_column, get_cookie($this->config->item('identity_cookie_name', 'ion_auth')))
 		                  ->where('remember_code', get_cookie($this->config->item('remember_cookie_name', 'ion_auth')))
 		                  ->limit(1)
