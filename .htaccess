@@ -16,4 +16,4 @@
 
 <IfModule !mod_rewrite.c>
     ErrorDocument 404 /index.php
-</IfModule>  
+</IfModule> 
