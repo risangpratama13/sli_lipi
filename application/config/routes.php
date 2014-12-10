@@ -38,9 +38,16 @@
 |
 */
 
-$route['default_controller'] = "welcome";
+$route['default_controller'] = "auth/index";
 $route['404_override'] = '';
 
+$route['login'] = "auth/login";
+$route['logout'] = "auth/logout";
+$route['registrasi'] = "auth/member_registration";
+
+$route['administrator'] = "auth/configuration/1";
+$route['tambah_administrator'] = "auth/add_administrator";
+$route['ganti_password'] = "auth/change_password";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

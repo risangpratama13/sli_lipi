@@ -35,6 +35,10 @@ class Auth extends CI_Controller {
 
     //log the user in
     function login() {
+        if ($this->ion_auth->logged_in()) {
+            redirect('/', 'refresh');
+        }
+
         $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
 
@@ -95,9 +99,9 @@ class Auth extends CI_Controller {
             }
         } else {
             redirect('/', 'refresh');
-        }        
+        }
     }
-    
+
     //delete the user
     function delete() {
         if ($_SERVER['HTTP_REFERER']) {
@@ -109,7 +113,7 @@ class Auth extends CI_Controller {
             }
         } else {
             redirect('/', 'refresh');
-        }        
+        }
     }
 
     //create a new user
@@ -128,13 +132,13 @@ class Auth extends CI_Controller {
             $username = $this->input->post('username');
             $password = $this->input->post('password');
 
-            if($this->input->post('sex') == "M") {
+            if ($this->input->post('sex') == "M") {
                 $photo = "avatar_male.png";
-            } else if($this->input->post('sex') == "F") {
+            } else if ($this->input->post('sex') == "F") {
                 $photo = "avatar_female.png";
             }
             $this->db->insert('balances', array('value' => 0));
-            
+
             $additional_data = array(
                 'full_name' => $this->input->post('full_name'),
                 'sex' => $this->input->post('sex'),
@@ -144,7 +148,7 @@ class Auth extends CI_Controller {
         }
         if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $additional_data)) {
             $remember = (bool) $this->input->post('remember');
-            $this->ion_auth->login($this->input->post('username'), $this->input->post('password'), $remember);            
+            $this->ion_auth->login($this->input->post('username'), $this->input->post('password'), $remember);
             redirect("/", 'refresh');
         } else {
             $data['message'] = ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message'));
@@ -180,4 +184,131 @@ class Auth extends CI_Controller {
             $this->smartyci->display('registration.tpl');
         }
     }
+
+    function configuration($group_id) {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+
+        if ($group_id == 1) {
+            if ($this->ion_auth->in_group(3)) {
+                $administrators = $this->ion_auth->users($group_id)->result();
+
+                $this->basic_data();
+                $this->smartyci->assign('administrators', $administrators);
+                $this->smartyci->display('configuration/administrators.tpl');
+            } else {
+                redirect('/', 'refresh');
+            }
+        }
+    }
+
+    function add_administrator() {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+
+        if ($this->ion_auth->in_group(3)) {
+            $tables = $this->config->item('tables', 'ion_auth');
+            //validate form input
+            $this->form_validation->set_rules('username', 'Username', 'required|xss_clean|is_unique[' . $tables['users'] . '.username]');
+            $this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
+            $this->form_validation->set_rules('password_confirm', 'Konfirmasi Password', 'required');
+
+            if ($this->form_validation->run() == true) {
+                $username = $this->input->post('username');
+                $password = $this->input->post('password');
+            }
+
+            if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, "", array('1'))) {
+                redirect("/", 'refresh');
+            } else {
+                $data['message'] = ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message'));
+
+                $data['username'] = array(
+                    'name' => 'username',
+                    'class' => 'form-control',
+                    'placeholder' => 'Username',
+                    'type' => 'text',
+                    'value' => $this->form_validation->set_value('username'),
+                );
+                $data['password'] = array(
+                    'name' => 'password',
+                    'class' => 'form-control',
+                    'placeholder' => 'Password',
+                    'value' => $this->form_validation->set_value('password'),
+                );
+                $data['password_confirm'] = array(
+                    'name' => 'password_confirm',
+                    'class' => 'form-control',
+                    'placeholder' => 'Konfirmasi Password',
+                    'value' => $this->form_validation->set_value('password_confirm'),
+                );
+
+                $this->smartyci->assign('data', $data);
+                $this->basic_data();
+                $this->smartyci->display('configuration/add_administrator.tpl');
+            }
+        } else {
+            redirect('/', 'refresh');
+        }
+    }
+
+    function change_password($username = "") {
+        $this->form_validation->set_rules('old', 'Password Lama', 'required');
+        $this->form_validation->set_rules('new', 'Password Baru', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
+        $this->form_validation->set_rules('new_confirm', 'Konfirmasi Password', 'required');
+
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+        
+        if($username == "") {
+            $user = $this->ion_auth->user()->row();
+            $username = $user->username;
+        }
+        
+        if ($this->form_validation->run() == false) {
+            $data['message'] = $this->session->flashdata('message');
+
+            $data['min_password_length'] = $this->config->item('min_password_length', 'ion_auth');
+            $data['old_password'] = array(
+                'name' => 'old',
+                'class' => 'form-control',
+                'placeholder' => 'Password Lama',
+            );
+            $data['new_password'] = array(
+                'name' => 'new',
+                'class' => 'form-control',
+                'placeholder' => 'Password Baru',
+                'pattern' => '^.{' . $data['min_password_length'] . '}.*$',
+            );
+            $data['new_password_confirm'] = array(
+                'name' => 'new_confirm',
+                'class' => 'form-control',
+                'placeholder' => 'Konfirmasi Password Baru',
+                'pattern' => '^.{' . $data['min_password_length'] . '}.*$',
+            );
+            $data['username'] = array(
+                'name' => 'identity',                
+                'value' => $username
+            );
+
+            $this->basic_data();
+            $this->smartyci->assign('data', $data);
+            $this->smartyci->display('configuration/change_password.tpl');
+        } else {
+            $identity = $this->input->post('identity');
+            $change = $this->ion_auth->change_password($identity, $this->input->post('old'), $this->input->post('new'));
+
+            if ($change) {
+                $this->session->set_flashdata('message', $this->ion_auth->messages());
+                redirect('change_password', 'refresh');
+            } else {
+                $this->session->set_flashdata('message', $this->ion_auth->errors());
+                redirect('change_password', 'refresh');
+            }
+        }
+    }
+
 }
