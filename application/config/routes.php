@@ -48,6 +48,7 @@ $route['registrasi'] = "auth/member_registration";
 $route['administrator'] = "auth/configuration/1";
 $route['tambah_administrator'] = "auth/add_administrator";
 $route['ganti_password/(:any)'] = "auth/change_password/$1";
+$route['anggota'] = "auth/configuration/2";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

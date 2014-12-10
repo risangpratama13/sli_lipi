@@ -200,6 +200,19 @@ class Auth extends CI_Controller {
             } else {
                 redirect('/', 'refresh');
             }
+        } else if ($group_id == 2) {
+            if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
+                $members = $this->ion_auth->users($group_id)->result();
+                foreach ($members as $k => $member) {
+                    $members[$k]->groups = $this->ion_auth->get_users_groups($member->id)->result();
+                }
+
+                $this->basic_data();
+                $this->smartyci->assign('members', $members);
+                $this->smartyci->display('configuration/members.tpl');
+            } else {
+                redirect('/', 'refresh');
+            }
         }
     }
 
@@ -222,7 +235,7 @@ class Auth extends CI_Controller {
 
             if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, "", array('1'))) {
                 redirect("administrator", 'refresh');
-            } else {               
+            } else {
                 $data['username'] = array(
                     'name' => 'username',
                     'class' => 'form-control',
@@ -260,12 +273,12 @@ class Auth extends CI_Controller {
         if (!$this->ion_auth->logged_in()) {
             redirect('login', 'refresh');
         }
-        
-        if($username == "") {
+
+        if ($username == "") {
             $user = $this->ion_auth->user()->row();
             $username = $user->username;
         }
-        
+
         if ($this->form_validation->run() == false) {
             $data['message'] = $this->session->flashdata('message');
 
@@ -298,10 +311,10 @@ class Auth extends CI_Controller {
 
             if ($change) {
                 $this->session->set_flashdata('message', $this->ion_auth->messages());
-                redirect('ganti_password/'.$username, 'refresh');
+                redirect('ganti_password/' . $username, 'refresh');
             } else {
                 $this->session->set_flashdata('message', $this->ion_auth->errors());
-                redirect('ganti_password/'.$username, 'refresh');
+                redirect('ganti_password/' . $username, 'refresh');
             }
         }
     }
