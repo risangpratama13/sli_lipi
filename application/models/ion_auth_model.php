@@ -2194,4 +2194,9 @@ class Ion_auth_model extends CI_Model
 		//just return the string IP address now for better compatibility
 		return $ip_address;
 	}
+        
+        function get_user_id_by_username($username) {
+            $user = $this->db->get_where('users', array('username' => $username))->row();
+            return $user->id;
+        }
 }

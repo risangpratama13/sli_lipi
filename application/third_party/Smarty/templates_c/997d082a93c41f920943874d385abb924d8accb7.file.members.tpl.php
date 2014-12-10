@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-10 19:15:45
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-10 21:27:19
          compiled from "application\views\configuration\members.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:72495487c82f42e4c4-57416047%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '997d082a93c41f920943874d385abb924d8accb7' => 
     array (
       0 => 'application\\views\\configuration\\members.tpl',
-      1 => 1418212466,
+      1 => 1418221637,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -110,7 +110,8 @@ tambah_anggota" class="btn btn-flat btn-primary">
                         <table id="tableAdmin" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Nama Lengkap/Username</th>
+                                    <th>Nama Lengkap</th>
+                                    <th>Username</th>
                                     <th>Terdaftar</th>
                                     <th>Terakhir Login</th>
                                     <th>Operator</th>
@@ -126,7 +127,8 @@ $_smarty_tpl->tpl_vars['member']->_loop = true;
 ?>
                                     <tr>
                                         <td><?php echo $_smarty_tpl->tpl_vars['member']->value->full_name;?>
-/<?php echo $_smarty_tpl->tpl_vars['member']->value->username;?>
+</td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['member']->value->username;?>
 </td>
                                         <td><?php echo date('j F Y H:i:s',$_smarty_tpl->tpl_vars['member']->value->created_on);?>
 </td>

@@ -61,7 +61,6 @@
                             </div>
                         </div>
                     </div><!-- /.box-body -->
-
                     <div class="box-footer">
                         {form_submit('submit', "Tambahkan Anggota", 'class="btn btn-primary"')}
                     </div>

@@ -277,9 +277,18 @@ class Auth extends CI_Controller {
         if ($username == "") {
             $user = $this->ion_auth->user()->row();
             $username = $user->username;
+            $id = $user->id;
+        } else {
+            $id = $this->ion_auth->get_user_id_by_username($username);
         }
 
         if ($this->form_validation->run() == false) {
+            $usergroups = array();
+            $user_groups = $this->ion_auth->get_users_groups($id)->result_array();
+            foreach ($user_groups as $group) {
+                $usergroups[$group['id']] = $group['name'];
+            }
+            
             $data['message'] = $this->session->flashdata('message');
 
             $data['min_password_length'] = $this->config->item('min_password_length', 'ion_auth');
@@ -303,6 +312,7 @@ class Auth extends CI_Controller {
             $data['identity'] = $username;
 
             $this->basic_data();
+            $this->smartyci->assign('usergroups', $usergroups);
             $this->smartyci->assign('data', $data);
             $this->smartyci->display('configuration/change_password.tpl');
         } else {
@@ -340,76 +350,76 @@ class Auth extends CI_Controller {
             redirect('/', 'refresh');
         }
     }
-    
+
     function add_member() {
         if (!$this->ion_auth->logged_in()) {
             redirect('login', 'refresh');
         }
-        
-//        if (!$this->ion_auth->in_group(3) or !$this->ion_auth->is_admin()) {
-//            redirect('/', 'refresh');
-//        }
-        
-        $tables = $this->config->item('tables', 'ion_auth');
-        //validate form input
-        $this->form_validation->set_rules('full_name', 'Nama Lengkap', 'required|xss_clean');
-        $this->form_validation->set_rules('username', 'Username', 'required|xss_clean|is_unique[' . $tables['users'] . '.username]');
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
-        $this->form_validation->set_rules('password_confirm', 'Konfirmasi Password', 'required');
 
-        if ($this->form_validation->run() == true) {
-            $username = $this->input->post('username');
-            $password = $this->input->post('password');
+        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
+            $tables = $this->config->item('tables', 'ion_auth');
+            //validate form input
+            $this->form_validation->set_rules('full_name', 'Nama Lengkap', 'required|xss_clean');
+            $this->form_validation->set_rules('username', 'Username', 'required|xss_clean|is_unique[' . $tables['users'] . '.username]');
+            $this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
+            $this->form_validation->set_rules('password_confirm', 'Konfirmasi Password', 'required');
 
-            if ($this->input->post('sex') == "M") {
-                $photo = "avatar_male.png";
-            } else if ($this->input->post('sex') == "F") {
-                $photo = "avatar_female.png";
+            if ($this->form_validation->run() == true) {
+                $username = $this->input->post('username');
+                $password = $this->input->post('password');
+
+                if ($this->input->post('sex') == "M") {
+                    $photo = "avatar_male.png";
+                } else if ($this->input->post('sex') == "F") {
+                    $photo = "avatar_female.png";
+                }
+                $this->db->insert('balances', array('value' => 0));
+
+                $additional_data = array(
+                    'full_name' => $this->input->post('full_name'),
+                    'sex' => $this->input->post('sex'),
+                    'photo' => $photo,
+                    'balance_id' => $this->db->insert_id()
+                );
             }
-            $this->db->insert('balances', array('value' => 0));
+            if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $additional_data)) {
+                redirect("anggota", 'refresh');
+            } else {
+                $data['message'] = ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message'));
 
-            $additional_data = array(
-                'full_name' => $this->input->post('full_name'),
-                'sex' => $this->input->post('sex'),
-                'photo' => $photo,
-                'balance_id' => $this->db->insert_id()
-            );
-        }
-        if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $additional_data)) {
-            redirect("anggota", 'refresh');
+                $data['full_name'] = array(
+                    'name' => 'full_name',
+                    'class' => 'form-control',
+                    'placeholder' => 'Nama Lengkap',
+                    'type' => 'text',
+                    'value' => $this->form_validation->set_value('full_name'),
+                );
+                $data['username'] = array(
+                    'name' => 'username',
+                    'class' => 'form-control',
+                    'placeholder' => 'Username',
+                    'type' => 'text',
+                    'value' => $this->form_validation->set_value('username'),
+                );
+                $data['password'] = array(
+                    'name' => 'password',
+                    'class' => 'form-control',
+                    'placeholder' => 'Password',
+                    'value' => $this->form_validation->set_value('password'),
+                );
+                $data['password_confirm'] = array(
+                    'name' => 'password_confirm',
+                    'class' => 'form-control',
+                    'placeholder' => 'Konfirmasi Password',
+                    'value' => $this->form_validation->set_value('password_confirm'),
+                );
+
+                $this->basic_data();
+                $this->smartyci->assign('data', $data);
+                $this->smartyci->display('configuration/add_member.tpl');
+            }
         } else {
-            $data['message'] = ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message'));
-
-            $data['full_name'] = array(
-                'name' => 'full_name',
-                'class' => 'form-control',
-                'placeholder' => 'Nama Lengkap',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('full_name'),
-            );
-            $data['username'] = array(
-                'name' => 'username',
-                'class' => 'form-control',
-                'placeholder' => 'Username',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('username'),
-            );
-            $data['password'] = array(
-                'name' => 'password',
-                'class' => 'form-control',
-                'placeholder' => 'Password',
-                'value' => $this->form_validation->set_value('password'),
-            );
-            $data['password_confirm'] = array(
-                'name' => 'password_confirm',
-                'class' => 'form-control',
-                'placeholder' => 'Konfirmasi Password',
-                'value' => $this->form_validation->set_value('password_confirm'),
-            );
-
-            $this->basic_data();
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('configuration/add_member.tpl');
+            redirect('/', 'refresh');
         }
     }
 

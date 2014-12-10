@@ -30,7 +30,8 @@
                         <table id="tableAdmin" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Nama Lengkap/Username</th>
+                                    <th>Nama Lengkap</th>
+                                    <th>Username</th>
                                     <th>Terdaftar</th>
                                     <th>Terakhir Login</th>
                                     <th>Operator</th>
@@ -41,7 +42,8 @@
                             <tbody>                              
                                 {foreach $members as $member}
                                     <tr>
-                                        <td>{$member->full_name}/{$member->username}</td>
+                                        <td>{$member->full_name}</td>
+                                        <td>{$member->username}</td>
                                         <td>{date('j F Y H:i:s', $member->created_on)}</td>
                                         <td>
                                             {if $member->last_login != 0}

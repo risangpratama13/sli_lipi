@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-10 10:17:09
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-10 21:26:11
          compiled from "application\views\configuration\change_password.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:89745487ae1b7d6cb1-13986762%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7f813662e782f603651ef70e6fab25fb09359543' => 
     array (
       0 => 'application\\views\\configuration\\change_password.tpl',
-      1 => 1418181426,
+      1 => 1418221565,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1418139323,
+      1 => 1418213239,
       2 => 'file',
     ),
   ),
@@ -77,13 +77,22 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <section class="content-header">
         <h1>
             Konfigurasi Pengguna
-            <small>Administrator</small>
+            <?php if (in_array("members",$_smarty_tpl->tpl_vars['usergroups']->value)) {?>
+                <small>Anggota</small>
+            <?php } else { ?>
+                <small>Administrator</small>
+            <?php }?>            
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
             <li><a href="#">Konfigurasi Pengguna</a></li>
-            <li><a href="<?php echo base_url();?>
-administrator">Administrator</a></li>
+            <?php if (in_array("members",$_smarty_tpl->tpl_vars['usergroups']->value)) {?>
+                <li><a href="<?php echo base_url();?>
+anggota">Anggota</a></li>            
+            <?php } else { ?>
+                <li><a href="<?php echo base_url();?>
+administrator">Administrator</a></li>            
+            <?php }?>  
             <li class="active">Ubah Password</li>
         </ol>
     </section>

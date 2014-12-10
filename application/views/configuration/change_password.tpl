@@ -4,12 +4,20 @@
     <section class="content-header">
         <h1>
             Konfigurasi Pengguna
-            <small>Administrator</small>
+            {if in_array("members", $usergroups)}
+                <small>Anggota</small>
+            {else}
+                <small>Administrator</small>
+            {/if}            
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
             <li><a href="#">Konfigurasi Pengguna</a></li>
-            <li><a href="{base_url()}administrator">Administrator</a></li>
+            {if in_array("members", $usergroups)}
+                <li><a href="{base_url()}anggota">Anggota</a></li>            
+            {else}
+                <li><a href="{base_url()}administrator">Administrator</a></li>            
+            {/if}  
             <li class="active">Ubah Password</li>
         </ol>
     </section>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-10 19:13:08
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-10 19:22:01
          compiled from "application\views\configuration\add_member.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:27633548836ae036e30-28494044%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9bc586f68bd539d542679023ce200b7bea537e11' => 
     array (
       0 => 'application\\views\\configuration\\add_member.tpl',
-      1 => 1418213583,
+      1 => 1418213894,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -148,7 +148,6 @@ anggota">Anggota</a></li>
                             </div>
                         </div>
                     </div><!-- /.box-body -->
-
                     <div class="box-footer">
                         <?php echo form_submit('submit',"Tambahkan Anggota",'class="btn btn-primary"');?>
 
