@@ -16,11 +16,11 @@
         {if in_array("admin", $groups) or in_array("superadmin", $groups)}
             {include file='layouts/menu_admin.tpl'}
         {else}
-            {if in_array("members")}
+            {if in_array("members", $groups)}
                 {include file='layouts/menu_member.tpl'}
             {/if}
 
-            {if in_array("operators")}
+            {if in_array("operators", $groups)}
                 {include file='layouts/menu_operator.tpl'}
             {/if}
         {/if}        

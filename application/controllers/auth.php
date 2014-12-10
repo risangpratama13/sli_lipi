@@ -142,7 +142,7 @@ class Auth extends CI_Controller {
             $additional_data = array(
                 'full_name' => $this->input->post('full_name'),
                 'sex' => $this->input->post('sex'),
-                'photo' => $this->input->post('photo'),
+                'photo' => $photo,
                 'balance_id' => $this->db->insert_id()
             );
         }
@@ -221,10 +221,8 @@ class Auth extends CI_Controller {
             }
 
             if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, "", array('1'))) {
-                redirect("/", 'refresh');
-            } else {
-                $data['message'] = ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message'));
-
+                redirect("administrator", 'refresh');
+            } else {               
                 $data['username'] = array(
                     'name' => 'username',
                     'class' => 'form-control',
@@ -289,10 +287,7 @@ class Auth extends CI_Controller {
                 'placeholder' => 'Konfirmasi Password Baru',
                 'pattern' => '^.{' . $data['min_password_length'] . '}.*$',
             );
-            $data['username'] = array(
-                'name' => 'identity',                
-                'value' => $username
-            );
+            $data['identity'] = $username;
 
             $this->basic_data();
             $this->smartyci->assign('data', $data);
@@ -303,10 +298,10 @@ class Auth extends CI_Controller {
 
             if ($change) {
                 $this->session->set_flashdata('message', $this->ion_auth->messages());
-                redirect('change_password', 'refresh');
+                redirect('ganti_password/'.$username, 'refresh');
             } else {
                 $this->session->set_flashdata('message', $this->ion_auth->errors());
-                redirect('change_password', 'refresh');
+                redirect('ganti_password/'.$username, 'refresh');
             }
         }
     }

@@ -9,8 +9,8 @@
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
             <li><a href="#">Konfigurasi Pengguna</a></li>
-            <li><a href="#">Daftar Administrator</a></li>
-            <li class="active">Administrator</li>
+            <li><a href="{base_url()}administrator">Administrator</a></li>
+            <li class="active">Daftar Administrator</li>
         </ol>
     </section>
 
@@ -42,17 +42,21 @@
                                     <tr>
                                         <td>{$admin->username}</td>
                                         <td>{date('j F Y H:i:s', $admin->created_on)}</td>
-                                        <td>{date('j F Y H:i:s', $admin->last_login)}</td>
                                         <td>
-                                            {if $admin->active == 1}
-                                                <input type="checkbox" name="status" data-size="mini" checked>
-                                            {else}
-                                                <input type="checkbox" name="status" data-size="mini">
+                                            {if $admin->last_login != 0}
+                                                {date('j F Y H:i:s', $admin->last_login)}
                                             {/if}
                                         </td>
                                         <td>
-                                            <a href="{base_url()}ganti_password" title="Ganti Password" class="btn btn-flat btn-sm bg-navy"><i class="fa fa-unlock-alt"></i></a>
-                                            <button title="Hapus Admin" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
+                                            {if $admin->active == 1}
+                                                <input type="checkbox" data-username="{$admin->username}" data-id="{$admin->id}" name="status" data-size="mini" checked>
+                                            {else}
+                                                <input type="checkbox" data-username="{$admin->username}" data-id="{$admin->id}" name="status" data-size="mini">
+                                            {/if}
+                                        </td>
+                                        <td>
+                                            <a href="{base_url()}ganti_password/{$admin->username}" title="Ubah Password" class="btn btn-flat btn-sm bg-navy"><i class="fa fa-unlock-alt"></i></a>
+                                            <button onclick="deleteUser({$admin->id},'{$admin->username}')" title="Hapus Admin" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
                                         </td>
                                     </tr>
                                 {/foreach}
@@ -80,7 +84,52 @@
     <script type="text/javascript">
         $(function () {
             $("#tableAdmin").dataTable();
-            $("input[name='status']").bootstrapSwitch();
+            $('input[name="status"]').bootstrapSwitch();
+            $('input[name="status"]').on({
+                'switchChange.bootstrapSwitch': function (event, state) {
+                    var status = $(this).is(':checked') ? '1' : '0';
+                    var id = $(this).attr("data-id");
+                    var username = $(this).attr("data-username");
+                    if (status == "0") {
+                        var url = "{base_url()}auth/deactivate";
+                    } else if (status == "1") {
+                        var url = "{base_url()}auth/activate";
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: "id=" + id,
+                        success: function (data) {
+                            if (data == "Success") {
+                                if(status == "0") {
+                                    alert(" Akun " + username + " Tidak Aktif");
+                                } else {
+                                    alert(" Akun " + username + " Aktif");
+                                }
+                            }
+                        }
+                    });
+                }
+            });
         });
+
+        function deleteUser(id, username) {
+            var konfirmasi = confirm("Hapus Akun " + username + "?");
+            if (konfirmasi == true) {
+                $.ajax({
+                    type: "POST",
+                    url: "{base_url()}auth/delete",
+                    data: "id=" + id,
+                    success: function (data) {
+                        if (data == "Success") {
+                            alert(" Akun " + username + " Dihapus");
+                            location.reload();
+                        } else {
+                            alert(" Akun " + username + " Tidak Berhasil Dihapus");
+                        }
+                    }
+                });
+            }
+        }
     </script>
 {/block}

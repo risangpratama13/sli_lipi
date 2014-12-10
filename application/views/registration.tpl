@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="footer">                    
-                    {form_submit('login', "Mendaftar", 'class="btn bg-olive btn-block"')}
+                    {form_submit('registrasi', "Mendaftar", 'class="btn bg-olive btn-block"')}
                     <a href="{base_url()}login" class="text-center">Sudah Punya Akun</a>
                 </div>
             {form_close()}

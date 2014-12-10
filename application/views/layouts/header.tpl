@@ -43,7 +43,7 @@
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
-                            {if in_array("admin", $groups) or in_array("superadmin", $groups)}
+                            {if in_array("members", $groups)}
                                 <div class="pull-left">
                                     <a href="{base_url()}" class="btn btn-default btn-flat">Profil</a>
                                 </div>

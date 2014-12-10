@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-09 23:13:08
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-10 09:26:39
          compiled from "application\views\configuration\administrators.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2587554871e8d9c1087-61028372%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '4fc83b537e09c5f4db5b04ece39136a143e315c3' => 
     array (
       0 => 'application\\views\\configuration\\administrators.tpl',
-      1 => 1418141584,
+      1 => 1418178388,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -87,8 +87,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
             <li><a href="#">Konfigurasi Pengguna</a></li>
-            <li><a href="#">Daftar Administrator</a></li>
-            <li class="active">Administrator</li>
+            <li><a href="<?php echo base_url();?>
+administrator">Administrator</a></li>
+            <li class="active">Daftar Administrator</li>
         </ol>
     </section>
 
@@ -127,19 +128,30 @@ $_smarty_tpl->tpl_vars['admin']->_loop = true;
 </td>
                                         <td><?php echo date('j F Y H:i:s',$_smarty_tpl->tpl_vars['admin']->value->created_on);?>
 </td>
-                                        <td><?php echo date('j F Y H:i:s',$_smarty_tpl->tpl_vars['admin']->value->last_login);?>
-</td>
+                                        <td>
+                                            <?php if ($_smarty_tpl->tpl_vars['admin']->value->last_login!=0) {?>
+                                                <?php echo date('j F Y H:i:s',$_smarty_tpl->tpl_vars['admin']->value->last_login);?>
+
+                                            <?php }?>
+                                        </td>
                                         <td>
                                             <?php if ($_smarty_tpl->tpl_vars['admin']->value->active==1) {?>
-                                                <input type="checkbox" name="status" data-size="mini" checked>
+                                                <input type="checkbox" data-username="<?php echo $_smarty_tpl->tpl_vars['admin']->value->username;?>
+" data-id="<?php echo $_smarty_tpl->tpl_vars['admin']->value->id;?>
+" name="status" data-size="mini" checked>
                                             <?php } else { ?>
-                                                <input type="checkbox" name="status" data-size="mini">
+                                                <input type="checkbox" data-username="<?php echo $_smarty_tpl->tpl_vars['admin']->value->username;?>
+" data-id="<?php echo $_smarty_tpl->tpl_vars['admin']->value->id;?>
+" name="status" data-size="mini">
                                             <?php }?>
                                         </td>
                                         <td>
                                             <a href="<?php echo base_url();?>
-ganti_password" title="Ganti Password" class="btn btn-flat btn-sm bg-navy"><i class="fa fa-unlock-alt"></i></a>
-                                            <button title="Hapus Admin" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
+ganti_password/<?php echo $_smarty_tpl->tpl_vars['admin']->value->username;?>
+" title="Ubah Password" class="btn btn-flat btn-sm bg-navy"><i class="fa fa-unlock-alt"></i></a>
+                                            <button onclick="deleteUser(<?php echo $_smarty_tpl->tpl_vars['admin']->value->id;?>
+,'<?php echo $_smarty_tpl->tpl_vars['admin']->value->username;?>
+')" title="Hapus Admin" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -190,8 +202,56 @@ asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
  type="text/javascript">
         $(function () {
             $("#tableAdmin").dataTable();
-            $("input[name='status']").bootstrapSwitch();
+            $('input[name="status"]').bootstrapSwitch();
+            $('input[name="status"]').on({
+                'switchChange.bootstrapSwitch': function (event, state) {
+                    var status = $(this).is(':checked') ? '1' : '0';
+                    var id = $(this).attr("data-id");
+                    var username = $(this).attr("data-username");
+                    if (status == "0") {
+                        var url = "<?php echo base_url();?>
+auth/deactivate";
+                    } else if (status == "1") {
+                        var url = "<?php echo base_url();?>
+auth/activate";
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: "id=" + id,
+                        success: function (data) {
+                            if (data == "Success") {
+                                if(status == "0") {
+                                    alert(" Akun " + username + " Tidak Aktif");
+                                } else {
+                                    alert(" Akun " + username + " Aktif");
+                                }
+                            }
+                        }
+                    });
+                }
+            });
         });
+
+        function deleteUser(id, username) {
+            var konfirmasi = confirm("Hapus Akun " + username + "?");
+            if (konfirmasi == true) {
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url();?>
+auth/delete",
+                    data: "id=" + id,
+                    success: function (data) {
+                        if (data == "Success") {
+                            alert(" Akun " + username + " Dihapus");
+                            location.reload();
+                        } else {
+                            alert(" Akun " + username + " Tidak Berhasil Dihapus");
+                        }
+                    }
+                });
+            }
+        }
     <?php echo '</script'; ?>
 >
 

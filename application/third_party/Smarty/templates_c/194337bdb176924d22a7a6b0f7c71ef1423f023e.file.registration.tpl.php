@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-09 21:22:46
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-10 09:01:09
          compiled from "application\views\registration.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:30145548701d7039d15-78777328%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '194337bdb176924d22a7a6b0f7c71ef1423f023e' => 
     array (
       0 => 'application\\views\\registration.tpl',
-      1 => 1418134963,
+      1 => 1418176018,
       2 => 'file',
     ),
   ),
@@ -96,7 +96,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     </div>
                 </div>
                 <div class="footer">                    
-                    <?php echo form_submit('login',"Mendaftar",'class="btn bg-olive btn-block"');?>
+                    <?php echo form_submit('registrasi',"Mendaftar",'class="btn bg-olive btn-block"');?>
 
                     <a href="<?php echo base_url();?>
 login" class="text-center">Sudah Punya Akun</a>

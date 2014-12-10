@@ -47,6 +47,7 @@ $lang['activation_email_unsuccessful']   	 = 'Tidak Dapat Mengirimkan Email Akti
 // Login / Logout
 $lang['login_successful'] 		  	 = 'Log In Berhasil';
 $lang['login_unsuccessful'] 		  	 = 'Log In Gagal';
+$lang['login_unsuccessful_not_active']  	 = 'Log In Gagal. Akun Tidak Aktif';
 $lang['logout_successful'] 		 	 = 'Log Out Berhasil';
   
 // Account Changes

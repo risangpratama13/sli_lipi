@@ -1,6 +1,7 @@
 <?php
 
 $lang['required'] 			= "%s harus diisi";
+$lang['is_unique']				= "%s harus bernilai unik.";
 $lang['isset']				= "%s harus mempunyai nilai.";
 $lang['valid_email']		= "%s harus berisi email yang sah.";
 $lang['valid_emails'] 		= "%s harus berisi seluruh email yang sah.";
