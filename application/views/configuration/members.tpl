@@ -9,7 +9,7 @@
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
             <li><a href="#">Konfigurasi Pengguna</a></li>
-            <li><a href="{base_url()}member">Anggota</a></li>
+            <li><a href="{base_url()}anggota">Anggota</a></li>
             <li class="active">Daftar Anggota</li>
         </ol>
     </section>
@@ -49,13 +49,13 @@
                                             {/if}
                                         </td>
                                         <td>
+                                            {$checked = ""}
                                             {foreach $member->groups as $group}                                               
                                                 {if $group->id == 4}
-                                                    <input type="checkbox" data-username="{$member->username}" data-id="{$member->id}" name="group" data-size="mini" checked>
-                                                {else}
-                                                    <input type="checkbox" data-username="{$member->username}" data-id="{$member->id}" name="group" data-size="mini">
+                                                    {$checked = "checked"}
                                                 {/if}
                                             {/foreach}
+                                            <input type="checkbox" data-username="{$member->username}" data-id="{$member->id}" name="group" data-size="mini" {$checked}>
                                         </td>
                                         <td>
                                             {if $member->active == 1}
@@ -122,6 +122,32 @@
                     });
                 }
             });
+            $('input[name="group"]').on({
+                'switchChange.bootstrapSwitch': function (event, state) {
+                    var status = $(this).is(':checked') ? 'add' : 'remove';
+                    var id = $(this).attr("data-id");
+                    var username = $(this).attr("data-username");
+                    if (status == "add") {
+                        var url = "{base_url()}auth/operator/add";
+                    } else if (status == "remove") {
+                        var url = "{base_url()}auth/operator/remove";
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: "id=" + id,
+                        success: function (data) {
+                            if (data == "Success") {
+                                if(status == "remove") {
+                                    alert(" Akun " + username + " Dihapus Dari Grup Operator");
+                                } else {
+                                    alert(" Akun " + username + " Dimasukkan Ke Grup Operator");
+                                }
+                            }
+                        }
+                    });
+                }
+            });            
         });
 
         function deleteUser(id, username) {

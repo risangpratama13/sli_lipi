@@ -319,4 +319,98 @@ class Auth extends CI_Controller {
         }
     }
 
+    function operator($oper = "add") {
+        if ($_SERVER['HTTP_REFERER']) {
+            if ($oper == "add") {
+                $add_operator = $this->ion_auth->add_to_group(4, $this->input->post('id'));
+                if ($add_operator) {
+                    echo "Success";
+                } else {
+                    echo "Failed";
+                }
+            } else if ($oper == "remove") {
+                $remove_operator = $this->ion_auth->remove_from_group(4, $this->input->post('id'));
+                if ($remove_operator) {
+                    echo "Success";
+                } else {
+                    echo "Failed";
+                }
+            }
+        } else {
+            redirect('/', 'refresh');
+        }
+    }
+    
+    function add_member() {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+        
+//        if (!$this->ion_auth->in_group(3) or !$this->ion_auth->is_admin()) {
+//            redirect('/', 'refresh');
+//        }
+        
+        $tables = $this->config->item('tables', 'ion_auth');
+        //validate form input
+        $this->form_validation->set_rules('full_name', 'Nama Lengkap', 'required|xss_clean');
+        $this->form_validation->set_rules('username', 'Username', 'required|xss_clean|is_unique[' . $tables['users'] . '.username]');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
+        $this->form_validation->set_rules('password_confirm', 'Konfirmasi Password', 'required');
+
+        if ($this->form_validation->run() == true) {
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+
+            if ($this->input->post('sex') == "M") {
+                $photo = "avatar_male.png";
+            } else if ($this->input->post('sex') == "F") {
+                $photo = "avatar_female.png";
+            }
+            $this->db->insert('balances', array('value' => 0));
+
+            $additional_data = array(
+                'full_name' => $this->input->post('full_name'),
+                'sex' => $this->input->post('sex'),
+                'photo' => $photo,
+                'balance_id' => $this->db->insert_id()
+            );
+        }
+        if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $additional_data)) {
+            redirect("anggota", 'refresh');
+        } else {
+            $data['message'] = ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message'));
+
+            $data['full_name'] = array(
+                'name' => 'full_name',
+                'class' => 'form-control',
+                'placeholder' => 'Nama Lengkap',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('full_name'),
+            );
+            $data['username'] = array(
+                'name' => 'username',
+                'class' => 'form-control',
+                'placeholder' => 'Username',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('username'),
+            );
+            $data['password'] = array(
+                'name' => 'password',
+                'class' => 'form-control',
+                'placeholder' => 'Password',
+                'value' => $this->form_validation->set_value('password'),
+            );
+            $data['password_confirm'] = array(
+                'name' => 'password_confirm',
+                'class' => 'form-control',
+                'placeholder' => 'Konfirmasi Password',
+                'value' => $this->form_validation->set_value('password_confirm'),
+            );
+
+            $this->basic_data();
+            $this->smartyci->assign('data', $data);
+            $this->smartyci->display('configuration/add_member.tpl');
+        }
+    }
+
 }
