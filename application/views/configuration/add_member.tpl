@@ -46,19 +46,16 @@
                             {form_password($data.password_confirm)}
                             {form_error('password_confirm','<p class="help-block text-red">','</p>')}
                         </div>
-                        <div class="form-group">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="sex" value="M" checked>
-                                    Laki-laki
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="sex" value="F">
-                                    Perempuan
-                                </label>
-                            </div>
+                        <div class="form-group">                            
+                            <label>
+                                <input type="radio" name="sex" value="M" checked>
+                                Laki-laki
+                            </label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label>
+                                <input type="radio" name="sex" value="F">
+                                Perempuan
+                            </label>                           
                         </div>
                     </div><!-- /.box-body -->
                     <div class="box-footer">

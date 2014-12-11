@@ -288,7 +288,7 @@ class Auth extends CI_Controller {
             foreach ($user_groups as $group) {
                 $usergroups[$group['id']] = $group['name'];
             }
-            
+
             $data['message'] = $this->session->flashdata('message');
 
             $data['min_password_length'] = $this->config->item('min_password_length', 'ion_auth');
@@ -420,6 +420,66 @@ class Auth extends CI_Controller {
             }
         } else {
             redirect('/', 'refresh');
+        }
+    }
+
+    function account_setting($action = "") {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+
+        switch ($action) {
+            case "change_password":
+                $this->form_validation->set_rules('old', 'Password Lama', 'required');
+                $this->form_validation->set_rules('new', 'Password Baru', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
+                $this->form_validation->set_rules('new_confirm', 'Konfirmasi Password', 'required');
+
+                $user = $this->ion_auth->user()->row();
+                $username = $user->username;
+                
+                if ($this->form_validation->run() == false) {
+                    $data['message'] = $this->session->flashdata('message');
+
+                    $data['min_password_length'] = $this->config->item('min_password_length', 'ion_auth');
+                    $data['old_password'] = array(
+                        'name' => 'old',
+                        'class' => 'form-control',
+                        'placeholder' => 'Password Lama',
+                    );
+                    $data['new_password'] = array(
+                        'name' => 'new',
+                        'class' => 'form-control',
+                        'placeholder' => 'Password Baru',
+                        'pattern' => '^.{' . $data['min_password_length'] . '}.*$',
+                    );
+                    $data['new_password_confirm'] = array(
+                        'name' => 'new_confirm',
+                        'class' => 'form-control',
+                        'placeholder' => 'Konfirmasi Password Baru',
+                        'pattern' => '^.{' . $data['min_password_length'] . '}.*$',
+                    );
+                    $data['identity'] = $username;
+
+                    $this->basic_data();
+                    $this->smartyci->assign('data', $data);
+                    $this->smartyci->display('configuration/profil/change_password.tpl');
+                } else {
+                    $identity = $this->input->post('identity');
+                    $change = $this->ion_auth->change_password($identity, $this->input->post('old'), $this->input->post('new'));
+
+                    if ($change) {
+                        $this->session->set_flashdata('message', $this->ion_auth->messages());
+                        redirect('profil/ganti_password', 'refresh');
+                    } else {
+                        $this->session->set_flashdata('message', $this->ion_auth->errors());
+                        redirect('profil/ganti_password', 'refresh');
+                    }
+                }
+                break;
+            default:
+                $this->basic_data();
+                $this->smartyci->display('configuration/profile/personal.tpl');
+                break;
         }
     }
 
