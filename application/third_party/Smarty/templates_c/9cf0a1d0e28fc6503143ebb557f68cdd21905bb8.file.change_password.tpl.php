@@ -1,13 +1,13 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-12 06:21:20
-         compiled from "application\views\configuration\profile\personal.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:307235489837a29c369-09293533%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-12 06:22:55
+         compiled from "application\views\configuration\profile\change_password.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:27762548a26f417e827-58675489%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '46eae25c8982e2ed1f8bc5bf3face1bcf36226fe' => 
+    '9cf0a1d0e28fc6503143ebb557f68cdd21905bb8' => 
     array (
-      0 => 'application\\views\\configuration\\profile\\personal.tpl',
-      1 => 1418339757,
+      0 => 'application\\views\\configuration\\profile\\change_password.tpl',
+      1 => 1418340171,
       2 => 'file',
     ),
     '68cc9180bc6fb0dd465914a3c57d03a07aa9bace' => 
@@ -23,15 +23,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '307235489837a29c369-09293533',
+  'nocache_hash' => '27762548a26f417e827-58675489',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5489837a3b1929_28948546',
+  'unifunc' => 'content_548a26f4268e52_50970426',
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5489837a3b1929_28948546')) {function content_5489837a3b1929_28948546($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_548a26f4268e52_50970426')) {function content_548a26f4268e52_50970426($_smarty_tpl) {?><!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -139,12 +139,12 @@ asset/avatar/<?php echo $_smarty_tpl->tpl_vars['user']->value->photo;?>
                                 <div style="margin-top: 15px;">
                                 
     <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="<?php echo base_url();?>
-profil"><i class="fa fa-info-circle"></i> Informasi Pribadi</a></li>
-        <?php if (in_array("members",$_smarty_tpl->tpl_vars['groups']->value)) {?>
-            <li><a href="#"><i class="fa fa-pencil-square-o"></i> Ubah Informasi Pribadi</a></li>
-        <?php }?>
         <li><a href="<?php echo base_url();?>
+profil"><i class="fa fa-info-circle"></i> Informasi Pribadi</a></li>
+            <?php if (in_array("members",$_smarty_tpl->tpl_vars['groups']->value)) {?>
+            <li><a href="#"><i class="fa fa-pencil-square-o"></i> Ubah Informasi Pribadi</a></li>
+            <?php }?>
+        <li  class="active"><a href="<?php echo base_url();?>
 profil/ubah_password"><i class="fa fa-unlock"></i> Ubah Password</a></li>
     </ul>
 
@@ -152,129 +152,50 @@ profil/ubah_password"><i class="fa fa-unlock"></i> Ubah Password</a></li>
                         </div><!-- /.col (LEFT) -->
                         <div class="col-md-9 col-sm-8">
                         
+    <!-- Content Header (Page header) -->
     <h3 class="header">Informasi Akun</h3>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <tr>
-                <td>Username</td>
-                <td><?php echo $_smarty_tpl->tpl_vars['user']->value->username;?>
-</td>
-            </tr>
-            <?php if (in_array("members",$_smarty_tpl->tpl_vars['groups']->value)) {?>
-                <tr>
-                    <td>Nama Lengkap</td>
-                    <td><?php echo $_smarty_tpl->tpl_vars['user']->value->full_name;?>
-</td>
-                </tr>
-                <tr>
-                    <td>Jenis Kelamin</td>
-                    <td>
-                        <?php if ($_smarty_tpl->tpl_vars['user']->value->sex=="M") {?>
-                            Laki-laki
-                        <?php } else { ?>
-                            Perempuan
-                        <?php }?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Golongan/Jabatan</td>
-                    <td>
-                        <?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {?>
-                            <?php echo $_smarty_tpl->tpl_vars['member']->value->category;?>
-/<?php echo $_smarty_tpl->tpl_vars['member']->value->position;?>
+    <div class="box box-solid">
+        <?php echo form_open("ganti_password/".((string)$_smarty_tpl->tpl_vars['data']->value['identity']));?>
 
-                        <?php }?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Tempat Tanggal Lahir</td>
-                    <td>
-                        <?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {?>
-                            <?php echo $_smarty_tpl->tpl_vars['member']->value->birthplace;?>
-, <?php echo date('j F Y',strtotime($_smarty_tpl->tpl_vars['member']->value->birthday));?>
+        <?php echo form_hidden('identity',$_smarty_tpl->tpl_vars['data']->value['identity']);?>
 
-                        <?php }?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Alamat</td>
-                    <td><?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {
-echo $_smarty_tpl->tpl_vars['member']->value->address;?>
-}<?php }?></td>
-                </tr>
-                <tr>
-                    <td>Kota/Kabupaten</td>
-                    <td><?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {
-echo $_smarty_tpl->tpl_vars['member']->value->state_name;?>
-}<?php }?></td>
-                </tr>
-                <tr>
-                    <td>Propinsi</td>
-                    <td><?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {
-echo $_smarty_tpl->tpl_vars['member']->value->prov_name;?>
-}<?php }?></td>
-                </tr>
-                <tr>
-                    <td>No. Telp</td>
-                    <td><?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {
-echo $_smarty_tpl->tpl_vars['member']->value->phone;?>
-}<?php }?></td>
-                </tr>
-                <tr>
-                    <td>Kelompok Peneliti</td>
-                    <td><?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {
-echo $_smarty_tpl->tpl_vars['member']->value->researcher_name;?>
-}<?php }?></td>
-                </tr>
-                <tr>
-                    <td>Kelompok Penelitian</td>
-                    <td><?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {
-echo $_smarty_tpl->tpl_vars['member']->value->research_name;?>
-}<?php }?></td>
-                </tr>
-            <?php }?>
-            <tr>
-                <td>Terdaftar</td>
-                <td><?php echo date('j F Y H:i:s',$_smarty_tpl->tpl_vars['user']->value->created_on);?>
-</td>
-            </tr>
-            <tr>
-                <td>Kelompok Pengguna</td>
-                <td>
-                    <?php if (in_array("members",$_smarty_tpl->tpl_vars['groups']->value)) {?>
-                        <?php if (in_array("operators",$_smarty_tpl->tpl_vars['groups']->value)) {?>
-                            Anggota dan Operator
-                        <?php } else { ?>
-                            Anggota
-                        <?php }?>
-                    <?php } elseif (in_array("superadmin",$_smarty_tpl->tpl_vars['groups']->value)) {?>
-                        Superadministrator
-                    <?php } elseif (in_array("admin",$_smarty_tpl->tpl_vars['groups']->value)) {?>
-                        Administrator    
-                    <?php }?>
-                </td>
-            </tr>
-            <tr>
-                <td>Status Akun</td>
-                <td>
-                    <?php if ($_smarty_tpl->tpl_vars['user']->value->active==1) {?>
-                        <span class="label label-success">Aktif</span>
-                    <?php } else { ?>
-                        <span class="label label-danger">Tidak Aktif</span>
-                    <?php }?>
-                </td>
-            </tr>
-            <tr>
-                <td>Terakhir Masuk</td>
-                <td>
-                    <?php if ($_smarty_tpl->tpl_vars['user']->value->last_login!=0) {?>
-                        <?php echo date('j F Y H:i:s',$_smarty_tpl->tpl_vars['user']->value->last_login);?>
+        <div class="box-body">
+            <br/>
+            <?php echo $_smarty_tpl->tpl_vars['data']->value['message'];?>
 
-                    <?php }?>
-                </td>
-            </tr>
-        </table>
-    </div>
+            <div class="form-group">
+                <?php echo form_label('Password Lama','old');?>
+
+                <?php echo form_password($_smarty_tpl->tpl_vars['data']->value['old_password']);?>
+
+                <?php echo form_error('old','<p class="help-block text-red">','</p>');?>
+
+            </div>
+            <div class="form-group">
+                <?php echo form_label('Password Baru','new');?>
+
+                <?php echo form_password($_smarty_tpl->tpl_vars['data']->value['new_password']);?>
+
+                <?php echo form_error('new','<p class="help-block text-red">','</p>');?>
+
+            </div>
+            <div class="form-group">
+                <?php echo form_label('Konfirmasi Password Baru','new_confirm');?>
+
+                <?php echo form_password($_smarty_tpl->tpl_vars['data']->value['new_password_confirm']);?>
+
+                <?php echo form_error('new_confirm','<p class="help-block text-red">','</p>');?>
+
+            </div>
+        </div><!-- /.box-body -->
+
+        <div class="box-footer">
+            <?php echo form_submit('submit',"Simpan Password Baru",'class="btn btn-warning"');?>
+
+        </div>
+        <?php echo form_close();?>
+
+    </div><!-- /.box -->
 
                     </div><!-- /.col (RIGHT) -->
                 </div><!-- /.row -->

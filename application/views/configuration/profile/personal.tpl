@@ -5,7 +5,7 @@
         {if in_array("members", $groups)}
             <li><a href="#"><i class="fa fa-pencil-square-o"></i> Ubah Informasi Pribadi</a></li>
         {/if}
-        <li><a href="#"><i class="fa fa-unlock"></i> Ubah Password</a></li>
+        <li><a href="{base_url()}profil/ubah_password"><i class="fa fa-unlock"></i> Ubah Password</a></li>
     </ul>
 {/block}
 

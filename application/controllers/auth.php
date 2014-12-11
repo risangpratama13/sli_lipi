@@ -506,8 +506,9 @@ class Auth extends CI_Controller {
                     $data['identity'] = $username;
 
                     $this->basic_data();
+                    $this->smartyci->assign('action', 'Ubah Password');                   
                     $this->smartyci->assign('data', $data);
-                    $this->smartyci->display('configuration/profil/change_password.tpl');
+                    $this->smartyci->display('configuration/profile/change_password.tpl');
                 } else {
                     $identity = $this->input->post('identity');
                     $change = $this->ion_auth->change_password($identity, $this->input->post('old'), $this->input->post('new'));
