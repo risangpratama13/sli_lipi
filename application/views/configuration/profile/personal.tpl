@@ -2,7 +2,9 @@
 {block name="profile_menu"}
     <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="{base_url()}profil"><i class="fa fa-info-circle"></i> Informasi Pribadi</a></li>
-        <li><a href="#"><i class="fa fa-pencil-square-o"></i> Ubah Informasi Pribadi</a></li>
+        {if in_array("members", $groups)}
+            <li><a href="#"><i class="fa fa-pencil-square-o"></i> Ubah Informasi Pribadi</a></li>
+        {/if}
         <li><a href="#"><i class="fa fa-unlock"></i> Ubah Password</a></li>
     </ul>
 {/block}

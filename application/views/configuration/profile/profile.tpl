@@ -40,7 +40,8 @@
                                 </div>
                                 <div id="input_file" style="display: none;"> 
                                     <form id="avatar" method="POST" enctype="multipart/form-data" action="{base_url()}auth/account_setting/change_avatar"> 
-                                        <input type="file" id="file_avatar" name="file_avatar"/>
+                                        <input type="file" id="file_avatar" name="file_avatar" onchange="$('#submitAvatar').click();"/>
+                                        <input type="submit" id="submitAvatar" value="submit">
                                     </form>
                                 </div>
                                 <img src="{base_url()}asset/avatar/{$user->photo}" class="img-thumbnail"><br/><br/>
@@ -63,8 +64,61 @@
 </section><!-- /.content -->
 {/block}
 
+{block name="addon_plugins"}
+    <script type="text/javascript" src="{base_url()}asset/js/plugins/jquery-form/jquery.form.min.js"></script>
+{/block}
+
 {block name="addon_scripts"}
     <script type="text/javascript">
+        function beforeSubmitAvatar() {
+            if (window.File && window.FileReader && window.FileList && window.Blob) {
+                if (!$('#file_avatar').val()) {
+                    alert("Gambar Tidak Ada");
+                }
 
+                var fsize = $("#file_avatar")[0].files[0].size;
+                var ftype = $("#file_avatar")[0].files[0].type;
+
+                switch (ftype) {
+                    case 'image/png':
+                    case 'image/gif':
+                    case 'image/jpeg':
+                    case 'image/pjpeg':
+                        break;
+                    default:
+                        alert("Format File Yang Diupload Harus PNG, JPG, JPEG, atau GIF");
+                        return false
+                }
+
+                if (fsize > 1048576) {
+                    alert("Ukuran File Tidak Boleh Lebih Dari 1 MB");
+                    return false
+                }
+
+            } else {
+                alert("Browser Anda Tidak Mendukung Fasilitas Upload Ini");
+                return false;
+            }
+        }
+
+        $(document).ready(function () {
+            var options = {
+                resetForm: true,
+                beforeSubmit: beforeSubmitAvatar,
+                resetForm: true,
+                        success: function (data) {
+                            if (data == "Success") {
+                                location.reload();
+                            } else {
+                                alert("Foto Tidak Berhasil Diubah")
+                            }
+                        }
+            };
+
+            $('#submitAvatar').click(function () {
+                $('#avatar').ajaxSubmit(options);
+                return false;
+            });
+        });
     </script>
 {/block}

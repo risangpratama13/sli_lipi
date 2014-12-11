@@ -10,6 +10,7 @@ class Auth extends CI_Controller {
         $this->load->model('member');
         $this->load->library('form_validation');
         $this->load->helper('language');
+        $this->load->helper('getextension');
         $this->lang->load('auth');
     }
 
@@ -435,7 +436,46 @@ class Auth extends CI_Controller {
 
         switch ($action) {
             case "change_avatar":
-                
+                if ($_SERVER['HTTP_REFERER']) {
+                    $ext = getExtension($_FILES['file_avatar']['type']);
+                    $avatar_filename = "avatar_" . $username . $ext;
+
+                    $config['upload_path'] = './asset/avatar';
+                    $config['allowed_types'] = 'jpeg|jpg|png';
+                    $config['max_size'] = '1024';
+                    $config['max_width'] = '0';
+                    $config['max_height'] = '0';
+                    $config['overwrite'] = TRUE;
+                    $config['file_name'] = $avatar_filename;
+                    $this->load->library('upload', $config);
+
+                    if ($this->upload->do_upload('file_avatar')) {
+                        $datafile = $this->upload->data();
+
+                        $config['source_image'] = $datafile['full_path'];
+                        $config['new_image'] = './asset/avatar';
+                        $config['maintain_ratio'] = TRUE;
+                        $config['height'] = 300;
+                        $config['width'] = 300;
+                        $config['overwrite'] = TRUE;
+                        $this->load->library('image_lib', $config);
+
+                        if ($this->image_lib->resize()) {
+                            $data = array("photo" => $avatar_filename);
+                            if($this->ion_auth->update($id, $data)){
+                                echo "Success";                                
+                            } else {
+                                echo "Failed";
+                            }
+                        } else {
+                            echo "Failed";
+                        }
+                    } else {
+                        echo "Failed";
+                    }
+                } else {
+                    redirect('profil', 'refresh');
+                }
                 break;
             case "change_password":
                 $this->form_validation->set_rules('old', 'Password Lama', 'required');

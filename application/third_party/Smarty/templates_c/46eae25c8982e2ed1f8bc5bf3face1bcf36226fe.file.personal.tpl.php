@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-11 20:10:00
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-12 05:53:10
          compiled from "application\views\configuration\profile\personal.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:307235489837a29c369-09293533%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '46eae25c8982e2ed1f8bc5bf3face1bcf36226fe' => 
     array (
       0 => 'application\\views\\configuration\\profile\\personal.tpl',
-      1 => 1418303397,
+      1 => 1418337296,
       2 => 'file',
     ),
     '68cc9180bc6fb0dd465914a3c57d03a07aa9bace' => 
     array (
       0 => 'application\\views\\configuration\\profile\\profile.tpl',
-      1 => 1418302912,
+      1 => 1418338325,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -127,7 +127,8 @@ profil">Profil</a></li>
                                 <div id="input_file" style="display: none;"> 
                                     <form id="avatar" method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>
 auth/account_setting/change_avatar"> 
-                                        <input type="file" id="file_avatar" name="file_avatar"/>
+                                        <input type="file" id="file_avatar" name="file_avatar" onchange="$('#submitAvatar').click();"/>
+                                        <input type="submit" id="submitAvatar" value="submit">
                                     </form>
                                 </div>
                                 <img src="<?php echo base_url();?>
@@ -140,7 +141,9 @@ asset/avatar/<?php echo $_smarty_tpl->tpl_vars['user']->value->photo;?>
     <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="<?php echo base_url();?>
 profil"><i class="fa fa-info-circle"></i> Informasi Pribadi</a></li>
-        <li><a href="#"><i class="fa fa-pencil-square-o"></i> Ubah Informasi Pribadi</a></li>
+        <?php if (in_array("members",$_smarty_tpl->tpl_vars['groups']->value)) {?>
+            <li><a href="#"><i class="fa fa-pencil-square-o"></i> Ubah Informasi Pribadi</a></li>
+        <?php }?>
         <li><a href="#"><i class="fa fa-unlock"></i> Ubah Password</a></li>
     </ul>
 
@@ -297,6 +300,11 @@ asset/js/bootstrap.min.js" type="text/javascript"><?php echo '</script'; ?>
 >
         <!-- Addons Plugins -->
         
+    <?php echo '<script'; ?>
+ type="text/javascript" src="<?php echo base_url();?>
+asset/js/plugins/jquery-form/jquery.form.min.js"><?php echo '</script'; ?>
+>
+
         <!-- SLI LIPI App -->
         <?php echo '<script'; ?>
  src="<?php echo base_url();?>
@@ -306,7 +314,56 @@ asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
         
     <?php echo '<script'; ?>
  type="text/javascript">
+        function beforeSubmitAvatar() {
+            if (window.File && window.FileReader && window.FileList && window.Blob) {
+                if (!$('#file_avatar').val()) {
+                    alert("Gambar Tidak Ada");
+                }
 
+                var fsize = $("#file_avatar")[0].files[0].size;
+                var ftype = $("#file_avatar")[0].files[0].type;
+
+                switch (ftype) {
+                    case 'image/png':
+                    case 'image/gif':
+                    case 'image/jpeg':
+                    case 'image/pjpeg':
+                        break;
+                    default:
+                        alert("Format File Yang Diupload Harus PNG, JPG, JPEG, atau GIF");
+                        return false
+                }
+
+                if (fsize > 1048576) {
+                    alert("Ukuran File Tidak Boleh Lebih Dari 1 MB");
+                    return false
+                }
+
+            } else {
+                alert("Browser Anda Tidak Mendukung Fasilitas Upload Ini");
+                return false;
+            }
+        }
+
+        $(document).ready(function () {
+            var options = {
+                resetForm: true,
+                beforeSubmit: beforeSubmitAvatar,
+                resetForm: true,
+                        success: function (data) {
+                            if (data == "Success") {
+                                location.reload();
+                            } else {
+                                alert("Foto Tidak Berhasil Diubah")
+                            }
+                        }
+            };
+
+            $('#submitAvatar').click(function () {
+                $('#avatar').ajaxSubmit(options);
+                return false;
+            });
+        });
     <?php echo '</script'; ?>
 >
 
