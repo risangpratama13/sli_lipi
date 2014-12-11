@@ -42,12 +42,10 @@
                             </p>
                         </li>
                         <!-- Menu Footer-->
-                        <li class="user-footer">
-                            {if in_array("members", $groups)}
-                                <div class="pull-left">
-                                    <a href="{base_url()}" class="btn btn-default btn-flat">Profil</a>
-                                </div>
-                            {/if}
+                        <li class="user-footer">                            
+                            <div class="pull-left">
+                                <a href="{base_url()}profil" class="btn btn-default btn-flat">Profil</a>
+                            </div>
                             <div class="pull-right">
                                 <a href="{base_url()}logout" class="btn btn-default btn-flat">Keluar</a>
                             </div>

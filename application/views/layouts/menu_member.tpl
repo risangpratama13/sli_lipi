@@ -4,4 +4,9 @@
             <i class="fa fa-home"></i> <span>Home</span>
         </a>
     </li>    
+    <li>
+        <a href="{base_url()}profil">
+            <i class="fa fa-user"></i> <span>Profil</span>
+        </a>
+    </li>    
 </ul>

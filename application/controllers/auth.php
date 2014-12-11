@@ -7,6 +7,7 @@ class Auth extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        $this->load->model('member');
         $this->load->library('form_validation');
         $this->load->helper('language');
         $this->lang->load('auth');
@@ -428,15 +429,19 @@ class Auth extends CI_Controller {
             redirect('login', 'refresh');
         }
 
+        $user = $this->ion_auth->user()->row();
+        $username = $user->username;
+        $id = $user->id;
+
         switch ($action) {
+            case "change_avatar":
+                
+                break;
             case "change_password":
                 $this->form_validation->set_rules('old', 'Password Lama', 'required');
                 $this->form_validation->set_rules('new', 'Password Baru', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
                 $this->form_validation->set_rules('new_confirm', 'Konfirmasi Password', 'required');
 
-                $user = $this->ion_auth->user()->row();
-                $username = $user->username;
-                
                 if ($this->form_validation->run() == false) {
                     $data['message'] = $this->session->flashdata('message');
 
@@ -477,6 +482,11 @@ class Auth extends CI_Controller {
                 }
                 break;
             default:
+                if ($this->ion_auth->in_group(2)) {
+                    $member = $this->member->by_user_id($id);
+                    $this->smartyci->assign('member', $member);
+                }
+                $this->smartyci->assign('action', 'Informasi Akun');
                 $this->basic_data();
                 $this->smartyci->display('configuration/profile/personal.tpl');
                 break;

@@ -50,6 +50,7 @@ $route['tambah_administrator'] = "auth/add_administrator";
 $route['ganti_password/(:any)'] = "auth/change_password/$1";
 $route['anggota'] = "auth/configuration/2";
 $route['tambah_anggota'] = "auth/add_member";
+$route['profil'] = "auth/account_setting";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

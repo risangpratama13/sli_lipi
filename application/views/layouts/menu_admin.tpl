@@ -15,7 +15,7 @@
                 <li><a href="{base_url()}administrator"><i class="fa fa-angle-double-right"></i> Administrator</a></li>            
             {/if}
             <li><a href="{base_url()}anggota"><i class="fa fa-angle-double-right"></i> Anggota</a></li>
-            <li><a href="{base_url()}"><i class="fa fa-angle-double-right"></i> Profil</a></li>
+            <li><a href="{base_url()}profil"><i class="fa fa-angle-double-right"></i> Profil</a></li>
         </ul>
     </li>
 </ul>

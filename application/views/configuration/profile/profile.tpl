@@ -36,29 +36,35 @@
                             <div class="col-md-3 col-sm-4">
                                 <div class="box-header">
                                     <i class="fa fa-user"></i>
-                                    {if in_array("admin", $groups) or in_array("superadmin", $groups)}
-                                        <h3 class="box-title">{$user->username}</h3>
-                                    {else}
-                                        <h3 class="box-title">{$user->full_name}</h3>
-                                    {/if}
+                                    <h3 class="box-title">{$user->username}</h3>                                   
                                 </div>
-
-                                <img src="{base_url()}asset/avatar/{$user->photo}" class="img-thumbnail">
-                                <a class="btn btn-block btn-primary"><i class="fa fa-picture-o"></i> Ubah Foto</a>
+                                <div id="input_file" style="display: none;"> 
+                                    <form id="avatar" method="POST" enctype="multipart/form-data" action="{base_url()}auth/account_setting/change_avatar"> 
+                                        <input type="file" id="file_avatar" name="file_avatar"/>
+                                    </form>
+                                </div>
+                                <img src="{base_url()}asset/avatar/{$user->photo}" class="img-thumbnail"><br/><br/>
+                                <button onclick="$('#file_avatar').click();" class="btn btn-block btn-primary"><i class="fa fa-picture-o"></i> Ubah Foto</button>
                                 <!-- Navigation - folders-->
                                 <div style="margin-top: 15px;">
-                                    {block name="profile_menu"}{/block}
-                                </div>
-                            </div><!-- /.col (LEFT) -->
-                            <div class="col-md-9 col-sm-8">
-                                {block name="profile_content"}{/block}
-                            </div><!-- /.col (RIGHT) -->
-                        </div><!-- /.row -->
-                    </div><!-- /.box-body -->
-                    {block name="profile_footer"}{/block}
-                </div><!-- /.box -->
-            </div><!-- /.col (MAIN) -->
-        </div>
-        <!-- MAILBOX END -->
-    </section><!-- /.content -->
+                                {block name="profile_menu"}{/block}
+                            </div>
+                        </div><!-- /.col (LEFT) -->
+                        <div class="col-md-9 col-sm-8">
+                        {block name="profile_content"}{/block}
+                    </div><!-- /.col (RIGHT) -->
+                </div><!-- /.row -->
+            </div><!-- /.box-body -->
+        {block name="profile_footer"}{/block}
+    </div><!-- /.box -->
+</div><!-- /.col (MAIN) -->
+</div>
+<!-- MAILBOX END -->
+</section><!-- /.content -->
+{/block}
+
+{block name="addon_scripts"}
+    <script type="text/javascript">
+
+    </script>
 {/block}
