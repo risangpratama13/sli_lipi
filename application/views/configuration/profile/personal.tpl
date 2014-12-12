@@ -50,27 +50,27 @@
                 </tr>
                 <tr>
                     <td>Alamat</td>
-                    <td>{if !empty($member)}{$member->address}}{/if}</td>
+                    <td>{if !empty($member)}{$member->address}{/if}</td>
                 </tr>
                 <tr>
                     <td>Kota/Kabupaten</td>
-                    <td>{if !empty($member)}{$member->state_name}}{/if}</td>
+                    <td>{if !empty($member)}{$member->state_name}{/if}</td>
                 </tr>
                 <tr>
                     <td>Propinsi</td>
-                    <td>{if !empty($member)}{$member->prov_name}}{/if}</td>
+                    <td>{if !empty($member)}{$member->prov_name}{/if}</td>
                 </tr>
                 <tr>
                     <td>No. Telp</td>
-                    <td>{if !empty($member)}{$member->phone}}{/if}</td>
+                    <td>{if !empty($member)}{$member->phone}{/if}</td>
                 </tr>
                 <tr>
                     <td>Kelompok Peneliti</td>
-                    <td>{if !empty($member)}{$member->researcher_name}}{/if}</td>
+                    <td>{if !empty($member)}{$member->researcher_name}{/if}</td>
                 </tr>
                 <tr>
                     <td>Kelompok Penelitian</td>
-                    <td>{if !empty($member)}{$member->research_name}}{/if}</td>
+                    <td>{if !empty($member)}{$member->research_name}{/if}</td>
                 </tr>
             {/if}
             <tr>

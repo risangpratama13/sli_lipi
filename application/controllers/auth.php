@@ -484,6 +484,8 @@ class Auth extends CI_Controller {
 
                 $this->load->model('province');
                 $this->load->model('state');
+                $this->load->model('researcher');
+                $this->load->model('research');
 
                 $this->form_validation->set_rules('full_name', 'Nama Lengkap', 'required|xss_clean');
                 $this->form_validation->set_rules('category', 'Golongan', 'required|xss_clean');
@@ -500,6 +502,8 @@ class Auth extends CI_Controller {
                 $member = $this->member->by_user_id($id);
                 $provinces = $this->province->get_all();
                 $states = $this->state->get_all();
+                $researchers = $this->researcher->get_all();
+                $researches = $this->research->get_all();
 
                 if ($this->form_validation->run() == false) {
                     $data['message'] = $this->session->flashdata('message');
@@ -508,51 +512,44 @@ class Auth extends CI_Controller {
                         'name' => 'full_name',
                         'class' => 'form-control',
                         'placeholder' => 'Nama Lengkap',
+                        'value' => $user->full_name,
                         'type' => 'text'
                     );
                     $data['category'] = array(
                         'name' => 'category',
                         'class' => 'form-control',
                         'placeholder' => 'Golongan',
+                        'value' => !empty($member->category) ? $member->category : "",
                         'type' => 'text'
                     );
                     $data['position'] = array(
                         'name' => 'position',
                         'class' => 'form-control',
                         'placeholder' => 'Jabatan',
+                        'value' => !empty($member->position) ? $member->position : "",
                         'type' => 'text'
                     );
                     $data['birthplace'] = array(
                         'name' => 'birthplace',
                         'class' => 'form-control',
                         'placeholder' => 'Tempat Lahir',
+                        'value' => !empty($member->birthplace) ? $member->birthplace : "",
                         'type' => 'text'
-                    );
-                    $data['birthday'] = array(
-                        'name' => 'birthday',
-                        'class' => 'form-control',
-                        'data-inputmask' => "'alias': 'yyyy-mm-dd'",
-                        'type' => 'text',
-                        'data-mask'
                     );
                     $data['address'] = array(
                         'name' => 'address',
                         'class' => 'form-control',
-                        'rows' => 3
-                    );
-                    $data['phone'] = array(
-                        'name' => 'phone',
-                        'class' => 'form-control',
-                        'data-inputmask' => "'mask': ['+62(8##)###-##-###']",
-                        'type' => 'text',
-                        'data-mask'
-                    );
+                        'rows' => 3,
+                        'value' => !empty($member->address) ? $member->address : ""
+                    );                    
 
                     $this->basic_data();
                     $this->smartyci->assign('action', 'Ubah Informasi Pribadi');
                     $this->smartyci->assign('member', $member);
                     $this->smartyci->assign('provinces', $provinces);
                     $this->smartyci->assign('states', $states);
+                    $this->smartyci->assign('researchers', $researchers);
+                    $this->smartyci->assign('researches', $researches);
                     $this->smartyci->assign('data', $data);
                     $this->smartyci->display('configuration/profile/change_personal_info.tpl');
                 } else {
@@ -579,12 +576,12 @@ class Auth extends CI_Controller {
                         $this->ion_auth->update($id, $data_users);
                         $this->member->create_member($data_member);
                         $this->session->set_flashdata('message', "Informasi Pribadi Berhasil Dirubah");
-                        redirect('profil/ubah_profil');
+                        redirect('profil', 'refresh');
                     } else if($this->input->post('oper') == "edit") {
                         $this->ion_auth->update($id, $data_users);
                         $this->member->update_member($this->input->post('member_id'), $data_member);
                         $this->session->set_flashdata('message', "Informasi Pribadi Berhasil Dirubah");
-                        redirect('profil/ubah_profil');
+                        redirect('profil', 'refresh');
                     }
                 }
                 break;

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-12 07:39:30
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-12 10:35:51
          compiled from "application\views\configuration\profile\personal.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:307235489837a29c369-09293533%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '46eae25c8982e2ed1f8bc5bf3face1bcf36226fe' => 
     array (
       0 => 'application\\views\\configuration\\profile\\personal.tpl',
-      1 => 1418344048,
+      1 => 1418355348,
       2 => 'file',
     ),
     '68cc9180bc6fb0dd465914a3c57d03a07aa9bace' => 
@@ -200,38 +200,38 @@ profil/ubah_password"><i class="fa fa-unlock"></i> Ubah Password</a></li>
                 <tr>
                     <td>Alamat</td>
                     <td><?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {
-echo $_smarty_tpl->tpl_vars['member']->value->address;?>
-}<?php }?></td>
+echo $_smarty_tpl->tpl_vars['member']->value->address;
+}?></td>
                 </tr>
                 <tr>
                     <td>Kota/Kabupaten</td>
                     <td><?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {
-echo $_smarty_tpl->tpl_vars['member']->value->state_name;?>
-}<?php }?></td>
+echo $_smarty_tpl->tpl_vars['member']->value->state_name;
+}?></td>
                 </tr>
                 <tr>
                     <td>Propinsi</td>
                     <td><?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {
-echo $_smarty_tpl->tpl_vars['member']->value->prov_name;?>
-}<?php }?></td>
+echo $_smarty_tpl->tpl_vars['member']->value->prov_name;
+}?></td>
                 </tr>
                 <tr>
                     <td>No. Telp</td>
                     <td><?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {
-echo $_smarty_tpl->tpl_vars['member']->value->phone;?>
-}<?php }?></td>
+echo $_smarty_tpl->tpl_vars['member']->value->phone;
+}?></td>
                 </tr>
                 <tr>
                     <td>Kelompok Peneliti</td>
                     <td><?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {
-echo $_smarty_tpl->tpl_vars['member']->value->researcher_name;?>
-}<?php }?></td>
+echo $_smarty_tpl->tpl_vars['member']->value->researcher_name;
+}?></td>
                 </tr>
                 <tr>
                     <td>Kelompok Penelitian</td>
                     <td><?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {
-echo $_smarty_tpl->tpl_vars['member']->value->research_name;?>
-}<?php }?></td>
+echo $_smarty_tpl->tpl_vars['member']->value->research_name;
+}?></td>
                 </tr>
             <?php }?>
             <tr>
