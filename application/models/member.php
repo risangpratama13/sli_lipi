@@ -18,6 +18,15 @@ class Member extends CI_Model {
         $this->db->where('members.user_id', $user_id);
         $query = $this->db->get();
         return $query->row();
-    } 
+    }
+    
+    function create_member($data) {
+        return $this->db->insert($this->table, $data);
+    }
+    
+    function update_member($id, $data) {
+        $this->db->where('id', $id);
+        return $this->db->update($this->table, $data);
+    }
     
 }

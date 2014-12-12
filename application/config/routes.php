@@ -51,6 +51,7 @@ $route['ganti_password/(:any)'] = "auth/change_password/$1";
 $route['anggota'] = "auth/configuration/2";
 $route['tambah_anggota'] = "auth/add_member";
 $route['profil'] = "auth/account_setting";
+$route['profil/ubah_profil'] = "auth/account_setting/change_profile";
 $route['profil/ubah_password'] = "auth/account_setting/change_password";
 
 /* End of file routes.php */

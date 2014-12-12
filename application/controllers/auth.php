@@ -462,8 +462,8 @@ class Auth extends CI_Controller {
 
                         if ($this->image_lib->resize()) {
                             $data = array("photo" => $avatar_filename);
-                            if($this->ion_auth->update($id, $data)){
-                                echo "Success";                                
+                            if ($this->ion_auth->update($id, $data)) {
+                                echo "Success";
                             } else {
                                 echo "Failed";
                             }
@@ -475,6 +475,117 @@ class Auth extends CI_Controller {
                     }
                 } else {
                     redirect('profil', 'refresh');
+                }
+                break;
+            case "change_profile":
+                if (!$this->ion_auth->in_group(2)) {
+                    redirect('profil', 'refresh');
+                }
+
+                $this->load->model('province');
+                $this->load->model('state');
+
+                $this->form_validation->set_rules('full_name', 'Nama Lengkap', 'required|xss_clean');
+                $this->form_validation->set_rules('category', 'Golongan', 'required|xss_clean');
+                $this->form_validation->set_rules('position', 'Jabatan', 'required|xss_clean');
+                $this->form_validation->set_rules('birthplace', 'Tempat Lahir', 'required|xss_clean');
+                $this->form_validation->set_rules('birthday', 'Tanggal Lahir', 'required|xss_clean');
+                $this->form_validation->set_rules('address', 'Alamat', 'required|xss_clean');
+                $this->form_validation->set_rules('province', 'Propinsi', 'required|xss_clean');
+                $this->form_validation->set_rules('state', 'Kabupaten/Kota', 'required|xss_clean');
+                $this->form_validation->set_rules('phone', 'Kabupaten/Kota', 'required|xss_clean');
+                $this->form_validation->set_rules('researcher', 'Kelompok Peneliti', 'required|xss_clean');
+                $this->form_validation->set_rules('research', 'Kelompok Penelitian', 'required|xss_clean');
+
+                $member = $this->member->by_user_id($id);
+                $provinces = $this->province->get_all();
+                $states = $this->state->get_all();
+
+                if ($this->form_validation->run() == false) {
+                    $data['message'] = $this->session->flashdata('message');
+
+                    $data['full_name'] = array(
+                        'name' => 'full_name',
+                        'class' => 'form-control',
+                        'placeholder' => 'Nama Lengkap',
+                        'type' => 'text'
+                    );
+                    $data['category'] = array(
+                        'name' => 'category',
+                        'class' => 'form-control',
+                        'placeholder' => 'Golongan',
+                        'type' => 'text'
+                    );
+                    $data['position'] = array(
+                        'name' => 'position',
+                        'class' => 'form-control',
+                        'placeholder' => 'Jabatan',
+                        'type' => 'text'
+                    );
+                    $data['birthplace'] = array(
+                        'name' => 'birthplace',
+                        'class' => 'form-control',
+                        'placeholder' => 'Tempat Lahir',
+                        'type' => 'text'
+                    );
+                    $data['birthday'] = array(
+                        'name' => 'birthday',
+                        'class' => 'form-control',
+                        'data-inputmask' => "'alias': 'yyyy-mm-dd'",
+                        'type' => 'text',
+                        'data-mask'
+                    );
+                    $data['address'] = array(
+                        'name' => 'address',
+                        'class' => 'form-control',
+                        'rows' => 3
+                    );
+                    $data['phone'] = array(
+                        'name' => 'phone',
+                        'class' => 'form-control',
+                        'data-inputmask' => "'mask': ['+62(8##)###-##-###']",
+                        'type' => 'text',
+                        'data-mask'
+                    );
+
+                    $this->basic_data();
+                    $this->smartyci->assign('action', 'Ubah Informasi Pribadi');
+                    $this->smartyci->assign('member', $member);
+                    $this->smartyci->assign('provinces', $provinces);
+                    $this->smartyci->assign('states', $states);
+                    $this->smartyci->assign('data', $data);
+                    $this->smartyci->display('configuration/profile/change_personal_info.tpl');
+                } else {
+                    $data_users = array(
+                        'full_name' => $this->input->post('full_name'),
+                        'sex' => $this->input->post('sex')
+                    );
+                    
+                    $data_member = array(
+                        'user_id' => $id,
+                        'category' => $this->input->post('category'),
+                        'position' => $this->input->post('position'),
+                        'birthplace' => $this->input->post('birthplace'),
+                        'birthday' => $this->input->post('birthday'),
+                        'address' => $this->input->post('address'),
+                        'province_id' => $this->input->post('province'),
+                        'state_id' => $this->input->post('state'),
+                        'phone' => $this->input->post('phone'),
+                        'researcher_id' => $this->input->post('researcher'),
+                        'research_id' => $this->input->post('research')
+                    );
+                    
+                    if($this->input->post('oper') == "add") {
+                        $this->ion_auth->update($id, $data_users);
+                        $this->member->create_member($data_member);
+                        $this->session->set_flashdata('message', "Informasi Pribadi Berhasil Dirubah");
+                        redirect('profil/ubah_profil');
+                    } else if($this->input->post('oper') == "edit") {
+                        $this->ion_auth->update($id, $data_users);
+                        $this->member->update_member($this->input->post('member_id'), $data_member);
+                        $this->session->set_flashdata('message', "Informasi Pribadi Berhasil Dirubah");
+                        redirect('profil/ubah_profil');
+                    }
                 }
                 break;
             case "change_password":
@@ -506,7 +617,7 @@ class Auth extends CI_Controller {
                     $data['identity'] = $username;
 
                     $this->basic_data();
-                    $this->smartyci->assign('action', 'Ubah Password');                   
+                    $this->smartyci->assign('action', 'Ubah Password');
                     $this->smartyci->assign('data', $data);
                     $this->smartyci->display('configuration/profile/change_password.tpl');
                 } else {
@@ -515,10 +626,10 @@ class Auth extends CI_Controller {
 
                     if ($change) {
                         $this->session->set_flashdata('message', $this->ion_auth->messages());
-                        redirect('profil/ganti_password', 'refresh');
+                        redirect('profil/ubah_password', 'refresh');
                     } else {
                         $this->session->set_flashdata('message', $this->ion_auth->errors());
-                        redirect('profil/ganti_password', 'refresh');
+                        redirect('profil/ubah_password', 'refresh');
                     }
                 }
                 break;

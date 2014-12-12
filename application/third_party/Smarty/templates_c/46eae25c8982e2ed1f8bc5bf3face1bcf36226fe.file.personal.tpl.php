@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-12 06:21:20
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-12 07:39:30
          compiled from "application\views\configuration\profile\personal.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:307235489837a29c369-09293533%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '46eae25c8982e2ed1f8bc5bf3face1bcf36226fe' => 
     array (
       0 => 'application\\views\\configuration\\profile\\personal.tpl',
-      1 => 1418339757,
+      1 => 1418344048,
       2 => 'file',
     ),
     '68cc9180bc6fb0dd465914a3c57d03a07aa9bace' => 
@@ -142,7 +142,8 @@ asset/avatar/<?php echo $_smarty_tpl->tpl_vars['user']->value->photo;?>
         <li class="active"><a href="<?php echo base_url();?>
 profil"><i class="fa fa-info-circle"></i> Informasi Pribadi</a></li>
         <?php if (in_array("members",$_smarty_tpl->tpl_vars['groups']->value)) {?>
-            <li><a href="#"><i class="fa fa-pencil-square-o"></i> Ubah Informasi Pribadi</a></li>
+            <li><a href="<?php echo base_url();?>
+profil/ubah_profil"><i class="fa fa-pencil-square-o"></i> Ubah Informasi Pribadi</a></li>
         <?php }?>
         <li><a href="<?php echo base_url();?>
 profil/ubah_password"><i class="fa fa-unlock"></i> Ubah Password</a></li>

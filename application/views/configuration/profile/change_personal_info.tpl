@@ -3,15 +3,15 @@
     <ul class="nav nav-pills nav-stacked">
         <li><a href="{base_url()}profil"><i class="fa fa-info-circle"></i> Informasi Pribadi</a></li>
             {if in_array("members", $groups)}
-                <li><a href="{base_url()}profil/ubah_profil"><i class="fa fa-pencil-square-o"></i> Ubah Informasi Pribadi</a></li>
+                <li class="active"><a href="{base_url()}profil/ubah_profil"><i class="fa fa-pencil-square-o"></i> Ubah Informasi Pribadi</a></li>
             {/if}
-        <li class="active"><a href="{base_url()}profil/ubah_password"><i class="fa fa-unlock"></i> Ubah Password</a></li>
+        <li><a href="{base_url()}profil/ubah_password"><i class="fa fa-unlock"></i> Ubah Password</a></li>
     </ul>
 {/block}
 
 {block name="profile_content"}
     <!-- Content Header (Page header) -->
-    <h3 class="header">Ubah Password</h3>
+    <h3 class="header">Informasi Akun</h3>
     <div class="box box-solid">
         {form_open("profil/ubah_password")}
         {form_hidden('identity',$data.identity)}

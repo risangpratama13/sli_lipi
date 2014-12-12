@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-12 06:22:55
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-12 07:28:35
          compiled from "application\views\configuration\profile\change_password.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:27762548a26f417e827-58675489%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9cf0a1d0e28fc6503143ebb557f68cdd21905bb8' => 
     array (
       0 => 'application\\views\\configuration\\profile\\change_password.tpl',
-      1 => 1418340171,
+      1 => 1418344107,
       2 => 'file',
     ),
     '68cc9180bc6fb0dd465914a3c57d03a07aa9bace' => 
@@ -142,9 +142,10 @@ asset/avatar/<?php echo $_smarty_tpl->tpl_vars['user']->value->photo;?>
         <li><a href="<?php echo base_url();?>
 profil"><i class="fa fa-info-circle"></i> Informasi Pribadi</a></li>
             <?php if (in_array("members",$_smarty_tpl->tpl_vars['groups']->value)) {?>
-            <li><a href="#"><i class="fa fa-pencil-square-o"></i> Ubah Informasi Pribadi</a></li>
+                <li><a href="<?php echo base_url();?>
+profil/ubah_profil"><i class="fa fa-pencil-square-o"></i> Ubah Informasi Pribadi</a></li>
             <?php }?>
-        <li  class="active"><a href="<?php echo base_url();?>
+        <li class="active"><a href="<?php echo base_url();?>
 profil/ubah_password"><i class="fa fa-unlock"></i> Ubah Password</a></li>
     </ul>
 
@@ -153,9 +154,9 @@ profil/ubah_password"><i class="fa fa-unlock"></i> Ubah Password</a></li>
                         <div class="col-md-9 col-sm-8">
                         
     <!-- Content Header (Page header) -->
-    <h3 class="header">Informasi Akun</h3>
+    <h3 class="header">Ubah Password</h3>
     <div class="box box-solid">
-        <?php echo form_open("ganti_password/".((string)$_smarty_tpl->tpl_vars['data']->value['identity']));?>
+        <?php echo form_open("profil/ubah_password");?>
 
         <?php echo form_hidden('identity',$_smarty_tpl->tpl_vars['data']->value['identity']);?>
 
