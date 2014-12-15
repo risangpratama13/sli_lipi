@@ -16,12 +16,16 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-8">
-                <div class="box">
+            <div class="col-xs-12">
+                <div class="box box-primary">
                     <div class="box-header">
                         <h3 class="box-title">Daftar Satuan</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
+                        <a class="btn btn-flat btn-primary" onclick="tambahSatuan()">
+                            <i class="fa fa-plus-circle"></i> Tambah Satuan
+                        </a>
+                        <br/><br/>
                         <table id="tableUnit" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -55,31 +59,37 @@
                         </table>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->               
-            </div>
-            <div class="col-md-4">
-                <div class="box box-primary" id="boxForm">
-                    <div class="box-header">
-                        <h3 class="box-title" name="title">Tambah Satuan</h3>
-                    </div><!-- /.box-header -->
-                    {form_open('master/crud_units')}
-                        {form_hidden('action', 'add')}
-                        {form_hidden('id', 0)}
-                    <div class="box-body">
-                        <div class="form-group">
-                            {form_label('Nama Satuan', 'unit_name')}
-                            {form_input($unit_name)}
-                            {$message}
-                        </div>
-                    </div><!-- /.box-body -->
-                    <div class="box-footer">
-                        {form_submit('submit', "Simpan Satuan", 'class="btn btn-flat btn-success"')}
-                        <button type="button" onclick="batalkanUbah()" id="cancel" class="btn btn-flat bg-red" style="display: none">Batalkan</button> 
-                    </div>
-                    {form_close()}
-                </div>
-            </div>
+            </div>            
         </div>
     </section><!-- /.content -->
+{/block}
+
+{block name="modal"}
+    <div class="modal fade" id="unit-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" name="title">Tambah Satuan</h4>
+                </div>
+                {form_open('master/crud_units')}
+                    {form_hidden('action', 'add')}
+                    {form_hidden('id', 0)}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="form-group">
+                                {form_label('Nama Satuan', 'unit_name')}
+                                {form_input($unit_name)}                            
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="modal-footer clearfix">
+                        <button type="button" id="cancel" class="btn btn-danger" onclick="batalkanSatuan()"><i class="fa fa-times"></i> Batalkan</button>
+                        {form_submit('submit', "Simpan Satuan", 'class="btn btn-flat btn-success pull-left"')}
+                    </div>
+                {form_close()}
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 {/block}
 
 {block name="addon_styles"}
@@ -91,7 +101,6 @@
     <script src="{base_url()}asset/js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
     <script src="{base_url()}asset/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
     <script src="{base_url()}asset/js/plugins/bootstrap-switch/bootstrap-switch.min.js" type="text/javascript"></script>
-    <script src="{base_url()}asset/js/plugins/jquery-loadJSON/jquery.loadJSON.js" type="text/javascript"></script>
 {/block}
 
 {block name="addon_scripts"}
@@ -115,24 +124,28 @@
             }
         }
         
-        function ubahSatuan(id, unit_name) {
-            var data = {
-                "title":"Ubah Satuan",
-                "action":"edit",
-                "id":id,"unit_name":unit_name
-            };
-            $("#boxForm").loadJSON(data);
-            $("#cancel").show();
+        function ubahSatuan(id, name) {
+            $('input[name="action"]').val("edit");
+            $('input[name="id"]').val(id);
+            $('input[name="unit_name"]').val(name);
+            $('[name="title"]').text("Ubah Satuan");
+            $("#unit-modal").modal('show');
+        }
+
+        function batalkanSatuan() {
+            $('input[name="action"]').val("");
+            $('input[name="id"]').val("");
+            $('input[name="unit_name"]').val("");
+            $('[name="title"]').text("");
+            $("#unit-modal").modal('hide');
         }
         
-        function batalkanUbah() {
-            var data = {
-                "title":"Tambahkan Satuan",
-                "action":"add",
-                "id":0,"unit_name":""
-            };
-            $("#boxForm").loadJSON(data);
-            $("#cancel").hide();
+        function tambahSatuan() {
+            $('input[name="action"]').val("add");
+            $('input[name="id"]').val("0");
+            $('input[name="unit_name"]').val("");
+            $('[name="title"]').text("Tambah Stuan");
+            $("#unit-modal").modal('show');
         }
         
         $(function () {

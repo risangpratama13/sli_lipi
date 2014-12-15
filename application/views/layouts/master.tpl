@@ -38,7 +38,10 @@
             </aside>
             <!-- End Content -->
         </div>
-            
+        <!-- Modal -->    
+        {block name="modal"}{/block}
+        <!-- End Modal -->
+        
         <!-- jQuery 2.0.2 -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <!-- Bootstrap -->

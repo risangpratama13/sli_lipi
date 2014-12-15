@@ -33,12 +33,11 @@ class Master extends CI_Controller {
                 'name' => 'unit_name',
                 'class' => 'form-control',
                 'placeholder' => 'Nama Satuan',
-                'type' => 'text'
+                'type' => 'text',
+                'required' => 'required'
             );
-            $message = $this->session->flashdata('message') ? $this->session->flashdata('message') : "";
             $this->basic_data();
             $this->smartyci->assign('units', $units);
-            $this->smartyci->assign('message', $message);
             $this->smartyci->assign('unit_name', $unit_name);
             $this->smartyci->display('master/unit.tpl');
         } else {
@@ -59,19 +58,9 @@ class Master extends CI_Controller {
                     }
                     break;
                 case "edit":
-                    $this->form_validation->set_rules('unit_name', 'Nama Satuan', 'required|xss_clean');
-                    $this->form_validation->set_error_delimiters('<p class="help-block text-red">', '</p>');
-
-                    if ($this->form_validation->run() == true) {
-                        $data = array("unit_name" => $this->input->post('unit_name'));
-                        $this->unit->update($this->input->post('id'), $data);
-                        $this->session->set_flashdata('message', "");
-                        redirect('unit', 'refresh');
-                    } else {
-                        $this->session->set_flashdata('message', validation_errors());
-                        redirect('unit', 'refresh');
-                    }
-
+                    $data = array("unit_name" => $this->input->post('unit_name'));
+                    $this->unit->update($this->input->post('id'), $data);
+                    redirect('unit', 'refresh');
                     break;
                 case "change_status":
                     $data = array("unit_status" => $this->input->post("status"));
@@ -80,20 +69,87 @@ class Master extends CI_Controller {
                     } else {
                         echo "Failed";
                     }
+                    break;
                 case "add":
                 default:
-                    $this->form_validation->set_rules('unit_name', 'Nama Satuan', 'required|xss_clean');
-                    $this->form_validation->set_error_delimiters('<p class="help-block text-red">', '</p>');
+                    $data = array("unit_name" => $this->input->post('unit_name'));
+                    $this->unit->save($data);
+                    redirect('unit', 'refresh');                    
+                    break;
+            }
+        } else {
+            redirect('unit', 'refresh');
+        }
+    }
 
-                    if ($this->form_validation->run() == true) {
-                        $data = array("unit_name" => $this->input->post('unit_name'));
-                        $this->unit->save($data);
-                        $this->session->set_flashdata('message', "");
-                        redirect('unit', 'refresh');
+    function item_types() {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+
+        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
+            $item_types = $this->item_type->get_all();
+            $data['type_name'] = array(
+                'name' => 'type_name',
+                'class' => 'form-control',
+                'placeholder' => 'Nama Kategori',
+                'type' => 'text',
+                'required' => 'required'
+            );
+            $data['type_point'] = array(
+                'name' => 'type_point',
+                'class' => 'form-control',
+                'placeholder' => 'Jumlah Poin',
+                'type' => 'text',
+                'required' => 'required',
+                'onkeypress' => 'return isNumberKey(event)'
+            );
+            
+            $this->basic_data();
+            $this->smartyci->assign('types', $item_types);
+            $this->smartyci->assign('data', $data);
+            $this->smartyci->display('master/item_type.tpl');
+        } else {
+            redirect('/', 'refresh');
+        }
+    }
+
+    function crud_item_types() {
+        if ($_SERVER['HTTP_REFERER']) {
+            $action = $this->input->post('action');
+
+            switch ($action) {
+                case "delete":
+                    if ($this->item_type->delete($this->input->post('id'))) {
+                        echo "Success";
                     } else {
-                        $this->session->set_flashdata('message', validation_errors());
-                        redirect('unit', 'refresh');
+                        echo "Failed";
                     }
+                    break;
+                case "edit":
+                    $data = array(
+                        "type_name" => $this->input->post('type_name'),
+                        "type_point" => $this->input->post('type_point')
+                    );
+                    $this->item_type->update($this->input->post('id'), $data);
+                    redirect('tipe_item', 'refresh');
+                    break;
+                case "change_status":
+                    $data = array("type_status" => $this->input->post("status"));
+                    if ($this->item_type->update($this->input->post('id'), $data)) {
+                        echo "Success";
+                    } else {
+                        echo "Failed";
+                    }
+                    break;
+                case "add":
+                default:
+                    $data = array(
+                        "type_name" => $this->input->post('type_name'),
+                        "type_point" => $this->input->post('type_point')
+                    );
+                    $this->item_type->save($data);
+                    redirect('tipe_item', 'refresh');
                     break;
             }
         } else {
@@ -121,7 +177,7 @@ class Master extends CI_Controller {
                     'type' => 'text',
                     'onkeypress' => 'return isNumberKey(event)'
                 );
-                
+
                 $this->basic_data();
                 $this->smartyci->assign('kurs', $kurs);
                 $this->smartyci->assign('form_kurs', $form_kurs);
