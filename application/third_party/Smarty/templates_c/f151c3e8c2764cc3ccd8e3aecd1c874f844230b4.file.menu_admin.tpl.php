@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-11 18:43:01
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-15 04:15:07
          compiled from "application\views\layouts\menu_admin.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:16035548714f01505b9-17899961%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f151c3e8c2764cc3ccd8e3aecd1c874f844230b4' => 
     array (
       0 => 'application\\views\\layouts\\menu_admin.tpl',
-      1 => 1418296057,
+      1 => 1418590197,
       2 => 'file',
     ),
   ),
@@ -29,6 +29,21 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 ">
             <i class="fa fa-home"></i> <span>Home</span>
         </a>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-hdd-o"></i>
+            <span>Master Data</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">            
+            <li><a href="<?php echo base_url();?>
+kurs_point"><i class="fa fa-angle-double-right"></i> Kurs Poin</a></li>     
+            <li><a href="<?php echo base_url();?>
+tipe_item"><i class="fa fa-angle-double-right"></i> Kategori Item</a></li>
+            <li><a href="<?php echo base_url();?>
+unit"><i class="fa fa-angle-double-right"></i> Satuan</a></li>
+        </ul>
     </li>
     <li class="treeview">
         <a href="#">

@@ -54,5 +54,7 @@ $route['profil'] = "auth/account_setting";
 $route['profil/ubah_profil'] = "auth/account_setting/change_profile";
 $route['profil/ubah_password'] = "auth/account_setting/change_password";
 
+$route['unit'] = "master/units";
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

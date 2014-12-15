@@ -13,4 +13,18 @@ class Unit extends CI_Model {
         return $query->result();
     }
     
+    function save($data) {
+        return $this->db->insert($this->table, $data);
+    }
+    
+    function update($id, $data) {
+        $this->db->where('id', $id);
+        return $this->db->update($this->table, $data);
+    }
+    
+    function delete($id) {
+        $this->db->where('id', $id);
+        return $this->db->delete($this->table); 
+    }
+    
 }

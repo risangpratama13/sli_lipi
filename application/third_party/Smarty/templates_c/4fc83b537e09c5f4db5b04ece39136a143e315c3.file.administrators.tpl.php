@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-10 21:25:20
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-15 05:58:39
          compiled from "application\views\configuration\administrators.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2587554871e8d9c1087-61028372%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '4fc83b537e09c5f4db5b04ece39136a143e315c3' => 
     array (
       0 => 'application\\views\\configuration\\administrators.tpl',
-      1 => 1418178388,
+      1 => 1418597913,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -136,11 +136,11 @@ $_smarty_tpl->tpl_vars['admin']->_loop = true;
                                         </td>
                                         <td>
                                             <?php if ($_smarty_tpl->tpl_vars['admin']->value->active==1) {?>
-                                                <input type="checkbox" data-username="<?php echo $_smarty_tpl->tpl_vars['admin']->value->username;?>
+                                                <input type="checkbox" class="simple" data-username="<?php echo $_smarty_tpl->tpl_vars['admin']->value->username;?>
 " data-id="<?php echo $_smarty_tpl->tpl_vars['admin']->value->id;?>
 " name="status" data-size="mini" checked>
                                             <?php } else { ?>
-                                                <input type="checkbox" data-username="<?php echo $_smarty_tpl->tpl_vars['admin']->value->username;?>
+                                                <input type="checkbox" class="simple" data-username="<?php echo $_smarty_tpl->tpl_vars['admin']->value->username;?>
 " data-id="<?php echo $_smarty_tpl->tpl_vars['admin']->value->id;?>
 " name="status" data-size="mini">
                                             <?php }?>

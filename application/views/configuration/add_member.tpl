@@ -22,9 +22,9 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">Tambah Anggota</h3>
+                        <h3 class="box-title">Form Satuan</h3>
                     </div><!-- /.box-header -->
-                    {form_open('tambah_anggota')}
+                    {form_open('master/crud_units')}
                     <div class="box-body">
                         <div class="form-group">
                             {form_label('Nama Lengkap', 'full_name')}

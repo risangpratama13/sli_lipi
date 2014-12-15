@@ -49,9 +49,9 @@
                                         </td>
                                         <td>
                                             {if $admin->active == 1}
-                                                <input type="checkbox" data-username="{$admin->username}" data-id="{$admin->id}" name="status" data-size="mini" checked>
+                                                <input type="checkbox" class="simple" data-username="{$admin->username}" data-id="{$admin->id}" name="status" data-size="mini" checked>
                                             {else}
-                                                <input type="checkbox" data-username="{$admin->username}" data-id="{$admin->id}" name="status" data-size="mini">
+                                                <input type="checkbox" class="simple" data-username="{$admin->username}" data-id="{$admin->id}" name="status" data-size="mini">
                                             {/if}
                                         </td>
                                         <td>

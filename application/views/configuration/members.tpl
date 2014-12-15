@@ -27,7 +27,7 @@
                             <i class="fa fa-plus-circle"></i> Tambah Anggota
                         </a>
                         <br/><br/>
-                        <table id="tableAdmin" class="table table-bordered table-striped">
+                        <table id="tableMember" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>Nama Lengkap</th>
@@ -61,9 +61,9 @@
                                         </td>
                                         <td>
                                             {if $member->active == 1}
-                                                <input type="checkbox" data-username="{$member->username}" data-id="{$member->id}" name="status" data-size="mini" checked>
+                                                <input type="checkbox" class="simple" data-username="{$member->username}" data-id="{$member->id}" name="status" data-size="mini" checked>
                                             {else}
-                                                <input type="checkbox" data-username="{$member->username}" data-id="{$member->id}" name="status" data-size="mini">
+                                                <input type="checkbox" class="simple" data-username="{$member->username}" data-id="{$member->id}" name="status" data-size="mini">
                                             {/if}
                                         </td>
                                         <td>
@@ -95,7 +95,7 @@
 {block name="addon_scripts"}
     <script type="text/javascript">
         $(function () {
-            $("#tableAdmin").dataTable();
+            $("#tableMember").dataTable();
             $('input[name="status"]').bootstrapSwitch();
             $('input[name="group"]').bootstrapSwitch();
             $('input[name="status"]').on({

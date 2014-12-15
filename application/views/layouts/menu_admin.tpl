@@ -6,6 +6,18 @@
     </li>
     <li class="treeview">
         <a href="#">
+            <i class="fa fa-hdd-o"></i>
+            <span>Master Data</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">            
+            <li><a href="{base_url()}kurs_point"><i class="fa fa-angle-double-right"></i> Kurs Poin</a></li>     
+            <li><a href="{base_url()}tipe_item"><i class="fa fa-angle-double-right"></i> Kategori Item</a></li>
+            <li><a href="{base_url()}unit"><i class="fa fa-angle-double-right"></i> Satuan</a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#">
             <i class="fa fa-gears"></i>
             <span>Konfigurasi Pengguna</span>
             <i class="fa fa-angle-left pull-right"></i>
