@@ -59,6 +59,9 @@ $route['kurs_point'] = "master/kurs_point";
 $route['tipe_item'] = "master/item_types";
 
 $route['kategori_pengujian'] = "testing/categories";
+$route['pengujian'] = "testing";
+$route['tambah_pengujian'] = "testing/add_pengujian";
+$route['ubah_pengujian/(:num)'] = "testing/edit_pengujian/$1";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

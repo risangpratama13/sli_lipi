@@ -22,7 +22,7 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">Form Satuan</h3>
+                        <h3 class="box-title">Tambah Anggota</h3>
                     </div><!-- /.box-header -->
                     {form_open('master/crud_units')}
                     <div class="box-body">
@@ -59,7 +59,7 @@
                         </div>
                     </div><!-- /.box-body -->
                     <div class="box-footer">
-                        {form_submit('submit', "Tambahkan Anggota", 'class="btn btn-primary"')}
+                        {form_submit('submit', "Tambahkan Anggota", 'class="btn btn-flat btn-success"')}
                     </div>
                     {form_close()}
                 </div><!-- /.box -->               

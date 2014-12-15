@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-15 05:58:42
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 05:07:34
          compiled from "application\views\configuration\members.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:72495487c82f42e4c4-57416047%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '997d082a93c41f920943874d385abb924d8accb7' => 
     array (
       0 => 'application\\views\\configuration\\members.tpl',
-      1 => 1418597889,
+      1 => 1418607899,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1418213239,
+      1 => 1418622047,
       2 => 'file',
     ),
   ),
@@ -107,7 +107,7 @@ tambah_anggota" class="btn btn-flat btn-primary">
                             <i class="fa fa-plus-circle"></i> Tambah Anggota
                         </a>
                         <br/><br/>
-                        <table id="tableAdmin" class="table table-bordered table-striped">
+                        <table id="tableMember" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>Nama Lengkap</th>
@@ -186,7 +186,10 @@ ganti_password/<?php echo $_smarty_tpl->tpl_vars['member']->value->username;?>
             </aside>
             <!-- End Content -->
         </div>
-            
+        <!-- Modal -->    
+        
+        <!-- End Modal -->
+        
         <!-- jQuery 2.0.2 -->
         <?php echo '<script'; ?>
  src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"><?php echo '</script'; ?>
@@ -221,7 +224,7 @@ asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
     <?php echo '<script'; ?>
  type="text/javascript">
         $(function () {
-            $("#tableAdmin").dataTable();
+            $("#tableMember").dataTable();
             $('input[name="status"]').bootstrapSwitch();
             $('input[name="group"]').bootstrapSwitch();
             $('input[name="status"]').on({

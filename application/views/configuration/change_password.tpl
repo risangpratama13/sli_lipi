@@ -53,7 +53,7 @@
                     </div><!-- /.box-body -->
 
                     <div class="box-footer">
-                        {form_submit('submit', "Simpan Password Baru", 'class="btn btn-primary"')}
+                        {form_submit('submit', "Simpan Password Baru", 'class="btn btn-flat btn-success"')}
                     </div>
                     {form_close()}
                 </div><!-- /.box -->               

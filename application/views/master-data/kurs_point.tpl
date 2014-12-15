@@ -32,7 +32,7 @@
                                 <td>Nilai Rupiah</td>
                                 <td>
                                     <span class="label label-info">
-                                        Rp {number_format($kurs->idr, '2', ',', '.')}
+                                        Rp. {number_format($kurs->idr, '2', ',', '.')}
                                     </span>
                                 </td>
                             </tr>

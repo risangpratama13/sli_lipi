@@ -42,7 +42,7 @@
                     </div><!-- /.box-body -->
 
                     <div class="box-footer">
-                        {form_submit('submit', "Tambahkan Akun Administrator", 'class="btn btn-primary"')}
+                        {form_submit('submit', "Tambahkan Akun Administrator", 'class="btn btn-flat btn-success"')}
                     </div>
                     {form_close()}
                 </div><!-- /.box -->               
