@@ -12,4 +12,9 @@ class Kurs_point extends CI_Model {
         return $this->db->get_where($this->table, array("id" => 1))->row();
     }
     
+    function update($data) {
+        $this->db->where('id', 1);
+        return $this->db->update($this->table, $data);
+    }
+    
 }

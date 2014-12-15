@@ -1,16 +1,16 @@
 <?php
 
 class Master extends CI_Controller {
-    
+
     function __construct() {
         parent::__construct();
         $this->load->model('item_type');
         $this->load->model('kurs_point');
         $this->load->model('unit');
-        
+
         $this->load->library('form_validation');
     }
-    
+
     function basic_data() {
         $user = $this->ion_auth->user()->row();
         $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
@@ -21,13 +21,13 @@ class Master extends CI_Controller {
         $this->smartyci->assign('user', $user);
         $this->smartyci->assign('groups', $groups);
     }
-    
+
     function units() {
         if (!$this->ion_auth->logged_in()) {
             redirect('login', 'refresh');
-        } 
-        
-        if($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()){
+        }
+
+        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
             $units = $this->unit->get_all();
             $unit_name = array(
                 'name' => 'unit_name',
@@ -45,14 +45,14 @@ class Master extends CI_Controller {
             redirect('/', 'refresh');
         }
     }
-    
+
     function crud_units() {
-        if($_SERVER['HTTP_REFERER']) {
+        if ($_SERVER['HTTP_REFERER']) {
             $action = $this->input->post('action');
-            
+
             switch ($action) {
                 case "delete":
-                    if($this->unit->delete($this->input->post('id'))) {
+                    if ($this->unit->delete($this->input->post('id'))) {
                         echo "Success";
                     } else {
                         echo "Failed";
@@ -61,9 +61,9 @@ class Master extends CI_Controller {
                 case "edit":
                     $this->form_validation->set_rules('unit_name', 'Nama Satuan', 'required|xss_clean');
                     $this->form_validation->set_error_delimiters('<p class="help-block text-red">', '</p>');
-            
-                    if ($this->form_validation->run() == true) {                        
-                        $data = array("unit_name" => $this->input->post('unit_name'));                        
+
+                    if ($this->form_validation->run() == true) {
+                        $data = array("unit_name" => $this->input->post('unit_name'));
                         $this->unit->update($this->input->post('id'), $data);
                         $this->session->set_flashdata('message', "");
                         redirect('unit', 'refresh');
@@ -75,7 +75,7 @@ class Master extends CI_Controller {
                     break;
                 case "change_status":
                     $data = array("unit_status" => $this->input->post("status"));
-                    if($this->unit->update($this->input->post('id'), $data)) {
+                    if ($this->unit->update($this->input->post('id'), $data)) {
                         echo "Success";
                     } else {
                         echo "Failed";
@@ -84,7 +84,7 @@ class Master extends CI_Controller {
                 default:
                     $this->form_validation->set_rules('unit_name', 'Nama Satuan', 'required|xss_clean');
                     $this->form_validation->set_error_delimiters('<p class="help-block text-red">', '</p>');
-            
+
                     if ($this->form_validation->run() == true) {
                         $data = array("unit_name" => $this->input->post('unit_name'));
                         $this->unit->save($data);
@@ -100,5 +100,36 @@ class Master extends CI_Controller {
             redirect('unit', 'refresh');
         }
     }
-    
+
+    function kurs_point() {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+
+        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
+            $this->form_validation->set_rules('idr', 'Nilai Tukar Rupiah', 'required|xss_clean|numeric|is_natural_no_zero');
+            if ($this->form_validation->run() == true) {
+                $data = array("idr" => $this->input->post('idr'));
+                $this->kurs_point->update($data);
+                redirect('kurs_point', 'refresh');
+            } else {
+                $kurs = $this->kurs_point->get_kurs();
+                $form_kurs = array(
+                    'name' => 'idr',
+                    'class' => 'form-control',
+                    'placeholder' => 'Nilai Tukar Rupiah',
+                    'type' => 'text',
+                    'onkeypress' => 'return isNumberKey(event)'
+                );
+                
+                $this->basic_data();
+                $this->smartyci->assign('kurs', $kurs);
+                $this->smartyci->assign('form_kurs', $form_kurs);
+                $this->smartyci->display('master/kurs_point.tpl');
+            }
+        } else {
+            redirect('/', 'refresh');
+        }
+    }
+
 }
