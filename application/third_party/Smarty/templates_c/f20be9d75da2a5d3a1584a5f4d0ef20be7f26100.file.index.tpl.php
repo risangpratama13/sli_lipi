@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-10 19:20:17
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-15 14:14:55
          compiled from "application\views\index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:218035487144de015c5-93114714%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -13,7 +13,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1418213239,
+      1 => 1418622047,
       2 => 'file',
     ),
   ),
@@ -93,7 +93,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             </aside>
             <!-- End Content -->
         </div>
-            
+        <!-- Modal -->    
+        
+        <!-- End Modal -->
+        
         <!-- jQuery 2.0.2 -->
         <?php echo '<script'; ?>
  src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"><?php echo '</script'; ?>
