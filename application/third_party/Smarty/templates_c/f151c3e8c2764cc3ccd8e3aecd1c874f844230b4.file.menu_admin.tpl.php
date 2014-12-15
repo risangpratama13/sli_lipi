@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-15 04:15:07
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-15 11:14:02
          compiled from "application\views\layouts\menu_admin.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:16035548714f01505b9-17899961%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f151c3e8c2764cc3ccd8e3aecd1c874f844230b4' => 
     array (
       0 => 'application\\views\\layouts\\menu_admin.tpl',
-      1 => 1418590197,
+      1 => 1418638437,
       2 => 'file',
     ),
   ),
@@ -43,6 +43,19 @@ kurs_point"><i class="fa fa-angle-double-right"></i> Kurs Poin</a></li>
 tipe_item"><i class="fa fa-angle-double-right"></i> Kategori Item</a></li>
             <li><a href="<?php echo base_url();?>
 unit"><i class="fa fa-angle-double-right"></i> Satuan</a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-list-alt"></i>
+            <span>Pengujian</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">            
+            <li><a href="<?php echo base_url();?>
+kategori_pengujian"><i class="fa fa-angle-double-right"></i> Kategori Pengujian</a></li>     
+            <li><a href="<?php echo base_url();?>
+pengujian"><i class="fa fa-angle-double-right"></i> Daftar Pengujian</a></li>
         </ul>
     </li>
     <li class="treeview">

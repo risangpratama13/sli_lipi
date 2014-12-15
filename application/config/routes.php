@@ -58,5 +58,7 @@ $route['unit'] = "master/units";
 $route['kurs_point'] = "master/kurs_point";
 $route['tipe_item'] = "master/item_types";
 
+$route['kategori_pengujian'] = "testing/categories";
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

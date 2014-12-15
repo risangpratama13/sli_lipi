@@ -1,5 +1,7 @@
 <?php
 
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 class Master extends CI_Controller {
 
     function __construct() {
@@ -39,7 +41,7 @@ class Master extends CI_Controller {
             $this->basic_data();
             $this->smartyci->assign('units', $units);
             $this->smartyci->assign('unit_name', $unit_name);
-            $this->smartyci->display('master/unit.tpl');
+            $this->smartyci->display('master-data/unit.tpl');
         } else {
             redirect('/', 'refresh');
         }
@@ -62,14 +64,6 @@ class Master extends CI_Controller {
                     $this->unit->update($this->input->post('id'), $data);
                     redirect('unit', 'refresh');
                     break;
-                case "change_status":
-                    $data = array("unit_status" => $this->input->post("status"));
-                    if ($this->unit->update($this->input->post('id'), $data)) {
-                        echo "Success";
-                    } else {
-                        echo "Failed";
-                    }
-                    break;
                 case "add":
                 default:
                     $data = array("unit_name" => $this->input->post('unit_name'));
@@ -78,7 +72,7 @@ class Master extends CI_Controller {
                     break;
             }
         } else {
-            redirect('unit', 'refresh');
+            redirect('/', 'refresh');
         }
     }
 
@@ -108,7 +102,7 @@ class Master extends CI_Controller {
             $this->basic_data();
             $this->smartyci->assign('types', $item_types);
             $this->smartyci->assign('data', $data);
-            $this->smartyci->display('master/item_type.tpl');
+            $this->smartyci->display('master-data/item_type.tpl');
         } else {
             redirect('/', 'refresh');
         }
@@ -134,14 +128,6 @@ class Master extends CI_Controller {
                     $this->item_type->update($this->input->post('id'), $data);
                     redirect('tipe_item', 'refresh');
                     break;
-                case "change_status":
-                    $data = array("type_status" => $this->input->post("status"));
-                    if ($this->item_type->update($this->input->post('id'), $data)) {
-                        echo "Success";
-                    } else {
-                        echo "Failed";
-                    }
-                    break;
                 case "add":
                 default:
                     $data = array(
@@ -153,7 +139,7 @@ class Master extends CI_Controller {
                     break;
             }
         } else {
-            redirect('unit', 'refresh');
+            redirect('/', 'refresh');
         }
     }
 
@@ -181,7 +167,7 @@ class Master extends CI_Controller {
                 $this->basic_data();
                 $this->smartyci->assign('kurs', $kurs);
                 $this->smartyci->assign('form_kurs', $form_kurs);
-                $this->smartyci->display('master/kurs_point.tpl');
+                $this->smartyci->display('master-data/kurs_point.tpl');
             }
         } else {
             redirect('/', 'refresh');

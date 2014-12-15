@@ -31,7 +31,6 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Satuan</th>
-                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -41,13 +40,6 @@
                                     <tr>
                                         <td>{$no}</td>
                                         <td>{$unit->unit_name}</td>
-                                        <td>
-                                            {if $unit->unit_status == "Y"}
-                                                <input type="checkbox" class="simple" data-id="{$unit->id}" data-unit_name="{$unit->unit_name}" name="status" data-size="mini" checked>
-                                            {else}
-                                                <input type="checkbox" class="simple" data-id="{$unit->id}" data-unit_name="{$unit->unit_name}" name="status" data-size="mini">
-                                            {/if}
-                                        </td>
                                         <td>
                                             <button onclick="ubahSatuan({$unit->id}, '{$unit->unit_name}')" title="Ubah Satuan" class="btn btn-flat btn-sm btn-warning"><i class="fa fa-edit"></i></button>
                                             <button type="button" onclick="deleteSatuan({$unit->id})" title="Hapus Satuan" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
@@ -94,13 +86,11 @@
 
 {block name="addon_styles"}
     {link_tag('asset/css/datatables/dataTables.bootstrap.css')}
-    {link_tag('asset/css/bootstrap-switch/bootstrap-switch.min.css')}
 {/block}
 
 {block name="addon_plugins"}
     <script src="{base_url()}asset/js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
     <script src="{base_url()}asset/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
-    <script src="{base_url()}asset/js/plugins/bootstrap-switch/bootstrap-switch.min.js" type="text/javascript"></script>
 {/block}
 
 {block name="addon_scripts"}
@@ -144,7 +134,7 @@
             $('input[name="action"]').val("add");
             $('input[name="id"]').val("0");
             $('input[name="unit_name"]').val("");
-            $('[name="title"]').text("Tambah Stuan");
+            $('[name="title"]').text("Tambah Satuan");
             $("#unit-modal").modal('show');
         }
         
@@ -152,28 +142,6 @@
             var tableUnit = $("#tableUnit").dataTable({
                 oLanguage: {
                     sUrl: '{base_url()}asset/js/plugins/datatables/Indonesian.json'
-                }
-            });
-            tableUnit.$('input[name="status"]').bootstrapSwitch();
-            tableUnit.$('input[name="status"]').on({                
-                'switchChange.bootstrapSwitch': function (event, state) {
-                    var status = $(this).is(':checked') ? 'Y' : 'N';
-                    var id = $(this).attr("data-id");
-                    var unit_name = $(this).attr("data-unit_name");
-                    $.ajax({
-                        type: "POST",
-                        url: "{base_url()}master/crud_units",
-                        data: "id=" + id +"&status=" + status + "&action=change_status",
-                        success: function(data) {
-                            if (data == "Success") {
-                                if(status == "Y") {
-                                    alert(" Satuan " + unit_name + " Aktif");
-                                } else {
-                                    alert(" Satuan " + unit_name + " Tidak Aktif");
-                                }
-                            }
-                        }
-                    });
                 }
             });
         });

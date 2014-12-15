@@ -32,7 +32,6 @@
                                     <th>No</th>
                                     <th>Kategori</th>
                                     <th>Jumlah Poin</th>
-                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -43,13 +42,6 @@
                                         <td>{$no}</td>
                                         <td>{$type->type_name}</td>
                                         <td>{$type->type_point} Poin</td>
-                                        <td>
-                                            {if $type->type_status == "Y"}
-                                                <input type="checkbox" class="simple" data-id="{$type->id}" data-name="{$type->type_name}" name="status" data-size="mini" checked>
-                                            {else}
-                                                <input type="checkbox" class="simple" data-id="{$type->id}" data-name="{$type->type_name}" name="status" data-size="mini">
-                                            {/if}
-                                        </td>
                                         <td>
                                             <button onclick="ubahKategori({$type->id}, '{$type->type_name}', {$type->type_point})" title="Ubah Kategori" class="btn btn-flat btn-sm btn-warning"><i class="fa fa-edit"></i></button>
                                             <button type="button" onclick="deleteKategori({$type->id})" title="Hapus Kategori" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
@@ -103,13 +95,11 @@
 
 {block name="addon_styles"}
     {link_tag('asset/css/datatables/dataTables.bootstrap.css')}
-    {link_tag('asset/css/bootstrap-switch/bootstrap-switch.min.css')}
 {/block}
 
 {block name="addon_plugins"}
     <script src="{base_url()}asset/js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
     <script src="{base_url()}asset/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
-    <script src="{base_url()}asset/js/plugins/bootstrap-switch/bootstrap-switch.min.js" type="text/javascript"></script>
 {/block}
 
 {block name="addon_scripts"}
@@ -172,28 +162,6 @@
             var tableType = $("#tableType").dataTable({
                 oLanguage: {
                     sUrl: '{base_url()}asset/js/plugins/datatables/Indonesian.json'
-                }
-            });
-            tableType.$('input[name="status"]').bootstrapSwitch();
-            tableType.$('input[name="status"]').on({
-                'switchChange.bootstrapSwitch': function (event, state) {
-                    var status = $(this).is(':checked') ? 'Y' : 'N';
-                    var id = $(this).attr("data-id");
-                    var type_name = $(this).attr("data-name");
-                    $.ajax({
-                        type: "POST",
-                        url: "{base_url()}master/crud_item_types",
-                        data: "id=" + id + "&status=" + status + "&action=change_status",
-                        success: function (data) {
-                            if (data == "Success") {
-                                if (status == "Y") {
-                                    alert(" Kategori " + type_name + " Aktif");
-                                } else {
-                                    alert(" Kategori " + type_name + " Tidak Aktif");
-                                }
-                            }
-                        }
-                    });
                 }
             });
         });

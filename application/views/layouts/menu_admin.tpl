@@ -18,6 +18,17 @@
     </li>
     <li class="treeview">
         <a href="#">
+            <i class="fa fa-list-alt"></i>
+            <span>Pengujian</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">            
+            <li><a href="{base_url()}kategori_pengujian"><i class="fa fa-angle-double-right"></i> Kategori Pengujian</a></li>     
+            <li><a href="{base_url()}pengujian"><i class="fa fa-angle-double-right"></i> Daftar Pengujian</a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a href="#">
             <i class="fa fa-gears"></i>
             <span>Konfigurasi Pengguna</span>
             <i class="fa fa-angle-left pull-right"></i>
