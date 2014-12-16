@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 10:15:20
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 11:03:46
          compiled from "application\views\configuration\operators.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:13923548f93436df625-56017294%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8d8817442c45005e73435054b4819da0b5e90389' => 
     array (
       0 => 'application\\views\\configuration\\operators.tpl',
-      1 => 1418699706,
+      1 => 1418702624,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -138,6 +138,9 @@ $_smarty_tpl->tpl_vars['category']->_loop = true;
                                             </ul>
                                         </td>
                                         <td>
+                                            <a href="<?php echo base_url();?>
+member/<?php echo $_smarty_tpl->tpl_vars['operator']->value->username;?>
+" title="Profil Anggota" class="btn btn-flat btn-sm btn-info"><i class="fa fa-eye"></i></a>
                                             <a href="<?php echo base_url();?>
 ubah_operator/<?php echo $_smarty_tpl->tpl_vars['operator']->value->id;?>
 " title="Ubah Operator" class="btn btn-flat btn-sm btn-warning"><i class="fa fa-edit"></i></a>

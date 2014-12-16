@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-12 10:35:51
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 11:18:51
          compiled from "application\views\configuration\profile\personal.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:307235489837a29c369-09293533%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '46eae25c8982e2ed1f8bc5bf3face1bcf36226fe' => 
     array (
       0 => 'application\\views\\configuration\\profile\\personal.tpl',
-      1 => 1418355348,
+      1 => 1418703527,
       2 => 'file',
     ),
     '68cc9180bc6fb0dd465914a3c57d03a07aa9bace' => 
@@ -19,7 +19,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1418213239,
+      1 => 1418622047,
       2 => 'file',
     ),
   ),
@@ -141,10 +141,10 @@ asset/avatar/<?php echo $_smarty_tpl->tpl_vars['user']->value->photo;?>
     <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="<?php echo base_url();?>
 profil"><i class="fa fa-info-circle"></i> Informasi Pribadi</a></li>
-        <?php if (in_array("members",$_smarty_tpl->tpl_vars['groups']->value)) {?>
+            <?php if (in_array("members",$_smarty_tpl->tpl_vars['groups']->value)) {?>
             <li><a href="<?php echo base_url();?>
 profil/ubah_profil"><i class="fa fa-pencil-square-o"></i> Ubah Informasi Pribadi</a></li>
-        <?php }?>
+            <?php }?>
         <li><a href="<?php echo base_url();?>
 profil/ubah_password"><i class="fa fa-unlock"></i> Ubah Password</a></li>
     </ul>
@@ -255,6 +255,23 @@ echo $_smarty_tpl->tpl_vars['member']->value->research_name;
                     <?php }?>
                 </td>
             </tr>
+            <?php if (in_array("operators",$_smarty_tpl->tpl_vars['groups']->value)) {?>
+                <tr>
+                    <td>Operator Pengujian</td>
+                    <td>
+                        <ul>
+                            <?php  $_smarty_tpl->tpl_vars['operator'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['operator']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['operators']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['operator']->key => $_smarty_tpl->tpl_vars['operator']->value) {
+$_smarty_tpl->tpl_vars['operator']->_loop = true;
+?>
+                                <li><?php echo $_smarty_tpl->tpl_vars['operator']->value->cat_name;?>
+</li>
+                                <?php } ?>
+                        </ul>
+                    </td>
+                </tr>
+            <?php }?>
             <tr>
                 <td>Status Akun</td>
                 <td>
@@ -290,7 +307,10 @@ echo $_smarty_tpl->tpl_vars['member']->value->research_name;
             </aside>
             <!-- End Content -->
         </div>
-            
+        <!-- Modal -->    
+        
+        <!-- End Modal -->
+        
         <!-- jQuery 2.0.2 -->
         <?php echo '<script'; ?>
  src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"><?php echo '</script'; ?>

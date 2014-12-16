@@ -732,12 +732,43 @@ class Auth extends CI_Controller {
             default:
                 if ($this->ion_auth->in_group(2)) {
                     $member = $this->member->by_user_id($id);
+                    $operators = $this->operator->find_byuser($id);                
                     $this->smartyci->assign('member', $member);
+                    $this->smartyci->assign('operators', $operators);                    
                 }
                 $this->smartyci->assign('action', 'Informasi Akun');
                 $this->basic_data();
                 $this->smartyci->display('configuration/profile/personal.tpl');
                 break;
+        }
+    }
+    
+    function view_member($username) {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+
+        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
+            $id = $this->ion_auth->get_user_id_by_username($username);
+            
+            $member = $this->ion_auth->user($id)->row();
+            $data_member = $this->member->by_user_id($id);            
+            $operators = $this->operator->find_byuser($id);
+            
+            if($this->ion_auth->in_group(4, $id)) {
+                $member_operator = TRUE;
+            } else {
+                $member_operator = FALSE;
+            }
+                        
+            $this->basic_data();
+            $this->smartyci->assign('member', $member);
+            $this->smartyci->assign('data_member', $data_member);
+            $this->smartyci->assign('member_operator', $member_operator);
+            $this->smartyci->assign('operators', $operators);
+            $this->smartyci->display('configuration/view_member.tpl');
+        } else {
+            redirect('/', 'refresh');
         }
     }
 

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 07:16:09
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 11:11:36
          compiled from "application\views\configuration\members.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:72495487c82f42e4c4-57416047%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '997d082a93c41f920943874d385abb924d8accb7' => 
     array (
       0 => 'application\\views\\configuration\\members.tpl',
-      1 => 1418688950,
+      1 => 1418703093,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -149,6 +149,9 @@ $_smarty_tpl->tpl_vars['member']->_loop = true;
                                             <?php }?>
                                         </td>
                                         <td>
+                                            <a href="<?php echo base_url();?>
+anggota/<?php echo $_smarty_tpl->tpl_vars['member']->value->username;?>
+" title="Profil Anggota" class="btn btn-flat btn-sm btn-info"><i class="fa fa-eye"></i></a>
                                             <a href="<?php echo base_url();?>
 ganti_password/<?php echo $_smarty_tpl->tpl_vars['member']->value->username;?>
 " title="Ubah Password" class="btn btn-flat btn-sm bg-navy"><i class="fa fa-unlock-alt"></i></a>

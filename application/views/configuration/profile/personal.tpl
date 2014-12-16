@@ -2,9 +2,9 @@
 {block name="profile_menu"}
     <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="{base_url()}profil"><i class="fa fa-info-circle"></i> Informasi Pribadi</a></li>
-        {if in_array("members", $groups)}
+            {if in_array("members", $groups)}
             <li><a href="{base_url()}profil/ubah_profil"><i class="fa fa-pencil-square-o"></i> Ubah Informasi Pribadi</a></li>
-        {/if}
+            {/if}
         <li><a href="{base_url()}profil/ubah_password"><i class="fa fa-unlock"></i> Ubah Password</a></li>
     </ul>
 {/block}
@@ -93,6 +93,18 @@
                     {/if}
                 </td>
             </tr>
+            {if in_array("operators", $groups)}
+                <tr>
+                    <td>Operator Pengujian</td>
+                    <td>
+                        <ul>
+                            {foreach $operators as $operator}
+                                <li>{$operator->cat_name}</li>
+                                {/foreach}
+                        </ul>
+                    </td>
+                </tr>
+            {/if}
             <tr>
                 <td>Status Akun</td>
                 <td>

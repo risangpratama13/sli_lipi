@@ -57,6 +57,7 @@
                                             {/if}
                                         </td>
                                         <td>
+                                            <a href="{base_url()}anggota/{$member->username}" title="Profil Anggota" class="btn btn-flat btn-sm btn-info"><i class="fa fa-eye"></i></a>
                                             <a href="{base_url()}ganti_password/{$member->username}" title="Ubah Password" class="btn btn-flat btn-sm bg-navy"><i class="fa fa-unlock-alt"></i></a>
                                             <button onclick="deleteUser({$member->id},'{$member->username}')" title="Hapus Admin" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
                                         </td>
