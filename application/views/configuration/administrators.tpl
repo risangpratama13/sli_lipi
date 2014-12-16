@@ -83,7 +83,11 @@
 {block name="addon_scripts"}
     <script type="text/javascript">
         $(function () {
-            $("#tableAdmin").dataTable();
+            $("#tableAdmin").dataTable({
+                oLanguage: {
+                    sUrl: '{base_url()}asset/js/plugins/datatables/Indonesian.json'
+                }
+            });
             $('input[name="status"]').bootstrapSwitch();
             $('input[name="status"]').on({
                 'switchChange.bootstrapSwitch': function (event, state) {

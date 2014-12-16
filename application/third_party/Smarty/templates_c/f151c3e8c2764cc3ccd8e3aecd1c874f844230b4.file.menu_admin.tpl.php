@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-15 11:14:02
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 02:29:41
          compiled from "application\views\layouts\menu_admin.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:16035548714f01505b9-17899961%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f151c3e8c2764cc3ccd8e3aecd1c874f844230b4' => 
     array (
       0 => 'application\\views\\layouts\\menu_admin.tpl',
-      1 => 1418638437,
+      1 => 1418693375,
       2 => 'file',
     ),
   ),
@@ -71,6 +71,8 @@ administrator"><i class="fa fa-angle-double-right"></i> Administrator</a></li>
             <?php }?>
             <li><a href="<?php echo base_url();?>
 anggota"><i class="fa fa-angle-double-right"></i> Anggota</a></li>
+            <li><a href="<?php echo base_url();?>
+operator"><i class="fa fa-angle-double-right"></i> Operator</a></li>
             <li><a href="<?php echo base_url();?>
 profil"><i class="fa fa-angle-double-right"></i> Profil</a></li>
         </ul>

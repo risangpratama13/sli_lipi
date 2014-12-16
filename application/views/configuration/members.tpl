@@ -34,7 +34,6 @@
                                     <th>Username</th>
                                     <th>Terdaftar</th>
                                     <th>Terakhir Login</th>
-                                    <th>Operator</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -49,15 +48,6 @@
                                             {if $member->last_login != 0}
                                                 {date('j F Y H:i:s', $member->last_login)}
                                             {/if}
-                                        </td>
-                                        <td>
-                                            {$checked = ""}
-                                            {foreach $member->groups as $group}                                               
-                                                {if $group->id == 4}
-                                                    {$checked = "checked"}
-                                                {/if}
-                                            {/foreach}
-                                            <input type="checkbox" data-username="{$member->username}" data-id="{$member->id}" name="group" data-size="mini" {$checked}>
                                         </td>
                                         <td>
                                             {if $member->active == 1}
@@ -95,9 +85,12 @@
 {block name="addon_scripts"}
     <script type="text/javascript">
         $(function () {
-            $("#tableMember").dataTable();
+            $("#tableMember").dataTable({
+                oLanguage: {
+                    sUrl: '{base_url()}asset/js/plugins/datatables/Indonesian.json'
+                }
+            });
             $('input[name="status"]').bootstrapSwitch();
-            $('input[name="group"]').bootstrapSwitch();
             $('input[name="status"]').on({
                 'switchChange.bootstrapSwitch': function (event, state) {
                     var status = $(this).is(':checked') ? '1' : '0';
@@ -123,33 +116,7 @@
                         }
                     });
                 }
-            });
-            $('input[name="group"]').on({
-                'switchChange.bootstrapSwitch': function (event, state) {
-                    var status = $(this).is(':checked') ? 'add' : 'remove';
-                    var id = $(this).attr("data-id");
-                    var username = $(this).attr("data-username");
-                    if (status == "add") {
-                        var url = "{base_url()}auth/operator/add";
-                    } else if (status == "remove") {
-                        var url = "{base_url()}auth/operator/remove";
-                    }
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        data: "id=" + id,
-                        success: function (data) {
-                            if (data == "Success") {
-                                if(status == "remove") {
-                                    alert(" Akun " + username + " Dihapus Dari Grup Operator");
-                                } else {
-                                    alert(" Akun " + username + " Dimasukkan Ke Grup Operator");
-                                }
-                            }
-                        }
-                    });
-                }
-            });            
+            });                       
         });
 
         function deleteUser(id, username) {

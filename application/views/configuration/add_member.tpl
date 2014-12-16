@@ -24,7 +24,7 @@
                     <div class="box-header">
                         <h3 class="box-title">Tambah Anggota</h3>
                     </div><!-- /.box-header -->
-                    {form_open('master/crud_units')}
+                    {form_open('tambah_anggota')}
                     <div class="box-body">
                         <div class="form-group">
                             {form_label('Nama Lengkap', 'full_name')}

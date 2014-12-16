@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 05:07:34
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 07:16:09
          compiled from "application\views\configuration\members.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:72495487c82f42e4c4-57416047%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '997d082a93c41f920943874d385abb924d8accb7' => 
     array (
       0 => 'application\\views\\configuration\\members.tpl',
-      1 => 1418607899,
+      1 => 1418688950,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -114,7 +114,6 @@ tambah_anggota" class="btn btn-flat btn-primary">
                                     <th>Username</th>
                                     <th>Terdaftar</th>
                                     <th>Terakhir Login</th>
-                                    <th>Operator</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -137,22 +136,6 @@ $_smarty_tpl->tpl_vars['member']->_loop = true;
                                                 <?php echo date('j F Y H:i:s',$_smarty_tpl->tpl_vars['member']->value->last_login);?>
 
                                             <?php }?>
-                                        </td>
-                                        <td>
-                                            <?php $_smarty_tpl->tpl_vars['checked'] = new Smarty_variable('', null, 0);?>
-                                            <?php  $_smarty_tpl->tpl_vars['group'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['group']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['member']->value->groups; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['group']->key => $_smarty_tpl->tpl_vars['group']->value) {
-$_smarty_tpl->tpl_vars['group']->_loop = true;
-?>                                               
-                                                <?php if ($_smarty_tpl->tpl_vars['group']->value->id==4) {?>
-                                                    <?php $_smarty_tpl->tpl_vars['checked'] = new Smarty_variable("checked", null, 0);?>
-                                                <?php }?>
-                                            <?php } ?>
-                                            <input type="checkbox" data-username="<?php echo $_smarty_tpl->tpl_vars['member']->value->username;?>
-" data-id="<?php echo $_smarty_tpl->tpl_vars['member']->value->id;?>
-" name="group" data-size="mini" <?php echo $_smarty_tpl->tpl_vars['checked']->value;?>
->
                                         </td>
                                         <td>
                                             <?php if ($_smarty_tpl->tpl_vars['member']->value->active==1) {?>
@@ -224,9 +207,13 @@ asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
     <?php echo '<script'; ?>
  type="text/javascript">
         $(function () {
-            $("#tableMember").dataTable();
+            $("#tableMember").dataTable({
+                oLanguage: {
+                    sUrl: '<?php echo base_url();?>
+asset/js/plugins/datatables/Indonesian.json'
+                }
+            });
             $('input[name="status"]').bootstrapSwitch();
-            $('input[name="group"]').bootstrapSwitch();
             $('input[name="status"]').on({
                 'switchChange.bootstrapSwitch': function (event, state) {
                     var status = $(this).is(':checked') ? '1' : '0';
@@ -254,35 +241,7 @@ auth/activate";
                         }
                     });
                 }
-            });
-            $('input[name="group"]').on({
-                'switchChange.bootstrapSwitch': function (event, state) {
-                    var status = $(this).is(':checked') ? 'add' : 'remove';
-                    var id = $(this).attr("data-id");
-                    var username = $(this).attr("data-username");
-                    if (status == "add") {
-                        var url = "<?php echo base_url();?>
-auth/operator/add";
-                    } else if (status == "remove") {
-                        var url = "<?php echo base_url();?>
-auth/operator/remove";
-                    }
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        data: "id=" + id,
-                        success: function (data) {
-                            if (data == "Success") {
-                                if(status == "remove") {
-                                    alert(" Akun " + username + " Dihapus Dari Grup Operator");
-                                } else {
-                                    alert(" Akun " + username + " Dimasukkan Ke Grup Operator");
-                                }
-                            }
-                        }
-                    });
-                }
-            });            
+            });                       
         });
 
         function deleteUser(id, username) {

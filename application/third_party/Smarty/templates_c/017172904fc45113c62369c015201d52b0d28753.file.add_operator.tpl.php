@@ -1,13 +1,13 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 09:43:23
-         compiled from "application\views\configuration\add_member.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:27633548836ae036e30-28494044%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 10:17:51
+         compiled from "application\views\configuration\add_operator.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:22312548f9baf5f8b52-15754248%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '9bc586f68bd539d542679023ce200b7bea537e11' => 
+    '017172904fc45113c62369c015201d52b0d28753' => 
     array (
-      0 => 'application\\views\\configuration\\add_member.tpl',
-      1 => 1418697794,
+      0 => 'application\\views\\configuration\\add_operator.tpl',
+      1 => 1418699862,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -17,15 +17,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '27633548836ae036e30-28494044',
+  'nocache_hash' => '22312548f9baf5f8b52-15754248',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_548836ae0bbb51_56618954',
+  'unifunc' => 'content_548f9baf66de58_85029419',
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_548836ae0bbb51_56618954')) {function content_548836ae0bbb51_56618954($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_548f9baf66de58_85029419')) {function content_548f9baf66de58_85029419($_smarty_tpl) {?><!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -77,16 +77,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <section class="content-header">
         <h1>
             Konfigurasi Pengguna
-            <small>Anggota</small>
+            <small>Operator</small>
         </h1>
         <ol class="breadcrumb">
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-                <li><a href="#">Konfigurasi Pengguna</a></li>
-                <li><a href="<?php echo base_url();?>
-anggota">Anggota</a></li>
-                <li class="active">Tambah Anggota</li>
-            </ol>
+            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="#">Konfigurasi Pengguna</a></li>
+            <li><a href="<?php echo base_url();?>
+operator">Operator</a></li>
+            <li class="active">Tambah Operator</li>
         </ol>
     </section>
 
@@ -96,57 +94,26 @@ anggota">Anggota</a></li>
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">Tambah Anggota</h3>
+                        <h3 class="box-title">Tambah Operator</h3>
                     </div><!-- /.box-header -->
-                    <?php echo form_open('tambah_anggota');?>
+                    <?php echo form_open('tambah_operator');?>
 
                     <div class="box-body">
                         <div class="form-group">
-                            <?php echo form_label('Nama Lengkap','full_name');?>
+                            <?php echo form_label('Nama Operator','full_name');?>
 
-                            <?php echo form_input($_smarty_tpl->tpl_vars['data']->value['full_name']);?>
-
-                            <?php echo form_error('full_name','<p class="help-block text-red">','</p>');?>
+                            <?php echo form_dropdown('user_id',$_smarty_tpl->tpl_vars['members']->value,'','class="form-control"');?>
 
                         </div>
                         <div class="form-group">
-                            <?php echo form_label('Username','username');?>
+                            <?php echo form_label('Kategori Pengujian','username');?>
 
-                            <?php echo form_input($_smarty_tpl->tpl_vars['data']->value['username']);?>
+                            <?php echo form_multiselect('categories[]',$_smarty_tpl->tpl_vars['categories']->value,'','class="form-control"');?>
 
-                            <?php echo form_error('username','<p class="help-block text-red">','</p>');?>
-
-                        </div>
-                        <div class="form-group">
-                            <?php echo form_label('Password','password');?>
-
-                            <?php echo form_password($_smarty_tpl->tpl_vars['data']->value['password']);?>
-
-                            <?php echo form_error('password','<p class="help-block text-red">','</p>');?>
-
-                        </div>
-                        <div class="form-group">
-                            <?php echo form_label('Konfirmasi Password','password_confirm');?>
-
-                            <?php echo form_password($_smarty_tpl->tpl_vars['data']->value['password_confirm']);?>
-
-                            <?php echo form_error('password_confirm','<p class="help-block text-red">','</p>');?>
-
-                        </div>
-                        <div class="form-group">                            
-                            <label>
-                                <input type="radio" name="sex" value="M" checked>
-                                Laki-laki
-                            </label>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label>
-                                <input type="radio" name="sex" value="F">
-                                Perempuan
-                            </label>                           
                         </div>
                     </div><!-- /.box-body -->
                     <div class="box-footer">
-                        <?php echo form_submit('submit',"Tambahkan Anggota",'class="btn btn-flat btn-success"');?>
+                        <?php echo form_submit('submit',"Tambahkan Operator",'class="btn btn-flat btn-success"');?>
 
                     </div>
                     <?php echo form_close();?>

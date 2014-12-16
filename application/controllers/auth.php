@@ -8,6 +8,9 @@ class Auth extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('member');
+        $this->load->model('operator');
+        $this->load->model('category');
+
         $this->load->library('form_validation');
         $this->load->helper('language');
         $this->load->helper('getextension');
@@ -205,13 +208,21 @@ class Auth extends CI_Controller {
         } else if ($group_id == 2) {
             if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
                 $members = $this->ion_auth->users($group_id)->result();
-                foreach ($members as $k => $member) {
-                    $members[$k]->groups = $this->ion_auth->get_users_groups($member->id)->result();
-                }
-
                 $this->basic_data();
                 $this->smartyci->assign('members', $members);
                 $this->smartyci->display('configuration/members.tpl');
+            } else {
+                redirect('/', 'refresh');
+            }
+        } else if ($group_id == 4) {
+            if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
+                $operators = $this->ion_auth->users($group_id)->result();
+                foreach ($operators as $k => $operator) {
+                    $operators[$k]->categories = $this->operator->find_byuser($operator->id);
+                }
+                $this->basic_data();
+                $this->smartyci->assign('operators', $operators);
+                $this->smartyci->display('configuration/operators.tpl');
             } else {
                 redirect('/', 'refresh');
             }
@@ -331,28 +342,6 @@ class Auth extends CI_Controller {
         }
     }
 
-    function operator($oper = "add") {
-        if ($_SERVER['HTTP_REFERER']) {
-            if ($oper == "add") {
-                $add_operator = $this->ion_auth->add_to_group(4, $this->input->post('id'));
-                if ($add_operator) {
-                    echo "Success";
-                } else {
-                    echo "Failed";
-                }
-            } else if ($oper == "remove") {
-                $remove_operator = $this->ion_auth->remove_from_group(4, $this->input->post('id'));
-                if ($remove_operator) {
-                    echo "Success";
-                } else {
-                    echo "Failed";
-                }
-            }
-        } else {
-            redirect('/', 'refresh');
-        }
-    }
-
     function add_member() {
         if (!$this->ion_auth->logged_in()) {
             redirect('login', 'refresh');
@@ -422,6 +411,116 @@ class Auth extends CI_Controller {
             }
         } else {
             redirect('/', 'refresh');
+        }
+    }
+
+    function add_operator() {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+        
+        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {            
+            if($this->input->post('submit')) {
+                $categories = $this->input->post('categories');
+                $user_id = $this->input->post('user_id');
+                foreach ( $categories as $category) {
+                    $data = array(
+                        'user_id' => $user_id,
+                        'category_id' => $category
+                    );
+                    $this->operator->save($data);
+                }
+                $this->ion_auth->add_to_group(4, $user_id);
+                redirect('operator', 'refresh');
+            } else {
+                $members = $this->ion_auth->users(2)->result();
+                $anggota = array();
+                foreach ($members as $member) {
+                    $anggota[$member->id] = $member->full_name;
+                }
+                
+                $categories = $this->category->get_all();
+                $kategori = array();
+                foreach ($categories as $category) {
+                    $kategori[$category->id] = $category->cat_name;
+                }
+                
+                $this->basic_data();
+                $this->smartyci->assign('members', $anggota);
+                $this->smartyci->assign('categories', $kategori);
+                $this->smartyci->display('configuration/add_operator.tpl');
+            }            
+        } else {
+            redirect('/', 'refresh');
+        }
+    }
+    
+    function edit_operator($id = NULL) {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+        
+        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {            
+            if($this->input->post('submit')) {
+                $categories = $this->input->post('categories');
+                $user_id = $this->input->post('user_id');
+                
+                $this->operator->delete_byuser($user_id);
+                foreach ( $categories as $category) {
+                    $data = array(
+                        'user_id' => $user_id,
+                        'category_id' => $category
+                    );
+                    $this->operator->save($data);
+                }
+                redirect('operator', 'refresh');
+            } else {
+                $member = $this->ion_auth->user($id)->row();
+                
+                $categories = $this->category->get_all();
+                $kategori = array();
+                foreach ($categories as $category) {
+                    $kategori[$category->id] = $category->cat_name;
+                }
+                
+                $select_operator = array();
+                $operators = $this->operator->find_byuser($id);
+                foreach ($operators as $operator) {
+                    $select_operator[] = $operator->category_id;
+                }
+                
+                $full_name = array(
+                    'class' => 'form-control',
+                    'value' => $member->full_name,
+                    'disabled' => 'disabled'
+                );
+                
+                $this->basic_data();
+                $this->smartyci->assign('member', $member);
+                $this->smartyci->assign('categories', $kategori);
+                $this->smartyci->assign('full_name', $full_name);
+                $this->smartyci->assign('select_operator', $select_operator);
+                $this->smartyci->display('configuration/edit_operator.tpl');
+            }            
+        } else {
+            redirect('/', 'refresh');
+        }
+    }
+
+    function delete_operator() {
+        if ($_SERVER['HTTP_REFERER']) {
+            $remove_operator = $this->ion_auth->remove_from_group(4, $this->input->post('user_id'));
+            if ($remove_operator) {
+                if ($this->operator->delete_byuser($this->input->post('user_id'))) {
+                    echo "Success";
+                } else {
+                    echo "Failed";
+                }
+            } else {
+                echo "Failed";
+            }
+        } else {
+            redirect('operator', 'refresh');
         }
     }
 
@@ -541,7 +640,7 @@ class Auth extends CI_Controller {
                         'class' => 'form-control',
                         'rows' => 3,
                         'value' => !empty($member->address) ? $member->address : ""
-                    );                    
+                    );
 
                     $this->basic_data();
                     $this->smartyci->assign('action', 'Ubah Informasi Pribadi');
@@ -557,7 +656,7 @@ class Auth extends CI_Controller {
                         'full_name' => $this->input->post('full_name'),
                         'sex' => $this->input->post('sex')
                     );
-                    
+
                     $data_member = array(
                         'user_id' => $id,
                         'category' => $this->input->post('category'),
@@ -571,13 +670,13 @@ class Auth extends CI_Controller {
                         'researcher_id' => $this->input->post('researcher'),
                         'research_id' => $this->input->post('research')
                     );
-                    
-                    if($this->input->post('oper') == "add") {
+
+                    if ($this->input->post('oper') == "add") {
                         $this->ion_auth->update($id, $data_users);
                         $this->member->create_member($data_member);
                         $this->session->set_flashdata('message', "Informasi Pribadi Berhasil Dirubah");
                         redirect('profil', 'refresh');
-                    } else if($this->input->post('oper') == "edit") {
+                    } else if ($this->input->post('oper') == "edit") {
                         $this->ion_auth->update($id, $data_users);
                         $this->member->update_member($this->input->post('member_id'), $data_member);
                         $this->session->set_flashdata('message', "Informasi Pribadi Berhasil Dirubah");

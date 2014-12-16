@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-15 10:57:45
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 03:03:29
          compiled from "application\views\master-data\kurs_point.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5050548eb09971e046-90697013%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8f212f62d07ec39112dbeaa02f3f43e621323665' => 
     array (
       0 => 'application\\views\\master-data\\kurs_point.tpl',
-      1 => 1418614327,
+      1 => 1418644776,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -21,9 +21,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
   'unifunc' => 'content_548eb0997ba479_39771825',
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_548eb0997ba479_39771825')) {function content_548eb0997ba479_39771825($_smarty_tpl) {?><!DOCTYPE html>
 <html>
@@ -107,7 +107,7 @@ kurs_point">Kurs Poin</a></li>
                                 <td>Nilai Rupiah</td>
                                 <td>
                                     <span class="label label-info">
-                                        Rp <?php echo number_format($_smarty_tpl->tpl_vars['kurs']->value->idr,'2',',','.');?>
+                                        Rp. <?php echo number_format($_smarty_tpl->tpl_vars['kurs']->value->idr,'2',',','.');?>
 
                                     </span>
                                 </td>

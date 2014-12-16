@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-15 11:04:38
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 03:03:32
          compiled from "application\views\master-data\unit.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5091548eb09e0be3a4-54902715%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b67ee08295b7303d3f676fb861bc4d8377515322' => 
     array (
       0 => 'application\\views\\master-data\\unit.tpl',
-      1 => 1418637789,
+      1 => 1418640873,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -250,7 +250,7 @@ master/crud_units",
             $('input[name="action"]').val("add");
             $('input[name="id"]').val("0");
             $('input[name="unit_name"]').val("");
-            $('[name="title"]').text("Tambah Stuan");
+            $('[name="title"]').text("Tambah Satuan");
             $("#unit-modal").modal('show');
         }
         

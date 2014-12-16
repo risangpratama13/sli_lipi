@@ -38,6 +38,7 @@
                 <li><a href="{base_url()}administrator"><i class="fa fa-angle-double-right"></i> Administrator</a></li>            
             {/if}
             <li><a href="{base_url()}anggota"><i class="fa fa-angle-double-right"></i> Anggota</a></li>
+            <li><a href="{base_url()}operator"><i class="fa fa-angle-double-right"></i> Operator</a></li>
             <li><a href="{base_url()}profil"><i class="fa fa-angle-double-right"></i> Profil</a></li>
         </ul>
     </li>
