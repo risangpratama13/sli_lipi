@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-13 09:32:42
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 11:56:24
          compiled from "application\views\configuration\profile\change_personal_info.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:17557548a4ff06c6b70-79465444%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c9a1d54ce23f32a07eac25748524d1207787b88d' => 
     array (
       0 => 'application\\views\\configuration\\profile\\change_personal_info.tpl',
-      1 => 1418356663,
+      1 => 1418705781,
       2 => 'file',
     ),
     '68cc9180bc6fb0dd465914a3c57d03a07aa9bace' => 
@@ -19,7 +19,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1418213239,
+      1 => 1418622047,
       2 => 'file',
     ),
   ),
@@ -184,7 +184,7 @@ profil/ubah_password"><i class="fa fa-unlock"></i> Ubah Password</a></li>
                 <?php echo form_label('Jenis Kelamin','sex');?>
 
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <?php if (empty($_smarty_tpl->tpl_vars['member']->value)||$_smarty_tpl->tpl_vars['user']->value->sex=="M") {?>
+                <?php if ($_smarty_tpl->tpl_vars['user']->value->sex=="M") {?>
                     <label>
                         <?php echo form_radio('sex','M',true);?>
  Laki-laki
@@ -409,7 +409,10 @@ $_smarty_tpl->tpl_vars['research']->_loop = true;
             </aside>
             <!-- End Content -->
         </div>
-            
+        <!-- Modal -->    
+        
+        <!-- End Modal -->
+        
         <!-- jQuery 2.0.2 -->
         <?php echo '<script'; ?>
  src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"><?php echo '</script'; ?>

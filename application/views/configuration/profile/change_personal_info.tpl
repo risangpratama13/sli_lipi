@@ -31,13 +31,13 @@
             <div class="form-group">
                 {form_label('Jenis Kelamin', 'sex')}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {if empty($member) or $user->sex eq "M"}
+                {if $user->sex == "M"}
                     <label>
                         {form_radio('sex','M',TRUE)} Laki-laki
                     </label>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <label>
-                        {form_radio('sex','F')} Perempuan
+                        {form_radio('sex','F' )} Perempuan
                     </label>
                 {else}
                     <label>
@@ -45,7 +45,7 @@
                     </label>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <label>
-                        {form_radio('sex','F',TRUE)} Perempuan
+                        {form_radio('sex','F', TRUE)} Perempuan
                     </label>
                 {/if}
             </div>
