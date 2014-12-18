@@ -9,4 +9,9 @@
             <i class="fa fa-user"></i> <span>Profil</span>
         </a>
     </li>    
+    <li>
+        <a href="{base_url()}item">
+            <i class="fa fa-files-o"></i> <span>Item</span>
+        </a>
+    </li>    
 </ul>

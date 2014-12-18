@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-10 09:01:09
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-18 05:57:57
          compiled from "application\views\registration.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:30145548701d7039d15-78777328%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '194337bdb176924d22a7a6b0f7c71ef1423f023e' => 
     array (
       0 => 'application\\views\\registration.tpl',
-      1 => 1418176018,
+      1 => 1418853640,
       2 => 'file',
     ),
   ),
@@ -27,7 +27,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <html class="bg-black">
     <head>
         <meta charset="UTF-8">
-        <title>AdminLTE | Registration Page</title>
+        <title>Registrasi Anggota Baru</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- Icon -->
         <?php echo link_tag('asset/img/favicon.png','shortcut icon','image/png');?>

@@ -2,7 +2,7 @@
 <html class="bg-black">
     <head>
         <meta charset="UTF-8">
-        <title>AdminLTE | Registration Page</title>
+        <title>Registrasi Anggota Baru</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- Icon -->
         {link_tag('asset/img/favicon.png','shortcut icon','image/png')}        

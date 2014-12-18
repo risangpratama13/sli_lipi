@@ -62,6 +62,10 @@ $route['unit'] = "master/units";
 $route['kurs_point'] = "master/kurs_point";
 $route['tipe_item'] = "master/item_types";
 
+$route['item'] = "account/items";
+$route['tambah_item'] = "account/add_item";
+$route['ubah_item/(:num)'] = "account/edit_item/$1";
+
 $route['kategori_pengujian'] = "testing/categories";
 $route['pengujian'] = "testing";
 $route['tambah_pengujian'] = "testing/add_pengujian";

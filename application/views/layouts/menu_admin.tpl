@@ -16,6 +16,11 @@
             <li><a href="{base_url()}unit"><i class="fa fa-angle-double-right"></i> Satuan</a></li>
         </ul>
     </li>
+    <li>
+        <a href="{base_url()}item">
+            <i class="fa fa-files-o"></i> <span>Item</span>
+        </a>
+    </li>
     <li class="treeview">
         <a href="#">
             <i class="fa fa-list-alt"></i>

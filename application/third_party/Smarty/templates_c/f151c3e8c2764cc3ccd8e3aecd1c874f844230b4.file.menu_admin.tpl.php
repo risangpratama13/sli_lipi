@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 02:29:41
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-18 06:21:30
          compiled from "application\views\layouts\menu_admin.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:16035548714f01505b9-17899961%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f151c3e8c2764cc3ccd8e3aecd1c874f844230b4' => 
     array (
       0 => 'application\\views\\layouts\\menu_admin.tpl',
-      1 => 1418693375,
+      1 => 1418858477,
       2 => 'file',
     ),
   ),
@@ -44,6 +44,12 @@ tipe_item"><i class="fa fa-angle-double-right"></i> Kategori Item</a></li>
             <li><a href="<?php echo base_url();?>
 unit"><i class="fa fa-angle-double-right"></i> Satuan</a></li>
         </ul>
+    </li>
+    <li>
+        <a href="<?php echo base_url();?>
+item">
+            <i class="fa fa-files-o"></i> <span>Item</span>
+        </a>
     </li>
     <li class="treeview">
         <a href="#">

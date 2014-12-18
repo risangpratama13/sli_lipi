@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 03:03:29
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 11:16:27
          compiled from "application\views\master-data\kurs_point.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5050548eb09971e046-90697013%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8f212f62d07ec39112dbeaa02f3f43e621323665' => 
     array (
       0 => 'application\\views\\master-data\\kurs_point.tpl',
-      1 => 1418644776,
+      1 => 1418724984,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -149,7 +149,7 @@ kurs_point">Kurs Poin</a></li>
                 </div><!-- /.box -->
             </div><!-- ./col -->
             <div class="col-md-4">
-                <div class="box box-solid">
+                <div class="box box-danger">
                     <div class="box-header">
                         <i class="fa fa-keyboard-o"></i>
                         <h3 class="box-title">Kalkulator Kurs</h3>

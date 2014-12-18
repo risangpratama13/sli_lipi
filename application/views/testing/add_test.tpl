@@ -4,7 +4,7 @@
     <section class="content-header">
         <h1>
             Pengujian
-            <small>Daftar Pengujian</small>
+            <small>Tambah Pengujian</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-group">                            
                             <label for="category">Kategori Pengujian</label>
-                            {html_options name=category options=$kategori class=form-control}                       
+                            {html_options name=category options=$kategori}                       
                         </div>
                         <div class="form-group">
                             {form_label('Harga Pengujian', 'testing_price')}
@@ -44,7 +44,7 @@
                         </div>
                         <div class="form-group">                            
                             <label for="unit">Satuan (Per)</label>
-                            {html_options name=unit options=$satuan class=form-control}                         
+                            {html_options name=unit options=$satuan}                         
                         </div>
                     </div><!-- /.box-body -->
                     <div class="box-footer">

@@ -67,7 +67,7 @@
                 </div><!-- /.box -->
             </div><!-- ./col -->
             <div class="col-md-4">
-                <div class="box box-solid">
+                <div class="box box-danger">
                     <div class="box-header">
                         <i class="fa fa-keyboard-o"></i>
                         <h3 class="box-title">Kalkulator Kurs</h3>
