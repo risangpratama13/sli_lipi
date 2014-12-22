@@ -14,6 +14,7 @@ class Orders extends CI_Controller {
         $this->load->model('order');
         $this->load->model('test_order');
         $this->load->model('test');
+        $this->load->model('member');
         $this->load->model('operator');
         $this->load->model('category');
         $this->load->model('balance');
@@ -40,6 +41,7 @@ class Orders extends CI_Controller {
             $this->smartyci->assign('idr', $this->idr);
             $this->smartyci->assign('point', $this->point);
             $this->smartyci->assign('shopping_carts', $this->cart->total_items());
+            $this->smartyci->assign('contents', $this->cart->contents());
         }
 
         $this->smartyci->assign('user', $user);
@@ -52,7 +54,13 @@ class Orders extends CI_Controller {
             redirect('login', 'refresh');
         }
 
-        $orders = $this->order->get_all();
+        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
+            $orders = $this->order->get_all();
+        } else {
+            $user = $this->ion_auth->user()->row();
+            $orders = $this->order->find_byuser($user->id);
+        }
+
         $this->basic_data();
         $this->smartyci->assign('orders', $orders);
         $this->smartyci->display('order/orders.tpl');
@@ -64,12 +72,15 @@ class Orders extends CI_Controller {
         }
 
         if ($this->ion_auth->in_group(2)) {
+            if ($this->idr == 0) {
+                $this->session->set_flashdata('message', 'Anda Tidak Memiliki Saldo Untuk Melakukan Pengajuan Pengujian');
+                redirect('keranjang_belanja', 'refresh');
+            }
+
             $tests = $this->test->get_all();
-            $total = $this->cart->total();
-            
+
             $this->basic_data();
             $this->smartyci->assign('tests', $tests);
-            $this->smartyci->assign('total', $total);
             $this->smartyci->display('order/add_order.tpl');
         } else {
             redirect('/', 'refresh');
@@ -89,9 +100,9 @@ class Orders extends CI_Controller {
                 foreach ($this->cart->product_options($cart['rowid']) as $option_name => $option_value) {
                     $product_options[$cart['rowid']][$option_name] = $option_value;
                 }
-            }            
+            }
             $message = $this->session->flashdata('message') ? $this->session->flashdata('message') : "";
-            
+
             $this->basic_data();
             $this->smartyci->assign('total', $total);
             $this->smartyci->assign('message', $message);
@@ -115,7 +126,7 @@ class Orders extends CI_Controller {
                 $test = $this->test->find_by_id($test_id);
                 $operator_id = $this->input->post('operator');
                 $operator = $this->operator->get_byid($operator_id);
-                
+
                 $data = array(
                     'id' => $test->id,
                     'qty' => $qty,
@@ -126,22 +137,27 @@ class Orders extends CI_Controller {
                 $this->cart->insert($data);
                 redirect('keranjang_belanja', 'refresh');
             } else {
+                if ($this->idr == 0) {
+                    $this->session->set_flashdata('message', 'Anda Tidak Memiliki Saldo Untuk Melakukan Pengajuan Pengujian');
+                    redirect('keranjang_belanja', 'refresh');
+                }
+
                 $operators = $this->operator->find_bycategory($category);
                 $test = $this->test->find_by_id($id);
                 $qty = array(
-                    "name" => 'qty', 
+                    "name" => 'qty',
                     "class" => "form-control",
                     "min" => 1,
                     'required' => 'required',
                     'onkeypress' => 'return isNumberKey(event)',
                     'type' => 'number'
                 );
-                
+
                 $this->basic_data();
-                $this->smartyci->assign('test_id', $id);                
-                $this->smartyci->assign('qty', $qty);                
-                $this->smartyci->assign('test', $test);                
-                $this->smartyci->assign('operators', $operators);                
+                $this->smartyci->assign('test_id', $id);
+                $this->smartyci->assign('qty', $qty);
+                $this->smartyci->assign('test', $test);
+                $this->smartyci->assign('operators', $operators);
                 $this->smartyci->display('order/add_cart.tpl');
             }
         } else {
@@ -150,27 +166,27 @@ class Orders extends CI_Controller {
     }
 
     function save_cart() {
-        if($_SERVER['HTTP_REFERER']) {
-            if($this->input->post('checkout')) {
+        if ($_SERVER['HTTP_REFERER']) {
+            if ($this->input->post('checkout')) {
                 $total = $this->cart->total();
-                if($total > $this->idr) {
+                if ($total > $this->idr) {
                     $this->session->set_flashdata('message', 'Saldo Anda Tidak Mencukupi Untuk Melakukan Pengajuan Pengujian');
                     redirect('keranjang_belanja', 'refresh');
-                } else {
+                } else if ($this->cart->total_items() > 0) {
                     $user = $this->ion_auth->user()->row();
                     $total = $this->cart->total();
-                    
+
                     $order_no = $this->order->max_order_no($user->id);
                     $order_no = $order_no + 1;
-                    
-                    $code = $user->id.date("Ymd").$order_no;
+
+                    $code = $user->id . date("Ymd") . $order_no;
                     $data = array(
                         'order_no' => $order_no,
                         'user_id' => $user->id,
                         'code' => $code,
                         'total' => $total
                     );
-                    if($this->order->save($data)) {
+                    if ($this->order->save($data)) {
                         $order_id = $this->db->insert_id();
                         foreach ($this->cart->contents() as $items) {
                             $data = array(
@@ -178,30 +194,38 @@ class Orders extends CI_Controller {
                                 'operator_id' => $items['options']['operator'],
                                 'test_id' => $items['id'],
                                 'qty' => $items['qty'],
-                                'subtotal' => $items['subtotal']                                
+                                'subtotal' => $items['subtotal']
                             );
                             $this->test_order->save($data);
                         }
                         $this->cart->destroy();
                         redirect('order', 'refresh');
                     } else {
-                        $this->session->set_flashdata('message', 'Terjadi Kegagalan Menyimpan Pengajuan Pengujian');                    
+                        $this->session->set_flashdata('message', 'Terjadi Kegagalan Menyimpan Pengajuan Pengujian');
                         redirect('keranjang_belanja', 'refresh');
                     }
-                } 
-            } else if($this->input->post('ubah')) {
-                $total_items = $this->cart->total_items();
-                for($i = 1; $i <= $total_items; $i++) {
-                    $rowid = $this->input->post($i.'rowid');
-                    $qty = $this->input->post($i.'qty');
-                    
-                    $data = array(
-                        'rowid' => $rowid,
-                        'qty' => $qty
-                    );
-                    $this->cart->update($data);
+                } else {
+                    $this->session->set_flashdata('message', 'Tidak Ada Pengujian Dalam Keranjang Belanja');
+                    redirect('keranjang_belanja', 'refresh');
                 }
-                redirect('keranjang_belanja', 'refresh');
+            } else if ($this->input->post('ubah')) {
+                $total_items = $this->cart->total_items();
+                if ($total_items > 0) {
+                    for ($i = 1; $i <= $total_items; $i++) {
+                        $rowid = $this->input->post($i . 'rowid');
+                        $qty = $this->input->post($i . 'qty');
+
+                        $data = array(
+                            'rowid' => $rowid,
+                            'qty' => $qty
+                        );
+                        $this->cart->update($data);
+                    }
+                    redirect('keranjang_belanja', 'refresh');
+                } else {
+                    $this->session->set_flashdata('message', 'Tidak Ada Pengujian Dalam Keranjang Belanja');
+                    redirect('keranjang_belanja', 'refresh');
+                }
             } else {
                 redirect('keranjang_belanja', 'refresh');
             }
@@ -217,6 +241,22 @@ class Orders extends CI_Controller {
         );
         $this->cart->update($data);
         redirect('keranjang_belanja');
+    }
+
+    function view_order($code) {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+
+        $order = $this->order->find_bycode($code);
+        $test_orders = $this->test_order->find_byorder($order->id);
+        $member = $this->member->by_user_id($order->user_id);
+
+        $this->basic_data();
+        $this->smartyci->assign('order', $order);
+        $this->smartyci->assign('member', $member);
+        $this->smartyci->assign('test_orders', $test_orders);
+        $this->smartyci->display('order/view_order.tpl');
     }
 
     /** Akhir Fungsi Untuk Menangani Pengajuan Pengujian ** */

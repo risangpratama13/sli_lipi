@@ -43,7 +43,7 @@
                                         <td>{date("j F Y H:i:s", strtotime($order->order_date))}</td>
                                         <td>Rp. {number_format($order->total, '2', ',', '.')}</td>
                                         <td>
-                                            <a href="{base_url()}view_order/{$order->code}" class="btn btn-flat btn-sm btn-info"><i class="fa fa-eye"></i></a>
+                                            <a href="{base_url()}invoice/{$order->code}" title="Invoice" class="btn btn-flat btn-sm btn-info"><i class="fa fa-file-text"></i></a>
                                         </td>
                                     </tr>
                                     {$no = $no + 1}

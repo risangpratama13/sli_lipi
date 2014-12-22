@@ -26,6 +26,7 @@ class Auth extends CI_Controller {
         }
         if($this->ion_auth->in_group(2)) {            
             $this->smartyci->assign('shopping_carts', $this->cart->total_items());
+            $this->smartyci->assign('contents', $this->cart->contents());
         }
         $this->smartyci->assign('user', $user);
         $this->smartyci->assign('groups', $groups);

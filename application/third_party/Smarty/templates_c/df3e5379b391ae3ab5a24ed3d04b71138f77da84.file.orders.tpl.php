@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-22 13:05:21
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-22 17:16:46
          compiled from "application\views\order\orders.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:159455493fbe9d2db84-58576439%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'df3e5379b391ae3ab5a24ed3d04b71138f77da84' => 
     array (
       0 => 'application\\views\\order\\orders.tpl',
-      1 => 1419228318,
+      1 => 1419243401,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -130,8 +130,8 @@ $_smarty_tpl->tpl_vars['order']->_loop = true;
 </td>
                                         <td>
                                             <a href="<?php echo base_url();?>
-view_order/<?php echo $_smarty_tpl->tpl_vars['order']->value->code;?>
-" class="btn btn-flat btn-sm btn-info"><i class="fa fa-eye"></i></a>
+invoice/<?php echo $_smarty_tpl->tpl_vars['order']->value->code;?>
+" title="Invoice" class="btn btn-flat btn-sm btn-info"><i class="fa fa-file-text"></i></a>
                                         </td>
                                     </tr>
                                     <?php $_smarty_tpl->tpl_vars['no'] = new Smarty_variable($_smarty_tpl->tpl_vars['no']->value+1, null, 0);?>

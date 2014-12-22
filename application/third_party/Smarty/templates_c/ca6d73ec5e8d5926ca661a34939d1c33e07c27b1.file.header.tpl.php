@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-11 18:53:11
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-22 17:48:13
          compiled from "application\views\layouts\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:6407548714861bd111-13683789%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ca6d73ec5e8d5926ca661a34939d1c33e07c27b1' => 
     array (
       0 => 'application\\views\\layouts\\header.tpl',
-      1 => 1418298751,
+      1 => 1419245291,
       2 => 'file',
     ),
   ),
@@ -41,7 +41,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <span class="icon-bar"></span>
         </a>
         <div class="navbar-right">
-            <ul class="nav navbar-nav">                
+            <ul class="nav navbar-nav">
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-22 07:18:53
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-23 05:39:19
          compiled from "application\views\order\add_order.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:142885494bf33f2b805-12271238%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '95c502f5306450ef9a719ac84d67184926af6a29' => 
     array (
       0 => 'application\\views\\order\\add_order.tpl',
-      1 => 1419207531,
+      1 => 1419287948,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -92,59 +92,7 @@ order">Daftar Pengajuan Pengujian</a></li>
     </section>
 
     <!-- Main content -->
-    <section class="content">
-        <div class="row">
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-blue-gradient">
-                    <div class="inner">
-                        <h3><?php echo $_smarty_tpl->tpl_vars['shopping_carts']->value;?>
-</h3>
-                        <p>Pengujian</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-bag"></i>
-                    </div>
-                    <a href="<?php echo base_url();?>
-keranjang_belanja" class="small-box-footer">
-                        Lihat Detail <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-purple-gradient">
-                    <div class="inner">
-                        <h3>Rp. <?php echo number_format($_smarty_tpl->tpl_vars['total']->value,'2',',','.');?>
-</h3>
-                        <p>Total Harga</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-calculator"></i>
-                    </div>
-                    <a href="<?php echo base_url();?>
-keranjang_belanja" class="small-box-footer">
-                        Lihat Detail <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div><!-- ./col -->
-            <div class="col-lg-5 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-red-gradient">
-                    <div class="inner">
-                        <h3>Rp. <?php echo number_format($_smarty_tpl->tpl_vars['idr']->value,'2',',','.');?>
-</h3>
-                        <p>Saldo</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-social-usd"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">
-                        Lihat Detail <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div><!-- ./col -->            
-        </div><!-- /.row -->
+    <section class="content">        
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">

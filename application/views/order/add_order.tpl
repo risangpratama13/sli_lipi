@@ -15,54 +15,7 @@
     </section>
 
     <!-- Main content -->
-    <section class="content">
-        <div class="row">
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-blue-gradient">
-                    <div class="inner">
-                        <h3>{$shopping_carts}</h3>
-                        <p>Pengujian</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-bag"></i>
-                    </div>
-                    <a href="{base_url()}keranjang_belanja" class="small-box-footer">
-                        Lihat Detail <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-purple-gradient">
-                    <div class="inner">
-                        <h3>Rp. {number_format($total, '2', ',', '.')}</h3>
-                        <p>Total Harga</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-calculator"></i>
-                    </div>
-                    <a href="{base_url()}keranjang_belanja" class="small-box-footer">
-                        Lihat Detail <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div><!-- ./col -->
-            <div class="col-lg-5 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-red-gradient">
-                    <div class="inner">
-                        <h3>Rp. {number_format($idr, '2', ',', '.')}</h3>
-                        <p>Saldo</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-social-usd"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">
-                        Lihat Detail <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div><!-- ./col -->            
-        </div><!-- /.row -->
+    <section class="content">        
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
