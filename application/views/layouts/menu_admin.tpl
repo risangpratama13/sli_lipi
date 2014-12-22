@@ -20,7 +20,7 @@
         <a href="{base_url()}item">
             <i class="fa fa-files-o"></i> <span>Item</span>
         </a>
-    </li>
+    </li>    
     <li class="treeview">
         <a href="#">
             <i class="fa fa-list-alt"></i>
@@ -31,6 +31,11 @@
             <li><a href="{base_url()}kategori_pengujian"><i class="fa fa-angle-double-right"></i> Kategori Pengujian</a></li>     
             <li><a href="{base_url()}pengujian"><i class="fa fa-angle-double-right"></i> Daftar Pengujian</a></li>
         </ul>
+    </li>
+    <li>
+        <a href="{base_url()}order">
+            <i class="fa fa-book"></i> <span>Pengajuan Pengujian</span>
+        </a>
     </li>
     <li class="treeview">
         <a href="#">

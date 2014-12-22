@@ -71,5 +71,10 @@ $route['pengujian'] = "testing";
 $route['tambah_pengujian'] = "testing/add_pengujian";
 $route['ubah_pengujian/(:num)'] = "testing/edit_pengujian/$1";
 
+$route['order'] = "orders/index";
+$route['tambah_order'] = "orders/add_order";
+$route['tambah_keranjang/(:num)/(:num)'] = "orders/add_cart/$1/$2";
+$route['keranjang_belanja'] = "orders/view_cart";
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

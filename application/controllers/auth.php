@@ -24,6 +24,9 @@ class Auth extends CI_Controller {
         foreach ($user_groups as $user_group) {
             $groups[$user_group->id] = $user_group->name;
         }
+        if($this->ion_auth->in_group(2)) {            
+            $this->smartyci->assign('shopping_carts', $this->cart->total_items());
+        }
         $this->smartyci->assign('user', $user);
         $this->smartyci->assign('groups', $groups);
     }
@@ -418,12 +421,12 @@ class Auth extends CI_Controller {
         if (!$this->ion_auth->logged_in()) {
             redirect('login', 'refresh');
         }
-        
-        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {            
-            if($this->input->post('submit')) {
+
+        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
+            if ($this->input->post('submit')) {
                 $categories = $this->input->post('categories');
                 $user_id = $this->input->post('user_id');
-                foreach ( $categories as $category) {
+                foreach ($categories as $category) {
                     $data = array(
                         'user_id' => $user_id,
                         'category_id' => $category
@@ -438,35 +441,35 @@ class Auth extends CI_Controller {
                 foreach ($members as $member) {
                     $anggota[$member->id] = $member->full_name;
                 }
-                
+
                 $categories = $this->category->get_all();
                 $kategori = array();
                 foreach ($categories as $category) {
                     $kategori[$category->id] = $category->cat_name;
                 }
-                
+
                 $this->basic_data();
                 $this->smartyci->assign('members', $anggota);
                 $this->smartyci->assign('categories', $kategori);
                 $this->smartyci->display('configuration/add_operator.tpl');
-            }            
+            }
         } else {
             redirect('/', 'refresh');
         }
     }
-    
+
     function edit_operator($id = NULL) {
         if (!$this->ion_auth->logged_in()) {
             redirect('login', 'refresh');
         }
-        
-        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {            
-            if($this->input->post('submit')) {
+
+        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
+            if ($this->input->post('submit')) {
                 $categories = $this->input->post('categories');
                 $user_id = $this->input->post('user_id');
-                
+
                 $this->operator->delete_byuser($user_id);
-                foreach ( $categories as $category) {
+                foreach ($categories as $category) {
                     $data = array(
                         'user_id' => $user_id,
                         'category_id' => $category
@@ -476,32 +479,32 @@ class Auth extends CI_Controller {
                 redirect('operator', 'refresh');
             } else {
                 $member = $this->ion_auth->user($id)->row();
-                
+
                 $categories = $this->category->get_all();
                 $kategori = array();
                 foreach ($categories as $category) {
                     $kategori[$category->id] = $category->cat_name;
                 }
-                
+
                 $select_operator = array();
                 $operators = $this->operator->find_byuser($id);
                 foreach ($operators as $operator) {
                     $select_operator[] = $operator->category_id;
                 }
-                
+
                 $full_name = array(
                     'class' => 'form-control',
                     'value' => $member->full_name,
                     'disabled' => 'disabled'
                 );
-                
+
                 $this->basic_data();
                 $this->smartyci->assign('member', $member);
                 $this->smartyci->assign('categories', $kategori);
                 $this->smartyci->assign('full_name', $full_name);
                 $this->smartyci->assign('select_operator', $select_operator);
                 $this->smartyci->display('configuration/edit_operator.tpl');
-            }            
+            }
         } else {
             redirect('/', 'refresh');
         }
@@ -641,7 +644,7 @@ class Auth extends CI_Controller {
                         'rows' => 3,
                         'value' => !empty($member->address) ? $member->address : ""
                     );
-
+                    
                     $this->basic_data();
                     $this->smartyci->assign('action', 'Ubah Informasi Pribadi');
                     $this->smartyci->assign('member', $member);
@@ -732,17 +735,18 @@ class Auth extends CI_Controller {
             default:
                 if ($this->ion_auth->in_group(2)) {
                     $member = $this->member->by_user_id($id);
-                    $operators = $this->operator->find_byuser($id);                
+                    $operators = $this->operator->find_byuser($id);
                     $this->smartyci->assign('member', $member);
-                    $this->smartyci->assign('operators', $operators);                    
+                    $this->smartyci->assign('operators', $operators);
                 }
-                $this->smartyci->assign('action', 'Informasi Akun');
+                
+                $this->smartyci->assign('action', 'Informasi Akun');               
                 $this->basic_data();
                 $this->smartyci->display('configuration/profile/personal.tpl');
                 break;
         }
     }
-    
+
     function view_member($username) {
         if (!$this->ion_auth->logged_in()) {
             redirect('login', 'refresh');
@@ -750,17 +754,17 @@ class Auth extends CI_Controller {
 
         if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
             $id = $this->ion_auth->get_user_id_by_username($username);
-            
+
             $member = $this->ion_auth->user($id)->row();
-            $data_member = $this->member->by_user_id($id);            
+            $data_member = $this->member->by_user_id($id);
             $operators = $this->operator->find_byuser($id);
-            
-            if($this->ion_auth->in_group(4, $id)) {
+
+            if ($this->ion_auth->in_group(4, $id)) {
                 $member_operator = TRUE;
             } else {
                 $member_operator = FALSE;
             }
-                        
+
             $this->basic_data();
             $this->smartyci->assign('member', $member);
             $this->smartyci->assign('data_member', $data_member);

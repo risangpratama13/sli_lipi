@@ -20,6 +20,9 @@ class Account extends CI_Controller {
         foreach ($user_groups as $user_group) {
             $groups[$user_group->id] = $user_group->name;
         }
+        if($this->ion_auth->in_group(2)) {            
+            $this->smartyci->assign('shopping_carts', $this->cart->total_items());
+        }
         $this->smartyci->assign('user', $user);
         $this->smartyci->assign('groups', $groups);
     }
@@ -32,7 +35,7 @@ class Account extends CI_Controller {
 
         $user = $this->ion_auth->user()->row();
         if ($this->ion_auth->in_group(2)) {
-            $items = $this->item->get_by_user($user->id);
+            $items = $this->item->get_by_user($user->id);       
         } else if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
             $items = $this->item->get_all();
         }
@@ -260,4 +263,5 @@ class Account extends CI_Controller {
     }
 
     /** Akhir Dari Fungsi Untuk Menangani Penambahan Saldo dari Upload Item * */
+    
 }
