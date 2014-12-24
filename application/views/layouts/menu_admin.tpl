@@ -37,6 +37,11 @@
             <i class="fa fa-book"></i> <span>Pengajuan Pengujian</span>
         </a>
     </li>
+    <li>
+        <a href="{base_url()}history_pengujian">
+            <i class="fa fa-tasks"></i> <span>Kegiatan Pengujian</span>
+        </a>
+    </li>
     <li class="treeview">
         <a href="#">
             <i class="fa fa-gears"></i>
@@ -46,7 +51,7 @@
         <ul class="treeview-menu">
             {if in_array("superadmin", $groups)}
                 <li><a href="{base_url()}administrator"><i class="fa fa-angle-double-right"></i> Administrator</a></li>            
-            {/if}
+                {/if}
             <li><a href="{base_url()}anggota"><i class="fa fa-angle-double-right"></i> Anggota</a></li>
             <li><a href="{base_url()}operator"><i class="fa fa-angle-double-right"></i> Operator</a></li>
             <li><a href="{base_url()}profil"><i class="fa fa-angle-double-right"></i> Profil</a></li>

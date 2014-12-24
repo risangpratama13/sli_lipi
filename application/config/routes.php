@@ -77,5 +77,9 @@ $route['tambah_keranjang/(:num)/(:num)'] = "orders/add_cart/$1/$2";
 $route['keranjang_belanja'] = "orders/view_cart";
 $route['invoice/(:any)'] = "orders/view_order/$1";
 
+$route['pengujian_member'] = "testing/history/member";
+$route['pengujian_operator'] = "testing/history/operator";
+$route['history_pengujian'] = "testing/history/all";
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -41,7 +41,6 @@ class Orders extends CI_Controller {
             $this->smartyci->assign('idr', $this->idr);
             $this->smartyci->assign('point', $this->point);
             $this->smartyci->assign('shopping_carts', $this->cart->total_items());
-            $this->smartyci->assign('contents', $this->cart->contents());
         }
 
         $this->smartyci->assign('user', $user);
@@ -257,6 +256,14 @@ class Orders extends CI_Controller {
         $this->smartyci->assign('member', $member);
         $this->smartyci->assign('test_orders', $test_orders);
         $this->smartyci->display('order/view_order.tpl');
+    }
+    
+    function update_status() {
+        if($_SERVER['HTTP_REFERER']) {
+            
+        } else {
+            redirect('/', 'refresh');
+        }
     }
 
     /** Akhir Fungsi Untuk Menangani Pengajuan Pengujian ** */

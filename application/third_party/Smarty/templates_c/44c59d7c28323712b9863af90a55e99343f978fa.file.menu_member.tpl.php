@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-22 06:28:59
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-24 09:00:16
          compiled from "application\views\layouts\menu_member.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:143295487a9d939a3c4-15757029%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '44c59d7c28323712b9863af90a55e99343f978fa' => 
     array (
       0 => 'application\\views\\layouts\\menu_member.tpl',
-      1 => 1419204534,
+      1 => 1419380031,
       2 => 'file',
     ),
   ),
@@ -20,6 +20,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'shopping_carts' => 0,
+    'groups' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -55,5 +56,34 @@ order"><i class="fa fa-angle-double-right"></i> Daftar Pengajuan</a></li>
 keranjang_belanja"><i class="fa fa-angle-double-right"></i> Keranjang Belanja<small class="badge pull-right bg-yellow"><?php echo $_smarty_tpl->tpl_vars['shopping_carts']->value;?>
 </small></a></li>
         </ul>
-    </li>    
+    </li>
+    <?php if (in_array("admin",$_smarty_tpl->tpl_vars['groups']->value)||in_array("superadmin",$_smarty_tpl->tpl_vars['groups']->value)) {?>
+        <li>
+            <a href="<?php echo base_url();?>
+history_pengujian">
+                <i class="fa fa-tasks"></i> <span>Kegiatan Pengujian</span>
+            </a>
+        </li>
+    <?php } elseif (in_array("members",$_smarty_tpl->tpl_vars['groups']->value)&&in_array("operators",$_smarty_tpl->tpl_vars['groups']->value)) {?>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-tasks"></i>
+                <span>Kegiatan Pengujian</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">            
+                <li><a href="<?php echo base_url();?>
+pengujian_member"><i class="fa fa-angle-double-right"></i> Pengujian Anggota</a></li>     
+                <li><a href="<?php echo base_url();?>
+pengujian_operator"><i class="fa fa-angle-double-right"></i> Pengujian Operator</a></li>
+            </ul>
+        </li>
+    <?php } elseif (in_array("members",$_smarty_tpl->tpl_vars['groups']->value)) {?>
+        <li>
+            <a href="<?php echo base_url();?>
+pengujian_member">
+                <i class="fa fa-tasks"></i> <span>Kegiatan Pengujian</span>
+            </a>
+        </li>        
+    <?php }?>
 </ul><?php }} ?>

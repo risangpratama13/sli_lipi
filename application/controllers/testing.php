@@ -9,6 +9,7 @@ class Testing extends CI_Controller {
         $this->load->model('category');
         $this->load->model('unit');
         $this->load->model('test');
+        $this->load->model('test_order');
 
         $this->load->library('form_validation');
     }
@@ -19,6 +20,9 @@ class Testing extends CI_Controller {
         $groups = array();
         foreach ($user_groups as $user_group) {
             $groups[$user_group->id] = $user_group->name;
+        }
+        if($this->ion_auth->in_group(2)) {            
+            $this->smartyci->assign('shopping_carts', $this->cart->total_items());
         }
         $this->smartyci->assign('user', $user);
         $this->smartyci->assign('groups', $groups);
@@ -178,7 +182,7 @@ class Testing extends CI_Controller {
                     'value' => $test->testing_price,
                     'onkeypress' => 'return isNumberKey(event)'
                 );
-                
+
                 $categories = $this->category->get_all();
                 $kategori = array();
                 foreach ($categories as $category) {
@@ -215,6 +219,37 @@ class Testing extends CI_Controller {
         } else {
             redirect('pengujian', 'refresh');
         }
+    }
+
+    function history($type) {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+
+        $user = $this->ion_auth->user()->row();
+        if ($type == "member") {
+            if ($this->ion_auth->in_group(2)) {
+                $tests = $this->test_order->find_byuser($user->id);
+            } else {
+                redirect('/', 'refresh');
+            }
+        } else if ($type == "operator") {
+            if ($this->ion_auth->in_group(2) and $this->ion_auth->in_group(4)) {
+                $tests = $this->test_order->find_byuser($user->id, 4);
+            } else {
+                redirect('/', 'refresh');
+            }
+        } else if ($type == "all") {
+            if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
+                $tests = $this->test_order->get_all();
+            } else {
+                redirect('/', 'refresh');
+            }
+        }
+        $this->basic_data();
+        $this->smartyci->assign('type', $type);
+        $this->smartyci->assign('tests', $tests);
+        $this->smartyci->display('testing/history.tpl');
     }
 
 }
