@@ -65,6 +65,7 @@ $route['tipe_item'] = "master/item_types";
 $route['item'] = "account/items";
 $route['tambah_item'] = "account/add_item";
 $route['ubah_item/(:num)'] = "account/edit_item/$1";
+$route['rincian_saldo'] = "account/balance_detail";
 
 $route['kategori_pengujian'] = "testing/categories";
 $route['pengujian'] = "testing";

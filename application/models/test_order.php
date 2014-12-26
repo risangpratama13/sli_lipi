@@ -52,4 +52,9 @@ class Test_order extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->update($this->table, $data);
     }    
+    
+    function delete($id) {
+        $this->db->where('id', $id);
+        return $this->db->delete($this->table);
+    }    
 }

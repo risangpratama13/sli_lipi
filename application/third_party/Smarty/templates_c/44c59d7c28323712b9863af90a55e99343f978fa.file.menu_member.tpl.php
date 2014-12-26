@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-24 09:00:16
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-26 18:50:28
          compiled from "application\views\layouts\menu_member.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:143295487a9d939a3c4-15757029%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '44c59d7c28323712b9863af90a55e99343f978fa' => 
     array (
       0 => 'application\\views\\layouts\\menu_member.tpl',
-      1 => 1419380031,
+      1 => 1419594623,
       2 => 'file',
     ),
   ),
@@ -35,6 +35,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <a href="<?php echo base_url();?>
 profil">
             <i class="fa fa-user"></i> <span>Profil</span>
+        </a>
+    </li>    
+    <li>
+        <a href="<?php echo base_url();?>
+rincian_saldo">
+            <i class="fa fa-money"></i> <span>Rincian Saldo</span>
         </a>
     </li>    
     <li>

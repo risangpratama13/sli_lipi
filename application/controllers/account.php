@@ -9,6 +9,9 @@ class Account extends CI_Controller {
         parent::__construct();
         $this->load->model('item');
         $this->load->model('item_type');
+        $this->load->model('balance_log');        
+        $this->load->model('balance');
+        $this->load->model('kurs_point');
 
         $this->load->library('form_validation');
     }
@@ -262,6 +265,28 @@ class Account extends CI_Controller {
         }
     }
 
-    /** Akhir Dari Fungsi Untuk Menangani Penambahan Saldo dari Upload Item * */
+    /** Akhir Dari Fungsi Untuk Menangani Penambahan Saldo dari Upload Item **/
+    
+    /** Rincian Saldo **/
+    function balance_detail() {
+        if(!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+        
+        if($this->ion_auth->in_group(2)) {
+            $user = $this->ion_auth->user()->row();
+            $balances = $this->balance_log->find_byuser($user->id);
+            $kurs = $this->kurs_point->get_kurs();
+            $point = $this->balance->get_value($user->balance_id);
+            (int) $saldo = (double) $point * (double) $kurs->idr;
+            
+            $this->basic_data();
+            $this->smartyci->assign('saldo', $saldo);
+            $this->smartyci->assign('balances', $balances);
+            $this->smartyci->display('account/balance_log.tpl');
+        } else {
+            redirect('/', 'refresh');
+        }
+    }
     
 }

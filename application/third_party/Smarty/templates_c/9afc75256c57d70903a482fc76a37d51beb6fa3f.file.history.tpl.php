@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-24 03:44:56
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-26 03:45:35
          compiled from "application\views\testing\history.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:8472549a1e8a8c8b89-83129481%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9afc75256c57d70903a482fc76a37d51beb6fa3f' => 
     array (
       0 => 'application\\views\\testing\\history.tpl',
-      1 => 1419389092,
+      1 => 1419561931,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -47,6 +47,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <!-- Addons Style -->
         
     <?php echo link_tag('asset/css/datatables/dataTables.bootstrap.css');?>
+
+    <?php echo link_tag('asset/css/timepicker/bootstrap-timepicker.min.css');?>
 
 
         <!-- Theme style -->
@@ -123,14 +125,14 @@ history_pengujian">Daftar Pengujian</a>
                                 <tr>
                                     <?php if ($_smarty_tpl->tpl_vars['type']->value=="operator"||$_smarty_tpl->tpl_vars['type']->value=="all") {?>
                                         <th>Anggota</th>
-                                    <?php }?>
+                                        <?php }?>
                                     <th>Pengujian</th>
                                     <th>Tanggal Mulai</th>
                                     <th>Tanggal Selesai</th>
                                     <th>Periode</th>
-                                    <?php if ($_smarty_tpl->tpl_vars['type']->value=="member"||$_smarty_tpl->tpl_vars['type']->value=="all") {?>
+                                        <?php if ($_smarty_tpl->tpl_vars['type']->value=="member"||$_smarty_tpl->tpl_vars['type']->value=="all") {?>
                                         <th>Operator</th>
-                                    <?php }?>                                    
+                                        <?php }?>                                    
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -182,20 +184,24 @@ $_smarty_tpl->tpl_vars['test']->_loop = true;
                                         <td>
                                             <?php if ($_smarty_tpl->tpl_vars['test']->value->status=="P") {?>
                                                 <?php if ($_smarty_tpl->tpl_vars['type']->value=="operator") {?>
-                                                    <button title="Setujui Pengujian" class="btn btn-flat btn-sm btn-success"><i class="fa fa-check"></i></button>
-                                                    <button title="Tolak Pengujian" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-times"></i></button>
+                                                    <button title="Setujui Pengujian" id="accTest" data-id="<?php echo $_smarty_tpl->tpl_vars['test']->value->id;?>
+" class="btn btn-flat btn-sm btn-success"><i class="fa fa-check"></i></button>
+                                                    <button title="Tolak Pengujian" onclick="ubahStatus(<?php echo $_smarty_tpl->tpl_vars['test']->value->id;?>
+, 'D')" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-times"></i></button>
                                                 <?php } else { ?>
                                                     &nbsp;
                                                 <?php }?>
                                             <?php } elseif ($_smarty_tpl->tpl_vars['test']->value->status=="O") {?>
                                                 <?php if ($_smarty_tpl->tpl_vars['type']->value=="operator") {?>
-                                                    <button class="btn btn-flat btn-sm btn-default"><i class="fa fa-flag-checkered"></i> Pengujian Selesai</button>
+                                                    <button onclick="ubahStatus(<?php echo $_smarty_tpl->tpl_vars['test']->value->id;?>
+, 'F')" class="btn btn-flat btn-sm btn-default"><i class="fa fa-flag-checkered"></i> Pengujian Selesai</button>
                                                 <?php } else { ?>
                                                     &nbsp;
                                                 <?php }?>
                                             <?php } elseif ($_smarty_tpl->tpl_vars['test']->value->status=="D") {?>
                                                 <?php if ($_smarty_tpl->tpl_vars['type']->value=="member") {?>
-                                                    <button class="btn btn-flat btn-sm btn-danger"><i class="fa fa-trash-o"></i> Hapus</button>
+                                                    <button onclick="hapusOrder(<?php echo $_smarty_tpl->tpl_vars['test']->value->id;?>
+)" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-trash-o"></i> Hapus</button>
                                                 <?php } else { ?>
                                                     &nbsp;
                                                 <?php }?>
@@ -218,6 +224,45 @@ $_smarty_tpl->tpl_vars['test']->_loop = true;
         </div>
         <!-- Modal -->    
         
+    <div class="modal fade" id="accTest-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" name="title">Setujui Pengujian</h4>
+                </div>
+                <input type="hidden" name="id">
+                <input type="hidden" name="status" value="O">
+                <div class="modal-body">
+                    <div class="form-group">                        
+                        <label for="start_date">Tanggal Mulai Pengujian</label>                
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" name="start_date" class="form-control" data-inputmask="'alias': 'yyyy-mm-dd'" value="<?php echo date('Y-m-d');?>
+" data-mask/>
+                        </div>                        
+                    </div>
+                    <div class="bootstrap-timepicker">
+                        <div class="form-group">
+                            <label>Jam Mulai Pengujian</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                                <input type="text" name="start_time" class="form-control timepicker"/>                                
+                            </div><!-- /.input group -->
+                        </div><!-- /.form group -->
+                    </div>
+                </div>
+                <div class="modal-footer clearfix">
+                    <button type="button" id="cancel" class="btn btn-danger"><i class="fa fa-times"></i> Batalkan</button>
+                    <button type="button" id="submit" class="btn btn-success"><i class="fa fa-check"></i> Setujui Pengujian</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
         <!-- End Modal -->
         
         <!-- jQuery 2.0.2 -->
@@ -239,6 +284,18 @@ asset/js/plugins/datatables/jquery.dataTables.js" type="text/javascript"><?php e
  src="<?php echo base_url();?>
 asset/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"><?php echo '</script'; ?>
 >
+    <?php echo '<script'; ?>
+ src="<?php echo base_url();?>
+asset/js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="<?php echo base_url();?>
+asset/js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"><?php echo '</script'; ?>
+>    
+    <?php echo '<script'; ?>
+ src="<?php echo base_url();?>
+asset/js/plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"><?php echo '</script'; ?>
+>    
 
         <!-- SLI LIPI App -->
         <?php echo '<script'; ?>
@@ -249,14 +306,86 @@ asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
         
     <?php echo '<script'; ?>
  type="text/javascript">
-        $(function () {
+        function ubahStatus(id, status) {
+            $.ajax({
+                url : "<?php echo base_url();?>
+orders/update_status",
+                type: "POST",
+                data: "id="+id+"&status="+status,
+                success: function(data) {
+                    if(data == "Success") {
+                        location.reload();
+                    } else {
+                        alert("Gagal Mengubah Status");
+                    }
+                }
+            });
+        }
+        
+        function hapusOrder(id) {
+            $.ajax({
+                url : "<?php echo base_url();?>
+orders/delete_order",
+                type: "POST",
+                data: "id="+id,
+                success: function(data) {
+                    if(data == "Success") {
+                        location.reload();
+                    } else {
+                        alert("Gagal Menghapus Order");
+                    }
+                }
+            });
+        }
+        
+        $(document).ready(function() {
             $("#tableTestHistory").dataTable({
                 oLanguage: {
                     sUrl: '<?php echo base_url();?>
 asset/js/plugins/datatables/Indonesian.json'
                 }
             });
-        });
+            
+            $("[data-mask]").inputmask();
+            $(".timepicker").timepicker({
+                showInputs: false,
+                showMeridian: false
+            });
+            
+            $("#accTest").click(function() {
+                var id = $(this).attr("data-id");
+                $("input[name='id']").val(id);
+                $("#accTest-modal").modal('show');
+            });
+            
+            $("#cancel").click(function() {
+                $("input[name='id']").val("");
+                $("input[name='start_date']").val("");
+                $("input[name='start_time']").val("");
+                $("#accTest-modal").modal('hide');
+            });
+            
+            $("#submit").click(function() {
+                var id = $("input[name='id']").val();
+                var start_date = $("input[name='start_date']").val();
+                var status = $("input[name='status']").val();
+                var start_time = $("input[name='start_time']").val();
+                
+                $.ajax({
+                    url : "<?php echo base_url();?>
+orders/update_status",
+                    type: "POST",
+                    data: "id="+id+"&status="+status+"&start_date="+start_date+"&start_time="+start_time,
+                    success: function(data) {
+                        if(data == "Success") {
+                            location.reload();
+                        } else {
+                            alert("Gagal Mengubah Status");
+                        }
+                    }
+                });
+            });
+        });     
     <?php echo '</script'; ?>
 >
 
