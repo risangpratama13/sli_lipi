@@ -38,6 +38,15 @@
                         <h3 class="box-title">Daftar Pengujian</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
+                        {if !empty($messages)}
+                            <div class="alert alert-danger alert-dismissable">
+                                <i class="fa fa-ban"></i>
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                {foreach $messages as $message}
+                                    {$message}
+                                {/foreach}
+                            </div>
+                        {/if}
                         <table id="tableTestHistory" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -110,7 +119,15 @@
                                                     &nbsp;
                                                 {/if}
                                             {else if $test->status eq "F"}
-                                                <button class="btn btn-flat btn-sm btn-default"><i class="fa fa-book"></i> Hasil Pengujian</button>
+                                                {if $test->url_file eq ""}
+                                                    {if $type eq "operator"}
+                                                        <button id="btnUpload" class="btn btn-flat btn-sm btn-default" data-id="{$test->id}"><i class="fa fa-upload"></i> Unggah Hasil Pengujian</button>
+                                                    {else}
+                                                        &nbsp;
+                                                    {/if}
+                                                {else}
+                                                    <a href="{base_url()}asset/test_results/{$test->url_file}" class="btn btn-flat btn-sm btn-primary"><i class="fa fa-download"></i> Unduh Hasil Pengujian</a>
+                                                {/if}
                                             {/if}
                                         </td>
                                     </tr>
@@ -122,6 +139,13 @@
             </div>
         </div>
     </section><!-- /.content -->
+    <div style="display: none">
+        <form action="{base_url()}testing/upload_result" method="POST" enctype="multipart/form-data"> 
+            <input type="hidden" name="test_id">
+            <input type="file" name="test_result" onchange="$('#submitResult').click()">
+            <input type="submit" id="submitResult" name="submit">
+        </form>
+    </div>
 {/block}
 
 {block name="modal"}
@@ -181,7 +205,7 @@
     <script type="text/javascript">
         function ubahStatus(id, status) {
             $.ajax({
-                url : "{base_url()}orders/update_status",
+                url : "{base_url()}testing/update_status",
                 type: "POST",
                 data: "id="+id+"&status="+status,
                 success: function(data) {
@@ -196,7 +220,7 @@
         
         function hapusOrder(id) {
             $.ajax({
-                url : "{base_url()}orders/delete_order",
+                url : "{base_url()}testing/delete_order",
                 type: "POST",
                 data: "id="+id,
                 success: function(data) {
@@ -222,6 +246,12 @@
                 showMeridian: false
             });
             
+            $("#btnUpload").click(function() {
+                var test_id = $(this).attr("data-id");
+                $("input[name='test_id']").val(test_id);
+                $("input[name='test_result']").click();
+            });
+            
             $("#accTest").click(function() {
                 var id = $(this).attr("data-id");
                 $("input[name='id']").val(id);
@@ -242,7 +272,7 @@
                 var start_time = $("input[name='start_time']").val();
                 
                 $.ajax({
-                    url : "{base_url()}orders/update_status",
+                    url : "{base_url()}testing/update_status",
                     type: "POST",
                     data: "id="+id+"&status="+status+"&start_date="+start_date+"&start_time="+start_time,
                     success: function(data) {

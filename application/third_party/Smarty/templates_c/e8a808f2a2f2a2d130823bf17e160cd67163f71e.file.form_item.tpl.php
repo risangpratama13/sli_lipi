@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-18 08:58:02
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-27 07:07:10
          compiled from "application\views\account\form_item.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:173035492119672c1f5-49354121%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'e8a808f2a2f2a2d130823bf17e160cd67163f71e' => 
     array (
       0 => 'application\\views\\account\\form_item.tpl',
-      1 => 1418867878,
+      1 => 1419637337,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -135,7 +135,6 @@ pengujian">Daftar Item</a></li>
                                 <div class="alert alert-danger alert-dismissable">
                                     <i class="fa fa-ban"></i>
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    <b>Alert!</b> 
                                     <?php  $_smarty_tpl->tpl_vars['message'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['message']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['data']->value['message']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['message']->key => $_smarty_tpl->tpl_vars['message']->value) {

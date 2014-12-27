@@ -11,6 +11,7 @@ class Testing extends CI_Controller {
         $this->load->model('test');
         $this->load->model('test_order');
 
+        $this->load->helper('download');
         $this->load->library('form_validation');
     }
 
@@ -21,7 +22,7 @@ class Testing extends CI_Controller {
         foreach ($user_groups as $user_group) {
             $groups[$user_group->id] = $user_group->name;
         }
-        if($this->ion_auth->in_group(2)) {            
+        if ($this->ion_auth->in_group(2)) {
             $this->smartyci->assign('shopping_carts', $this->cart->total_items());
         }
         $this->smartyci->assign('user', $user);
@@ -246,10 +247,69 @@ class Testing extends CI_Controller {
                 redirect('/', 'refresh');
             }
         }
+        $message = $this->session->flashdata('message') ? $this->session->flashdata('message') : "";                
+        
         $this->basic_data();
         $this->smartyci->assign('type', $type);
+        $this->smartyci->assign('messages', $message);
         $this->smartyci->assign('tests', $tests);
         $this->smartyci->display('testing/history.tpl');
     }
 
+    function update_status() {
+        if ($_SERVER['HTTP_REFERER']) {
+            $status = $this->input->post('status');
+            $id = $this->input->post('id');
+            switch ($status) {
+                case 'O':
+                    $data = array(
+                        'status' => 'O',
+                        'start_date' => $this->input->post('start_date') . " " . $this->input->post('start_time')
+                    );
+                    break;
+                case 'D':
+                    $data = array('status' => 'D');
+                    break;
+                case 'F':
+                    $data = array(
+                        'status' => 'F',
+                        'finish_date' => date('Y-m-d H:i:s')
+                    );
+                    break;
+            }
+            if ($this->test_order->update($id, $data)) {
+                echo "Success";
+            } else {
+                echo 'Failed';
+            }
+        } else {
+            redirect('/', 'refresh');
+        }
+    }
+
+    function upload_result() {
+        if ($_SERVER['HTTP_REFERER']) {
+            $id = $this->input->post('test_id');
+            
+            $config['upload_path'] = './asset/test_results';
+            $config['max_size'] = 0;
+            $config['allowed_types'] = "*";
+            $config['encrypt_name'] = TRUE;
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('test_result')) {
+                $data = $this->upload->data();
+                $url = $data['file_name'];
+                $data = array('url_file' => $url);
+                $this->test_order->update($id, $data);
+                redirect('pengujian_operator', 'refresh');
+            } else {
+                $error = array('error' => $this->upload->display_errors());
+                $this->session->set_flashdata('message', $error);
+                redirect('pengujian_operator', 'refresh');
+            }
+        } else {
+            redirect('/', 'refresh');
+        }
+    }
 }

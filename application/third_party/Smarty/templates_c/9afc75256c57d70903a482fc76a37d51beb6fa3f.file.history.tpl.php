@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-26 03:45:35
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-27 01:33:39
          compiled from "application\views\testing\history.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:8472549a1e8a8c8b89-83129481%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9afc75256c57d70903a482fc76a37d51beb6fa3f' => 
     array (
       0 => 'application\\views\\testing\\history.tpl',
-      1 => 1419561931,
+      1 => 1419640005,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -120,6 +120,20 @@ history_pengujian">Daftar Pengujian</a>
                         <h3 class="box-title">Daftar Pengujian</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
+                        <?php if (!empty($_smarty_tpl->tpl_vars['messages']->value)) {?>
+                            <div class="alert alert-danger alert-dismissable">
+                                <i class="fa fa-ban"></i>
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <?php  $_smarty_tpl->tpl_vars['message'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['message']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['messages']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['message']->key => $_smarty_tpl->tpl_vars['message']->value) {
+$_smarty_tpl->tpl_vars['message']->_loop = true;
+?>
+                                    <?php echo $_smarty_tpl->tpl_vars['message']->value;?>
+
+                                <?php } ?>
+                            </div>
+                        <?php }?>
                         <table id="tableTestHistory" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -206,7 +220,18 @@ $_smarty_tpl->tpl_vars['test']->_loop = true;
                                                     &nbsp;
                                                 <?php }?>
                                             <?php } elseif ($_smarty_tpl->tpl_vars['test']->value->status=="F") {?>
-                                                <button class="btn btn-flat btn-sm btn-default"><i class="fa fa-book"></i> Hasil Pengujian</button>
+                                                <?php if ($_smarty_tpl->tpl_vars['test']->value->url_file=='') {?>
+                                                    <?php if ($_smarty_tpl->tpl_vars['type']->value=="operator") {?>
+                                                        <button id="btnUpload" class="btn btn-flat btn-sm btn-default" data-id="<?php echo $_smarty_tpl->tpl_vars['test']->value->id;?>
+"><i class="fa fa-upload"></i> Unggah Hasil Pengujian</button>
+                                                    <?php } else { ?>
+                                                        &nbsp;
+                                                    <?php }?>
+                                                <?php } else { ?>
+                                                    <a href="<?php echo base_url();?>
+asset/test_results/<?php echo $_smarty_tpl->tpl_vars['test']->value->url_file;?>
+" class="btn btn-flat btn-sm btn-primary"><i class="fa fa-download"></i> Unduh Hasil Pengujian</a>
+                                                <?php }?>
                                             <?php }?>
                                         </td>
                                     </tr>
@@ -218,6 +243,14 @@ $_smarty_tpl->tpl_vars['test']->_loop = true;
             </div>
         </div>
     </section><!-- /.content -->
+    <div style="display: none">
+        <form action="<?php echo base_url();?>
+testing/upload_result" method="POST" enctype="multipart/form-data"> 
+            <input type="hidden" name="test_id">
+            <input type="file" name="test_result" onchange="$('#submitResult').click()">
+            <input type="submit" id="submitResult" name="submit">
+        </form>
+    </div>
 
             </aside>
             <!-- End Content -->
@@ -309,7 +342,7 @@ asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
         function ubahStatus(id, status) {
             $.ajax({
                 url : "<?php echo base_url();?>
-orders/update_status",
+testing/update_status",
                 type: "POST",
                 data: "id="+id+"&status="+status,
                 success: function(data) {
@@ -325,7 +358,7 @@ orders/update_status",
         function hapusOrder(id) {
             $.ajax({
                 url : "<?php echo base_url();?>
-orders/delete_order",
+testing/delete_order",
                 type: "POST",
                 data: "id="+id,
                 success: function(data) {
@@ -352,6 +385,12 @@ asset/js/plugins/datatables/Indonesian.json'
                 showMeridian: false
             });
             
+            $("#btnUpload").click(function() {
+                var test_id = $(this).attr("data-id");
+                $("input[name='test_id']").val(test_id);
+                $("input[name='test_result']").click();
+            });
+            
             $("#accTest").click(function() {
                 var id = $(this).attr("data-id");
                 $("input[name='id']").val(id);
@@ -373,7 +412,7 @@ asset/js/plugins/datatables/Indonesian.json'
                 
                 $.ajax({
                     url : "<?php echo base_url();?>
-orders/update_status",
+testing/update_status",
                     type: "POST",
                     data: "id="+id+"&status="+status+"&start_date="+start_date+"&start_time="+start_time,
                     success: function(data) {

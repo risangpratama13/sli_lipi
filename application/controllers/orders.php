@@ -26,7 +26,7 @@ class Orders extends CI_Controller {
             $this->point = $this->balance->get_value($user->balance_id);
             $this->kurs = $kurs->idr;
             (int) $this->idr = (double) $this->point * (double) $this->kurs;
-        }
+        }        
     }
 
     function basic_data() {
@@ -256,10 +256,10 @@ class Orders extends CI_Controller {
         $this->smartyci->assign('test_orders', $test_orders);
         $this->smartyci->display('order/view_order.tpl');
     }
-    
+
     function delete_order() {
-        if($_SERVER['HTTP_REFERER']) {
-            if($this->test_order->delete($this->input->post('id'))) {
+        if ($_SERVER['HTTP_REFERER']) {
+            if ($this->test_order->delete($this->input->post('id'))) {
                 echo "Success";
             } else {
                 echo 'Failed';
@@ -267,36 +267,5 @@ class Orders extends CI_Controller {
         } else {
             redirect('/', 'refresh');
         }
-    }
-            
-    function update_status() {
-        if($_SERVER['HTTP_REFERER']) {
-            $status = $this->input->post('status');
-            $id = $this->input->post('id');
-            switch ($status) {
-                case 'O':
-                    $data = array(
-                        'status' => 'O',
-                        'start_date' => $this->input->post('start_date')." ".$this->input->post('start_time')
-                    );
-                    break;
-                case 'D':
-                    $data = array('status' => 'D');
-                    break;
-                case 'F':
-                    $data = array(
-                        'status' => 'F',
-                        'finish_date' => date('Y-m-d H:i:s')
-                    );
-                    break;
-            }
-            if($this->test_order->update($id, $data)) {
-                echo "Success";
-            } else {
-                echo 'Failed';
-            }
-        } else {
-            redirect('/', 'refresh');
-        }
-    }
+    }    
 }

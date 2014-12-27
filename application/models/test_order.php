@@ -27,6 +27,17 @@ class Test_order extends CI_Model {
         return $query->result();
     }
     
+    function find_byid($test_order_id) {
+        $this->db->select('test_orders.*, tests.testing_name, users.full_name');
+        $this->db->from($this->table);
+        $this->db->join('tests','tests.id = test_orders.test_id');
+        $this->db->join('operators','operators.id = test_orders.operator_id');
+        $this->db->join('users','operators.user_id = users.id');
+        $this->db->where('test_orders.id', $test_order_id);
+        $query = $this->db->get();
+        return $query->row();
+    }
+    
     function find_byuser($user_id, $group = 2) {
         $this->db->select('test_orders.*, tests.testing_name, m.full_name as anggota, o.full_name as operator');
         $this->db->from($this->table);
