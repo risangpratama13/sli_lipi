@@ -23,7 +23,7 @@
                         <p>Pengujian</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-bag"></i>
+                        <i class="ion ion-ios-cart"></i>
                     </div>
                     <a href="{base_url()}keranjang_belanja" class="small-box-footer">
                         Lihat Detail <i class="fa fa-arrow-circle-right"></i>
@@ -55,7 +55,7 @@
                     <div class="icon">
                         <i class="ion ion-social-usd"></i>
                     </div>
-                    <a href="#" class="small-box-footer">
+                    <a href="{base_url()}rincian_saldo" class="small-box-footer">
                         Lihat Detail <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>

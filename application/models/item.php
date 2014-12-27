@@ -37,6 +37,16 @@ class Item extends CI_Model {
         return $query->result();
     }
     
+    function count_items($user_id = NULL) {
+        if($user_id) {
+            $this->db->from($this->table);
+            $this->db->where('user_id', $user_id);
+            return $this->db->count_all_results();
+        } else {
+            return $this->db->count_all_results($this->table);
+        }
+    }   
+    
     function save($data) {
         return $this->db->insert($this->table, $data);
     }

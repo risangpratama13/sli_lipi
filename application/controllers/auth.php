@@ -24,7 +24,7 @@ class Auth extends CI_Controller {
         foreach ($user_groups as $user_group) {
             $groups[$user_group->id] = $user_group->name;
         }
-        if($this->ion_auth->in_group(2)) {            
+        if ($this->ion_auth->in_group(2)) {
             $this->smartyci->assign('shopping_carts', $this->cart->total_items());
         }
         $this->smartyci->assign('user', $user);
@@ -35,10 +35,36 @@ class Auth extends CI_Controller {
     function index() {
         if (!$this->ion_auth->logged_in()) {
             redirect('login', 'refresh');
-        } else {
-            $this->basic_data();
-            $this->smartyci->display('index.tpl');
         }
+        $this->load->model('item');
+        $this->load->model('test_order');
+
+        if ($this->ion_auth->in_group(2)) {
+            $this->load->model('balance');
+            $this->load->model('kurs_point');
+
+            $user = $this->ion_auth->user()->row();
+            $count_items = $this->item->count_items($user->id);
+            $count_test_orders = $this->test_order->count_test_orders($user->id);
+            $kurs = $this->kurs_point->get_kurs();
+            $point = $this->balance->get_value($user->balance_id);
+            (int) $saldo = (double) $point * (double) $kurs->idr;
+
+            $this->smartyci->assign('saldo', $saldo);
+        } else if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
+            $count_members = $this->ion_auth->users(2)->num_rows();
+            $count_admins = $this->ion_auth->users(1)->num_rows() + 1;
+            $count_items = $this->item->count_items();
+            $count_test_orders = $this->test_order->count_test_orders();
+
+            $this->smartyci->assign('count_members', $count_members);
+            $this->smartyci->assign('count_admins', $count_admins);
+        }
+
+        $this->basic_data();
+        $this->smartyci->assign('count_items', $count_items);
+        $this->smartyci->assign('count_test_orders', $count_test_orders);
+        $this->smartyci->display('index.tpl');
     }
 
     //log the user in
@@ -644,7 +670,7 @@ class Auth extends CI_Controller {
                         'rows' => 3,
                         'value' => !empty($member->address) ? $member->address : ""
                     );
-                    
+
                     $this->basic_data();
                     $this->smartyci->assign('action', 'Ubah Informasi Pribadi');
                     $this->smartyci->assign('member', $member);
@@ -739,8 +765,8 @@ class Auth extends CI_Controller {
                     $this->smartyci->assign('member', $member);
                     $this->smartyci->assign('operators', $operators);
                 }
-                
-                $this->smartyci->assign('action', 'Informasi Akun');               
+
+                $this->smartyci->assign('action', 'Informasi Akun');
                 $this->basic_data();
                 $this->smartyci->display('configuration/profile/personal.tpl');
                 break;

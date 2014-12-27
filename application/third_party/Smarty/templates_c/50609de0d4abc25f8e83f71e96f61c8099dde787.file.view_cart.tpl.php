@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-22 11:51:52
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-27 09:03:10
          compiled from "application\views\order\view_cart.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1260754975ac52efc02-04842824%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '50609de0d4abc25f8e83f71e96f61c8099dde787' => 
     array (
       0 => 'application\\views\\order\\view_cart.tpl',
-      1 => 1419223910,
+      1 => 1419641547,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -98,7 +98,7 @@ keranjang_belanja">Keranjang Belanja</a></li>
                         <p>Pengujian</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-bag"></i>
+                        <i class="ion ion-ios-cart"></i>
                     </div>
                     <a href="<?php echo base_url();?>
 keranjang_belanja" class="small-box-footer">
@@ -134,7 +134,8 @@ keranjang_belanja" class="small-box-footer">
                     <div class="icon">
                         <i class="ion ion-social-usd"></i>
                     </div>
-                    <a href="#" class="small-box-footer">
+                    <a href="<?php echo base_url();?>
+rincian_saldo" class="small-box-footer">
                         Lihat Detail <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>

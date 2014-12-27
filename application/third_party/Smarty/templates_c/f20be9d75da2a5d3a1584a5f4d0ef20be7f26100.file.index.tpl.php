@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-15 14:14:55
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-27 10:25:16
          compiled from "application\views\index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:218035487144de015c5-93114714%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f20be9d75da2a5d3a1584a5f4d0ef20be7f26100' => 
     array (
       0 => 'application\\views\\index.tpl',
-      1 => 1418138548,
+      1 => 1419650446,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
       1 => 1418622047,
+      2 => 'file',
+    ),
+    '668c70bfc32ed27c742429d00bb2307df1fd048a' => 
+    array (
+      0 => 'application\\views\\home\\tiles.tpl',
+      1 => 1419650713,
       2 => 'file',
     ),
   ),
@@ -76,8 +82,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Blank page
-            <small>it all starts here</small>
+            Sistem Layanan Internal Pusat Penelitian Fisika LIPI
         </h1>
         <ol class="breadcrumb">
             <li class="active"><i class="fa fa-home"></i> Home</li>
@@ -86,8 +91,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
     <!-- Main content -->
     <section class="content">
-
-
+        <div class="row">
+            <?php /*  Call merged included template "home/tiles.tpl" */
+$_tpl_stack[] = $_smarty_tpl;
+ $_smarty_tpl = $_smarty_tpl->setupInlineSubTemplate('home/tiles.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0, '218035487144de015c5-93114714');
+content_549e269c1a2aa0_57123582($_smarty_tpl);
+$_smarty_tpl = array_pop($_tpl_stack); 
+/*  End of included template "home/tiles.tpl" */?>
+        </div><!-- /.row -->
     </section><!-- /.content -->
 
             </aside>
@@ -117,3 +128,123 @@ asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
         
     </body>
 </html><?php }} ?>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-27 10:25:16
+         compiled from "application\views\home\tiles.tpl" */ ?>
+<?php if ($_valid && !is_callable('content_549e269c1a2aa0_57123582')) {function content_549e269c1a2aa0_57123582($_smarty_tpl) {?><?php if (in_array("admin",$_smarty_tpl->tpl_vars['groups']->value)||in_array("superadmin",$_smarty_tpl->tpl_vars['groups']->value)) {?>
+    <div class="col-lg-3 col-xs-6">            
+        <div class="small-box bg-aqua-gradient">
+            <div class="inner">
+                <h3><?php echo $_smarty_tpl->tpl_vars['count_test_orders']->value;?>
+</h3>
+                <p>Kegiatan Pengujian</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-ios-settings-strong"></i>
+            </div>
+            <a href="<?php echo base_url();?>
+pengujian_member" class="small-box-footer">
+                Lihat Detail <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div><!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-green-gradient">
+            <div class="inner">
+                <h3><?php echo $_smarty_tpl->tpl_vars['count_items']->value;?>
+</h3>
+                <p>Item</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-ios-paper"></i>
+            </div>
+            <a href="<?php echo base_url();?>
+item" class="small-box-footer">
+                Lihat Detail <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-yellow-gradient">
+            <div class="inner">
+                <h3><?php echo $_smarty_tpl->tpl_vars['count_members']->value;?>
+</h3>
+                <p>Anggota Terdaftar</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-ios-people"></i>
+            </div>
+            <a href="<?php echo base_url();?>
+item" class="small-box-footer">
+                Lihat Detail <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div><!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-red-gradient">
+            <div class="inner">
+                <h3><?php echo $_smarty_tpl->tpl_vars['count_admins']->value;?>
+</h3>
+                <p>Administrator</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+                More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div><!-- ./col -->
+<?php } else { ?>
+    <div class="col-lg-4 col-xs-6">            
+        <div class="small-box bg-aqua-gradient">
+            <div class="inner">
+                <h3><?php echo $_smarty_tpl->tpl_vars['count_test_orders']->value;?>
+</h3>
+                <p>Kegiatan Pengujian</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-ios-settings-strong"></i>
+            </div>
+            <a href="<?php echo base_url();?>
+pengujian_member" class="small-box-footer">
+                Lihat Detail <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div><!-- ./col -->
+    <div class="col-lg-4 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-green-gradient">
+            <div class="inner">
+                <h3><?php echo $_smarty_tpl->tpl_vars['count_items']->value;?>
+</h3>
+                <p>Item</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-ios-paper"></i>
+            </div>
+            <a href="<?php echo base_url();?>
+item" class="small-box-footer">
+                Lihat Detail <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div><!-- ./col -->
+    <div class="col-lg-4 col-xs-6">
+        <div class="small-box bg-red-gradient">
+            <div class="inner">
+                <h3>Rp. <?php echo number_format($_smarty_tpl->tpl_vars['saldo']->value,'2',',','.');?>
+</h3>
+                <p>Saldo</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-social-usd"></i>
+            </div>
+            <a href="<?php echo base_url();?>
+rincian_saldo" class="small-box-footer">
+                Lihat Detail <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div><!-- ./col -->
+<?php }?><?php }} ?>
