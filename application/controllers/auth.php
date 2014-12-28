@@ -53,12 +53,12 @@ class Auth extends CI_Controller {
             $this->smartyci->assign('saldo', $saldo);
         } else if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
             $count_members = $this->ion_auth->users(2)->num_rows();
-            $count_admins = $this->ion_auth->users(1)->num_rows() + 1;
+            $count_operators = $this->ion_auth->users(4)->num_rows();
             $count_items = $this->item->count_items();
             $count_test_orders = $this->test_order->count_test_orders();
 
             $this->smartyci->assign('count_members', $count_members);
-            $this->smartyci->assign('count_admins', $count_admins);
+            $this->smartyci->assign('count_operators', $count_operators);
         }
 
         $this->basic_data();

@@ -8,7 +8,7 @@
             <div class="icon">
                 <i class="ion ion-ios-settings-strong"></i>
             </div>
-            <a href="{base_url()}pengujian_member" class="small-box-footer">
+            <a href="{base_url()}history_pengujian" class="small-box-footer">
                 Lihat Detail <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>
@@ -38,7 +38,7 @@
             <div class="icon">
                 <i class="ion ion-ios-people"></i>
             </div>
-            <a href="{base_url()}item" class="small-box-footer">
+            <a href="{base_url()}anggota" class="small-box-footer">
                 Lihat Detail <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>
@@ -47,14 +47,14 @@
         <!-- small box -->
         <div class="small-box bg-red-gradient">
             <div class="inner">
-                <h3>{$count_admins}</h3>
-                <p>Administrator</p>
+                <h3>{$count_operators}</h3>
+                <p>Operator</p>
             </div>
             <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="ion ion-man"></i>
             </div>
-            <a href="#" class="small-box-footer">
-                More info <i class="fa fa-arrow-circle-right"></i>
+            <a href="{base_url()}operator" class="small-box-footer">
+                Lihat Detail <i class="fa fa-arrow-circle-right"></i>
             </a>
         </div>
     </div><!-- ./col -->
