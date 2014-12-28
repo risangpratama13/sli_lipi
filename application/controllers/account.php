@@ -9,7 +9,7 @@ class Account extends CI_Controller {
         parent::__construct();
         $this->load->model('item');
         $this->load->model('item_type');
-        $this->load->model('balance_log');        
+        $this->load->model('balance_log');
         $this->load->model('balance');
         $this->load->model('kurs_point');
 
@@ -23,7 +23,7 @@ class Account extends CI_Controller {
         foreach ($user_groups as $user_group) {
             $groups[$user_group->id] = $user_group->name;
         }
-        if($this->ion_auth->in_group(2)) {            
+        if ($this->ion_auth->in_group(2)) {
             $this->smartyci->assign('shopping_carts', $this->cart->total_items());
         }
         $this->smartyci->assign('user', $user);
@@ -38,7 +38,7 @@ class Account extends CI_Controller {
 
         $user = $this->ion_auth->user()->row();
         if ($this->ion_auth->in_group(2)) {
-            $items = $this->item->get_by_user($user->id);       
+            $items = $this->item->get_by_user($user->id);
         } else if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
             $items = $this->item->get_all();
         }
@@ -58,22 +58,28 @@ class Account extends CI_Controller {
 
             $user = $this->ion_auth->user()->row();
             if ($this->form_validation->run() == true) {
-                if ($_FILES['paper']['name'] == "") {
-                    $url = $this->input->post('paper_url');
+                if ($_FILES['paper']['name'] == "" and $this->input->post('paper_url') == "") {
+                    $error = array('error' => "Kolom URL Berkas Harus Diisi atau Unggah Berkas");
+                    $this->session->set_flashdata('message', $error);
+                    redirect('tambah_item', 'refresh');
                 } else {
-                    $config['upload_path'] = './asset/items';
-                    $config['max_size'] = 0;
-                    $config['allowed_types'] = "*";
-                    $config['encrypt_name'] = TRUE;
-                    $this->load->library('upload', $config);
-
-                    if ($this->upload->do_upload('paper')) {
-                        $data = $this->upload->data();
-                        $url = $data['file_name'];
+                    if ($_FILES['paper']['name'] == "") {
+                        $url = $this->input->post('paper_url');
                     } else {
-                        $error = array('error' => $this->upload->display_errors());
-                        $this->session->set_flashdata('message', $error);
-                        redirect('tambah_item', 'refresh');
+                        $config['upload_path'] = './asset/items';
+                        $config['max_size'] = 0;
+                        $config['allowed_types'] = "*";
+                        $config['encrypt_name'] = TRUE;
+                        $this->load->library('upload', $config);
+
+                        if ($this->upload->do_upload('paper')) {
+                            $data = $this->upload->data();
+                            $url = $data['file_name'];
+                        } else {
+                            $error = array('error' => $this->upload->display_errors());
+                            $this->session->set_flashdata('message', $error);
+                            redirect('tambah_item', 'refresh');
+                        }
                     }
                 }
 
@@ -141,23 +147,29 @@ class Account extends CI_Controller {
 
             $user = $this->ion_auth->user()->row();
             if ($this->form_validation->run() == true) {
-                if ($_FILES['paper']['name'] == "") {
-                    $url = $this->input->post('paper_url');
+                if ($_FILES['paper']['name'] == "" and $this->input->post('paper_url') == "") {
+                    $error = array('error' => "Kolom URL Berkas Harus Diisi atau Unggah Berkas");
+                    $this->session->set_flashdata('message', $error);
+                    redirect('tambah_item', 'refresh');
                 } else {
-                    $config['upload_path'] = './asset/items';
-                    $config['max_size'] = 0;
-                    $config['allowed_types'] = "*";
-                    $config['encrypt_name'] = TRUE;
-                    $config['overwrite'] = TRUE;
-                    $this->load->library('upload', $config);
-
-                    if ($this->upload->do_upload('paper')) {
-                        $data = $this->upload->data();
-                        $url = $data['file_name'];
+                    if ($_FILES['paper']['name'] == "") {
+                        $url = $this->input->post('paper_url');
                     } else {
-                        $error = array('error' => $this->upload->display_errors());
-                        $this->session->set_flashdata('message', $error);
-                        redirect('ubah_item/'.$id, 'refresh');
+                        $config['upload_path'] = './asset/items';
+                        $config['max_size'] = 0;
+                        $config['allowed_types'] = "*";
+                        $config['encrypt_name'] = TRUE;
+                        $config['overwrite'] = TRUE;
+                        $this->load->library('upload', $config);
+
+                        if ($this->upload->do_upload('paper')) {
+                            $data = $this->upload->data();
+                            $url = $data['file_name'];
+                        } else {
+                            $error = array('error' => $this->upload->display_errors());
+                            $this->session->set_flashdata('message', $error);
+                            redirect('ubah_item/' . $id, 'refresh');
+                        }
                     }
                 }
 
@@ -234,7 +246,7 @@ class Account extends CI_Controller {
             if ($_SERVER['HTTP_REFERER']) {
                 $data = array('status' => $this->input->post('status'));
                 if ($this->item->update($this->input->post('id'), $data)) {
-                    if($this->input->post('status') == "O") {
+                    if ($this->input->post('status') == "O") {
                         echo "Item Telah Disetujui";
                     } else {
                         echo "Item Tidak Disetujui";
@@ -265,21 +277,21 @@ class Account extends CI_Controller {
         }
     }
 
-    /** Akhir Dari Fungsi Untuk Menangani Penambahan Saldo dari Upload Item **/
-    
-    /** Rincian Saldo **/
+    /** Akhir Dari Fungsi Untuk Menangani Penambahan Saldo dari Upload Item * */
+
+    /** Rincian Saldo * */
     function balance_detail() {
-        if(!$this->ion_auth->logged_in()) {
+        if (!$this->ion_auth->logged_in()) {
             redirect('login', 'refresh');
         }
-        
-        if($this->ion_auth->in_group(2)) {
+
+        if ($this->ion_auth->in_group(2)) {
             $user = $this->ion_auth->user()->row();
             $balances = $this->balance_log->find_byuser($user->id);
             $kurs = $this->kurs_point->get_kurs();
             $point = $this->balance->get_value($user->balance_id);
             (int) $saldo = (double) $point * (double) $kurs->idr;
-            
+
             $this->basic_data();
             $this->smartyci->assign('saldo', $saldo);
             $this->smartyci->assign('balances', $balances);
@@ -288,5 +300,5 @@ class Account extends CI_Controller {
             redirect('/', 'refresh');
         }
     }
-    
+
 }
