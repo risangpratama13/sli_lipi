@@ -61,6 +61,7 @@ $route['anggota/(:any)'] = "auth/view_member/$1";
 $route['unit'] = "master/units";
 $route['kurs_point'] = "master/kurs_point";
 $route['tipe_item'] = "master/item_types";
+$route['tool'] = "master/tools";
 
 $route['item'] = "account/items";
 $route['tambah_item'] = "account/add_item";

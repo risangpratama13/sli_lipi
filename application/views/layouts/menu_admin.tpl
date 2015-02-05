@@ -14,13 +14,14 @@
             <li><a href="{base_url()}kurs_point"><i class="fa fa-angle-double-right"></i> Kurs Poin</a></li>     
             <li><a href="{base_url()}tipe_item"><i class="fa fa-angle-double-right"></i> Kategori Item</a></li>
             <li><a href="{base_url()}unit"><i class="fa fa-angle-double-right"></i> Satuan</a></li>
+            <li><a href="{base_url()}tool"><i class="fa fa-angle-double-right"></i> Alat Pengujian</a></li>
         </ul>
     </li>
     <li>
         <a href="{base_url()}item">
             <i class="fa fa-files-o"></i> <span>Item</span>
         </a>
-    </li>    
+    </li>
     <li class="treeview">
         <a href="#">
             <i class="fa fa-list-alt"></i>

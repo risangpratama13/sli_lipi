@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-10 11:11:54
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-05 07:14:11
          compiled from "application\views\layouts\menu.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:746554871496e76fc8-38110648%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7a22a9d199c6a24e7310768d37f61b994270f78e' => 
     array (
       0 => 'application\\views\\layouts\\menu.tpl',
-      1 => 1418184692,
+      1 => 1423095158,
       2 => 'file',
     ),
   ),
@@ -47,7 +47,7 @@ asset/avatar/<?php echo $_smarty_tpl->tpl_vars['user']->value->photo;?>
 
         <?php } else { ?>
             <?php echo $_smarty_tpl->getSubTemplate ('layouts/menu_member.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
-            
+
         <?php }?>        
     </section>
     <!-- /.sidebar -->

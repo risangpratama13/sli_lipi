@@ -16,7 +16,7 @@
         {if in_array("admin", $groups) or in_array("superadmin", $groups)}
             {include file='layouts/menu_admin.tpl'}
         {else}
-            {include file='layouts/menu_member.tpl'}            
+            {include file='layouts/menu_member.tpl'}
         {/if}        
     </section>
     <!-- /.sidebar -->

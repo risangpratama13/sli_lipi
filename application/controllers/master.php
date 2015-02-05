@@ -9,6 +9,7 @@ class Master extends CI_Controller {
         $this->load->model('item_type');
         $this->load->model('kurs_point');
         $this->load->model('unit');
+        $this->load->model('tool');
 
         $this->load->library('form_validation');
     }
@@ -168,6 +169,58 @@ class Master extends CI_Controller {
                 $this->smartyci->assign('kurs', $kurs);
                 $this->smartyci->assign('form_kurs', $form_kurs);
                 $this->smartyci->display('master-data/kurs_point.tpl');
+            }
+        } else {
+            redirect('/', 'refresh');
+        }
+    }
+    
+    function tools() {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+
+        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
+            $tools = $this->tool->get_all();
+            $tool_name = array(
+                'name' => 'tool_name',
+                'class' => 'form-control',
+                'placeholder' => 'Nama Alat',
+                'type' => 'text',
+                'required' => 'required'
+            );
+            $this->basic_data();
+            $this->smartyci->assign('tools', $tools);
+            $this->smartyci->assign('tool_name', $tool_name);
+            $this->smartyci->display('master-data/tool.tpl');
+        } else {
+            redirect('/', 'refresh');
+        }
+    }
+    
+    function crud_tools() {
+        if ($_SERVER['HTTP_REFERER']) {
+            $action = $this->input->post('action');
+
+            switch ($action) {
+                case "delete":
+                    if ($this->tool->delete($this->input->post('id'))) {
+                        echo "Success";
+                    } else {
+                        echo "Failed";
+                    }
+                    break;
+                case "edit":
+                    $data = array("tool_name" => $this->input->post('tool_name'));
+                    $this->tool->update($this->input->post('id'), $data);
+                    redirect('tool', 'refresh');
+                    break;
+                case "add":
+                default:
+                    $data = array("tool_name" => $this->input->post('tool_name'));
+                    $this->tool->save($data);
+                    redirect('tool', 'refresh');                    
+                    break;
             }
         } else {
             redirect('/', 'refresh');
