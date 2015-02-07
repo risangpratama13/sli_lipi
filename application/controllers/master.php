@@ -189,9 +189,21 @@ class Master extends CI_Controller {
                 'type' => 'text',
                 'required' => 'required'
             );
+            
+            $tool_qty = array(
+                'name' => 'tool_qty',
+                'class' => 'form-control',
+                'placeholder' => 'Jumlah Alat',
+                'type' => 'number',
+                'required' => 'required',
+                'min' => 1,
+                'value' => 1,
+                'max' => 100
+            );
             $this->basic_data();
             $this->smartyci->assign('tools', $tools);
             $this->smartyci->assign('tool_name', $tool_name);
+            $this->smartyci->assign('tool_qty', $tool_qty);
             $this->smartyci->display('master-data/tool.tpl');
         } else {
             redirect('/', 'refresh');
@@ -211,13 +223,19 @@ class Master extends CI_Controller {
                     }
                     break;
                 case "edit":
-                    $data = array("tool_name" => $this->input->post('tool_name'));
+                    $data = array(
+                        "tool_name" => $this->input->post('tool_name'), 
+                        "tool_qty" => $this->input->post('tool_qty')
+                    );
                     $this->tool->update($this->input->post('id'), $data);
                     redirect('tool', 'refresh');
                     break;
                 case "add":
                 default:
-                    $data = array("tool_name" => $this->input->post('tool_name'));
+                    $data = array(
+                        "tool_name" => $this->input->post('tool_name'), 
+                        "tool_qty" => $this->input->post('tool_qty')
+                    );
                     $this->tool->save($data);
                     redirect('tool', 'refresh');                    
                     break;

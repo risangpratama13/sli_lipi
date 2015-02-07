@@ -9,7 +9,9 @@ class Testing extends CI_Controller {
         $this->load->model('category');
         $this->load->model('unit');
         $this->load->model('test');
-        $this->load->model('test_order');
+        $this->load->model('test_order');        
+        $this->load->model('tool');
+        $this->load->model('test_tool');
 
         $this->load->helper('download');
         $this->load->library('form_validation');
@@ -247,13 +249,43 @@ class Testing extends CI_Controller {
                 redirect('/', 'refresh');
             }
         }
-        $message = $this->session->flashdata('message') ? $this->session->flashdata('message') : "";                
-        
+        $message = $this->session->flashdata('message') ? $this->session->flashdata('message') : "";
+
         $this->basic_data();
         $this->smartyci->assign('type', $type);
         $this->smartyci->assign('messages', $message);
         $this->smartyci->assign('tests', $tests);
         $this->smartyci->display('testing/history.tpl');
+    }
+
+    function confirm_test_order($test_order_id) {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+
+        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
+            if ($test_order_id == "") {
+                $test_order = $this->test_order->find_byid($test_order_id);
+                if ($this->input->post('find_tool')) {
+                    $tanggal = explode("-", $this->input->post('tanggal_test'));
+                    $tanggal_mulai = date('Y-m-d H:i:s', $tanggal[0]);
+                    $tanggal_selesai = date('Y-m-d H:i:s', $tanggal[1]);
+                    
+                    $counts_tests_tools = $this->test_tool->count_bytest_order($test_order_id, $tanggal_mulai, $tanggal_selesai);
+                    $tools = $this->tool->get_all();
+                    
+                    $this->smartyci->assign('counts_tests_tools', $counts_tests_tools);
+                    $this->smartyci->assign('tools', $tools);
+                }
+                $this->basic_data();
+                $this->smartyci->assign('test_order', $test_order);
+                $this->smartyci->display('testing/confirm_test.tpl');
+            } else {
+                
+            }
+        } else {
+            redirect('pengujian_operator', 'refresh');
+        }
     }
 
     function update_status() {
@@ -290,7 +322,7 @@ class Testing extends CI_Controller {
     function upload_result() {
         if ($_SERVER['HTTP_REFERER']) {
             $id = $this->input->post('test_id');
-            
+
             $config['upload_path'] = './asset/test_results';
             $config['max_size'] = 0;
             $config['allowed_types'] = "*";
@@ -312,4 +344,5 @@ class Testing extends CI_Controller {
             redirect('/', 'refresh');
         }
     }
+
 }

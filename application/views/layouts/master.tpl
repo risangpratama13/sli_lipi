@@ -43,7 +43,8 @@
         <!-- End Modal -->
         
         <!-- jQuery 2.0.2 -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+{*        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>*}
+        <script src="{base_url()}asset/js/jquery-2.0.2.min.js"></script>
         <!-- Bootstrap -->
         <script src="{base_url()}asset/js/bootstrap.min.js" type="text/javascript"></script>
         <!-- Addons Plugins -->

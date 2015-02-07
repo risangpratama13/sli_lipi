@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-05 01:29:14
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-06 05:45:55
          compiled from "application\views\master-data\tool.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1648854d2b95a800f78-82410951%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd6c889bdbf868bb38496e1b58060d24a38b20806' => 
     array (
       0 => 'application\\views\\master-data\\tool.tpl',
-      1 => 1423096135,
+      1 => 1423197952,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -21,9 +21,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
   'unifunc' => 'content_54d2b95a8c0629_55134264',
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_54d2b95a8c0629_55134264')) {function content_54d2b95a8c0629_55134264($_smarty_tpl) {?><!DOCTYPE html>
 <html>
@@ -80,7 +80,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <section class="content-header">
         <h1>
             Master Data
-            <small>Tool</small>
+            <small>Alat Pengujian</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
@@ -108,6 +108,7 @@ tool">Alat Pengujian</a></li>
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Alat Pengujian</th>
+                                    <th>Jumlah Alat</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -123,10 +124,13 @@ $_smarty_tpl->tpl_vars['tool']->_loop = true;
 </td>
                                         <td><?php echo $_smarty_tpl->tpl_vars['tool']->value->tool_name;?>
 </td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['tool']->value->tool_qty;?>
+</td>
                                         <td>
                                             <button onclick="ubahTool(<?php echo $_smarty_tpl->tpl_vars['tool']->value->id;?>
 , '<?php echo $_smarty_tpl->tpl_vars['tool']->value->tool_name;?>
-')" title="Ubah Alat Pengujian" class="btn btn-flat btn-sm btn-warning"><i class="fa fa-edit"></i></button>
+', <?php echo $_smarty_tpl->tpl_vars['tool']->value->tool_qty;?>
+)" title="Ubah Alat Pengujian" class="btn btn-flat btn-sm btn-warning"><i class="fa fa-edit"></i></button>
                                             <button type="button" onclick="deleteTool(<?php echo $_smarty_tpl->tpl_vars['tool']->value->id;?>
 )" title="Hapus Alat Pengujian" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
                                         </td>
@@ -166,7 +170,15 @@ $_smarty_tpl->tpl_vars['tool']->_loop = true;
                                 <?php echo form_input($_smarty_tpl->tpl_vars['tool_name']->value);?>
                             
                             </div>
-                        </div>                        
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <?php echo form_label('Jumlah Alat','tool_qty');?>
+
+                                <?php echo form_input($_smarty_tpl->tpl_vars['tool_qty']->value);?>
+                            
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer clearfix">
                         <button type="button" id="cancel" class="btn btn-danger" onclick="batalkanTool()"><i class="fa fa-times"></i> Batalkan</button>
@@ -230,10 +242,11 @@ master/crud_tools",
             }
         }
         
-        function ubahTool(id, name) {
+        function ubahTool(id, name, qty) {
             $('input[name="action"]').val("edit");
             $('input[name="id"]').val(id);
             $('input[name="tool_name"]').val(name);
+            $('input[name="tool_qty"]').val(qty);
             $('[name="title"]').text("Ubah Alat Pengujian");
             $("#unit-modal").modal('show');
         }
@@ -242,6 +255,7 @@ master/crud_tools",
             $('input[name="action"]').val("");
             $('input[name="id"]').val("");
             $('input[name="tool_name"]').val("");
+            $('input[name="tool_qty"]').val(1);
             $('[name="title"]').text("");
             $("#unit-modal").modal('hide');
         }
@@ -250,6 +264,7 @@ master/crud_tools",
             $('input[name="action"]').val("add");
             $('input[name="id"]').val("0");
             $('input[name="tool_name"]').val("");
+            $('input[name="tool_qty"]').val(1);
             $('[name="title"]').text("Tambah Alat Pengujian");
             $("#unit-modal").modal('show');
         }

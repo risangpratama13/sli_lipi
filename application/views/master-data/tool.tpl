@@ -4,7 +4,7 @@
     <section class="content-header">
         <h1>
             Master Data
-            <small>Tool</small>
+            <small>Alat Pengujian</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
@@ -31,6 +31,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Alat Pengujian</th>
+                                    <th>Jumlah Alat</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -40,8 +41,9 @@
                                     <tr>
                                         <td>{$no}</td>
                                         <td>{$tool->tool_name}</td>
+                                        <td>{$tool->tool_qty}</td>
                                         <td>
-                                            <button onclick="ubahTool({$tool->id}, '{$tool->tool_name}')" title="Ubah Alat Pengujian" class="btn btn-flat btn-sm btn-warning"><i class="fa fa-edit"></i></button>
+                                            <button onclick="ubahTool({$tool->id}, '{$tool->tool_name}', {$tool->tool_qty})" title="Ubah Alat Pengujian" class="btn btn-flat btn-sm btn-warning"><i class="fa fa-edit"></i></button>
                                             <button type="button" onclick="deleteTool({$tool->id})" title="Hapus Alat Pengujian" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
                                         </td>
                                     </tr>
@@ -72,7 +74,13 @@
                                 {form_label('Nama Alat Pengujian', 'tool_name')}
                                 {form_input($tool_name)}                            
                             </div>
-                        </div>                        
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                {form_label('Jumlah Alat', 'tool_qty')}
+                                {form_input($tool_qty)}                            
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer clearfix">
                         <button type="button" id="cancel" class="btn btn-danger" onclick="batalkanTool()"><i class="fa fa-times"></i> Batalkan</button>
@@ -114,10 +122,11 @@
             }
         }
         
-        function ubahTool(id, name) {
+        function ubahTool(id, name, qty) {
             $('input[name="action"]').val("edit");
             $('input[name="id"]').val(id);
             $('input[name="tool_name"]').val(name);
+            $('input[name="tool_qty"]').val(qty);
             $('[name="title"]').text("Ubah Alat Pengujian");
             $("#unit-modal").modal('show');
         }
@@ -126,6 +135,7 @@
             $('input[name="action"]').val("");
             $('input[name="id"]').val("");
             $('input[name="tool_name"]').val("");
+            $('input[name="tool_qty"]').val(1);
             $('[name="title"]').text("");
             $("#unit-modal").modal('hide');
         }
@@ -134,6 +144,7 @@
             $('input[name="action"]').val("add");
             $('input[name="id"]').val("0");
             $('input[name="tool_name"]').val("");
+            $('input[name="tool_qty"]').val(1);
             $('[name="title"]').text("Tambah Alat Pengujian");
             $("#unit-modal").modal('show');
         }

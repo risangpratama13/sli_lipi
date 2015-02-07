@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-15 11:04:45
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-06 05:44:57
          compiled from "application\views\master-data\item_type.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:12897548eb09bccf944-58384731%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6da60713d4b158272b88ae60a0cd0413c1aab741' => 
     array (
       0 => 'application\\views\\master-data\\item_type.tpl',
-      1 => 1418637870,
+      1 => 1418790428,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -94,7 +94,7 @@ tipe_item">Kategori Item</a></li>
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
-                <div class="box box-primary">
+                <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Daftar Kategori Item</h3>
                     </div><!-- /.box-header -->

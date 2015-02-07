@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-29 06:55:12
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-06 17:24:52
          compiled from "application\views\index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:218035487144de015c5-93114714%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -13,7 +13,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1418622047,
+      1 => 1423218267,
       2 => 'file',
     ),
     '668c70bfc32ed27c742429d00bb2307df1fd048a' => 
@@ -95,7 +95,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <?php /*  Call merged included template "home/tiles.tpl" */
 $_tpl_stack[] = $_smarty_tpl;
  $_smarty_tpl = $_smarty_tpl->setupInlineSubTemplate('home/tiles.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0, '218035487144de015c5-93114714');
-content_54a09860bfcdc3_45996338($_smarty_tpl);
+content_54d49674e19bb0_35258905($_smarty_tpl);
 $_smarty_tpl = array_pop($_tpl_stack); 
 /*  End of included template "home/tiles.tpl" */?>
         </div><!-- /.row -->
@@ -109,8 +109,10 @@ $_smarty_tpl = array_pop($_tpl_stack);
         <!-- End Modal -->
         
         <!-- jQuery 2.0.2 -->
+
         <?php echo '<script'; ?>
- src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"><?php echo '</script'; ?>
+ src="<?php echo base_url();?>
+asset/js/jquery-2.0.2.min.js"><?php echo '</script'; ?>
 >
         <!-- Bootstrap -->
         <?php echo '<script'; ?>
@@ -128,9 +130,9 @@ asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
         
     </body>
 </html><?php }} ?>
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-29 06:55:12
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-06 17:24:52
          compiled from "application\views\home\tiles.tpl" */ ?>
-<?php if ($_valid && !is_callable('content_54a09860bfcdc3_45996338')) {function content_54a09860bfcdc3_45996338($_smarty_tpl) {?><?php if (in_array("admin",$_smarty_tpl->tpl_vars['groups']->value)||in_array("superadmin",$_smarty_tpl->tpl_vars['groups']->value)) {?>
+<?php if ($_valid && !is_callable('content_54d49674e19bb0_35258905')) {function content_54d49674e19bb0_35258905($_smarty_tpl) {?><?php if (in_array("admin",$_smarty_tpl->tpl_vars['groups']->value)||in_array("superadmin",$_smarty_tpl->tpl_vars['groups']->value)) {?>
     <div class="col-lg-3 col-xs-6">            
         <div class="small-box bg-aqua-gradient">
             <div class="inner">
