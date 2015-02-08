@@ -101,8 +101,9 @@
                                         <td>
                                             {if $test->status eq "P"}
                                                 {if $type eq "operator"}
-                                                    <button title="Setujui Pengujian" id="accTest" data-id="{$test->id}" class="btn btn-flat btn-sm btn-success"><i class="fa fa-check"></i></button>
-                                                    <button title="Tolak Pengujian" onclick="ubahStatus({$test->id}, 'D')" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-times"></i></button>
+                                                    <a href="{base_url()}confirm/{$test->id}" class="btn btn-flat btn-sm btn-primary">Konfirmasi</a>
+{*                                                    <button title="Setujui Pengujian" id="accTest" data-id="{$test->id}" class="btn btn-flat btn-sm btn-success"><i class="fa fa-check"></i></button>*}
+{*                                                    <button title="Tolak Pengujian" onclick="ubahStatus({$test->id}, 'D')" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-times"></i></button>*}
                                                 {else}
                                                     &nbsp;
                                                 {/if}

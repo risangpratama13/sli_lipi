@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-06 11:25:08
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-08 01:19:28
          compiled from "application\views\testing\history.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:8472549a1e8a8c8b89-83129481%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9afc75256c57d70903a482fc76a37d51beb6fa3f' => 
     array (
       0 => 'application\\views\\testing\\history.tpl',
-      1 => 1419640005,
+      1 => 1423354765,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -198,10 +198,11 @@ $_smarty_tpl->tpl_vars['test']->_loop = true;
                                         <td>
                                             <?php if ($_smarty_tpl->tpl_vars['test']->value->status=="P") {?>
                                                 <?php if ($_smarty_tpl->tpl_vars['type']->value=="operator") {?>
-                                                    <button title="Setujui Pengujian" id="accTest" data-id="<?php echo $_smarty_tpl->tpl_vars['test']->value->id;?>
-" class="btn btn-flat btn-sm btn-success"><i class="fa fa-check"></i></button>
-                                                    <button title="Tolak Pengujian" onclick="ubahStatus(<?php echo $_smarty_tpl->tpl_vars['test']->value->id;?>
-, 'D')" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-times"></i></button>
+                                                    <a href="<?php echo base_url();?>
+confirm/<?php echo $_smarty_tpl->tpl_vars['test']->value->id;?>
+" class="btn btn-flat btn-sm btn-primary">Konfirmasi</a>
+
+
                                                 <?php } else { ?>
                                                     &nbsp;
                                                 <?php }?>

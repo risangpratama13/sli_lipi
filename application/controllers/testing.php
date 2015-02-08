@@ -263,28 +263,42 @@ class Testing extends CI_Controller {
             redirect('login', 'refresh');
         }
 
-        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
-            if ($test_order_id == "") {
+        if ($this->ion_auth->in_group(4)) {
+            if ($test_order_id != "") {
                 $test_order = $this->test_order->find_byid($test_order_id);
                 if ($this->input->post('find_tool')) {
-                    $tanggal = explode("-", $this->input->post('tanggal_test'));
-                    $tanggal_mulai = date('Y-m-d H:i:s', $tanggal[0]);
-                    $tanggal_selesai = date('Y-m-d H:i:s', $tanggal[1]);
-                    
+                    $tanggal = explode(" - ", $this->input->post('tanggal_test'));
+                    $tanggal_mulai = date('Y-m-d H:i', strtotime($tanggal[0]));
+                    $tanggal_selesai = date('Y-m-d H:i', strtotime($tanggal[1]));                    
+                    $count_tools = array();
                     $counts_tests_tools = $this->test_tool->count_bytest_order($test_order_id, $tanggal_mulai, $tanggal_selesai);
-                    $tools = $this->tool->get_all();
-                    
-                    $this->smartyci->assign('counts_tests_tools', $counts_tests_tools);
+                    foreach ($counts_tests_tools as $count_test_tool) {
+                        $count_tools[$count_test_tool->tool_id] = $count_test_tool->qty;
+                    }                    
+                    $tools = $this->tool->get_all();                    
+                    $this->smartyci->assign('count_tools', $count_tools);
                     $this->smartyci->assign('tools', $tools);
                 }
+                
+                $test_date = array(
+                    'name' => 'tanggal_test',
+                    'class' => 'form-control pull-right',
+                    'placeholder' => 'Tanggal Pengujian',
+                    'type' => 'text',
+                    'id' => 'tanggal_test',
+                    'required' => 'required',
+                    'value' => $this->input->post('tanggal_test')
+                );
+                
                 $this->basic_data();
+                $this->smartyci->assign('test_date', $test_date);
                 $this->smartyci->assign('test_order', $test_order);
                 $this->smartyci->display('testing/confirm_test.tpl');
             } else {
                 
             }
         } else {
-            redirect('pengujian_operator', 'refresh');
+            redirect('/', 'refresh');
         }
     }
 

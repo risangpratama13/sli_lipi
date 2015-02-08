@@ -15,6 +15,7 @@ class Test_tool extends CI_Model {
         $this->db->where('tests_tools.test_order_id', $test_order_id);
         $this->db->where('test_orders.start_date <=', $start_date);
         $this->db->where('test_orders.finish_date <=', $finish_date);
+        $this->db->group_by('tests_tools.tool_id');
         $query = $this->db->get();
         return $query->result();
     } 

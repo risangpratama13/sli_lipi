@@ -81,6 +81,7 @@ $route['invoice/(:any)'] = "orders/view_order/$1";
 
 $route['pengujian_member'] = "testing/history/member";
 $route['pengujian_operator'] = "testing/history/operator";
+$route['confirm/(:num)'] = "testing/confirm_test_order/$1";
 $route['history_pengujian'] = "testing/history/all";
 
 /* End of file routes.php */
