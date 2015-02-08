@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-08 03:15:40
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-08 13:00:02
          compiled from "application\views\testing\confirm_test.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2205954d6aaa5d9da59-12267598%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0bea8cc03a9101bfd3b4548f6678656ff59a04dc' => 
     array (
       0 => 'application\\views\\testing\\confirm_test.tpl',
-      1 => 1423361735,
+      1 => 1423396666,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -150,7 +150,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['tool']->key => $_smarty_tpl->tpl_vars
 $_smarty_tpl->tpl_vars['tool']->_loop = true;
 ?>
                                         <?php if (empty($_smarty_tpl->tpl_vars['count_tools']->value[$_smarty_tpl->tpl_vars['tool']->value->id])) {?>
-                                            <?php $_smarty_tpl->tpl_vars['max_qty'] = new Smarty_variable($_smarty_tpl->tpl_vars['tool']->value->tool_qty, null, 0);?>                                        
+                                            <?php $_smarty_tpl->tpl_vars['max_qty'] = new Smarty_variable($_smarty_tpl->tpl_vars['tool']->value->tool_qty, null, 0);?>                                            
                                         <?php } else { ?>
                                             <?php $_smarty_tpl->tpl_vars['max_qty'] = new Smarty_variable($_smarty_tpl->tpl_vars['tool']->value->tool_qty-$_smarty_tpl->tpl_vars['count_tools']->value[$_smarty_tpl->tpl_vars['tool']->value->id], null, 0);?>
                                         <?php }?>
@@ -243,13 +243,15 @@ asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
                 oLanguage: {
                     sUrl: '<?php echo base_url();?>
 asset/js/plugins/datatables/Indonesian.json'
-                }
+                },
+                "bPaginate" : false
             });
 
             $('#tanggal_test').daterangepicker({
                 timePicker: true,
                 timePickerIncrement: 1,
-                format: 'DD/MM/YYYY H:mm'
+                timePicker12Hour: false,
+                format: 'MM/DD/YYYY H:mm'
             });
         });
     <?php echo '</script'; ?>

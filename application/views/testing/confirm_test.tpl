@@ -62,7 +62,7 @@
                                     {$no = 1}
                                     {foreach $tools as $tool}
                                         {if empty($count_tools.{$tool->id})}
-                                            {$max_qty = $tool->tool_qty}                                        
+                                            {$max_qty = $tool->tool_qty}                                            
                                         {else}
                                             {$max_qty = $tool->tool_qty - $count_tools.{$tool->id}}
                                         {/if}
@@ -118,13 +118,15 @@
             var tableTool = $("#tableTool").dataTable({
                 oLanguage: {
                     sUrl: '{base_url()}asset/js/plugins/datatables/Indonesian.json'
-                }
+                },
+                "bPaginate" : false
             });
 
             $('#tanggal_test').daterangepicker({
                 timePicker: true,
                 timePickerIncrement: 1,
-                format: 'DD/MM/YYYY H:mm'
+                timePicker12Hour: false,
+                format: 'MM/DD/YYYY H:mm'
             });
         });
     </script>

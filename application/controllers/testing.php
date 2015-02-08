@@ -9,7 +9,7 @@ class Testing extends CI_Controller {
         $this->load->model('category');
         $this->load->model('unit');
         $this->load->model('test');
-        $this->load->model('test_order');        
+        $this->load->model('test_order');
         $this->load->model('tool');
         $this->load->model('test_tool');
 
@@ -269,17 +269,45 @@ class Testing extends CI_Controller {
                 if ($this->input->post('find_tool')) {
                     $tanggal = explode(" - ", $this->input->post('tanggal_test'));
                     $tanggal_mulai = date('Y-m-d H:i', strtotime($tanggal[0]));
-                    $tanggal_selesai = date('Y-m-d H:i', strtotime($tanggal[1]));                    
+                    $tanggal_selesai = date('Y-m-d H:i', strtotime($tanggal[1]));
                     $count_tools = array();
-                    $counts_tests_tools = $this->test_tool->count_bytest_order($test_order_id, $tanggal_mulai, $tanggal_selesai);
+                    $counts_tests_tools = $this->test_tool->count_bytest_order($tanggal_mulai, $tanggal_selesai);
                     foreach ($counts_tests_tools as $count_test_tool) {
                         $count_tools[$count_test_tool->tool_id] = $count_test_tool->qty;
-                    }                    
-                    $tools = $this->tool->get_all();                    
+                    }
+                    $tools = $this->tool->get_all();
                     $this->smartyci->assign('count_tools', $count_tools);
                     $this->smartyci->assign('tools', $tools);
+                } else if ($this->input->post('accept')) {
+                    $tanggal = explode(" - ", $this->input->post('tanggal_test'));
+                    $tanggal_mulai = date('Y-m-d H:i', strtotime($tanggal[0]));
+                    $tanggal_selesai = date('Y-m-d H:i', strtotime($tanggal[1]));
+                    $data = array(
+                        'status' => 'O',
+                        'start_date' => $tanggal_mulai,
+                        'finish_date' => $tanggal_selesai
+                    );                    
+                    $this->test_order->update($test_order_id, $data);
+                    if ($this->input->post('tools')) {
+                        $tools = $this->input->post('tools');
+                        for ($i = 0; $i < count($tools); $i++) {
+                            $tool_id = $tools[$i];
+                            $qty = $this->input->post('tool_qty_' . $tool_id);
+                            $data = array(
+                                'tool_id' => $tool_id,
+                                'test_order_id' => $test_order_id,
+                                'qty' => $qty
+                            );                            
+                            $this->test_tool->save($data);
+                        }
+                    }
+                    redirect('pengujian_operator', 'refresh');
+                } else if ($this->input->post('denied')) {
+                    $data = array('status' => 'D');
+                    $this->test_order->update($test_order_id, $data);
+                    redirect('pengujian_operator', 'refresh');
                 }
-                
+
                 $test_date = array(
                     'name' => 'tanggal_test',
                     'class' => 'form-control pull-right',
@@ -289,13 +317,13 @@ class Testing extends CI_Controller {
                     'required' => 'required',
                     'value' => $this->input->post('tanggal_test')
                 );
-                
+
                 $this->basic_data();
                 $this->smartyci->assign('test_date', $test_date);
                 $this->smartyci->assign('test_order', $test_order);
                 $this->smartyci->display('testing/confirm_test.tpl');
             } else {
-                
+                redirect('/', 'refresh');
             }
         } else {
             redirect('/', 'refresh');
