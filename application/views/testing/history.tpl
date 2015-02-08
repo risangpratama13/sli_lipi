@@ -102,34 +102,33 @@
                                             {if $test->status eq "P"}
                                                 {if $type eq "operator"}
                                                     <a href="{base_url()}confirm/{$test->id}" class="btn btn-flat btn-sm btn-primary">Konfirmasi</a>
-{*                                                    <button title="Setujui Pengujian" id="accTest" data-id="{$test->id}" class="btn btn-flat btn-sm btn-success"><i class="fa fa-check"></i></button>*}
-{*                                                    <button title="Tolak Pengujian" onclick="ubahStatus({$test->id}, 'D')" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-times"></i></button>*}
                                                 {else}
                                                     &nbsp;
                                                 {/if}
                                             {else if $test->status eq "O"}
                                                 {if $type eq "operator"}
-                                                    <button onclick="ubahStatus({$test->id}, 'F')" class="btn btn-flat btn-sm btn-default"><i class="fa fa-flag-checkered"></i> Pengujian Selesai</button>
+                                                    <button onclick="ubahStatus({$test->id}, 'F')" class="btn btn-flat btn-sm btn-default" title="Pengujian Selesai"><i class="fa fa-flag-checkered"></i></button>
                                                 {else}
                                                     &nbsp;
                                                 {/if}
                                             {else if $test->status eq "D"}
                                                 {if $type eq "member"}
-                                                    <button onclick="hapusOrder({$test->id})" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-trash-o"></i> Hapus</button>
+                                                    <button onclick="hapusOrder({$test->id})" class="btn btn-flat btn-sm btn-danger" title="Hapus"><i class="fa fa-trash-o"></i></button>
                                                 {else}
                                                     &nbsp;
                                                 {/if}
                                             {else if $test->status eq "F"}
                                                 {if $test->url_file eq ""}
                                                     {if $type eq "operator"}
-                                                        <button id="btnUpload" class="btn btn-flat btn-sm btn-default" data-id="{$test->id}"><i class="fa fa-upload"></i> Unggah Hasil Pengujian</button>
+                                                        <button id="btnUpload" class="btn btn-flat btn-sm btn-default" data-id="{$test->id}" title="Unggah Hasil Pengujian"><i class="fa fa-upload"></i></button>
                                                     {else}
                                                         &nbsp;
                                                     {/if}
                                                 {else}
-                                                    <a href="{base_url()}asset/test_results/{$test->url_file}" class="btn btn-flat btn-sm btn-primary"><i class="fa fa-download"></i> Unduh Hasil Pengujian</a>
+                                                    <a href="{base_url()}asset/test_results/{$test->url_file}" class="btn btn-flat btn-sm btn-primary" title="Unduh Hasil Pengujian"><i class="fa fa-download"></i></a>
                                                 {/if}
                                             {/if}
+                                            <a href="{base_url()}view_test/{$test->id}" class="btn btn-flat btn-sm btn-info" title="Lihat Pengujian"><i class="fa fa-eye"></i></a>
                                         </td>
                                     </tr>
                                 {/foreach}
@@ -149,57 +148,13 @@
     </div>
 {/block}
 
-{block name="modal"}
-    <div class="modal fade" id="accTest-modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" name="title">Setujui Pengujian</h4>
-                </div>
-                <input type="hidden" name="id">
-                <input type="hidden" name="status" value="O">
-                <div class="modal-body">
-                    <div class="form-group">                        
-                        <label for="start_date">Tanggal Mulai Pengujian</label>                
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            <input type="text" name="start_date" class="form-control" data-inputmask="'alias': 'yyyy-mm-dd'" value="{date('Y-m-d')}" data-mask/>
-                        </div>                        
-                    </div>
-                    <div class="bootstrap-timepicker">
-                        <div class="form-group">
-                            <label>Jam Mulai Pengujian</label>
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-clock-o"></i>
-                                </div>
-                                <input type="text" name="start_time" class="form-control timepicker"/>                                
-                            </div><!-- /.input group -->
-                        </div><!-- /.form group -->
-                    </div>
-                </div>
-                <div class="modal-footer clearfix">
-                    <button type="button" id="cancel" class="btn btn-danger"><i class="fa fa-times"></i> Batalkan</button>
-                    <button type="button" id="submit" class="btn btn-success"><i class="fa fa-check"></i> Setujui Pengujian</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-{/block}
-
 {block name="addon_styles"}
     {link_tag('asset/css/datatables/dataTables.bootstrap.css')}
-    {link_tag('asset/css/timepicker/bootstrap-timepicker.min.css')}
 {/block}
 
 {block name="addon_plugins"}
     <script src="{base_url()}asset/js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
-    <script src="{base_url()}asset/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
-    <script src="{base_url()}asset/js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
-    <script src="{base_url()}asset/js/plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>    
-    <script src="{base_url()}asset/js/plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>    
+    <script src="{base_url()}asset/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>    
 {/block}
 
 {block name="addon_scripts"}
@@ -240,50 +195,11 @@
                     sUrl: '{base_url()}asset/js/plugins/datatables/Indonesian.json'
                 }
             });
-            
-            $("[data-mask]").inputmask();
-            $(".timepicker").timepicker({
-                showInputs: false,
-                showMeridian: false
-            });
-            
+                        
             $("#btnUpload").click(function() {
                 var test_id = $(this).attr("data-id");
                 $("input[name='test_id']").val(test_id);
                 $("input[name='test_result']").click();
-            });
-            
-            $("#accTest").click(function() {
-                var id = $(this).attr("data-id");
-                $("input[name='id']").val(id);
-                $("#accTest-modal").modal('show');
-            });
-            
-            $("#cancel").click(function() {
-                $("input[name='id']").val("");
-                $("input[name='start_date']").val("");
-                $("input[name='start_time']").val("");
-                $("#accTest-modal").modal('hide');
-            });
-            
-            $("#submit").click(function() {
-                var id = $("input[name='id']").val();
-                var start_date = $("input[name='start_date']").val();
-                var status = $("input[name='status']").val();
-                var start_time = $("input[name='start_time']").val();
-                
-                $.ajax({
-                    url : "{base_url()}testing/update_status",
-                    type: "POST",
-                    data: "id="+id+"&status="+status+"&start_date="+start_date+"&start_time="+start_time,
-                    success: function(data) {
-                        if(data == "Success") {
-                            location.reload();
-                        } else {
-                            alert("Gagal Mengubah Status");
-                        }
-                    }
-                });
             });
         });     
     </script>

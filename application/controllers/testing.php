@@ -314,7 +314,6 @@ class Testing extends CI_Controller {
                     'placeholder' => 'Tanggal Pengujian',
                     'type' => 'text',
                     'id' => 'tanggal_test',
-                    'required' => 'required',
                     'value' => $this->input->post('tanggal_test')
                 );
 
@@ -334,16 +333,7 @@ class Testing extends CI_Controller {
         if ($_SERVER['HTTP_REFERER']) {
             $status = $this->input->post('status');
             $id = $this->input->post('id');
-            switch ($status) {
-                case 'O':
-                    $data = array(
-                        'status' => 'O',
-                        'start_date' => $this->input->post('start_date') . " " . $this->input->post('start_time')
-                    );
-                    break;
-                case 'D':
-                    $data = array('status' => 'D');
-                    break;
+            switch ($status) {                
                 case 'F':
                     $data = array(
                         'status' => 'F',
@@ -356,6 +346,24 @@ class Testing extends CI_Controller {
             } else {
                 echo 'Failed';
             }
+        } else {
+            redirect('/', 'refresh');
+        }
+    }
+    
+    function view_test_order($test_order_id) {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+        
+        if($test_order_id != "") {
+            $test_order = $this->test_order->find_byid($test_order_id);
+            $tools = $this->test_tool->find_bytestorder($test_order_id);
+            
+            $this->basic_data();
+            $this->smartyci->assign('test_order', $test_order);
+            $this->smartyci->assign('tools', $tools);
+            $this->smartyci->display('testing/view_test.tpl');
         } else {
             redirect('/', 'refresh');
         }

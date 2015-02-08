@@ -83,6 +83,7 @@ $route['pengujian_member'] = "testing/history/member";
 $route['pengujian_operator'] = "testing/history/operator";
 $route['confirm/(:num)'] = "testing/confirm_test_order/$1";
 $route['history_pengujian'] = "testing/history/all";
+$route['view_test/(:num)'] = "testing/view_test_order/$1";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
