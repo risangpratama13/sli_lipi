@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-22 06:28:23
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-19 10:31:02
          compiled from "application\views\order\add_cart.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:109255497543e15a5d7-15919826%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b17daa969a65dc6c88b3614bbd193396deb3c65e' => 
     array (
       0 => 'application\\views\\order\\add_cart.tpl',
-      1 => 1419204500,
+      1 => 1424316655,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1418622047,
+      1 => 1423521212,
       2 => 'file',
     ),
   ),
@@ -87,7 +87,7 @@ tambah_order">Buat Pengajuan Pengujian</a></li>
             <li class="active">Tambah Pengujian</li>
         </ol>
     </section>
-            
+
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
@@ -100,33 +100,44 @@ tambah_order">Buat Pengajuan Pengujian</a></li>
                     <?php echo form_hidden('test_id',$_smarty_tpl->tpl_vars['test_id']->value);?>
 
                     <div class="box-body">
-                        <div class="form-group">
-                            <?php echo form_label('Nama Pengujian','pengujian');?>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <?php echo form_label('Nama Pengujian','pengujian');?>
 
-                            <input type="text" name="pengujian" value="<?php echo $_smarty_tpl->tpl_vars['test']->value->testing_name;?>
+                                    <input type="text" name="pengujian" value="<?php echo $_smarty_tpl->tpl_vars['test']->value->testing_name;?>
 " class="form-control" disabled="disabled">
-                        </div>
-                        <div class="form-group">                            
-                            <?php echo form_label('Jumlah Pengujian','qty');?>
+                                </div>
+                                <div class="form-group">                            
+                                    <?php echo form_label('Jumlah Pengujian','qty');?>
 
-                            <?php echo form_input($_smarty_tpl->tpl_vars['qty']->value);?>
+                                    <?php echo form_input($_smarty_tpl->tpl_vars['qty']->value);?>
                        
-                        </div>
-                        <div class="form-group">
-                            <?php echo form_label('Pilih Operator','operator');?>
+                                </div>
+                                <div class="form-group">
+                                    <?php echo form_label('Pilih Operator','operator');?>
                             
-                            <select name="operator" class="form-control">
-                                <?php  $_smarty_tpl->tpl_vars['operator'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['operator']->_loop = false;
+                                    <select name="operator" class="form-control">
+                                        <?php  $_smarty_tpl->tpl_vars['operator'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['operator']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['operators']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['operator']->key => $_smarty_tpl->tpl_vars['operator']->value) {
 $_smarty_tpl->tpl_vars['operator']->_loop = true;
 ?>
-                                    <option value="<?php echo $_smarty_tpl->tpl_vars['operator']->value->id;?>
+                                            <option value="<?php echo $_smarty_tpl->tpl_vars['operator']->value->id;?>
 "><?php echo $_smarty_tpl->tpl_vars['operator']->value->full_name;?>
 </option>
-                                <?php } ?>                          
-                            </select>
-                        </div>
+                                        <?php } ?>                          
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <?php echo form_label('Keterangan (optional)','keterangan');?>
+
+                                    <textarea name="keterangan" class="form-control" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div><!-- /.row -->
                     </div><!-- /.box-body -->
                     <div class="box-footer">
                         <?php echo form_submit('submit',"Tambahkan Pengujian",'class="btn btn-flat btn-success"');?>
@@ -147,8 +158,10 @@ $_smarty_tpl->tpl_vars['operator']->_loop = true;
         <!-- End Modal -->
         
         <!-- jQuery 2.0.2 -->
+
         <?php echo '<script'; ?>
- src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"><?php echo '</script'; ?>
+ src="<?php echo base_url();?>
+asset/js/jquery-2.0.2.min.js"><?php echo '</script'; ?>
 >
         <!-- Bootstrap -->
         <?php echo '<script'; ?>

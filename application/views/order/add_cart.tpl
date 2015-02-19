@@ -13,7 +13,7 @@
             <li class="active">Tambah Pengujian</li>
         </ol>
     </section>
-            
+
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
@@ -24,22 +24,32 @@
                     {form_open('orders/add_cart')}
                     {form_hidden('test_id', $test_id)}
                     <div class="box-body">
-                        <div class="form-group">
-                            {form_label('Nama Pengujian', 'pengujian')}
-                            <input type="text" name="pengujian" value="{$test->testing_name}" class="form-control" disabled="disabled">
-                        </div>
-                        <div class="form-group">                            
-                            {form_label('Jumlah Pengujian', 'qty')}
-                            {form_input($qty)}                       
-                        </div>
-                        <div class="form-group">
-                            {form_label('Pilih Operator', 'operator')}                            
-                            <select name="operator" class="form-control">
-                                {foreach $operators as $operator}
-                                    <option value="{$operator->id}">{$operator->full_name}</option>
-                                {/foreach}                          
-                            </select>
-                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {form_label('Nama Pengujian', 'pengujian')}
+                                    <input type="text" name="pengujian" value="{$test->testing_name}" class="form-control" disabled="disabled">
+                                </div>
+                                <div class="form-group">                            
+                                    {form_label('Jumlah Pengujian', 'qty')}
+                                    {form_input($qty)}                       
+                                </div>
+                                <div class="form-group">
+                                    {form_label('Pilih Operator', 'operator')}                            
+                                    <select name="operator" class="form-control">
+                                        {foreach $operators as $operator}
+                                            <option value="{$operator->id}">{$operator->full_name}</option>
+                                        {/foreach}                          
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {form_label('Keterangan (optional)', 'keterangan')}
+                                    <textarea name="keterangan" class="form-control" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div><!-- /.row -->
                     </div><!-- /.box-body -->
                     <div class="box-footer">
                         {form_submit('submit', "Tambahkan Pengujian", 'class="btn btn-flat btn-success"')}

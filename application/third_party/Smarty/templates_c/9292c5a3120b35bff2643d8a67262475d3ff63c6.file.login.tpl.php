@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-09 21:01:27
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-10 05:34:13
          compiled from "application\views\login.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:18088548700b7558bb5-93694648%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9292c5a3120b35bff2643d8a67262475d3ff63c6' => 
     array (
       0 => 'application\\views\\login.tpl',
-      1 => 1418133656,
+      1 => 1418251298,
       2 => 'file',
     ),
   ),
@@ -15,13 +15,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_548700b75cdeb2_47738577',
   'variables' => 
   array (
     'data' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_548700b75cdeb2_47738577',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_548700b75cdeb2_47738577')) {function content_548700b75cdeb2_47738577($_smarty_tpl) {?><!DOCTYPE html>
 <html class="bg-black">
