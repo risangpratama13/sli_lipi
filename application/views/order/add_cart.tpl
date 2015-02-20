@@ -45,8 +45,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {form_label('Keterangan (optional)', 'keterangan')}
-                                    <textarea name="keterangan" class="form-control" rows="5"></textarea>
+                                    {form_label('Penjelasan (optional)', 'description')}
+                                    <textarea name="description" class="form-control" rows="5"></textarea>
                                 </div>
                             </div>
                         </div><!-- /.row -->

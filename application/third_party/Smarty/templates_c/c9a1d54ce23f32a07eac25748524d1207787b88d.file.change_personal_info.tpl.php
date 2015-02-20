@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 11:56:24
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-20 15:49:16
          compiled from "application\views\configuration\profile\change_personal_info.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:17557548a4ff06c6b70-79465444%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,19 +7,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c9a1d54ce23f32a07eac25748524d1207787b88d' => 
     array (
       0 => 'application\\views\\configuration\\profile\\change_personal_info.tpl',
-      1 => 1418705781,
+      1 => 1418731892,
       2 => 'file',
     ),
     '68cc9180bc6fb0dd465914a3c57d03a07aa9bace' => 
     array (
       0 => 'application\\views\\configuration\\profile\\profile.tpl',
-      1 => 1418338325,
+      1 => 1418400418,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1418622047,
+      1 => 1423521212,
       2 => 'file',
     ),
   ),
@@ -414,8 +414,10 @@ $_smarty_tpl->tpl_vars['research']->_loop = true;
         <!-- End Modal -->
         
         <!-- jQuery 2.0.2 -->
+
         <?php echo '<script'; ?>
- src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"><?php echo '</script'; ?>
+ src="<?php echo base_url();?>
+asset/js/jquery-2.0.2.min.js"><?php echo '</script'; ?>
 >
         <!-- Bootstrap -->
         <?php echo '<script'; ?>

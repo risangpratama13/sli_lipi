@@ -121,7 +121,7 @@ class Orders extends CI_Controller {
             if ($this->input->post('submit')) {
                 $test_id = $this->input->post('test_id');
                 $qty = $this->input->post('qty');
-                $keterangan = $this->input->post('keterangan');
+                $description = $this->input->post('description');
                 $test = $this->test->find_by_id($test_id);
                 $operator_id = $this->input->post('operator');
                 $operator = $this->operator->get_byid($operator_id);
@@ -129,7 +129,7 @@ class Orders extends CI_Controller {
                 $data = array(
                     'id' => $test->id,
                     'qty' => $qty,
-                    'keterangan' => $keterangan,
+                    'description' => $description,
                     'price' => $test->testing_price,
                     'name' => $test->testing_name,
                     'options' => array('operator' => $operator_id, 'operator_name' => $operator->full_name)
@@ -194,7 +194,7 @@ class Orders extends CI_Controller {
                                 'operator_id' => $items['options']['operator'],
                                 'test_id' => $items['id'],
                                 'qty' => $items['qty'],
-                                'keterangan' => $items['keterangan'],
+                                'description' => $items['description'],
                                 'subtotal' => $items['subtotal']
                             );
                             $this->test_order->save($data);

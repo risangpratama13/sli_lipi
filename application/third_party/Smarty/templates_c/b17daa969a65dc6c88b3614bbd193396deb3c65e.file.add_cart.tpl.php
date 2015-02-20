@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-19 10:31:02
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-20 10:42:49
          compiled from "application\views\order\add_cart.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:109255497543e15a5d7-15919826%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b17daa969a65dc6c88b3614bbd193396deb3c65e' => 
     array (
       0 => 'application\\views\\order\\add_cart.tpl',
-      1 => 1424316655,
+      1 => 1424403127,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -132,9 +132,9 @@ $_smarty_tpl->tpl_vars['operator']->_loop = true;
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <?php echo form_label('Keterangan (optional)','keterangan');?>
+                                    <?php echo form_label('Penjelasan (optional)','description');?>
 
-                                    <textarea name="keterangan" class="form-control" rows="5"></textarea>
+                                    <textarea name="description" class="form-control" rows="5"></textarea>
                                 </div>
                             </div>
                         </div><!-- /.row -->

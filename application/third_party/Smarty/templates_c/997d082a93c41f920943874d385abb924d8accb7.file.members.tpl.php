@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 11:11:36
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-20 10:43:20
          compiled from "application\views\configuration\members.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:72495487c82f42e4c4-57416047%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '997d082a93c41f920943874d385abb924d8accb7' => 
     array (
       0 => 'application\\views\\configuration\\members.tpl',
-      1 => 1418703093,
+      1 => 1418731892,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1418622047,
+      1 => 1423521212,
       2 => 'file',
     ),
   ),
@@ -177,8 +177,10 @@ ganti_password/<?php echo $_smarty_tpl->tpl_vars['member']->value->username;?>
         <!-- End Modal -->
         
         <!-- jQuery 2.0.2 -->
+
         <?php echo '<script'; ?>
- src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"><?php echo '</script'; ?>
+ src="<?php echo base_url();?>
+asset/js/jquery-2.0.2.min.js"><?php echo '</script'; ?>
 >
         <!-- Bootstrap -->
         <?php echo '<script'; ?>

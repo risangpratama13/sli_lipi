@@ -17,7 +17,7 @@
             <div class="col-xs-12">
                 <h2 class="page-header">
                     <img src="{base_url()}asset/img/favicon.png"> 
-                    Pusat Penelitian Fisika LIPI                    
+                    Sistem Layanan Internal - Pusat Penelitian Fisika LIPI                    
                 </h2>
             </div><!-- /.col -->
         </div>
@@ -61,7 +61,7 @@
                     <tbody>
                         {foreach $test_orders as $test_order}
                             <tr>    
-                                <td>{$test_order->testing_name}</td>
+                                <td rowspan="2">{$test_order->testing_name}</td>
                                 <td>{$test_order->qty}</td>
                                 <td>{$test_order->full_name}</td>
                                 {if $test_order->start_date eq "0000-00-00 00:00:00"}
@@ -71,7 +71,7 @@
                                 {/if}
                                 {if $test_order->status eq "P"}
                                     <td><span class="label label-warning">Pending</span></td>
-                                    {else if $test_order->status eq "O"}
+                                {else if $test_order->status eq "O"}
                                     <td><span class="label label-success">Ok</span></td>
                                 {else if $test_order->status eq "D"}
                                     <td><span class="label label-danger">Denied</span></td>
@@ -79,6 +79,9 @@
                                     <td><span class="label label-info">Finish</span></td>
                                 {/if}
                                 <td>Rp. {number_format($test_order->subtotal, '2', ',', '.')}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="6"><b>Penjelasan : </b>{$test_order->description}</td>
                             </tr>
                         {/foreach}
                     </tbody>
