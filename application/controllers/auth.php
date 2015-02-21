@@ -624,8 +624,9 @@ class Auth extends CI_Controller {
                 $this->form_validation->set_rules('province', 'Propinsi', 'required|xss_clean');
                 $this->form_validation->set_rules('state', 'Kabupaten/Kota', 'required|xss_clean');
                 $this->form_validation->set_rules('phone', 'Kabupaten/Kota', 'required|xss_clean');
-                $this->form_validation->set_rules('researcher', 'Kelompok Peneliti', 'required|xss_clean');
-                $this->form_validation->set_rules('research', 'Kelompok Penelitian', 'required|xss_clean');
+                $this->form_validation->set_rules('researcher', 'Deputi Bidang', 'required|xss_clean');
+                $this->form_validation->set_rules('research', 'Satuan Kerja', 'required|xss_clean');
+                $this->form_validation->set_rules('research_group', 'Kelompok Penelitian', 'required|xss_clean');
 
                 $member = $this->member->by_user_id($id);
                 $provinces = $this->province->get_all();
@@ -670,6 +671,13 @@ class Auth extends CI_Controller {
                         'rows' => 3,
                         'value' => !empty($member->address) ? $member->address : ""
                     );
+                    $data['research_group'] = array(
+                        'name' => 'research_group',
+                        'class' => 'form-control',
+                        'placeholder' => 'Kelompok Penelitian',
+                        'value' => !empty($member->research_group) ? $member->research_group : "",
+                        'type' => 'text'
+                    );
 
                     $this->basic_data();
                     $this->smartyci->assign('action', 'Ubah Informasi Pribadi');
@@ -697,7 +705,8 @@ class Auth extends CI_Controller {
                         'state_id' => $this->input->post('state'),
                         'phone' => $this->input->post('phone'),
                         'researcher_id' => $this->input->post('researcher'),
-                        'research_id' => $this->input->post('research')
+                        'research_id' => $this->input->post('research'),
+                        'research_group' => $this->input->post('research_group')
                     );
 
                     if ($this->input->post('oper') == "add") {

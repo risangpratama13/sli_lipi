@@ -126,9 +126,9 @@
                 {form_error('phone','<p class="help-block text-red">','</p>')}
             </div>
             <div class="form-group">
-                <label>Kelompok Peneliti</label>
+                <label>Deputi Bidang</label>
                 <select class="form-control" name="researcher" id="researcher">
-                    <option value="">-- Pilih Kelompok Peneliti --</option>
+                    <option value="">-- Pilih Deputi Bidang --</option>
                     {foreach $researchers as $researcher}
                         {if !empty($member)}
                             {if $member->researcher_id == $researcher->id}
@@ -144,9 +144,9 @@
                 {form_error('researcher','<p class="help-block text-red">','</p>')}
             </div>
             <div class="form-group">
-                <label>Kelompok Penelitian</label>
+                <label>Satuan Kerja</label>
                 <select class="form-control" name="research" id="research">
-                    <option value="">-- Pilih Kelompok Penelitian --</option>
+                    <option value="">-- Pilih Satuan Kerja --</option>
                     {foreach $researches as $research}
                         {if !empty($member)}
                             {if $member->research_id == $research->id}
@@ -160,6 +160,11 @@
                     {/foreach}
                 </select>
                 {form_error('research','<p class="help-block text-red">','</p>')}
+            </div>
+            <div class="form-group">
+                {form_label('Kelompok Penelitian', 'research_group')}
+                {form_input($data.research_group)}
+                {form_error('research_group','<p class="help-block text-red">','</p>')}
             </div>
         </div><!-- /.box-body -->
 

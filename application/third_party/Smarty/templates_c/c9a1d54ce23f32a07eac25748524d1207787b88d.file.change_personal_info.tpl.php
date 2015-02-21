@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-20 15:49:16
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-21 07:45:13
          compiled from "application\views\configuration\profile\change_personal_info.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:17557548a4ff06c6b70-79465444%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c9a1d54ce23f32a07eac25748524d1207787b88d' => 
     array (
       0 => 'application\\views\\configuration\\profile\\change_personal_info.tpl',
-      1 => 1418731892,
+      1 => 1424479509,
       2 => 'file',
     ),
     '68cc9180bc6fb0dd465914a3c57d03a07aa9bace' => 
@@ -326,9 +326,9 @@ $_smarty_tpl->tpl_vars['state']->_loop = true;
 
             </div>
             <div class="form-group">
-                <label>Kelompok Peneliti</label>
+                <label>Deputi Bidang</label>
                 <select class="form-control" name="researcher" id="researcher">
-                    <option value="">-- Pilih Kelompok Peneliti --</option>
+                    <option value="">-- Pilih Deputi Bidang --</option>
                     <?php  $_smarty_tpl->tpl_vars['researcher'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['researcher']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['researchers']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['researcher']->key => $_smarty_tpl->tpl_vars['researcher']->value) {
@@ -355,9 +355,9 @@ $_smarty_tpl->tpl_vars['researcher']->_loop = true;
 
             </div>
             <div class="form-group">
-                <label>Kelompok Penelitian</label>
+                <label>Satuan Kerja</label>
                 <select class="form-control" name="research" id="research">
-                    <option value="">-- Pilih Kelompok Penelitian --</option>
+                    <option value="">-- Pilih Satuan Kerja --</option>
                     <?php  $_smarty_tpl->tpl_vars['research'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['research']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['researches']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['research']->key => $_smarty_tpl->tpl_vars['research']->value) {
@@ -384,6 +384,14 @@ $_smarty_tpl->tpl_vars['research']->_loop = true;
                     <?php } ?>
                 </select>
                 <?php echo form_error('research','<p class="help-block text-red">','</p>');?>
+
+            </div>
+            <div class="form-group">
+                <?php echo form_label('Kelompok Penelitian','research_group');?>
+
+                <?php echo form_input($_smarty_tpl->tpl_vars['data']->value['research_group']);?>
+
+                <?php echo form_error('research_group','<p class="help-block text-red">','</p>');?>
 
             </div>
         </div><!-- /.box-body -->

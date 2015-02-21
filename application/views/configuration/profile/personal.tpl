@@ -65,12 +65,16 @@
                     <td>{if !empty($member)}{$member->phone}{/if}</td>
                 </tr>
                 <tr>
-                    <td>Kelompok Peneliti</td>
+                    <td>Deputi Bidang</td>
                     <td>{if !empty($member)}{$member->researcher_name}{/if}</td>
                 </tr>
                 <tr>
-                    <td>Kelompok Penelitian</td>
+                    <td>Satuan Kerja</td>
                     <td>{if !empty($member)}{$member->research_name}{/if}</td>
+                </tr>
+                <tr>
+                    <td>Kelompok Penelitian</td>
+                    <td>{if !empty($member)}{$member->research_group}{/if}</td>
                 </tr>
             {/if}
             <tr>

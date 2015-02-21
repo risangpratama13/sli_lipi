@@ -82,13 +82,17 @@
                                             <td>{if !empty($data_member)}{$data_member->phone}{/if}</td>
                                         </tr>
                                         <tr>
-                                            <td>Kelompok Peneliti</td>
+                                            <td>Deputi Bidang</td>
                                             <td>{if !empty($data_member)}{$data_member->researcher_name}{/if}</td>
                                         </tr>
                                         <tr>
-                                            <td>Kelompok Penelitian</td>
+                                            <td>Satuan Kerja</td>
                                             <td>{if !empty($data_member)}{$data_member->research_name}{/if}</td>
-                                        </tr>                                        
+                                        </tr>
+                                        <tr>
+                                            <td>Kelompok Penelitian</td>
+                                            <td>{if !empty($data_member)}{$data_member->research_group}{/if}</td>
+                                        </tr>
                                         <tr>
                                             <td>Terdaftar</td>
                                             <td>{date('j F Y H:i:s', $member->created_on)}</td>

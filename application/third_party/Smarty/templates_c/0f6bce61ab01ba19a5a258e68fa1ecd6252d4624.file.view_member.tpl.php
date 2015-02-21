@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 11:10:26
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-21 08:18:16
          compiled from "application\views\configuration\view_member.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:19196548fae117852b8-35474556%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0f6bce61ab01ba19a5a258e68fa1ecd6252d4624' => 
     array (
       0 => 'application\\views\\configuration\\view_member.tpl',
-      1 => 1418703023,
+      1 => 1424480307,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1418622047,
+      1 => 1423521212,
       2 => 'file',
     ),
   ),
@@ -174,17 +174,23 @@ echo $_smarty_tpl->tpl_vars['data_member']->value->phone;
 }?></td>
                                         </tr>
                                         <tr>
-                                            <td>Kelompok Peneliti</td>
+                                            <td>Deputi Bidang</td>
                                             <td><?php if (!empty($_smarty_tpl->tpl_vars['data_member']->value)) {
 echo $_smarty_tpl->tpl_vars['data_member']->value->researcher_name;
 }?></td>
                                         </tr>
                                         <tr>
-                                            <td>Kelompok Penelitian</td>
+                                            <td>Satuan Kerja</td>
                                             <td><?php if (!empty($_smarty_tpl->tpl_vars['data_member']->value)) {
 echo $_smarty_tpl->tpl_vars['data_member']->value->research_name;
 }?></td>
-                                        </tr>                                        
+                                        </tr>
+                                        <tr>
+                                            <td>Kelompok Penelitian</td>
+                                            <td><?php if (!empty($_smarty_tpl->tpl_vars['data_member']->value)) {
+echo $_smarty_tpl->tpl_vars['data_member']->value->research_group;
+}?></td>
+                                        </tr>
                                         <tr>
                                             <td>Terdaftar</td>
                                             <td><?php echo date('j F Y H:i:s',$_smarty_tpl->tpl_vars['member']->value->created_on);?>
@@ -255,8 +261,10 @@ $_smarty_tpl->tpl_vars['operator']->_loop = true;
         <!-- End Modal -->
         
         <!-- jQuery 2.0.2 -->
+
         <?php echo '<script'; ?>
- src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"><?php echo '</script'; ?>
+ src="<?php echo base_url();?>
+asset/js/jquery-2.0.2.min.js"><?php echo '</script'; ?>
 >
         <!-- Bootstrap -->
         <?php echo '<script'; ?>

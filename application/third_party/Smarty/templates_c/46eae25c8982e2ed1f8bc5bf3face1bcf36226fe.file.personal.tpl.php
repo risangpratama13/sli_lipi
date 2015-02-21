@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-10 16:33:19
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-21 08:00:03
          compiled from "application\views\configuration\profile\personal.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:307235489837a29c369-09293533%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '46eae25c8982e2ed1f8bc5bf3face1bcf36226fe' => 
     array (
       0 => 'application\\views\\configuration\\profile\\personal.tpl',
-      1 => 1418731892,
+      1 => 1424480396,
       2 => 'file',
     ),
     '68cc9180bc6fb0dd465914a3c57d03a07aa9bace' => 
@@ -222,15 +222,21 @@ echo $_smarty_tpl->tpl_vars['member']->value->phone;
 }?></td>
                 </tr>
                 <tr>
-                    <td>Kelompok Peneliti</td>
+                    <td>Deputi Bidang</td>
                     <td><?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {
 echo $_smarty_tpl->tpl_vars['member']->value->researcher_name;
 }?></td>
                 </tr>
                 <tr>
-                    <td>Kelompok Penelitian</td>
+                    <td>Satuan Kerja</td>
                     <td><?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {
 echo $_smarty_tpl->tpl_vars['member']->value->research_name;
+}?></td>
+                </tr>
+                <tr>
+                    <td>Kelompok Penelitian</td>
+                    <td><?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {
+echo $_smarty_tpl->tpl_vars['member']->value->research_group;
 }?></td>
                 </tr>
             <?php }?>
