@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 00:02:23
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-21 02:33:44
          compiled from "application\views\testing\add_test.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2717548f61712e32c1-62855273%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b16d12e69d7a3c9be923075cb599d5b9ee2ab7fa' => 
     array (
       0 => 'application\\views\\testing\\add_test.tpl',
-      1 => 1418684541,
+      1 => 1418962726,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1418622047,
+      1 => 1423521212,
       2 => 'file',
     ),
   ),
@@ -78,7 +78,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <section class="content-header">
         <h1>
             Pengujian
-            <small>Daftar Pengujian</small>
+            <small>Tambah Pengujian</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
@@ -110,7 +110,7 @@ pengujian">Daftar Pengujian</a></li>
                         </div>
                         <div class="form-group">                            
                             <label for="category">Kategori Pengujian</label>
-                            <?php echo smarty_function_html_options(array('name'=>'category','options'=>$_smarty_tpl->tpl_vars['kategori']->value,'class'=>'form'-'control'),$_smarty_tpl);?>
+                            <?php echo smarty_function_html_options(array('name'=>'category','options'=>$_smarty_tpl->tpl_vars['kategori']->value),$_smarty_tpl);?>
                        
                         </div>
                         <div class="form-group">
@@ -127,7 +127,7 @@ pengujian">Daftar Pengujian</a></li>
                         </div>
                         <div class="form-group">                            
                             <label for="unit">Satuan (Per)</label>
-                            <?php echo smarty_function_html_options(array('name'=>'unit','options'=>$_smarty_tpl->tpl_vars['satuan']->value,'class'=>'form'-'control'),$_smarty_tpl);?>
+                            <?php echo smarty_function_html_options(array('name'=>'unit','options'=>$_smarty_tpl->tpl_vars['satuan']->value),$_smarty_tpl);?>
                          
                         </div>
                     </div><!-- /.box-body -->
@@ -150,8 +150,10 @@ pengujian">Daftar Pengujian</a></li>
         <!-- End Modal -->
         
         <!-- jQuery 2.0.2 -->
+
         <?php echo '<script'; ?>
- src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"><?php echo '</script'; ?>
+ src="<?php echo base_url();?>
+asset/js/jquery-2.0.2.min.js"><?php echo '</script'; ?>
 >
         <!-- Bootstrap -->
         <?php echo '<script'; ?>

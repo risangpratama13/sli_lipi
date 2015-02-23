@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-27 07:07:10
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-23 11:59:22
          compiled from "application\views\account\form_item.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:173035492119672c1f5-49354121%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'e8a808f2a2f2a2d130823bf17e160cd67163f71e' => 
     array (
       0 => 'application\\views\\account\\form_item.tpl',
-      1 => 1419637337,
+      1 => 1424667424,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1418622047,
+      1 => 1423521212,
       2 => 'file',
     ),
   ),
@@ -163,6 +163,14 @@ $_smarty_tpl->tpl_vars['message']->_loop = true;
 
                                 <?php }?>                                                       
                             </div>
+                            <div class="form-group">
+                                <?php echo form_label('Jumlah Penulis','author_num');?>
+
+                                <?php echo form_input($_smarty_tpl->tpl_vars['data']->value['author_num']);?>
+
+                                <?php echo form_error('author_num','<p class="help-block text-red">','</p>');?>
+
+                            </div>
                             <label>Upload Berkas Atau Masukkan URL Berkas</label>                                
                             <div class="row">
                                 <div class="col-lg-6">
@@ -215,8 +223,10 @@ $_smarty_tpl->tpl_vars['message']->_loop = true;
         <!-- End Modal -->
         
         <!-- jQuery 2.0.2 -->
+
         <?php echo '<script'; ?>
- src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"><?php echo '</script'; ?>
+ src="<?php echo base_url();?>
+asset/js/jquery-2.0.2.min.js"><?php echo '</script'; ?>
 >
         <!-- Bootstrap -->
         <?php echo '<script'; ?>
@@ -239,6 +249,21 @@ asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
             $("#paper").change(function () {
                 $("#paper_path").val($("#paper").val());
             });
+        });
+    <?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ type="text/javascript">
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
+        
+        $(document).ready(function () {
+            $("select").attr("class", "form-control");
         });
     <?php echo '</script'; ?>
 >

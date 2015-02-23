@@ -55,6 +55,7 @@ class Account extends CI_Controller {
 
         if ($this->ion_auth->in_group(2)) {
             $this->form_validation->set_rules('item_title', 'Judul Paper', 'required|xss_clean');
+            $this->form_validation->set_rules('author_num', 'Jumlah Penulis', 'required|xss_clean');
 
             $user = $this->ion_auth->user()->row();
             if ($this->form_validation->run() == true) {
@@ -87,6 +88,7 @@ class Account extends CI_Controller {
                     'user_id' => $user->id,
                     'item_title' => $this->input->post('item_title'),
                     'item_type_id' => $this->input->post('item_type'),
+                    'author_num' => $this->input->post('author_num'),
                     'url' => $url,
                     'description' => $this->input->post('description')
                 );
@@ -105,6 +107,15 @@ class Account extends CI_Controller {
                     'name' => 'item_title',
                     'class' => 'form-control',
                     'placeholder' => 'Judul Paper'
+                );
+
+                $data['author_num'] = array(
+                'name' => 'author_num',
+                'type' => 'number',
+                'class' => 'form-control',
+                'placeholder' => 'Jumlah Penulis',
+                'min' => 1,
+                'onkeypress' => 'return isNumberKey(event)'                
                 );
 
                 $data['description'] = array(
@@ -144,6 +155,7 @@ class Account extends CI_Controller {
 
         if ($this->ion_auth->in_group(2)) {
             $this->form_validation->set_rules('item_title', 'Judul Paper', 'required|xss_clean');
+            $this->form_validation->set_rules('author_num', 'Jumlah Penulis', 'required|xss_clean');
 
             $user = $this->ion_auth->user()->row();
             if ($this->form_validation->run() == true) {
@@ -177,6 +189,7 @@ class Account extends CI_Controller {
                     'item_title' => $this->input->post('item_title'),
                     'item_type_id' => $this->input->post('item_type'),
                     'url' => $url,
+                    'author_num' => $this->input->post('author_num'),
                     'description' => $this->input->post('description')
                 );
 
@@ -196,6 +209,16 @@ class Account extends CI_Controller {
                     'class' => 'form-control',
                     'placeholder' => 'Judul Paper',
                     'value' => $item->item_title
+                );
+                
+                $data['author_num'] = array(
+                'name' => 'author_num',
+                'type' => 'number',
+                'class' => 'form-control',
+                'placeholder' => 'Jumlah Penulis',
+                'min' => 1,
+                'onkeypress' => 'return isNumberKey(event)', 
+                'value' => $item->author_num
                 );
 
                 $data['description'] = array(

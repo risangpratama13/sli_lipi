@@ -76,6 +76,11 @@
                                     {html_options name=item_type options=$kategori selected=$data.select_option}
                                 {/if}                                                       
                             </div>
+                            <div class="form-group">
+                                {form_label('Jumlah Penulis', 'author_num')}
+                                {form_input($data.author_num)}
+                                {form_error('author_num','<p class="help-block text-red">','</p>')}
+                            </div>
                             <label>Upload Berkas Atau Masukkan URL Berkas</label>                                
                             <div class="row">
                                 <div class="col-lg-6">
@@ -122,6 +127,19 @@
             $("#paper").change(function () {
                 $("#paper_path").val($("#paper").val());
             });
+        });
+    </script>
+    <script type="text/javascript">
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
+        
+        $(document).ready(function () {
+            $("select").attr("class", "form-control");
         });
     </script>
 {/block}

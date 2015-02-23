@@ -30,9 +30,15 @@
                                     {form_label('Nama Pengujian', 'pengujian')}
                                     <input type="text" name="pengujian" value="{$test->testing_name}" class="form-control" disabled="disabled">
                                 </div>
-                                <div class="form-group">                            
+                                <div class="row">
+                                <div class="form-group col-md-6">                            
                                     {form_label('Jumlah Pengujian', 'qty')}
                                     {form_input($qty)}                       
+                                </div>
+                                <div class="form-group col-md-6">                            
+                                    {form_label('Satuan Pengujian', 'unit')}
+                                    <input type="text" name="pengujian" value="{$test->unit_name}" class="form-control" disabled="disabled">                      
+                                </div>
                                 </div>
                                 <div class="form-group">
                                     {form_label('Pilih Operator', 'operator')}                            
