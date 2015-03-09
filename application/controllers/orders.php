@@ -132,6 +132,7 @@ class Orders extends CI_Controller {
                     'description' => $description,
                     'price' => $test->testing_price,
                     'name' => $test->testing_name,
+                    'unit' => $test->unit_name,
                     'options' => array('operator' => $operator_id, 'operator_name' => $operator->full_name)
                 );
                 $this->cart->insert($data);

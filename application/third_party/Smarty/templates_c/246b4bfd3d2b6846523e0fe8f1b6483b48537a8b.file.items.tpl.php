@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-10 05:35:57
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-23 12:36:31
          compiled from "application\views\account\items.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:12181549210bca81cf2-84654804%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '246b4bfd3d2b6846523e0fe8f1b6483b48537a8b' => 
     array (
       0 => 'application\\views\\account\\items.tpl',
-      1 => 1418962726,
+      1 => 1424669786,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -114,6 +114,7 @@ tambah_item" class="btn btn-flat btn-primary">
                                         <?php }?>
                                     <th>Judul Paper</th>
                                     <th>Kategori</th>
+                                    <th>Jumlah Penulis</th>
                                     <th>Tanggal Upload</th>
                                     <th>Poin</th>
                                     <th>Status</th>
@@ -141,9 +142,12 @@ $_smarty_tpl->tpl_vars['item']->_loop = true;
 </a></td>
                                         <td><?php echo $_smarty_tpl->tpl_vars['item']->value->type_name;?>
 </td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['item']->value->author_num;?>
+</td>
                                         <td><?php echo date('j F Y H:i:s',strtotime($_smarty_tpl->tpl_vars['item']->value->upload_date));?>
 </td>
                                         <td><?php echo $_smarty_tpl->tpl_vars['item']->value->type_point;?>
+/<?php echo $_smarty_tpl->tpl_vars['item']->value->author_num;?>
 </td>
                                         <td>
                                             <?php if ($_smarty_tpl->tpl_vars['item']->value->status=="O") {?>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-10 05:34:23
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-21 08:29:30
          compiled from "application\views\layouts\menu_admin.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:16035548714f01505b9-17899961%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f151c3e8c2764cc3ccd8e3aecd1c874f844230b4' => 
     array (
       0 => 'application\\views\\layouts\\menu_admin.tpl',
-      1 => 1423521212,
+      1 => 1424482166,
       2 => 'file',
     ),
   ),
@@ -50,7 +50,7 @@ tool"><i class="fa fa-angle-double-right"></i> Alat Pengujian</a></li>
     <li>
         <a href="<?php echo base_url();?>
 item">
-            <i class="fa fa-files-o"></i> <span>Item</span>
+            <i class="fa fa-files-o"></i> <span>Pengajuan Saldo</span>
         </a>
     </li>
     <li class="treeview">

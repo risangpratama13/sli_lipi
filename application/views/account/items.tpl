@@ -36,6 +36,7 @@
                                         {/if}
                                     <th>Judul Paper</th>
                                     <th>Kategori</th>
+                                    <th>Jumlah Penulis</th>
                                     <th>Tanggal Upload</th>
                                     <th>Poin</th>
                                     <th>Status</th>
@@ -55,8 +56,9 @@
                                         {/if}
                                         <td><a href="{$url}" target="_blank">{$item->item_title}</a></td>
                                         <td>{$item->type_name}</td>
+                                        <td>{$item->author_num}</td>
                                         <td>{date('j F Y H:i:s', strtotime($item->upload_date))}</td>
-                                        <td>{$item->type_point}</td>
+                                        <td>{$item->type_point}/{$item->author_num}</td>
                                         <td>
                                             {if $item->status eq "O"}
                                                 <span class="label label-success">Ok</span>

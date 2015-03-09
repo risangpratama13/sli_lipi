@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-20 10:42:49
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-23 10:32:15
          compiled from "application\views\order\add_cart.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:109255497543e15a5d7-15919826%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b17daa969a65dc6c88b3614bbd193396deb3c65e' => 
     array (
       0 => 'application\\views\\order\\add_cart.tpl',
-      1 => 1424403127,
+      1 => 1424662331,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -108,11 +108,19 @@ tambah_order">Buat Pengajuan Pengujian</a></li>
                                     <input type="text" name="pengujian" value="<?php echo $_smarty_tpl->tpl_vars['test']->value->testing_name;?>
 " class="form-control" disabled="disabled">
                                 </div>
-                                <div class="form-group">                            
+                                <div class="row">
+                                <div class="form-group col-md-6">                            
                                     <?php echo form_label('Jumlah Pengujian','qty');?>
 
                                     <?php echo form_input($_smarty_tpl->tpl_vars['qty']->value);?>
                        
+                                </div>
+                                <div class="form-group col-md-6">                            
+                                    <?php echo form_label('Satuan Pengujian','unit');?>
+
+                                    <input type="text" name="pengujian" value="<?php echo $_smarty_tpl->tpl_vars['test']->value->unit_name;?>
+" class="form-control" disabled="disabled">                      
+                                </div>
                                 </div>
                                 <div class="form-group">
                                     <?php echo form_label('Pilih Operator','operator');?>

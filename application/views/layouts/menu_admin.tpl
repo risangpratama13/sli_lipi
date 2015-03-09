@@ -19,7 +19,7 @@
     </li>
     <li>
         <a href="{base_url()}item">
-            <i class="fa fa-files-o"></i> <span>Item</span>
+            <i class="fa fa-files-o"></i> <span>Pengajuan Saldo</span>
         </a>
     </li>
     <li class="treeview">
