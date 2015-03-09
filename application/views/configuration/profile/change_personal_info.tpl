@@ -70,7 +70,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" name="birthday" class="form-control" value="{(!empty($member->birthday)) ? $member->birthday : ""}" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask/>
+                    <input type="text" name="birthday" class="form-control" value="{($member->birthday != "0000-00-00") ? $member->birthday : ""}" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask/>
                 </div>
                 {form_error('birthday','<p class="help-block text-red">','</p>')}
             </div>
@@ -162,12 +162,24 @@
                 {form_error('research','<p class="help-block text-red">','</p>')}
             </div>
             <div class="form-group">
-                {form_label('Kelompok Penelitian', 'research_group')}
-                {form_input($data.research_group)}
+                <label>Kelompok Penelitian</label>
+                <select class="form-control" name="research_group" id="research_group">
+                    <option value="">-- Pilih Kelompok Penelitian --</option>
+                    {foreach $research_groups as $research_group}
+                        {if !empty($member)}
+                            {if $member->research_group_id == $research_group->id}
+                                <option value="{$research_group->id}" class="{$research_group->researcher_id}\{$research_group->research_id}" selected>{$research_group->res_group_name}</option>
+                            {else}
+                                <option value="{$research_group->id}" class="{$research_group->researcher_id}\{$research_group->research_id}">{$research_group->res_group_name}</option>
+                            {/if}
+                        {else}
+                            <option value="{$research_group->id}" class="{$research_group->researcher_id}\{$research_group->research_id}">{$research_group->res_group_name}</option>
+                        {/if}                                                                           
+                    {/foreach}
+                </select>
                 {form_error('research_group','<p class="help-block text-red">','</p>')}
             </div>
-        </div><!-- /.box-body -->
-
+        </div>
         <div class="box-footer">
             {form_submit('submit', "Simpan Informasi Pribadi", 'class="btn btn-warning"')}
         </div>
@@ -188,6 +200,7 @@
             $("[data-mask]").inputmask();
             $("#state").chained("#province");
             $("#research").chained("#researcher");
+            $("#research_group").chained("#researcher, #research");
         });
     </script>
 {/block}

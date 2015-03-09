@@ -1,0 +1,14 @@
++++++++++++++++++++++++++++ test_order +++++++++++++++++++++++++++++
+1. create new field
+   "description", type text, default.
+
+
+++++++++++++++++++++++++++++ members +++++++++++++++++++++++++++++++
+1. create new field
+   "research_group", type text, default.
+
+
++++++++++++++++++++++++++++++ items ++++++++++++++++++++++++++++++++
+1. create new field
+   "author_num", type int, default.
+

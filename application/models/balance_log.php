@@ -13,4 +13,8 @@ class Balance_log extends CI_Model {
         return $query->result();
     }
     
+    function save($data) {
+        return $this->db->insert($this->table, $data);
+    }
+    
 }

@@ -66,7 +66,22 @@ class Test_order extends CI_Model {
         } else {
             return $this->db->count_all_results($this->table);
         }
-    }    
+    }
+    
+    function find_bystatus($status = array()) {
+        $this->db->select('test_orders.*, tests.testing_name, m.full_name as anggota, o.full_name as operator');
+        $this->db->from($this->table);
+        $this->db->join('orders','orders.id = test_orders.order_id');
+        $this->db->join('tests','tests.id = test_orders.test_id');
+        $this->db->join('operators','operators.id = test_orders.operator_id');
+        $this->db->join('users m','orders.user_id = m.id');
+        $this->db->join('users o','operators.user_id = o.id');
+        foreach ($status as $stat => $value) {
+            $this->db->or_where('test_orders.status', $value);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
     
     function save($data) {
         return $this->db->insert($this->table, $data);

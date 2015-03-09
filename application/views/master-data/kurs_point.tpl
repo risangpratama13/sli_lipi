@@ -4,12 +4,12 @@
     <section class="content-header">
         <h1>
             Master Data
-            <small>Kurs Poin</small>
+            <small>Konfigurasi Poin</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
             <li><a href="#">Master Data</a></li>
-            <li class="active"><a href="{base_url()}kurs_point">Kurs Poin</a></li>
+            <li class="active"><a href="{base_url()}config_point">Konfigurasi Poin</a></li>
         </ol>
     </section>
 
@@ -50,7 +50,7 @@
                         <i class="fa fa-edit"></i>
                         <h3 class="box-title">Ubah Kurs Poin</h3>
                     </div><!-- /.box-header -->
-                    {form_open('master/kurs_point')}
+                    {form_open('master/config_point')}
                     <div class="box-body">
                         <label for="idr">Nilai Tukar Rupiah</label>                            
                         <div class="input-group">
@@ -61,7 +61,7 @@
                         {form_error('idr','<p class="help-block text-red">','</p>')}
                     </div><!-- /.box-body -->
                     <div class="box-footer">
-                        {form_submit('submit', "Ubah Kurs", 'class="btn btn-flat btn-warning"')}
+                        {form_submit('ubah_kurs', "Ubah Kurs", 'class="btn btn-flat btn-warning"')}
                     </div>
                     {form_close()}
                 </div><!-- /.box -->
@@ -86,6 +86,51 @@
                             <span class="input-group-addon">.00</span>                            
                         </div>
                     </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div><!-- ./col -->
+        </div><!-- /.row -->
+        <div class="row">                
+            <div class="col-md-6">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <i class="fa fa-money"></i>
+                        <h3 class="box-title">Saldo Awal Anggota</h3>
+                    </div><!-- /.box-header -->
+                    {form_open('master/config_point')}
+                    <div class="box-body">
+                        <label for="init_saldo">Saldo Awal</label>                            
+                        <div class="input-group">
+                            <span class="input-group-addon">Rp</span>
+                            {form_input($form_init_saldo)}
+                            <span class="input-group-addon">.00</span>                            
+                        </div>
+                        {form_error('init_saldo','<p class="help-block text-red">','</p>')}
+                    </div><!-- /.box-body -->
+                    <div class="box-footer">
+                        {form_submit('ubah_init_saldo', "Ubah Saldo Awal", 'class="btn btn-flat btn-warning"')}
+                    </div>
+                    {form_close()}
+                </div><!-- /.box -->
+            </div><!-- ./col -->
+            <div class="col-md-6">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <i class="fa fa-ruble"></i>
+                        <h3 class="box-title">Persentase Poin Operator</h3>
+                    </div><!-- /.box-header -->
+                    {form_open('master/config_point')}
+                    <div class="box-body">
+                        <label for="test_percent">Persentase Poin</label>                            
+                        <div class="input-group">
+                            {form_input($form_test_percent)}
+                            <span class="input-group-addon">%</span>                            
+                        </div>
+                        {form_error('test_percent','<p class="help-block text-red">','</p>')}
+                    </div><!-- /.box-body -->
+                    <div class="box-footer">
+                        {form_submit('ubah_test_percent', "Ubah Persentase Poin", 'class="btn btn-flat btn-warning"')}
+                    </div>
+                    {form_close()}
                 </div><!-- /.box -->
             </div><!-- ./col -->
         </div><!-- /.row -->

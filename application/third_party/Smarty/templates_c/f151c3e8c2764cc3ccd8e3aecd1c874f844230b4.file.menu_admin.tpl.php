@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-21 08:29:30
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-07 10:34:54
          compiled from "application\views\layouts\menu_admin.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:16035548714f01505b9-17899961%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f151c3e8c2764cc3ccd8e3aecd1c874f844230b4' => 
     array (
       0 => 'application\\views\\layouts\\menu_admin.tpl',
-      1 => 1424482166,
+      1 => 1425699172,
       2 => 'file',
     ),
   ),
@@ -38,7 +38,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         </a>
         <ul class="treeview-menu">            
             <li><a href="<?php echo base_url();?>
-kurs_point"><i class="fa fa-angle-double-right"></i> Kurs Poin</a></li>     
+research_group"><i class="fa fa-angle-double-right"></i> Kelompok Penelitian</a></li>     
+            <li><a href="<?php echo base_url();?>
+config_point"><i class="fa fa-angle-double-right"></i> Konfigurasi Poin</a></li>     
             <li><a href="<?php echo base_url();?>
 tipe_item"><i class="fa fa-angle-double-right"></i> Kategori Item</a></li>
             <li><a href="<?php echo base_url();?>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 00:06:50
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-08 00:29:51
          compiled from "application\views\testing\edit_test.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:32524548f67ab399c16-31635350%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '5490764e7cf293957c1d07ca3892d7f325650ea3' => 
     array (
       0 => 'application\\views\\testing\\edit_test.tpl',
-      1 => 1418684807,
+      1 => 1425770981,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1418622047,
+      1 => 1423218267,
       2 => 'file',
     ),
   ),
@@ -78,7 +78,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <section class="content-header">
         <h1>
             Pengujian
-            <small>Daftar Pengujian</small>
+            <small>Ubah Pengujian</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
@@ -97,7 +97,8 @@ pengujian">Daftar Pengujian</a></li>
                     <div class="box-header">
                         <h3 class="box-title">Ubah Pengujian</h3>
                     </div><!-- /.box-header -->
-                    <?php echo form_open('testing/edit_pengujian');?>
+                    <?php $_smarty_tpl->tpl_vars['url'] = new Smarty_variable("testing/edit_pengujian/".((string)$_smarty_tpl->tpl_vars['test']->value->id), null, 0);?>
+                    <?php echo form_open($_smarty_tpl->tpl_vars['url']->value);?>
 
                     <?php echo form_hidden('id',$_smarty_tpl->tpl_vars['test']->value->id);?>
 
@@ -152,8 +153,10 @@ pengujian">Daftar Pengujian</a></li>
         <!-- End Modal -->
         
         <!-- jQuery 2.0.2 -->
+
         <?php echo '<script'; ?>
- src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"><?php echo '</script'; ?>
+ src="<?php echo base_url();?>
+asset/js/jquery-2.0.2.min.js"><?php echo '</script'; ?>
 >
         <!-- Bootstrap -->
         <?php echo '<script'; ?>

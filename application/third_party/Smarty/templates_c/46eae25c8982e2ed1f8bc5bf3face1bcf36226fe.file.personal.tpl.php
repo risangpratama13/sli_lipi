@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-21 08:00:03
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-09 06:55:30
          compiled from "application\views\configuration\profile\personal.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:307235489837a29c369-09293533%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,19 +7,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '46eae25c8982e2ed1f8bc5bf3face1bcf36226fe' => 
     array (
       0 => 'application\\views\\configuration\\profile\\personal.tpl',
-      1 => 1424480396,
+      1 => 1425858922,
       2 => 'file',
     ),
     '68cc9180bc6fb0dd465914a3c57d03a07aa9bace' => 
     array (
       0 => 'application\\views\\configuration\\profile\\profile.tpl',
-      1 => 1418400418,
+      1 => 1418338325,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1423521212,
+      1 => 1423218267,
       2 => 'file',
     ),
   ),
@@ -180,7 +180,7 @@ profil/ubah_password"><i class="fa fa-unlock"></i> Ubah Password</a></li>
                 <tr>
                     <td>Golongan/Jabatan</td>
                     <td>
-                        <?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {?>
+                        <?php if (!empty($_smarty_tpl->tpl_vars['member']->value->category)) {?>
                             <?php echo $_smarty_tpl->tpl_vars['member']->value->category;?>
 /<?php echo $_smarty_tpl->tpl_vars['member']->value->position;?>
 
@@ -190,7 +190,7 @@ profil/ubah_password"><i class="fa fa-unlock"></i> Ubah Password</a></li>
                 <tr>
                     <td>Tempat Tanggal Lahir</td>
                     <td>
-                        <?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {?>
+                        <?php if (!empty($_smarty_tpl->tpl_vars['member']->value->birthplace)) {?>
                             <?php echo $_smarty_tpl->tpl_vars['member']->value->birthplace;?>
 , <?php echo date('j F Y',strtotime($_smarty_tpl->tpl_vars['member']->value->birthday));?>
 
@@ -236,7 +236,7 @@ echo $_smarty_tpl->tpl_vars['member']->value->research_name;
                 <tr>
                     <td>Kelompok Penelitian</td>
                     <td><?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {
-echo $_smarty_tpl->tpl_vars['member']->value->research_group;
+echo $_smarty_tpl->tpl_vars['member']->value->res_group_name;
 }?></td>
                 </tr>
             <?php }?>

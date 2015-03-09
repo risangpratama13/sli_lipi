@@ -1,0 +1,133 @@
+1. kalender kegiatan pengujian. (DONE)
+   isinya informasi tentang jadwal kegiatan pengujian yang sudah disetujui oleh operator.
+  
+   alternatif -> tabel kegitan pengujian
+  
+   hak akses semua user (admin - klien - operator)
+
+   priority -> MEDIUM
+
+2. alat pengujian
+   menampilkan seluruh alat pengujian yang diperlukan.
+   jika alat sudah terpakai, tetap di tampilkan. tapi diinformasikan alat dipakai oleh operator siapa.
+
+   alternatif -> 1. tetap di tampilkan namun di kasih pembeda.
+		 2. tetap di tampilkan namun quantity nya nol (0).
+
+   priority -> MEDIUM
+
+ 
+3. tambah kolom keterangan di setiap pengujian (DONE)
+   fungsinya untuk memberitahukan kepada operator tentang pengujian yang dilakukan.
+
+   alternatif -> tanpa ada kolom keterangan
+
+   priority -> LOW 
+
+4. Konfigurasi saldo awal untuk semua member, saldo awal 16jt untuk semua member. (DONE)
+   Tambahakan menu konfigurasi saldo awal agar admin dapat merubah saldo awal yang akan diberikan ke member baru.
+   hak akses administrator.
+
+   priority -> HIGH 
+
+5. Notifikasi mininun saldo
+   Tambahkan menu konfigurasi minimal saldo, ketika ada user yang dibawah saldo minimum
+   system akan memberikan notifikasi untuk segera menambahkan saldo.
+
+   priority -> LOW
+
+6. Statistik penggunaan alat. Satuan jam.
+   Tambahkan menu statistik yang berisi seberapa lama alat sudah digunakan untuk kegiatan pengujian dalam satuan jam.
+   Hasil statistik berupa diagram atau grafik.
+ 
+   hak akses administrator, operator
+
+   proirity -> MEDIUM
+	
+7. Statistik banyaknya operator. Satuan pengujian.
+   Tambahkan menu statistik yang berisi seberapa lama alat sudah digunakan untuk kegiatan pengujian dalam satuan jam.
+   Hasil statistik berupa diagram atau grafik.
+   
+   hak akses administrator, operator
+
+   priority -> MEDIUM
+
+8. notifikasi operator klo ada pengujian.
+   memberikan notifikasi kepada operator bahwa ada tugas pengujian yang harus di selesaikan.
+
+   priority -> LOW
+
+9. Perubahan role di pengajuan saldo (item) (DONE)
+   harus ditambahkan kolom jumlah penulis.
+   misalkan user A, dalam sebuah jurnal internasional dibuat oleh 4 orang termasuk dia,
+   maka total poin yang di dapat adalah poin jurnal dibagi dengan seluruh jumlah pembuat jurnal (4 orang).
+
+   priority -> HIGH
+
+10. perubahan susunan dan nama menu (DONE)
+    susunan menu menjadi :
+    + HOME
+    + PROFILE
+    + SALDO
+     - RINCIAN SALDO
+     - TAMBAH SALDO -> sebelumnya menu ITEM
+    + PENGUJIAN
+     - PENGAJUAN PENGUJIAN -> sebelumnya menu KERANJANG BELANJA
+     - DAFTAR PENGUJIAN
+     - KEGIATAN PENGUJIAN
+    
+    priority -> HIGH
+	
+11. informasi pribadi (ubah profile)
+    "Kelompok peneliti" diubah menjadi "DEPUTI BIDANG" dan berpengaruh dalam pemilihan satuan kerja.
+    
+    + DEPUTI BIDANG ILMU KEBUMIAN
+     - Pusat Penelitian Geoteknologi
+     - Pusat Penelitian Oseanografi
+     - Pusat Penelitian Limnologi
+     - Pusat Penelitian Metalurgi dan Material
+     - Pusat Penelitian Laut Dalam
+     - UPT Loka Konservasi Biota Laut Bitung
+     - UPT Loka Konservasi Biota Laut Biak
+     - UPT Loka Konservasi Biota Laut Tual
+     - UPT Loka Pengembangan Kompetensi Sumber Daya Manusia Oseanografi Pulau Pari
+     - UPT Loka Pengembangan Bio Industri Laut Mataram
+     - UPT Loka Uji Teknik Penambangan Jampang Kulon
+     - UPT Loka Uji Teknik Penambangan dan Mitigasi Bencana Liwa
+     - UPT Balai Informasi dan Konservasi Kebumian Karangsambung
+    
+
+    + DEPUTI BIDANG ILMU PENGETAHUAN HAYATI
+     - Pusat Penelitian Biologi
+     - Pusat Penelitian Bioteknologi
+     - Pusat Konservasi Tumbuhan Kebun Raya
+     - Pusat Penelitian Biomaterial
+     - UPT Balai Konservasi Tumbuhan Kebun Raya Cibodas
+     - UPT Balai Konservasi Tumbuhan Kebun Raya Purwodadi
+     - UPT Balai Konservasi Tumbuhan Kebun Raya Eka Karya Bali
+
+    + DEPUTI BIDANG ILMU PENGETAHUAN TEKNIK
+     - Pusat Penelitian Fisika
+     - Pusat Penelitian Kimia
+     - Pusat Penelitian Informatika
+     - Pusat Penelitian Tenaga Listrik dan Mekatronik
+     - Pusat Penelitian Elektronika dan Telekomunikasi
+     - Pusat Pengembangan Teknologi Tepat Guna
+     - UPT Loka Pengembangan Signal dan Navigasi Ranggamalela
+     - UPT Balai Pengembangan Proses dan Teknologi Kimia Gunung Kidul
+     - UPT Balai Pengolahan Mineral Tanjung Bintang
+    
+
+    + DEPUTI BIDANG JASA ILMIAH
+     - Pusat Penelitian Metrologi
+     - Pusat Penelitian Sistem Mutu dan Teknologi Pengujian
+     - Pusat Dokumentasi dan Informasi Ilmiah
+     - Pusat Inovasi
+     - UPT Balai Pengembangan Instrumentasi Bandung
+     - UPT Balai Informasi Teknologi Bandung
+     - UPT Balai Media dan Reproduksi (LIPI Press) Jakarta
+
+
+    "kelompok penelitian" diubah menjadi tidak dropdown, inputan text biasa.
+
+     priority -> HIGH

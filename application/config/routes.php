@@ -59,9 +59,12 @@ $route['profil/ubah_password'] = "auth/account_setting/change_password";
 $route['anggota/(:any)'] = "auth/view_member/$1";
 
 $route['unit'] = "master/units";
-$route['kurs_point'] = "master/kurs_point";
+$route['config_point'] = "master/config_point";
 $route['tipe_item'] = "master/item_types";
 $route['tool'] = "master/tools";
+$route['research_group'] = "master/research_group";
+$route['research_group/add'] = "master/add_research_group";
+$route['research_group/edit/(:num)'] = "master/edit_research_group/$1";
 
 $route['item'] = "account/items";
 $route['tambah_item'] = "account/add_item";

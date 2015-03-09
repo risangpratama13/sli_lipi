@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-10 05:34:22
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-25 06:58:59
          compiled from "application\views\index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:218035487144de015c5-93114714%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,19 +7,25 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f20be9d75da2a5d3a1584a5f4d0ef20be7f26100' => 
     array (
       0 => 'application\\views\\index.tpl',
-      1 => 1419734732,
+      1 => 1424822289,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1423521212,
+      1 => 1423218267,
       2 => 'file',
     ),
     '668c70bfc32ed27c742429d00bb2307df1fd048a' => 
     array (
       0 => 'application\\views\\home\\tiles.tpl',
-      1 => 1419814148,
+      1 => 1419810908,
+      2 => 'file',
+    ),
+    '7202f9f1429e60929a78ae6918663660915b620d' => 
+    array (
+      0 => 'application\\views\\home\\calendar.tpl',
+      1 => 1424821898,
       2 => 'file',
     ),
   ),
@@ -51,6 +57,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
         <!-- Addons Style -->
         
+    <?php echo link_tag('asset/css/fullcalendar/fullcalendar.css');?>
+
+    <?php echo link_tag('asset/css/fullcalendar/fullcalendar.print.css');?>
+
+
         <!-- Theme style -->
         <?php echo link_tag('asset/css/sli_lipi.css');?>
 
@@ -95,10 +106,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <?php /*  Call merged included template "home/tiles.tpl" */
 $_tpl_stack[] = $_smarty_tpl;
  $_smarty_tpl = $_smarty_tpl->setupInlineSubTemplate('home/tiles.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0, '218035487144de015c5-93114714');
-content_54d935eec224a4_22317477($_smarty_tpl);
+content_54ed1043c843b4_24390636($_smarty_tpl);
 $_smarty_tpl = array_pop($_tpl_stack); 
-/*  End of included template "home/tiles.tpl" */?>
+/*  End of included template "home/tiles.tpl" */?>            
         </div><!-- /.row -->
+        <?php /*  Call merged included template "home/calendar.tpl" */
+$_tpl_stack[] = $_smarty_tpl;
+ $_smarty_tpl = $_smarty_tpl->setupInlineSubTemplate('home/calendar.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0, '218035487144de015c5-93114714');
+content_54ed1043caf346_48106379($_smarty_tpl);
+$_smarty_tpl = array_pop($_tpl_stack); 
+/*  End of included template "home/calendar.tpl" */?>
     </section><!-- /.content -->
 
             </aside>
@@ -121,6 +138,11 @@ asset/js/bootstrap.min.js" type="text/javascript"><?php echo '</script'; ?>
 >
         <!-- Addons Plugins -->
         
+    <?php echo '<script'; ?>
+ src="<?php echo base_url();?>
+asset/js/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"><?php echo '</script'; ?>
+>
+
         <!-- SLI LIPI App -->
         <?php echo '<script'; ?>
  src="<?php echo base_url();?>
@@ -128,11 +150,37 @@ asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
 >
         <!-- Addons Scripts -->
         
+    <?php echo '<script'; ?>
+ type="text/javascript">
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            buttonText: {
+                prev: "<span class='fa fa-caret-left'></span>",
+                next: "<span class='fa fa-caret-right'></span>",
+                today: 'today',
+                month: 'month',
+                week: 'week',
+                day: 'day'
+            },
+            //Random default events
+            eventSources: [{
+                    url: '<?php echo base_url();?>
+testing/calendar'
+                }
+            ]
+        });
+    <?php echo '</script'; ?>
+>
+
     </body>
 </html><?php }} ?>
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-10 05:34:22
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-25 06:58:59
          compiled from "application\views\home\tiles.tpl" */ ?>
-<?php if ($_valid && !is_callable('content_54d935eec224a4_22317477')) {function content_54d935eec224a4_22317477($_smarty_tpl) {?><?php if (in_array("admin",$_smarty_tpl->tpl_vars['groups']->value)||in_array("superadmin",$_smarty_tpl->tpl_vars['groups']->value)) {?>
+<?php if ($_valid && !is_callable('content_54ed1043c843b4_24390636')) {function content_54ed1043c843b4_24390636($_smarty_tpl) {?><?php if (in_array("admin",$_smarty_tpl->tpl_vars['groups']->value)||in_array("superadmin",$_smarty_tpl->tpl_vars['groups']->value)) {?>
     <div class="col-lg-3 col-xs-6">            
         <div class="small-box bg-aqua-gradient">
             <div class="inner">
@@ -251,3 +299,18 @@ rincian_saldo" class="small-box-footer">
         </div>
     </div><!-- ./col -->
 <?php }?><?php }} ?>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-25 06:58:59
+         compiled from "application\views\home\calendar.tpl" */ ?>
+<?php if ($_valid && !is_callable('content_54ed1043caf346_48106379')) {function content_54ed1043caf346_48106379($_smarty_tpl) {?><div class="row">    
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">Kalender Kegiatan Pengujian</h3>                
+            </div>
+            <div class="box-body no-padding">
+                <!-- THE CALENDAR -->
+                <div id="calendar"></div>
+            </div><!-- /.box-body -->
+        </div><!-- /. box -->
+    </div><!-- /.col -->
+</div><?php }} ?>

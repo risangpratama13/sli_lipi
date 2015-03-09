@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-18 05:57:57
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-09 06:44:21
          compiled from "application\views\registration.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:30145548701d7039d15-78777328%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '194337bdb176924d22a7a6b0f7c71ef1423f023e' => 
     array (
       0 => 'application\\views\\registration.tpl',
-      1 => 1418853640,
+      1 => 1425858256,
       2 => 'file',
     ),
   ),
@@ -20,6 +20,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'variables' => 
   array (
     'data' => 0,
+    'researcher' => 0,
+    'research' => 0,
+    'research_group' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -58,49 +61,100 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <div class="header">Daftar Anggota Baru</div>
             <?php echo form_open("registrasi");?>
 
-                <div class="body bg-gray">
-                    <br/>
-                    <?php echo $_smarty_tpl->tpl_vars['data']->value['message'];?>
+            <div class="body bg-gray">
+                <br/>
+                <?php echo $_smarty_tpl->tpl_vars['data']->value['message'];?>
 
-                    <div class="form-group">
-                        <?php echo form_input($_smarty_tpl->tpl_vars['data']->value['full_name']);?>
+                <div class="form-group">
+                    <?php echo form_input($_smarty_tpl->tpl_vars['data']->value['full_name']);?>
 
-                        <?php echo form_error('full_name','<p class="help-block text-red">','</p>');?>
+                    <?php echo form_error('full_name','<p class="help-block text-red">','</p>');?>
 
-                    </div>
-                    <div class="form-group">
-                        <?php echo form_input($_smarty_tpl->tpl_vars['data']->value['username']);?>
+                </div>
+                <div class="form-group">
+                    <?php echo form_input($_smarty_tpl->tpl_vars['data']->value['username']);?>
 
-                        <?php echo form_error('username','<p class="help-block text-red">','</p>');?>
+                    <?php echo form_error('username','<p class="help-block text-red">','</p>');?>
 
-                    </div>
-                    <div class="form-group">
-                        <?php echo form_password($_smarty_tpl->tpl_vars['data']->value['password']);?>
+                </div>
+                <div class="form-group">
+                    <?php echo form_password($_smarty_tpl->tpl_vars['data']->value['password']);?>
 
-                        <?php echo form_error('password','<p class="help-block text-red">','</p>');?>
+                    <?php echo form_error('password','<p class="help-block text-red">','</p>');?>
 
-                    </div>
-                    <div class="form-group">
-                        <?php echo form_password($_smarty_tpl->tpl_vars['data']->value['password_confirm']);?>
+                </div>
+                <div class="form-group">
+                    <?php echo form_password($_smarty_tpl->tpl_vars['data']->value['password_confirm']);?>
 
-                        <?php echo form_error('password_confirm','<p class="help-block text-red">','</p>');?>
+                    <?php echo form_error('password_confirm','<p class="help-block text-red">','</p>');?>
 
-                    </div>
-                    <div class="form-group">
-                        <?php echo form_radio('sex','M',true);?>
+                </div>
+                <div class="form-group">
+                    <?php echo form_radio('sex','M',true);?>
  Laki-laki
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <?php echo form_radio('sex','F');?>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <?php echo form_radio('sex','F');?>
  Perempuan
-                    </div>
                 </div>
-                <div class="footer">                    
-                    <?php echo form_submit('registrasi',"Mendaftar",'class="btn bg-olive btn-block"');?>
+                <div class="form-group">
+                    <select class="form-control" name="researcher" id="researcher">
+                        <option value="">-- Pilih Deputi Bidang --</option>
+                        <?php  $_smarty_tpl->tpl_vars['researcher'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['researcher']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['data']->value['researchers']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['researcher']->key => $_smarty_tpl->tpl_vars['researcher']->value) {
+$_smarty_tpl->tpl_vars['researcher']->_loop = true;
+?>                            
+                            <option value="<?php echo $_smarty_tpl->tpl_vars['researcher']->value->id;?>
+"><?php echo $_smarty_tpl->tpl_vars['researcher']->value->researcher_name;?>
+</option>                                                
+                        <?php } ?>
+                    </select>
+                    <?php echo form_error('researcher','<p class="help-block text-red">','</p>');?>
 
-                    <a href="<?php echo base_url();?>
-login" class="text-center">Sudah Punya Akun</a>
                 </div>
+                <div class="form-group">
+                    <select class="form-control" name="research" id="research">
+                        <option value="">-- Pilih Satuan Kerja --</option>
+                        <?php  $_smarty_tpl->tpl_vars['research'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['research']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['data']->value['researches']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['research']->key => $_smarty_tpl->tpl_vars['research']->value) {
+$_smarty_tpl->tpl_vars['research']->_loop = true;
+?>                            
+                            <option value="<?php echo $_smarty_tpl->tpl_vars['research']->value->id;?>
+" class="<?php echo $_smarty_tpl->tpl_vars['research']->value->researcher_id;?>
+"><?php echo $_smarty_tpl->tpl_vars['research']->value->research_name;?>
+</option>                                                   
+                        <?php } ?>
+                    </select>
+                    <?php echo form_error('research','<p class="help-block text-red">','</p>');?>
+
+                </div>
+                <div class="form-group">
+                    <select class="form-control" name="research_group" id="research_group">
+                        <option value="">-- Pilih Kelompok Penelitian --</option>
+                        <?php  $_smarty_tpl->tpl_vars['research_group'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['research_group']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['data']->value['research_groups']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['research_group']->key => $_smarty_tpl->tpl_vars['research_group']->value) {
+$_smarty_tpl->tpl_vars['research_group']->_loop = true;
+?>                            
+                            <option value="<?php echo $_smarty_tpl->tpl_vars['research_group']->value->id;?>
+" class="<?php echo $_smarty_tpl->tpl_vars['research_group']->value->researcher_id;?>
+\<?php echo $_smarty_tpl->tpl_vars['research_group']->value->research_id;?>
+"><?php echo $_smarty_tpl->tpl_vars['research_group']->value->res_group_name;?>
+</option>                                                   
+                        <?php } ?>
+                    </select>
+                    <?php echo form_error('research_group','<p class="help-block text-red">','</p>');?>
+
+                </div>
+            </div>
+            <div class="footer">                    
+                <?php echo form_submit('registrasi',"Mendaftar",'class="btn bg-olive btn-block"');?>
+
+                <a href="<?php echo base_url();?>
+login" class="text-center">Sudah Punya Akun</a>
+            </div>
             <?php echo form_close();?>
 
         </div>
@@ -113,6 +167,18 @@ login" class="text-center">Sudah Punya Akun</a>
         <?php echo '<script'; ?>
  src="<?php echo base_url();?>
 asset/js/bootstrap.min.js" type="text/javascript"><?php echo '</script'; ?>
+>
+        <?php echo '<script'; ?>
+ src="<?php echo base_url();?>
+asset/js/plugins/jquery-chained/jquery.chained.min.js" type="text/javascript"><?php echo '</script'; ?>
+>
+        <?php echo '<script'; ?>
+ type="text/javascript">
+            $(document).ready(function () {                
+                $("#research").chained("#researcher");
+                $("#research_group").chained("#researcher, #research");
+            });
+        <?php echo '</script'; ?>
 >
     </body>
 </html><?php }} ?>

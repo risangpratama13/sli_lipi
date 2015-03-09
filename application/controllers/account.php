@@ -55,7 +55,7 @@ class Account extends CI_Controller {
 
         if ($this->ion_auth->in_group(2)) {
             $this->form_validation->set_rules('item_title', 'Judul Paper', 'required|xss_clean');
-            $this->form_validation->set_rules('author_num', 'Jumlah Penulis', 'required|xss_clean');
+            $this->form_validation->set_rules('author_num', 'Jumlah Penulis', 'required|numeric|xss_clean');
 
             $user = $this->ion_auth->user()->row();
             if ($this->form_validation->run() == true) {
@@ -162,7 +162,7 @@ class Account extends CI_Controller {
                 if ($_FILES['paper']['name'] == "" and $this->input->post('paper_url') == "") {
                     $error = array('error' => "Kolom URL Berkas Harus Diisi atau Unggah Berkas");
                     $this->session->set_flashdata('message', $error);
-                    redirect('tambah_item', 'refresh');
+                    redirect('ubah_item/'.$this->input->post('id'), 'refresh');
                 } else {
                     if ($_FILES['paper']['name'] == "") {
                         $url = $this->input->post('paper_url');
@@ -180,7 +180,7 @@ class Account extends CI_Controller {
                         } else {
                             $error = array('error' => $this->upload->display_errors());
                             $this->session->set_flashdata('message', $error);
-                            redirect('ubah_item/' . $id, 'refresh');
+                            redirect('ubah_item/' . $this->input->post('id'), 'refresh');
                         }
                     }
                 }
@@ -255,7 +255,8 @@ class Account extends CI_Controller {
                         'type' => 'url'
                     );
                 }
-
+                
+                $data['url'] = $item->url;
                 $data['item_id'] = $item->id;
                 $data['select_option'] = $item->item_type_id;
 

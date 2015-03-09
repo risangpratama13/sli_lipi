@@ -47,7 +47,7 @@
                         {if $action eq "add"}
                             {$url = "account/add_item"}
                         {else}
-                            {$url = "account/edit_item"}
+                            {$url = "account/edit_item/`$data.item_id`"}
                         {/if}                        
                         {form_open_multipart($url)}
                         {if $action eq "edit"}
@@ -89,7 +89,7 @@
                                             <div class="input-group-btn">
                                                 <button type="button" class="btn btn-primary" onclick="$('#paper').click();"><i class="fa fa-file-text"></i> Pilih Berkas</button>
                                             </div><!-- /btn-group -->
-                                            <input type="file" name="paper" id="paper" style="display: none;">
+                                            <input type="file" name="paper" id="paper" value="{$data.url}" style="display: none;">
                                             {form_input($data.paper_path)}
                                         </div>
                                     </div>

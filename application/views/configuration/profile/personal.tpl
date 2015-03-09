@@ -35,7 +35,7 @@
                 <tr>
                     <td>Golongan/Jabatan</td>
                     <td>
-                        {if !empty($member)}
+                        {if !empty($member->category)}
                             {$member->category}/{$member->position}
                         {/if}
                     </td>
@@ -43,7 +43,7 @@
                 <tr>
                     <td>Tempat Tanggal Lahir</td>
                     <td>
-                        {if !empty($member)}
+                        {if !empty($member->birthplace)}
                             {$member->birthplace}, {date('j F Y', strtotime($member->birthday))}
                         {/if}
                     </td>
@@ -74,7 +74,7 @@
                 </tr>
                 <tr>
                     <td>Kelompok Penelitian</td>
-                    <td>{if !empty($member)}{$member->research_group}{/if}</td>
+                    <td>{if !empty($member)}{$member->res_group_name}{/if}</td>
                 </tr>
             {/if}
             <tr>

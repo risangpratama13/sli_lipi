@@ -2,6 +2,8 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+date_default_timezone_set("Asia/Jakarta");
+
 class Master extends CI_Controller {
 
     function __construct() {
@@ -10,6 +12,7 @@ class Master extends CI_Controller {
         $this->load->model('kurs_point');
         $this->load->model('unit');
         $this->load->model('tool');
+        $this->load->model('research_group');
 
         $this->load->library('form_validation');
     }
@@ -69,7 +72,7 @@ class Master extends CI_Controller {
                 default:
                     $data = array("unit_name" => $this->input->post('unit_name'));
                     $this->unit->save($data);
-                    redirect('unit', 'refresh');                    
+                    redirect('unit', 'refresh');
                     break;
             }
         } else {
@@ -99,7 +102,7 @@ class Master extends CI_Controller {
                 'required' => 'required',
                 'onkeypress' => 'return isNumberKey(event)'
             );
-            
+
             $this->basic_data();
             $this->smartyci->assign('types', $item_types);
             $this->smartyci->assign('data', $data);
@@ -144,37 +147,76 @@ class Master extends CI_Controller {
         }
     }
 
-    function kurs_point() {
+    function config_point() {
         if (!$this->ion_auth->logged_in()) {
             redirect('login', 'refresh');
         }
 
         if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
-            $this->form_validation->set_rules('idr', 'Nilai Tukar Rupiah', 'required|xss_clean|numeric|is_natural_no_zero');
-            if ($this->form_validation->run() == true) {
-                $data = array("idr" => $this->input->post('idr'));
-                $this->kurs_point->update($data);
-                redirect('kurs_point', 'refresh');
-            } else {
-                $kurs = $this->kurs_point->get_kurs();
-                $form_kurs = array(
-                    'name' => 'idr',
-                    'class' => 'form-control',
-                    'placeholder' => 'Nilai Tukar Rupiah',
-                    'type' => 'text',
-                    'onkeypress' => 'return isNumberKey(event)'
-                );
-
-                $this->basic_data();
-                $this->smartyci->assign('kurs', $kurs);
-                $this->smartyci->assign('form_kurs', $form_kurs);
-                $this->smartyci->display('master-data/kurs_point.tpl');
+            if ($this->input->post('ubah_kurs')) {
+                $this->form_validation->set_rules('idr', 'Nilai Tukar Rupiah', 'required|xss_clean|numeric|is_natural_no_zero');
+                if ($this->form_validation->run() == true) {
+                    $data = array(
+                        "idr" => $this->input->post('idr'),
+                        "last_update" => date('Y-m-d H:i:s')
+                    );
+                    $this->kurs_point->update($data);
+                    redirect('config_point', 'refresh');
+                }
+            } else if ($this->input->post('ubah_init_saldo')) {
+                $this->form_validation->set_rules('init_saldo', 'Saldo Awal Anggota', 'required|xss_clean|numeric|is_natural_no_zero');
+                if ($this->form_validation->run() == true) {
+                    $data = array("init_point" => $this->input->post('init_saldo'));
+                    $this->kurs_point->update($data);
+                    redirect('config_point', 'refresh');
+                }
+            } else if ($this->input->post('ubah_test_percent')) {
+                $this->form_validation->set_rules('test_percent', 'Persentasi Poin Operator', 'required|xss_clean|numeric|is_natural_no_zero');
+                if ($this->form_validation->run() == true) {
+                    $data = array("test_percent" => $this->input->post('test_percent'));
+                    $this->kurs_point->update($data);
+                    redirect('config_point', 'refresh');
+                }
             }
+
+
+            $config = $this->kurs_point->get_kurs();
+            $form_kurs = array(
+                'name' => 'idr',
+                'class' => 'form-control',
+                'placeholder' => 'Nilai Tukar Rupiah',
+                'type' => 'text',
+                'value' => $config->idr,
+                'onkeypress' => 'return isNumberKey(event)'
+            );
+            $form_init_saldo = array(
+                'name' => 'init_saldo',
+                'class' => 'form-control',
+                'placeholder' => 'Saldo Awal Anggota',
+                'type' => 'text',
+                'value' => $config->init_point,
+                'onkeypress' => 'return isNumberKey(event)'
+            );
+            $form_test_percent = array(
+                'name' => 'test_percent',
+                'class' => 'form-control',
+                'placeholder' => 'Persentase Poin Operator',
+                'type' => 'text',
+                'value' => $config->test_percent,
+                'onkeypress' => 'return isNumberKey(event)'
+            );
+
+            $this->basic_data();
+            $this->smartyci->assign('kurs', $config);
+            $this->smartyci->assign('form_kurs', $form_kurs);
+            $this->smartyci->assign('form_init_saldo', $form_init_saldo);
+            $this->smartyci->assign('form_test_percent', $form_test_percent);
+            $this->smartyci->display('master-data/kurs_point.tpl');
         } else {
             redirect('/', 'refresh');
         }
     }
-    
+
     function tools() {
         if (!$this->ion_auth->logged_in()) {
             redirect('login', 'refresh');
@@ -189,7 +231,7 @@ class Master extends CI_Controller {
                 'type' => 'text',
                 'required' => 'required'
             );
-            
+
             $tool_qty = array(
                 'name' => 'tool_qty',
                 'class' => 'form-control',
@@ -209,7 +251,7 @@ class Master extends CI_Controller {
             redirect('/', 'refresh');
         }
     }
-    
+
     function crud_tools() {
         if ($_SERVER['HTTP_REFERER']) {
             $action = $this->input->post('action');
@@ -224,7 +266,7 @@ class Master extends CI_Controller {
                     break;
                 case "edit":
                     $data = array(
-                        "tool_name" => $this->input->post('tool_name'), 
+                        "tool_name" => $this->input->post('tool_name'),
                         "tool_qty" => $this->input->post('tool_qty')
                     );
                     $this->tool->update($this->input->post('id'), $data);
@@ -233,15 +275,165 @@ class Master extends CI_Controller {
                 case "add":
                 default:
                     $data = array(
-                        "tool_name" => $this->input->post('tool_name'), 
+                        "tool_name" => $this->input->post('tool_name'),
                         "tool_qty" => $this->input->post('tool_qty')
                     );
                     $this->tool->save($data);
-                    redirect('tool', 'refresh');                    
+                    redirect('tool', 'refresh');
                     break;
             }
         } else {
             redirect('/', 'refresh');
+        }
+    }
+
+    function research_group() {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+
+        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
+            $research_groups = $this->research_group->get_all();
+            $users = array();
+            foreach ($research_groups as $research_group) {
+                if($research_group->user_id != NULL) {
+                    $user = $this->ion_auth->user($research_group->user_id)->row();
+                    $users[$research_group->user_id] = $user->full_name;
+                }
+            }
+
+            $this->basic_data();
+            $this->smartyci->assign('users', $users);
+            $this->smartyci->assign('research_groups', $research_groups);
+            $this->smartyci->display('master-data/research_group/lists.tpl');
+        } else {
+            redirect('/', 'refresh');
+        }
+    }
+
+    function add_research_group() {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+
+        $this->form_validation->set_rules('group_name', 'Nama Kelompok Penelitian', 'required|xss_clean');
+        $this->form_validation->set_rules('researcher', 'Deputi Bidang', 'required|xss_clean');
+        $this->form_validation->set_rules('research', 'Satuan Kerja', 'required|xss_clean');
+
+        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
+            if ($this->form_validation->run() == true) {
+                $data = array(
+                    'researcher_id' => $this->input->post('researcher'),
+                    'research_id' => $this->input->post('research'),
+                    'res_group_name' => $this->input->post('group_name')
+                );
+                $this->research_group->save($data);
+                redirect('research_group', 'refresh');
+            } else {
+                $this->load->model('research');
+                $this->load->model('researcher');
+
+                $researchers = $this->researcher->get_all();
+                $researchs = $this->research->get_all();
+
+                $users = $this->ion_auth->users(2)->result();
+                $leaders = array();
+                foreach ($users as $user) {
+                    $research_group = $this->research_group->find_byuser($user->id);
+                    if (empty($research_group)) {
+                        $leaders[$user->id] = $user->full_name;
+                    }
+                }
+
+                $group_name = array('name' => 'group_name',
+                    'class' => 'form-control',
+                    'placeholder' => 'Kelompok Penelitan',
+                    'type' => 'text'
+                );
+
+                $this->basic_data();
+                $this->smartyci->assign('action', 'add');
+                $this->smartyci->assign('researches', $researchs);
+                $this->smartyci->assign('researchers', $researchers);
+                $this->smartyci->assign('group_name', $group_name);
+                $this->smartyci->assign('users', $leaders);
+                $this->smartyci->display('master-data/research_group/form.tpl');
+            }
+        } else {
+            redirect('/', 'refresh');
+        }
+    }
+
+    function edit_research_group($id = NULL) {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+
+        $this->form_validation->set_rules('group_name', 'Nama Kelompok Penelitian', 'required|xss_clean');
+        $this->form_validation->set_rules('researcher', 'Deputi Bidang', 'required|xss_clean');
+        $this->form_validation->set_rules('research', 'Satuan Kerja', 'required|xss_clean');
+
+        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
+            if ($this->form_validation->run() == true) {
+                $id = $this->input->post('id');
+                $data = array(
+                    'researcher_id' => $this->input->post('researcher'),
+                    'research_id' => $this->input->post('research'),
+                    'res_group_name' => $this->input->post('group_name')
+                );
+                $this->research_group->update($id, $data);
+                redirect('research_group', 'refresh');
+            } else {
+                $this->load->model('research');
+                $this->load->model('researcher');
+
+                $research_group = $this->research_group->find_byid($id);
+                if (!empty($research_group)) {
+                    $researchers = $this->researcher->get_all();
+                    $researchs = $this->research->get_all();
+
+                    $users = $this->ion_auth->users(2)->result();
+                    $leaders = array();
+                    foreach ($users as $user) {
+                        $research_group_user = $this->research_group->find_byuser($user->id);
+                        if (empty($research_group_user)) {
+                            $leaders[$user->id] = $user->full_name;
+                        }
+                    }
+
+                    $group_name = array('name' => 'group_name',
+                        'class' => 'form-control',
+                        'placeholder' => 'Kelompok Penelitan',
+                        'type' => 'text',
+                        'value' => $research_group->res_group_name
+                    );
+
+                    $this->basic_data();
+                    $this->smartyci->assign('action', 'edit');
+                    $this->smartyci->assign('research_group', $research_group);
+                    $this->smartyci->assign('researches', $researchs);
+                    $this->smartyci->assign('researchers', $researchers);
+                    $this->smartyci->assign('group_name', $group_name);
+                    $this->smartyci->assign('users', $leaders);
+                    $this->smartyci->display('master-data/research_group/form.tpl');
+                } else {
+                    redirect('research_group', 'refresh');
+                }
+            }
+        } else {
+            redirect('/', 'refresh');
+        }
+    }
+    
+    function delete_research_group() {
+        if ($_SERVER['HTTP_REFERER']) {
+            if ($this->research_group->delete($this->input->post('id'))) {
+                echo "Success";
+            } else {
+                echo "Failed";
+            }
+        } else {
+            redirect('research_group', 'refresh');
         }
     }
 

@@ -394,5 +394,37 @@ class Testing extends CI_Controller {
             redirect('/', 'refresh');
         }
     }
+    
+    function calendar() {        
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }        
+        $tests = $this->test_order->find_bystatus(array('O', 'F'));
+        $test_calendar = array();
+        if(!empty($tests)) {
+            foreach ($tests as $test) {
+                $test_calendar[] = array(
+                    'id' => $test->id,
+                    'title' => $test->testing_name,
+                    'start' => date('c', strtotime($test->start_date)),
+                    'end' => date('c', strtotime($test->finish_date)),
+                    'url' => base_url()."view_test/".$test->id,
+                    'color' => 'green',
+                    'backgroundColor' => $this->colorStatus($test->status),
+                    'borderColor' => $this->colorStatus($test->status),                    
+                );
+            }
+        }
+        echo json_encode($test_calendar);
+    }
+    
+    function colorStatus($status) {
+        if($status == "O") {
+            $color = "green";
+        } else if($status == "F") {
+            $color = "blue";
+        }
+        return $color;
+    }
 
 }

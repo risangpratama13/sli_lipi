@@ -22,7 +22,8 @@
                     <div class="box-header">
                         <h3 class="box-title">Ubah Pengujian</h3>
                     </div><!-- /.box-header -->
-                    {form_open('testing/edit_pengujian')}
+                    {$url = "testing/edit_pengujian/`$test->id`"}
+                    {form_open($url)}
                     {form_hidden('id', $test->id)}
                     <div class="box-body">
                         <div class="form-group">

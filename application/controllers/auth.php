@@ -156,11 +156,16 @@ class Auth extends CI_Controller {
             redirect('/', 'refresh');
         }
         $tables = $this->config->item('tables', 'ion_auth');
+        $this->load->model('kurs_point');
+        $this->load->model('balance_log');
         //validate form input
         $this->form_validation->set_rules('full_name', 'Nama Lengkap', 'required|xss_clean');
         $this->form_validation->set_rules('username', 'Username', 'required|xss_clean|is_unique[' . $tables['users'] . '.username]');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
         $this->form_validation->set_rules('password_confirm', 'Konfirmasi Password', 'required');
+        $this->form_validation->set_rules('researcher', 'Deputi Bidang', 'required');
+        $this->form_validation->set_rules('research', 'Satuan Kerja', 'required');
+        $this->form_validation->set_rules('research_group', 'Kelompok Penelitian', 'required');
 
         if ($this->form_validation->run() == true) {
             $username = $this->input->post('username');
@@ -171,8 +176,10 @@ class Auth extends CI_Controller {
             } else if ($this->input->post('sex') == "F") {
                 $photo = "avatar_female.png";
             }
-            $this->db->insert('balances', array('value' => 0));
+            $config = $this->kurs_point->get_kurs();
+            $init_balance = (double) $config->init_point / $config->idr;
 
+            $this->db->insert('balances', array('value' => $init_balance));
             $additional_data = array(
                 'full_name' => $this->input->post('full_name'),
                 'sex' => $this->input->post('sex'),
@@ -180,11 +187,32 @@ class Auth extends CI_Controller {
                 'balance_id' => $this->db->insert_id()
             );
         }
-        if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $additional_data)) {
+        if ($this->form_validation->run() == true) {
+            $user_id = $this->ion_auth->register($username, $password, $additional_data);
             $remember = (bool) $this->input->post('remember');
+            $this->balance_log->save(array(
+                'user_id' => $user_id,
+                'trans_date' => date('Y-m-d H:i:s'),
+                'trans_type' => 'D',
+                'trans_type_detail' => 'Saldo Awal',
+                'amount' => $config->init_point,
+                'desc' => 'Saldo Awal Anggota'
+            ));
+
+            $data_member = array(
+                'user_id' => $user_id,                
+                'researcher_id' => $this->input->post('researcher'),
+                'research_id' => $this->input->post('research'),
+                'research_group_id' => $this->input->post('research_group')
+            );
+            $this->member->create_member($data_member);
             $this->ion_auth->login($this->input->post('username'), $this->input->post('password'), $remember);
             redirect("/", 'refresh');
         } else {
+            $this->load->model('research');
+            $this->load->model('researcher');
+            $this->load->model('research_group');
+
             $data['message'] = ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message'));
 
             $data['full_name'] = array(
@@ -213,6 +241,9 @@ class Auth extends CI_Controller {
                 'placeholder' => 'Konfirmasi Password',
                 'value' => $this->form_validation->set_value('password_confirm'),
             );
+            $data['researches'] = $this->research->get_all();
+            $data['researchers'] = $this->researcher->get_all();
+            $data['research_groups'] = $this->research_group->get_all();
 
             $this->smartyci->assign('data', $data);
             $this->smartyci->display('registration.tpl');
@@ -614,6 +645,7 @@ class Auth extends CI_Controller {
                 $this->load->model('state');
                 $this->load->model('researcher');
                 $this->load->model('research');
+                $this->load->model('research_group');
 
                 $this->form_validation->set_rules('full_name', 'Nama Lengkap', 'required|xss_clean');
                 $this->form_validation->set_rules('category', 'Golongan', 'required|xss_clean');
@@ -633,6 +665,7 @@ class Auth extends CI_Controller {
                 $states = $this->state->get_all();
                 $researchers = $this->researcher->get_all();
                 $researches = $this->research->get_all();
+                $research_groups = $this->research_group->get_all();
 
                 if ($this->form_validation->run() == false) {
                     $data['message'] = $this->session->flashdata('message');
@@ -686,6 +719,7 @@ class Auth extends CI_Controller {
                     $this->smartyci->assign('states', $states);
                     $this->smartyci->assign('researchers', $researchers);
                     $this->smartyci->assign('researches', $researches);
+                    $this->smartyci->assign('research_groups', $research_groups);
                     $this->smartyci->assign('data', $data);
                     $this->smartyci->display('configuration/profile/change_personal_info.tpl');
                 } else {

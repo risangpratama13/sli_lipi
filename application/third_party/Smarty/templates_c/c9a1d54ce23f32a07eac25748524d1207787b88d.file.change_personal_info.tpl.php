@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-21 07:45:13
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-09 07:02:50
          compiled from "application\views\configuration\profile\change_personal_info.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:17557548a4ff06c6b70-79465444%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,19 +7,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c9a1d54ce23f32a07eac25748524d1207787b88d' => 
     array (
       0 => 'application\\views\\configuration\\profile\\change_personal_info.tpl',
-      1 => 1424479509,
+      1 => 1425859367,
       2 => 'file',
     ),
     '68cc9180bc6fb0dd465914a3c57d03a07aa9bace' => 
     array (
       0 => 'application\\views\\configuration\\profile\\profile.tpl',
-      1 => 1418400418,
+      1 => 1418338325,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1423521212,
+      1 => 1423218267,
       2 => 'file',
     ),
   ),
@@ -237,7 +237,7 @@ profil/ubah_password"><i class="fa fa-unlock"></i> Ubah Password</a></li>
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" name="birthday" class="form-control" value="<?php echo !empty($_smarty_tpl->tpl_vars['member']->value->birthday) ? $_smarty_tpl->tpl_vars['member']->value->birthday : '';?>
+                    <input type="text" name="birthday" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['member']->value->birthday!="0000-00-00" ? $_smarty_tpl->tpl_vars['member']->value->birthday : '';?>
 " data-inputmask="'alias': 'yyyy-mm-dd'" data-mask/>
                 </div>
                 <?php echo form_error('birthday','<p class="help-block text-red">','</p>');?>
@@ -387,15 +387,41 @@ $_smarty_tpl->tpl_vars['research']->_loop = true;
 
             </div>
             <div class="form-group">
-                <?php echo form_label('Kelompok Penelitian','research_group');?>
-
-                <?php echo form_input($_smarty_tpl->tpl_vars['data']->value['research_group']);?>
-
+                <label>Kelompok Penelitian</label>
+                <select class="form-control" name="research_group" id="research_group">
+                    <option value="">-- Pilih Kelompok Penelitian --</option>
+                    <?php  $_smarty_tpl->tpl_vars['research_group'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['research_group']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['research_groups']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['research_group']->key => $_smarty_tpl->tpl_vars['research_group']->value) {
+$_smarty_tpl->tpl_vars['research_group']->_loop = true;
+?>
+                        <?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {?>
+                            <?php if ($_smarty_tpl->tpl_vars['member']->value->research_group_id==$_smarty_tpl->tpl_vars['research_group']->value->id) {?>
+                                <option value="<?php echo $_smarty_tpl->tpl_vars['research_group']->value->id;?>
+" class="<?php echo $_smarty_tpl->tpl_vars['research_group']->value->researcher_id;?>
+\<?php echo $_smarty_tpl->tpl_vars['research_group']->value->research_id;?>
+" selected><?php echo $_smarty_tpl->tpl_vars['research_group']->value->res_group_name;?>
+</option>
+                            <?php } else { ?>
+                                <option value="<?php echo $_smarty_tpl->tpl_vars['research_group']->value->id;?>
+" class="<?php echo $_smarty_tpl->tpl_vars['research_group']->value->researcher_id;?>
+\<?php echo $_smarty_tpl->tpl_vars['research_group']->value->research_id;?>
+"><?php echo $_smarty_tpl->tpl_vars['research_group']->value->res_group_name;?>
+</option>
+                            <?php }?>
+                        <?php } else { ?>
+                            <option value="<?php echo $_smarty_tpl->tpl_vars['research_group']->value->id;?>
+" class="<?php echo $_smarty_tpl->tpl_vars['research_group']->value->researcher_id;?>
+\<?php echo $_smarty_tpl->tpl_vars['research_group']->value->research_id;?>
+"><?php echo $_smarty_tpl->tpl_vars['research_group']->value->res_group_name;?>
+</option>
+                        <?php }?>                                                                           
+                    <?php } ?>
+                </select>
                 <?php echo form_error('research_group','<p class="help-block text-red">','</p>');?>
 
             </div>
-        </div><!-- /.box-body -->
-
+        </div>
         <div class="box-footer">
             <?php echo form_submit('submit',"Simpan Informasi Pribadi",'class="btn btn-warning"');?>
 
@@ -464,6 +490,7 @@ asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
             $("[data-mask]").inputmask();
             $("#state").chained("#province");
             $("#research").chained("#researcher");
+            $("#research_group").chained("#researcher, #research");
         });
     <?php echo '</script'; ?>
 >

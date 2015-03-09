@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-10 10:33:39
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-24 00:33:46
          compiled from "application\views\master-data\kurs_point.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5050548eb09971e046-90697013%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8f212f62d07ec39112dbeaa02f3f43e621323665' => 
     array (
       0 => 'application\\views\\master-data\\kurs_point.tpl',
-      1 => 1418962726,
+      1 => 1424734420,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1423521212,
+      1 => 1423218267,
       2 => 'file',
     ),
   ),
@@ -77,13 +77,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <section class="content-header">
         <h1>
             Master Data
-            <small>Kurs Poin</small>
+            <small>Konfigurasi Poin</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
             <li><a href="#">Master Data</a></li>
             <li class="active"><a href="<?php echo base_url();?>
-kurs_point">Kurs Poin</a></li>
+config_point">Konfigurasi Poin</a></li>
         </ol>
     </section>
 
@@ -127,7 +127,7 @@ kurs_point">Kurs Poin</a></li>
                         <i class="fa fa-edit"></i>
                         <h3 class="box-title">Ubah Kurs Poin</h3>
                     </div><!-- /.box-header -->
-                    <?php echo form_open('master/kurs_point');?>
+                    <?php echo form_open('master/config_point');?>
 
                     <div class="box-body">
                         <label for="idr">Nilai Tukar Rupiah</label>                            
@@ -141,7 +141,7 @@ kurs_point">Kurs Poin</a></li>
 
                     </div><!-- /.box-body -->
                     <div class="box-footer">
-                        <?php echo form_submit('submit',"Ubah Kurs",'class="btn btn-flat btn-warning"');?>
+                        <?php echo form_submit('ubah_kurs',"Ubah Kurs",'class="btn btn-flat btn-warning"');?>
 
                     </div>
                     <?php echo form_close();?>
@@ -168,6 +168,61 @@ kurs_point">Kurs Poin</a></li>
                             <span class="input-group-addon">.00</span>                            
                         </div>
                     </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div><!-- ./col -->
+        </div><!-- /.row -->
+        <div class="row">                
+            <div class="col-md-6">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <i class="fa fa-money"></i>
+                        <h3 class="box-title">Saldo Awal Anggota</h3>
+                    </div><!-- /.box-header -->
+                    <?php echo form_open('master/config_point');?>
+
+                    <div class="box-body">
+                        <label for="init_saldo">Saldo Awal</label>                            
+                        <div class="input-group">
+                            <span class="input-group-addon">Rp</span>
+                            <?php echo form_input($_smarty_tpl->tpl_vars['form_init_saldo']->value);?>
+
+                            <span class="input-group-addon">.00</span>                            
+                        </div>
+                        <?php echo form_error('init_saldo','<p class="help-block text-red">','</p>');?>
+
+                    </div><!-- /.box-body -->
+                    <div class="box-footer">
+                        <?php echo form_submit('ubah_init_saldo',"Ubah Saldo Awal",'class="btn btn-flat btn-warning"');?>
+
+                    </div>
+                    <?php echo form_close();?>
+
+                </div><!-- /.box -->
+            </div><!-- ./col -->
+            <div class="col-md-6">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <i class="fa fa-ruble"></i>
+                        <h3 class="box-title">Persentase Poin Operator</h3>
+                    </div><!-- /.box-header -->
+                    <?php echo form_open('master/config_point');?>
+
+                    <div class="box-body">
+                        <label for="test_percent">Persentase Poin</label>                            
+                        <div class="input-group">
+                            <?php echo form_input($_smarty_tpl->tpl_vars['form_test_percent']->value);?>
+
+                            <span class="input-group-addon">%</span>                            
+                        </div>
+                        <?php echo form_error('test_percent','<p class="help-block text-red">','</p>');?>
+
+                    </div><!-- /.box-body -->
+                    <div class="box-footer">
+                        <?php echo form_submit('ubah_test_percent',"Ubah Persentase Poin",'class="btn btn-flat btn-warning"');?>
+
+                    </div>
+                    <?php echo form_close();?>
+
                 </div><!-- /.box -->
             </div><!-- ./col -->
         </div><!-- /.row -->

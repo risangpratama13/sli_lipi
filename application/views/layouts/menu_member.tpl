@@ -11,7 +11,7 @@
     </li>
     <li class="treeview">
         <a href="#">
-            <i class="fa fa-book"></i>
+            <i class="fa fa-money"></i>
             <span> Saldo </span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
