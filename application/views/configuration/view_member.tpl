@@ -52,7 +52,7 @@
                                         <tr>
                                             <td>Golongan/Jabatan</td>
                                             <td>
-                                                {if !empty($data_member)}
+                                                {if !empty($data_member->category)}
                                                     {$data_member->category}/{$data_member->position}
                                                 {/if}
                                             </td>
@@ -60,7 +60,7 @@
                                         <tr>
                                             <td>Tempat Tanggal Lahir</td>
                                             <td>
-                                                {if !empty($data_member)}
+                                                {if !empty($data_member->birthplace)}
                                                     {$data_member->birthplace}, {date('j F Y', strtotime($data_member->birthday))}
                                                 {/if}
                                             </td>
@@ -91,7 +91,7 @@
                                         </tr>
                                         <tr>
                                             <td>Kelompok Penelitian</td>
-                                            <td>{if !empty($data_member)}{$data_member->research_group}{/if}</td>
+                                            <td>{if !empty($data_member)}{$data_member->res_group_name}{/if}</td>
                                         </tr>
                                         <tr>
                                             <td>Terdaftar</td>
@@ -114,7 +114,7 @@
                                                     <ul>
                                                         {foreach $operators as $operator}
                                                             <li>{$operator->cat_name}</li>
-                                                        {/foreach}
+                                                            {/foreach}
                                                     </ul>
                                                 </td>
                                             </tr>                                        

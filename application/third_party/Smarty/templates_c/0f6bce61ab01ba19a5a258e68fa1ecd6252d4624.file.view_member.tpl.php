@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-21 08:18:16
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-11 06:28:29
          compiled from "application\views\configuration\view_member.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:19196548fae117852b8-35474556%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0f6bce61ab01ba19a5a258e68fa1ecd6252d4624' => 
     array (
       0 => 'application\\views\\configuration\\view_member.tpl',
-      1 => 1424480307,
+      1 => 1426030107,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1423521212,
+      1 => 1423218267,
       2 => 'file',
     ),
   ),
@@ -132,7 +132,7 @@ asset/avatar/<?php echo $_smarty_tpl->tpl_vars['member']->value->photo;?>
                                         <tr>
                                             <td>Golongan/Jabatan</td>
                                             <td>
-                                                <?php if (!empty($_smarty_tpl->tpl_vars['data_member']->value)) {?>
+                                                <?php if (!empty($_smarty_tpl->tpl_vars['data_member']->value->category)) {?>
                                                     <?php echo $_smarty_tpl->tpl_vars['data_member']->value->category;?>
 /<?php echo $_smarty_tpl->tpl_vars['data_member']->value->position;?>
 
@@ -142,7 +142,7 @@ asset/avatar/<?php echo $_smarty_tpl->tpl_vars['member']->value->photo;?>
                                         <tr>
                                             <td>Tempat Tanggal Lahir</td>
                                             <td>
-                                                <?php if (!empty($_smarty_tpl->tpl_vars['data_member']->value)) {?>
+                                                <?php if (!empty($_smarty_tpl->tpl_vars['data_member']->value->birthplace)) {?>
                                                     <?php echo $_smarty_tpl->tpl_vars['data_member']->value->birthplace;?>
 , <?php echo date('j F Y',strtotime($_smarty_tpl->tpl_vars['data_member']->value->birthday));?>
 
@@ -188,7 +188,7 @@ echo $_smarty_tpl->tpl_vars['data_member']->value->research_name;
                                         <tr>
                                             <td>Kelompok Penelitian</td>
                                             <td><?php if (!empty($_smarty_tpl->tpl_vars['data_member']->value)) {
-echo $_smarty_tpl->tpl_vars['data_member']->value->research_group;
+echo $_smarty_tpl->tpl_vars['data_member']->value->res_group_name;
 }?></td>
                                         </tr>
                                         <tr>
@@ -218,7 +218,7 @@ $_smarty_tpl->tpl_vars['operator']->_loop = true;
 ?>
                                                             <li><?php echo $_smarty_tpl->tpl_vars['operator']->value->cat_name;?>
 </li>
-                                                        <?php } ?>
+                                                            <?php } ?>
                                                     </ul>
                                                 </td>
                                             </tr>                                        
