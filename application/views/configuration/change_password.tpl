@@ -36,11 +36,6 @@
                         <br/>
                         {$data.message}
                         <div class="form-group">
-                            {form_label('Password Lama', 'old')}
-                            {form_password($data.old_password)}
-                            {form_error('old','<p class="help-block text-red">','</p>')}
-                        </div>
-                        <div class="form-group">
                             {form_label('Password Baru', 'new')}
                             {form_password($data.new_password)}
                             {form_error('new','<p class="help-block text-red">','</p>')}

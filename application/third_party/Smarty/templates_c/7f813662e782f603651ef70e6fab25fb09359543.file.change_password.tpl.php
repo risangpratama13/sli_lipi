@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-10 07:11:25
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-11 04:41:56
          compiled from "application\views\configuration\change_password.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:89745487ae1b7d6cb1-13986762%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7f813662e782f603651ef70e6fab25fb09359543' => 
     array (
       0 => 'application\\views\\configuration\\change_password.tpl',
-      1 => 1418681416,
+      1 => 1426023713,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -114,14 +114,6 @@ administrator">Administrator</a></li>
                         <br/>
                         <?php echo $_smarty_tpl->tpl_vars['data']->value['message'];?>
 
-                        <div class="form-group">
-                            <?php echo form_label('Password Lama','old');?>
-
-                            <?php echo form_password($_smarty_tpl->tpl_vars['data']->value['old_password']);?>
-
-                            <?php echo form_error('old','<p class="help-block text-red">','</p>');?>
-
-                        </div>
                         <div class="form-group">
                             <?php echo form_label('Password Baru','new');?>
 

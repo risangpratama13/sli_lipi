@@ -362,7 +362,6 @@ class Auth extends CI_Controller {
     }
 
     function change_password($username = "") {
-        $this->form_validation->set_rules('old', 'Password Lama', 'required');
         $this->form_validation->set_rules('new', 'Password Baru', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
         $this->form_validation->set_rules('new_confirm', 'Konfirmasi Password', 'required');
 
@@ -388,11 +387,6 @@ class Auth extends CI_Controller {
             $data['message'] = $this->session->flashdata('message');
 
             $data['min_password_length'] = $this->config->item('min_password_length', 'ion_auth');
-            $data['old_password'] = array(
-                'name' => 'old',
-                'class' => 'form-control',
-                'placeholder' => 'Password Lama',
-            );
             $data['new_password'] = array(
                 'name' => 'new',
                 'class' => 'form-control',
@@ -413,14 +407,21 @@ class Auth extends CI_Controller {
             $this->smartyci->display('configuration/change_password.tpl');
         } else {
             $identity = $this->input->post('identity');
-            $change = $this->ion_auth->change_password($identity, $this->input->post('old'), $this->input->post('new'));
+            $id = $this->ion_auth->get_user_id_by_username($identity);
+            
+            $data = array("password" => $this->input->post('new'));
+            $change = $this->ion_auth->update($id, $data);
 
             if ($change) {
                 $this->session->set_flashdata('message', $this->ion_auth->messages());
-                redirect('ganti_password/' . $username, 'refresh');
+                if($this->ion_auth->in_group(2, $id)) {
+                    redirect('anggota', 'refresh');
+                } else if($this->ion_auth->in_group(1, $id)) {
+                    redirect('administrator', 'refresh');
+                }
             } else {
                 $this->session->set_flashdata('message', $this->ion_auth->errors());
-                redirect('ganti_password/' . $username, 'refresh');
+                redirect('ganti_password/' . $user->username, 'refresh');
             }
         }
     }
