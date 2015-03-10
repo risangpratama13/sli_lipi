@@ -53,6 +53,7 @@ $route['tambah_anggota'] = "auth/add_member";
 $route['operator'] = "auth/configuration/4";
 $route['tambah_operator'] = "auth/add_operator";
 $route['ubah_operator/(:any)'] = "auth/edit_operator/$1";
+$route['leader'] = "auth/configuration/5";
 $route['profil'] = "auth/account_setting";
 $route['profil/ubah_profil'] = "auth/account_setting/change_profile";
 $route['profil/ubah_password'] = "auth/account_setting/change_password";

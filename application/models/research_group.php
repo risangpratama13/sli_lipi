@@ -13,8 +13,13 @@ class Research_group extends CI_Model {
         $this->db->from('research_groups');
         $this->db->join('researchers','researchers.id = research_groups.researcher_id');
         $this->db->join('researches','research_groups.research_id = researches.id');
-        //$this->db->join('users','users.id = research_groups.user_id');
         $query = $this->db->get();
+        return $query->result();
+    }
+    
+    function find_nouser() {
+        $this->db->where(array('user_id' => NULL));
+        $query = $this->db->get($this->table);
         return $query->result();
     }
     

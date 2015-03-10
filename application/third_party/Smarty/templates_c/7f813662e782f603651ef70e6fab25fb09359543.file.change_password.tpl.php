@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-10 21:26:11
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-10 07:11:25
          compiled from "application\views\configuration\change_password.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:89745487ae1b7d6cb1-13986762%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7f813662e782f603651ef70e6fab25fb09359543' => 
     array (
       0 => 'application\\views\\configuration\\change_password.tpl',
-      1 => 1418221565,
+      1 => 1418681416,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1418213239,
+      1 => 1423218267,
       2 => 'file',
     ),
   ),
@@ -141,7 +141,7 @@ administrator">Administrator</a></li>
                     </div><!-- /.box-body -->
 
                     <div class="box-footer">
-                        <?php echo form_submit('submit',"Simpan Password Baru",'class="btn btn-primary"');?>
+                        <?php echo form_submit('submit',"Simpan Password Baru",'class="btn btn-flat btn-success"');?>
 
                     </div>
                     <?php echo form_close();?>
@@ -154,10 +154,15 @@ administrator">Administrator</a></li>
             </aside>
             <!-- End Content -->
         </div>
-            
+        <!-- Modal -->    
+        
+        <!-- End Modal -->
+        
         <!-- jQuery 2.0.2 -->
+
         <?php echo '<script'; ?>
- src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"><?php echo '</script'; ?>
+ src="<?php echo base_url();?>
+asset/js/jquery-2.0.2.min.js"><?php echo '</script'; ?>
 >
         <!-- Bootstrap -->
         <?php echo '<script'; ?>
