@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-10 07:11:06
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-11 06:23:15
          compiled from "application\views\configuration\leaders.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:810454fe369a57da03-08991587%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd5c5e6c75672cf2fd05e0693e5a62fa2541df561' => 
     array (
       0 => 'application\\views\\configuration\\leaders.tpl',
-      1 => 1425946176,
+      1 => 1426029792,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -21,9 +21,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
   'unifunc' => 'content_54fe369a629835_19381516',
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_54fe369a629835_19381516')) {function content_54fe369a629835_19381516($_smarty_tpl) {?><!DOCTYPE html>
 <html>
@@ -101,7 +101,7 @@ leader">Ketua Ketelitian</a></li>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
                         <a href="<?php echo base_url();?>
-add_leader" class="btn btn-flat btn-primary">
+tambah_leader" class="btn btn-flat btn-primary">
                             <i class="fa fa-plus-circle"></i> Tambah Ketua Ketelitian
                         </a>
                         <br/><br/>
@@ -124,11 +124,11 @@ $_smarty_tpl->tpl_vars['leader']->_loop = true;
                                     <tr>
                                         <td><?php echo $_smarty_tpl->tpl_vars['leader']->value->full_name;?>
 </td>
-                                        <td><?php echo $_smarty_tpl->tpl_vars['add_data']->value['research_group_`$leader->user_id`'];?>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['add_data']->value["research_group_".((string)$_smarty_tpl->tpl_vars['leader']->value->user_id)];?>
 </td>
-                                        <td><?php echo $_smarty_tpl->tpl_vars['add_data']->value['researcher_`$leader->user_id`'];?>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['add_data']->value["researcher_".((string)$_smarty_tpl->tpl_vars['leader']->value->user_id)];?>
 </td>
-                                        <td><?php echo $_smarty_tpl->tpl_vars['add_data']->value['research_`$leader->user_id`'];?>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['add_data']->value["research_".((string)$_smarty_tpl->tpl_vars['leader']->value->user_id)];?>
 </td>
                                         <td>
                                             <a href="<?php echo base_url();?>

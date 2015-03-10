@@ -54,6 +54,7 @@ $route['operator'] = "auth/configuration/4";
 $route['tambah_operator'] = "auth/add_operator";
 $route['ubah_operator/(:any)'] = "auth/edit_operator/$1";
 $route['leader'] = "auth/configuration/5";
+$route['tambah_leader'] = "auth/add_research_group_leader";
 $route['profil'] = "auth/account_setting";
 $route['profil/ubah_profil'] = "auth/account_setting/change_profile";
 $route['profil/ubah_password'] = "auth/account_setting/change_password";

@@ -881,11 +881,11 @@ class Auth extends CI_Controller {
 
             if ($this->input->post('submit')) {
                 $research_group = $this->input->post('research_group');
-                $user_id = $this->input->post('user_id');
+                $user_id = $this->input->post('user');
                 $data = array('user_id' => $user_id);
                 $this->research_group->update($research_group, $data);
                 $this->ion_auth->add_to_group(5, $user_id);
-                redirect('operator', 'refresh');
+                redirect('leader', 'refresh');
             } else {
                 $researchers = $this->researcher->get_all();
                 $researches = $this->research->get_all();

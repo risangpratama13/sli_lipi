@@ -23,7 +23,7 @@
                         <h3 class="box-title">Daftar Ketua Ketelitian</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
-                        <a href="{base_url()}add_leader" class="btn btn-flat btn-primary">
+                        <a href="{base_url()}tambah_leader" class="btn btn-flat btn-primary">
                             <i class="fa fa-plus-circle"></i> Tambah Ketua Ketelitian
                         </a>
                         <br/><br/>
@@ -41,9 +41,9 @@
                                 {foreach $leaders as $leader}
                                     <tr>
                                         <td>{$leader->full_name}</td>
-                                        <td>{$add_data['research_group_`$leader->user_id`']}</td>
-                                        <td>{$add_data['researcher_`$leader->user_id`']}</td>
-                                        <td>{$add_data['research_`$leader->user_id`']}</td>
+                                        <td>{$add_data["research_group_`$leader->user_id`"]}</td>
+                                        <td>{$add_data["researcher_`$leader->user_id`"]}</td>
+                                        <td>{$add_data["research_`$leader->user_id`"]}</td>
                                         <td>
                                             <a href="{base_url()}anggota/{$leader->username}" title="Profil Anggota" class="btn btn-flat btn-sm btn-info"><i class="fa fa-eye"></i></a>
                                             <a href="{base_url()}edit_leader/{$leader->id}" title="Ubah Ketua Ketelitian" class="btn btn-flat btn-sm btn-warning"><i class="fa fa-edit"></i></a>
