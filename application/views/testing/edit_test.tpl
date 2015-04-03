@@ -50,7 +50,7 @@
                         </div>
                     </div><!-- /.box-body -->
                     <div class="box-footer">
-                        {form_submit('submit', "Tambahkan Pengujian", 'class="btn btn-flat btn-success"')}
+                        {form_submit('submit', "Ubah Pengujian", 'class="btn btn-flat btn-success"')}
                     </div>
                     {form_close()}
                 </div><!-- /.box -->               

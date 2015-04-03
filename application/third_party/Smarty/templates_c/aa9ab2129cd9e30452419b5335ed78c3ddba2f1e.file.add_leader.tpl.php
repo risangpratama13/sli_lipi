@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-11 06:22:12
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-03 07:54:46
          compiled from "application\views\configuration\add_leader.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2283654ff7a46ecab66-79664899%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'aa9ab2129cd9e30452419b5335ed78c3ddba2f1e' => 
     array (
       0 => 'application\\views\\configuration\\add_leader.tpl',
-      1 => 1426029727,
+      1 => 1426893919,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -77,14 +77,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <section class="content-header">
         <h1>
             Konfigurasi Pengguna
-            <small>Ketua Ketilitian</small>
+            <small>Ketua Kelitian</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
             <li><a href="#">Konfigurasi Pengguna</a></li>
             <li><a href="<?php echo base_url();?>
-leader">Ketua Ketilitian</a></li>
-            <li class="active">Tambah Ketua Ketilitian</li>
+leader">Ketua Kelitian</a></li>
+            <li class="active">Tambah Ketua Kelitian</li>
         </ol>
     </section>
 
@@ -94,7 +94,7 @@ leader">Ketua Ketilitian</a></li>
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">Tambah Ketua Ketilitian</h3>
+                        <h3 class="box-title">Tambah Ketua Kelitian</h3>
                     </div><!-- /.box-header -->
                     <?php echo form_open('tambah_leader');?>
 
@@ -156,7 +156,7 @@ $_smarty_tpl->tpl_vars['research_group']->_loop = true;
                         <div class="form-group">
                             <label>Ketua Ketelitian</label>
                             <select class="form-control" name="user" id="user">
-                                <option value="">-- Pilih Ketua Ketelitian --</option>
+                                <option value="">-- Pilih Ketua Kelitian --</option>
                                 <?php  $_smarty_tpl->tpl_vars['member'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['member']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['members']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['member']->key => $_smarty_tpl->tpl_vars['member']->value) {

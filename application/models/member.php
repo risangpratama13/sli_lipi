@@ -21,6 +21,15 @@ class Member extends CI_Model {
         return $query->row();
     }
     
+    function find_byresgroup($res_group) {
+        $this->db->select('users.id, users.full_name');
+        $this->db->from('members');
+        $this->db->join('users','users.id = members.user_id');
+        $this->db->where('members.research_group_id', $res_group);
+        $query = $this->db->get();
+        return $query->result();
+    }
+            
     function create_member($data) {
         return $this->db->insert($this->table, $data);
     }

@@ -13,4 +13,8 @@ class Research extends CI_Model {
         return $query->result();
     }
     
+    function find_byid($id) {
+        return $this->db->get_where($this->table, array("id" => $id))->row();
+    }
+    
 }

@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 date_default_timezone_set("Asia/Jakarta");
 
 class Auth extends CI_Controller {
-    
+
     function __construct() {
         parent::__construct();
         $this->load->model('member');
@@ -290,15 +290,17 @@ class Auth extends CI_Controller {
             if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
                 $this->load->model('research_group');
 
-                $leaders = $this->ion_auth->users($group_id)->result();                
+                $leaders = $this->ion_auth->users($group_id)->result();
                 $add_data = array();
-                
+
                 foreach ($leaders as $leader) {
                     if ($leader->user_id != NULL) {
                         $member = $this->member->by_user_id($leader->user_id);
-                        $add_data['research_group_'.$leader->user_id] = $member->res_group_name;
-                        $add_data['researcher_'.$leader->user_id] = $member->researcher_name;
-                        $add_data['research_'.$leader->user_id] = $member->research_name;
+                        $research_group = $this->research_group->find_byuser($leader->user_id);
+                        $add_data['res_group_id_' . $leader->user_id] = $research_group->id;
+                        $add_data['research_group_' . $leader->user_id] = $member->res_group_name;
+                        $add_data['researcher_' . $leader->user_id] = $member->researcher_name;
+                        $add_data['research_' . $leader->user_id] = $member->research_name;
                     }
                 }
 
@@ -408,15 +410,15 @@ class Auth extends CI_Controller {
         } else {
             $identity = $this->input->post('identity');
             $id = $this->ion_auth->get_user_id_by_username($identity);
-            
+
             $data = array("password" => $this->input->post('new'));
             $change = $this->ion_auth->update($id, $data);
 
             if ($change) {
                 $this->session->set_flashdata('message', $this->ion_auth->messages());
-                if($this->ion_auth->in_group(2, $id)) {
+                if ($this->ion_auth->in_group(2, $id)) {
                     redirect('anggota', 'refresh');
-                } else if($this->ion_auth->in_group(1, $id)) {
+                } else if ($this->ion_auth->in_group(1, $id)) {
                     redirect('administrator', 'refresh');
                 }
             } else {
@@ -909,8 +911,8 @@ class Auth extends CI_Controller {
             redirect('/', 'refresh');
         }
     }
-    
-    function edit_research_group_leader() {
+
+    function edit_research_group_leader($res_group_id) {
         if (!$this->ion_auth->logged_in()) {
             redirect('login', 'refresh');
         }
@@ -921,30 +923,54 @@ class Auth extends CI_Controller {
             $this->load->model('research_group');
 
             if ($this->input->post('submit')) {
-                $research_group = $this->input->post('research_group');
                 $user_id = $this->input->post('user');
+                $res_group_id = $this->input->post('res_group_id');
+                $ori_user_id = $this->input->post('ori_user_id');
+                
                 $data = array('user_id' => $user_id);
-                $this->research_group->update($research_group, $data);
+                $this->research_group->update($res_group_id, $data);
+                
+                $this->ion_auth->remove_from_group(5, $ori_user_id);
                 $this->ion_auth->add_to_group(5, $user_id);
                 redirect('leader', 'refresh');
             } else {
-                $researchers = $this->researcher->get_all();
-                $researches = $this->research->get_all();
-                $research_groups = $this->research_group->find_nouser();
-                $members = $this->ion_auth->users(2)->result();
-                $anggota = array();
-                foreach ($members as $member) {
-                    $data_member = $this->member->by_user_id($member->id);
-                    $anggota[$member->id] = $data_member->research_group_id;
+                $select_member = array();
+                $research_group = $this->research_group->find_byid($res_group_id);
+                $researcher = $this->researcher->find_byid($research_group->researcher_id);
+                $research = $this->research->find_byid($research_group->research_id);
+                $members = $this->member->find_byresgroup($res_group_id);
+                if (!empty($members)) {
+                    foreach ($members as $member) {
+                        $select_member[$member->id] = $member->full_name;
+                    }
                 }
 
+                $data['deputi_bidang'] = array(
+                    'type' => 'text',
+                    'class' => 'form-control',
+                    'value' => $researcher->researcher_name,
+                    'disabled' => 'disabled'
+                );
+                
+                $data['satuan_kerja'] = array(
+                    'type' => 'text',
+                    'class' => 'form-control',
+                    'value' => $research->research_name,
+                    'disabled' => 'disabled'
+                );
+                
+                $data['kelompok_penelitian'] = array(
+                    'type' => 'text',
+                    'class' => 'form-control',
+                    'value' => $research_group->res_group_name,
+                    'disabled' => 'disabled'
+                );
+
                 $this->basic_data();
-                $this->smartyci->assign('members', $members);
-                $this->smartyci->assign('research_group_id', $anggota);
-                $this->smartyci->assign('researchers', $researchers);
-                $this->smartyci->assign('researches', $researches);
-                $this->smartyci->assign('research_groups', $research_groups);
-                $this->smartyci->display('configuration/add_leader.tpl');
+                $this->smartyci->assign('members', $select_member);
+                $this->smartyci->assign('research_group', $research_group);
+                $this->smartyci->assign('data', $data);
+                $this->smartyci->display('configuration/edit_leader.tpl');
             }
         } else {
             redirect('/', 'refresh');
