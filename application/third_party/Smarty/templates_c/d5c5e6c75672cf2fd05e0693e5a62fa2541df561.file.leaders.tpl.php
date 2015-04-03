@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-11 06:23:15
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-21 06:44:01
          compiled from "application\views\configuration\leaders.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:810454fe369a57da03-08991587%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd5c5e6c75672cf2fd05e0693e5a62fa2541df561' => 
     array (
       0 => 'application\\views\\configuration\\leaders.tpl',
-      1 => 1426029792,
+      1 => 1426894038,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -80,14 +80,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <section class="content-header">
         <h1>
             Konfigurasi Pengguna
-            <small>Ketua Ketelitian</small>
+            <small>Ketua Kelitian</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
             <li><a href="#">Konfigurasi Pengguna</a></li>
             <li><a href="<?php echo base_url();?>
-leader">Ketua Ketelitian</a></li>
-            <li class="active">Daftar Ketua Ketelitian</li>
+leader">Ketua Kelitian</a></li>
+            <li class="active">Daftar Ketua Kelitian</li>
         </ol>
     </section>
 
@@ -97,12 +97,12 @@ leader">Ketua Ketelitian</a></li>
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Daftar Ketua Ketelitian</h3>
+                        <h3 class="box-title">Daftar Ketua Kelitian</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
                         <a href="<?php echo base_url();?>
 tambah_leader" class="btn btn-flat btn-primary">
-                            <i class="fa fa-plus-circle"></i> Tambah Ketua Ketelitian
+                            <i class="fa fa-plus-circle"></i> Tambah Ketua Kelitian
                         </a>
                         <br/><br/>
                         <table id="tableLeader" class="table table-bordered table-striped">
@@ -136,10 +136,7 @@ anggota/<?php echo $_smarty_tpl->tpl_vars['leader']->value->username;?>
 " title="Profil Anggota" class="btn btn-flat btn-sm btn-info"><i class="fa fa-eye"></i></a>
                                             <a href="<?php echo base_url();?>
 edit_leader/<?php echo $_smarty_tpl->tpl_vars['leader']->value->id;?>
-" title="Ubah Ketua Ketelitian" class="btn btn-flat btn-sm btn-warning"><i class="fa fa-edit"></i></a>
-                                            <button onclick="deleteLeader(<?php echo $_smarty_tpl->tpl_vars['leader']->value->id;?>
-, '<?php echo $_smarty_tpl->tpl_vars['leader']->value->full_name;?>
-')" title="Hapus Ketua Ketelitian" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
+" title="Ubah Ketua Ketelitian" class="btn btn-flat btn-sm btn-warning"><i class="fa fa-edit"></i></a>                                            
                                         </td>
                                     </tr>
                                 <?php } ?>

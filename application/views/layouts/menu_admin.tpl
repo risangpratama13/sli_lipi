@@ -61,7 +61,7 @@
                 {/if}
             <li><a href="{base_url()}anggota"><i class="fa fa-angle-double-right"></i> Anggota</a></li>
             <li><a href="{base_url()}operator"><i class="fa fa-angle-double-right"></i> Operator</a></li>
-            <li><a href="{base_url()}leader"><i class="fa fa-angle-double-right"></i> Kelompok Ketelitian</a></li>
+            <li><a href="{base_url()}leader"><i class="fa fa-angle-double-right"></i> Kelompok Kelitian</a></li>
         </ul>
     </li>
 </ul>

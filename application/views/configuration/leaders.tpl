@@ -4,13 +4,13 @@
     <section class="content-header">
         <h1>
             Konfigurasi Pengguna
-            <small>Ketua Ketelitian</small>
+            <small>Ketua Kelitian</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
             <li><a href="#">Konfigurasi Pengguna</a></li>
-            <li><a href="{base_url()}leader">Ketua Ketelitian</a></li>
-            <li class="active">Daftar Ketua Ketelitian</li>
+            <li><a href="{base_url()}leader">Ketua Kelitian</a></li>
+            <li class="active">Daftar Ketua Kelitian</li>
         </ol>
     </section>
 
@@ -20,11 +20,11 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Daftar Ketua Ketelitian</h3>
+                        <h3 class="box-title">Daftar Ketua Kelitian</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
                         <a href="{base_url()}tambah_leader" class="btn btn-flat btn-primary">
-                            <i class="fa fa-plus-circle"></i> Tambah Ketua Ketelitian
+                            <i class="fa fa-plus-circle"></i> Tambah Ketua Kelitian
                         </a>
                         <br/><br/>
                         <table id="tableLeader" class="table table-bordered table-striped">
@@ -46,8 +46,7 @@
                                         <td>{$add_data["research_`$leader->user_id`"]}</td>
                                         <td>
                                             <a href="{base_url()}anggota/{$leader->username}" title="Profil Anggota" class="btn btn-flat btn-sm btn-info"><i class="fa fa-eye"></i></a>
-                                            <a href="{base_url()}edit_leader/{$leader->id}" title="Ubah Ketua Ketelitian" class="btn btn-flat btn-sm btn-warning"><i class="fa fa-edit"></i></a>
-                                            <button onclick="deleteLeader({$leader->id}, '{$leader->full_name}')" title="Hapus Ketua Ketelitian" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
+                                            <a href="{base_url()}edit_leader/{$leader->id}" title="Ubah Ketua Ketelitian" class="btn btn-flat btn-sm btn-warning"><i class="fa fa-edit"></i></a>                                            
                                         </td>
                                     </tr>
                                 {/foreach}

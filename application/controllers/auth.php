@@ -909,5 +909,46 @@ class Auth extends CI_Controller {
             redirect('/', 'refresh');
         }
     }
+    
+    function edit_research_group_leader() {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+
+        if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
+            $this->load->model('researcher');
+            $this->load->model('research');
+            $this->load->model('research_group');
+
+            if ($this->input->post('submit')) {
+                $research_group = $this->input->post('research_group');
+                $user_id = $this->input->post('user');
+                $data = array('user_id' => $user_id);
+                $this->research_group->update($research_group, $data);
+                $this->ion_auth->add_to_group(5, $user_id);
+                redirect('leader', 'refresh');
+            } else {
+                $researchers = $this->researcher->get_all();
+                $researches = $this->research->get_all();
+                $research_groups = $this->research_group->find_nouser();
+                $members = $this->ion_auth->users(2)->result();
+                $anggota = array();
+                foreach ($members as $member) {
+                    $data_member = $this->member->by_user_id($member->id);
+                    $anggota[$member->id] = $data_member->research_group_id;
+                }
+
+                $this->basic_data();
+                $this->smartyci->assign('members', $members);
+                $this->smartyci->assign('research_group_id', $anggota);
+                $this->smartyci->assign('researchers', $researchers);
+                $this->smartyci->assign('researches', $researches);
+                $this->smartyci->assign('research_groups', $research_groups);
+                $this->smartyci->display('configuration/add_leader.tpl');
+            }
+        } else {
+            redirect('/', 'refresh');
+        }
+    }
 
 }

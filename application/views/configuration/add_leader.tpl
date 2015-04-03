@@ -4,13 +4,13 @@
     <section class="content-header">
         <h1>
             Konfigurasi Pengguna
-            <small>Ketua Ketilitian</small>
+            <small>Ketua Kelitian</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
             <li><a href="#">Konfigurasi Pengguna</a></li>
-            <li><a href="{base_url()}leader">Ketua Ketilitian</a></li>
-            <li class="active">Tambah Ketua Ketilitian</li>
+            <li><a href="{base_url()}leader">Ketua Kelitian</a></li>
+            <li class="active">Tambah Ketua Kelitian</li>
         </ol>
     </section>
 
@@ -20,7 +20,7 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">Tambah Ketua Ketilitian</h3>
+                        <h3 class="box-title">Tambah Ketua Kelitian</h3>
                     </div><!-- /.box-header -->
                     {form_open('tambah_leader')}
                     <div class="box-body">
@@ -57,7 +57,7 @@
                         <div class="form-group">
                             <label>Ketua Ketelitian</label>
                             <select class="form-control" name="user" id="user">
-                                <option value="">-- Pilih Ketua Ketelitian --</option>
+                                <option value="">-- Pilih Ketua Kelitian --</option>
                                 {foreach $members as $member}
                                     <option value="{$member->id}" class="{$research_group_id[$member->id]}">{$member->full_name}</option>                                                                                                                
                                 {/foreach}
