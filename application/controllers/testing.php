@@ -12,6 +12,7 @@ class Testing extends CI_Controller {
         $this->load->model('test_order');
         $this->load->model('tool');
         $this->load->model('test_tool');
+        $this->load->model('research_group');
 
         $this->load->helper('download');
         $this->load->library('form_validation');
@@ -112,7 +113,8 @@ class Testing extends CI_Controller {
                     'category_id' => $this->input->post('category'),
                     'testing_name' => $this->input->post('testing_name'),
                     'testing_price' => $this->input->post('testing_price'),
-                    'unit_id' => $this->input->post('unit')
+                    'unit_id' => $this->input->post('unit'),
+                    'research_group_id' => $this->input->post('research_group')
                 );
                 $this->test->save($data);
                 redirect('pengujian', 'refresh');
@@ -130,19 +132,32 @@ class Testing extends CI_Controller {
                 );
                 $categories = $this->category->get_all();
                 $kategori = array();
-                foreach ($categories as $category) {
-                    $kategori[$category->id] = $category->cat_name;
+                if (!empty($categories)) {
+                    foreach ($categories as $category) {
+                        $kategori[$category->id] = $category->cat_name;
+                    }
                 }
 
                 $units = $this->unit->get_all();
                 $satuan = array();
-                foreach ($units as $unit) {
-                    $satuan[$unit->id] = $unit->unit_name;
+                if (!empty($units)) {
+                    foreach ($units as $unit) {
+                        $satuan[$unit->id] = $unit->unit_name;
+                    }
+                }
+                
+                $research_groups = $this->research_group->find_withuser();
+                $kelitian = array();
+                if (!empty($research_groups)) {
+                    foreach ($research_groups as $research_group) {
+                        $kelitian[$research_group->id] = $research_group->res_group_name;
+                    }
                 }
 
                 $this->basic_data();
                 $this->smartyci->assign('kategori', $kategori);
                 $this->smartyci->assign('satuan', $satuan);
+                $this->smartyci->assign('kelitian', $kelitian);
                 $this->smartyci->assign('data', $data);
                 $this->smartyci->display('testing/add_test.tpl');
             }
@@ -166,7 +181,8 @@ class Testing extends CI_Controller {
                     'category_id' => $this->input->post('category'),
                     'testing_name' => $this->input->post('testing_name'),
                     'testing_price' => $this->input->post('testing_price'),
-                    'unit_id' => $this->input->post('unit')
+                    'unit_id' => $this->input->post('unit'),
+                    'research_group_id' => $this->input->post('research_group')
                 );
                 $this->test->update($id, $data);
                 redirect('pengujian', 'refresh');
@@ -188,14 +204,26 @@ class Testing extends CI_Controller {
 
                 $categories = $this->category->get_all();
                 $kategori = array();
-                foreach ($categories as $category) {
-                    $kategori[$category->id] = $category->cat_name;
+                if (!empty($categories)) {
+                    foreach ($categories as $category) {
+                        $kategori[$category->id] = $category->cat_name;
+                    }
                 }
 
                 $units = $this->unit->get_all();
                 $satuan = array();
-                foreach ($units as $unit) {
-                    $satuan[$unit->id] = $unit->unit_name;
+                if (!empty($units)) {
+                    foreach ($units as $unit) {
+                        $satuan[$unit->id] = $unit->unit_name;
+                    }
+                }
+                
+                $research_groups = $this->research_group->find_withuser();
+                $kelitian = array();
+                if (!empty($research_groups)) {
+                    foreach ($research_groups as $research_group) {
+                        $kelitian[$research_group->id] = $research_group->res_group_name;
+                    }
                 }
 
                 $this->basic_data();
@@ -203,6 +231,8 @@ class Testing extends CI_Controller {
                 $this->smartyci->assign('cat_option', $test->category_id);
                 $this->smartyci->assign('satuan', $satuan);
                 $this->smartyci->assign('unit_option', $test->unit_id);
+                $this->smartyci->assign('kelitian', $kelitian);
+                $this->smartyci->assign('res_group_option', $test->research_group_id);
                 $this->smartyci->assign('data', $data);
                 $this->smartyci->assign('test', $test);
                 $this->smartyci->display('testing/edit_test.tpl');
@@ -286,7 +316,7 @@ class Testing extends CI_Controller {
                         'status' => 'O',
                         'start_date' => $tanggal_mulai,
                         'finish_date' => $tanggal_selesai
-                    );                    
+                    );
                     $this->test_order->update($test_order_id, $data);
                     if ($this->input->post('tools')) {
                         $tools = $this->input->post('tools');
@@ -297,7 +327,7 @@ class Testing extends CI_Controller {
                                 'tool_id' => $tool_id,
                                 'test_order_id' => $test_order_id,
                                 'qty' => $qty
-                            );                            
+                            );
                             $this->test_tool->save($data);
                         }
                     }
@@ -333,7 +363,7 @@ class Testing extends CI_Controller {
         if ($_SERVER['HTTP_REFERER']) {
             $status = $this->input->post('status');
             $id = $this->input->post('id');
-            switch ($status) {                
+            switch ($status) {
                 case 'F':
                     $data = array(
                         'status' => 'F',
@@ -350,16 +380,16 @@ class Testing extends CI_Controller {
             redirect('/', 'refresh');
         }
     }
-    
+
     function view_test_order($test_order_id) {
         if (!$this->ion_auth->logged_in()) {
             redirect('login', 'refresh');
         }
-        
-        if($test_order_id != "") {
+
+        if ($test_order_id != "") {
             $test_order = $this->test_order->find_byid($test_order_id);
             $tools = $this->test_tool->find_bytestorder($test_order_id);
-            
+
             $this->basic_data();
             $this->smartyci->assign('test_order', $test_order);
             $this->smartyci->assign('tools', $tools);
@@ -394,34 +424,34 @@ class Testing extends CI_Controller {
             redirect('/', 'refresh');
         }
     }
-    
-    function calendar() {        
+
+    function calendar() {
         if (!$this->ion_auth->logged_in()) {
             redirect('login', 'refresh');
-        }        
+        }
         $tests = $this->test_order->find_bystatus(array('O', 'F'));
         $test_calendar = array();
-        if(!empty($tests)) {
+        if (!empty($tests)) {
             foreach ($tests as $test) {
                 $test_calendar[] = array(
                     'id' => $test->id,
                     'title' => $test->testing_name,
                     'start' => date('c', strtotime($test->start_date)),
                     'end' => date('c', strtotime($test->finish_date)),
-                    'url' => base_url()."view_test/".$test->id,
+                    'url' => base_url() . "view_test/" . $test->id,
                     'color' => 'green',
                     'backgroundColor' => $this->colorStatus($test->status),
-                    'borderColor' => $this->colorStatus($test->status),                    
+                    'borderColor' => $this->colorStatus($test->status),
                 );
             }
         }
         echo json_encode($test_calendar);
     }
-    
+
     function colorStatus($status) {
-        if($status == "O") {
+        if ($status == "O") {
             $color = "green";
-        } else if($status == "F") {
+        } else if ($status == "F") {
             $color = "blue";
         }
         return $color;

@@ -43,6 +43,10 @@
                             {form_error('testing_price','<p class="help-block text-red">','</p>')}
                         </div>
                         <div class="form-group">                            
+                            <label for="kelitian">Kelompok Penelitian</label>
+                            {html_options name=research_group options=$kelitian}                       
+                        </div>
+                        <div class="form-group">                            
                             <label for="unit">Satuan (Per)</label>
                             {html_options name=unit options=$satuan}                         
                         </div>

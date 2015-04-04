@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-09 23:38:24
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-04 05:06:23
          compiled from "application\views\testing\test.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:22732548ecd92ae1186-81553100%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '41b1c7783b92ab69bb35e1d3b794615111662757' => 
     array (
       0 => 'application\\views\\testing\\test.tpl',
-      1 => 1418731892,
+      1 => 1428116781,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1423521212,
+      1 => 1423218267,
       2 => 'file',
     ),
   ),
@@ -111,8 +111,9 @@ tambah_pengujian" class="btn btn-flat btn-primary">
                                     <th>Pengujian</th>
                                     <th>Kategori Pengujian</th>
                                     <th>Satuan</th>
-                                    <th>Harga</th>
-                                    <th>Aksi</th>
+                                    <th width="15%">Harga</th>
+                                    <th>Kelompok Penelitian</th>
+                                    <th width="10%">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -133,6 +134,8 @@ $_smarty_tpl->tpl_vars['test']->_loop = true;
 </td>
                                         <td>Rp. <?php echo number_format($_smarty_tpl->tpl_vars['test']->value->testing_price,'2',',','.');?>
 </td>
+                                        <td><?php echo $_smarty_tpl->tpl_vars['test']->value->res_group_name;?>
+</td>                                        
                                         <td>
                                             <a href="<?php echo base_url();?>
 ubah_pengujian/<?php echo $_smarty_tpl->tpl_vars['test']->value->id;?>

@@ -23,6 +23,12 @@ class Research_group extends CI_Model {
         return $query->result();
     }
     
+    function find_withuser() {
+        $this->db->where('user_id IS NOT NULL', null, false);
+        $query = $this->db->get($this->table);
+        return $query->result();
+    }
+    
     function find_byid($id) {
         return $this->db->get_where($this->table, array("id" => $id))->row();
     }

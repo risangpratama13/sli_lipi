@@ -9,10 +9,11 @@ class Test extends CI_Model {
     }
     
     function get_all() {
-        $this->db->select('tests.*, categories.cat_name, units.unit_name');
+        $this->db->select('tests.*, categories.cat_name, units.unit_name, research_groups.res_group_name');
         $this->db->from($this->table);
         $this->db->join('categories','tests.category_id = categories.id');
         $this->db->join('units','tests.unit_id = units.id');
+        $this->db->join('research_groups','tests.research_group_id = research_groups.id');
         $query = $this->db->get();
         return $query->result();
     }

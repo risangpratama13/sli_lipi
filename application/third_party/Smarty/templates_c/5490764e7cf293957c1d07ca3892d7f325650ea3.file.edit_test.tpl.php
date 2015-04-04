@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-03 04:27:28
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-04 05:22:24
          compiled from "application\views\testing\edit_test.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:32524548f67ab399c16-31635350%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '5490764e7cf293957c1d07ca3892d7f325650ea3' => 
     array (
       0 => 'application\\views\\testing\\edit_test.tpl',
-      1 => 1428028046,
+      1 => 1428117739,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -127,6 +127,11 @@ pengujian">Daftar Pengujian</a></li>
                             </div>
                             <?php echo form_error('testing_price','<p class="help-block text-red">','</p>');?>
 
+                        </div>
+                        <div class="form-group">                            
+                            <label for="kelitian">Kelompok Penelitian</label>
+                            <?php echo smarty_function_html_options(array('name'=>'research_group','options'=>$_smarty_tpl->tpl_vars['kelitian']->value,'selected'=>$_smarty_tpl->tpl_vars['res_group_option']->value),$_smarty_tpl);?>
+                       
                         </div>
                         <div class="form-group">                            
                             <label for="unit">Satuan (Per)</label>

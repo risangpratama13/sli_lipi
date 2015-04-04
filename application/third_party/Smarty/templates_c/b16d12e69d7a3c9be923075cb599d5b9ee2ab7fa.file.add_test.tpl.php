@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-21 02:33:44
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-04 05:16:31
          compiled from "application\views\testing\add_test.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2717548f61712e32c1-62855273%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b16d12e69d7a3c9be923075cb599d5b9ee2ab7fa' => 
     array (
       0 => 'application\\views\\testing\\add_test.tpl',
-      1 => 1418962726,
+      1 => 1428117303,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1423521212,
+      1 => 1423218267,
       2 => 'file',
     ),
   ),
@@ -124,6 +124,11 @@ pengujian">Daftar Pengujian</a></li>
                             </div>
                             <?php echo form_error('testing_price','<p class="help-block text-red">','</p>');?>
 
+                        </div>
+                        <div class="form-group">                            
+                            <label for="kelitian">Kelompok Penelitian</label>
+                            <?php echo smarty_function_html_options(array('name'=>'research_group','options'=>$_smarty_tpl->tpl_vars['kelitian']->value),$_smarty_tpl);?>
+                       
                         </div>
                         <div class="form-group">                            
                             <label for="unit">Satuan (Per)</label>

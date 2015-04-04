@@ -33,8 +33,9 @@
                                     <th>Pengujian</th>
                                     <th>Kategori Pengujian</th>
                                     <th>Satuan</th>
-                                    <th>Harga</th>
-                                    <th>Aksi</th>
+                                    <th width="15%">Harga</th>
+                                    <th>Kelompok Penelitian</th>
+                                    <th width="10%">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,6 +47,7 @@
                                         <td>{$test->cat_name}</td>
                                         <td>Per {$test->unit_name}</td>
                                         <td>Rp. {number_format($test->testing_price, '2', ',', '.')}</td>
+                                        <td>{$test->res_group_name}</td>                                        
                                         <td>
                                             <a href="{base_url()}ubah_pengujian/{$test->id}" title="Ubah Pengujian" class="btn btn-flat btn-sm btn-warning"><i class="fa fa-edit"></i></a>
                                             <button onclick="deleteTest({$test->id})" title="Hapus Pengujian" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
