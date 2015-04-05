@@ -90,6 +90,7 @@ $route['pengujian_operator'] = "testing/history/operator";
 $route['confirm/(:num)'] = "testing/confirm_test_order/$1";
 $route['history_pengujian'] = "testing/history/all";
 $route['view_test/(:num)'] = "testing/view_test_order/$1";
+$route['konfirmasi_pengujian'] = "testing/leader_confirm_test";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

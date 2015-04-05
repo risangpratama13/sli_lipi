@@ -145,7 +145,7 @@ class Testing extends CI_Controller {
                         $satuan[$unit->id] = $unit->unit_name;
                     }
                 }
-                
+
                 $research_groups = $this->research_group->find_withuser();
                 $kelitian = array();
                 if (!empty($research_groups)) {
@@ -217,7 +217,7 @@ class Testing extends CI_Controller {
                         $satuan[$unit->id] = $unit->unit_name;
                     }
                 }
-                
+
                 $research_groups = $this->research_group->find_withuser();
                 $kelitian = array();
                 if (!empty($research_groups)) {
@@ -359,6 +359,23 @@ class Testing extends CI_Controller {
         }
     }
 
+    function leader_confirm_test() {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+
+        $user = $this->ion_auth->user()->row();
+        if ($this->ion_auth->in_group(5)) {
+            $tests = $this->test_order->find_byleader($user->id);
+            
+            $this->basic_data();
+            $this->smartyci->assign('tests', $tests);
+            $this->smartyci->display('testing/leader_confirm_test.tpl');
+        } else {
+            redirect('/', 'refresh');
+        }
+    }
+
     function update_status() {
         if ($_SERVER['HTTP_REFERER']) {
             $status = $this->input->post('status');
@@ -429,7 +446,7 @@ class Testing extends CI_Controller {
         if (!$this->ion_auth->logged_in()) {
             redirect('login', 'refresh');
         }
-        $tests = $this->test_order->find_bystatus(array('O', 'F'));
+        $tests = $this->test_order->find_bystatus(array('AO', 'F'));
         $test_calendar = array();
         if (!empty($tests)) {
             foreach ($tests as $test) {

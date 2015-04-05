@@ -682,9 +682,12 @@ class Auth extends CI_Controller {
                 $this->form_validation->set_rules('province', 'Propinsi', 'required|xss_clean');
                 $this->form_validation->set_rules('state', 'Kabupaten/Kota', 'required|xss_clean');
                 $this->form_validation->set_rules('phone', 'Kabupaten/Kota', 'required|xss_clean');
-                $this->form_validation->set_rules('researcher', 'Deputi Bidang', 'required|xss_clean');
-                $this->form_validation->set_rules('research', 'Satuan Kerja', 'required|xss_clean');
-                $this->form_validation->set_rules('research_group', 'Kelompok Penelitian', 'required|xss_clean');
+
+                if (!$this->ion_auth->in_group(5)) {
+                    $this->form_validation->set_rules('researcher', 'Deputi Bidang', 'required|xss_clean');
+                    $this->form_validation->set_rules('research', 'Satuan Kerja', 'required|xss_clean');
+                    $this->form_validation->set_rules('research_group', 'Kelompok Penelitian', 'required|xss_clean');
+                }
 
                 $member = $this->member->by_user_id($id);
                 $provinces = $this->province->get_all();
@@ -754,20 +757,34 @@ class Auth extends CI_Controller {
                         'sex' => $this->input->post('sex')
                     );
 
-                    $data_member = array(
-                        'user_id' => $id,
-                        'category' => $this->input->post('category'),
-                        'position' => $this->input->post('position'),
-                        'birthplace' => $this->input->post('birthplace'),
-                        'birthday' => $this->input->post('birthday'),
-                        'address' => $this->input->post('address'),
-                        'province_id' => $this->input->post('province'),
-                        'state_id' => $this->input->post('state'),
-                        'phone' => $this->input->post('phone'),
-                        'researcher_id' => $this->input->post('researcher'),
-                        'research_id' => $this->input->post('research'),
-                        'research_group' => $this->input->post('research_group')
-                    );
+                    if ($this->ion_auth->in_group(5)) {
+                        $data_member = array(
+                            'user_id' => $id,
+                            'category' => $this->input->post('category'),
+                            'position' => $this->input->post('position'),
+                            'birthplace' => $this->input->post('birthplace'),
+                            'birthday' => $this->input->post('birthday'),
+                            'address' => $this->input->post('address'),
+                            'province_id' => $this->input->post('province'),
+                            'state_id' => $this->input->post('state'),
+                            'phone' => $this->input->post('phone')
+                        );
+                    } else {
+                        $data_member = array(
+                            'user_id' => $id,
+                            'category' => $this->input->post('category'),
+                            'position' => $this->input->post('position'),
+                            'birthplace' => $this->input->post('birthplace'),
+                            'birthday' => $this->input->post('birthday'),
+                            'address' => $this->input->post('address'),
+                            'province_id' => $this->input->post('province'),
+                            'state_id' => $this->input->post('state'),
+                            'phone' => $this->input->post('phone'),
+                            'researcher_id' => $this->input->post('researcher'),
+                            'research_id' => $this->input->post('research'),
+                            'research_group' => $this->input->post('research_group')
+                        );
+                    }
 
                     if ($this->input->post('oper') == "add") {
                         $this->ion_auth->update($id, $data_users);
@@ -926,10 +943,10 @@ class Auth extends CI_Controller {
                 $user_id = $this->input->post('user');
                 $res_group_id = $this->input->post('res_group_id');
                 $ori_user_id = $this->input->post('ori_user_id');
-                
+
                 $data = array('user_id' => $user_id);
                 $this->research_group->update($res_group_id, $data);
-                
+
                 $this->ion_auth->remove_from_group(5, $ori_user_id);
                 $this->ion_auth->add_to_group(5, $user_id);
                 redirect('leader', 'refresh');
@@ -951,14 +968,14 @@ class Auth extends CI_Controller {
                     'value' => $researcher->researcher_name,
                     'disabled' => 'disabled'
                 );
-                
+
                 $data['satuan_kerja'] = array(
                     'type' => 'text',
                     'class' => 'form-control',
                     'value' => $research->research_name,
                     'disabled' => 'disabled'
                 );
-                
+
                 $data['kelompok_penelitian'] = array(
                     'type' => 'text',
                     'class' => 'form-control',

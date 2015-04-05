@@ -10,6 +10,10 @@
 {/block}
 
 {block name="profile_content"}
+    {if in_array("kelitian", $groups)}
+        {$disabled = "disabled"}
+    {/if}
+    
     <!-- Content Header (Page header) -->
     <h3 class="header">Ubah Informasi Pribadi</h3>
     <div class="box box-solid">
@@ -127,7 +131,7 @@
             </div>
             <div class="form-group">
                 <label>Deputi Bidang</label>
-                <select class="form-control" name="researcher" id="researcher">
+                <select class="form-control" name="researcher" id="researcher" {$disabled}>
                     <option value="">-- Pilih Deputi Bidang --</option>
                     {foreach $researchers as $researcher}
                         {if !empty($member)}
@@ -145,7 +149,7 @@
             </div>
             <div class="form-group">
                 <label>Satuan Kerja</label>
-                <select class="form-control" name="research" id="research">
+                <select class="form-control" name="research" id="research" {$disabled}>
                     <option value="">-- Pilih Satuan Kerja --</option>
                     {foreach $researches as $research}
                         {if !empty($member)}
@@ -163,7 +167,7 @@
             </div>
             <div class="form-group">
                 <label>Kelompok Penelitian</label>
-                <select class="form-control" name="research_group" id="research_group">
+                <select class="form-control" name="research_group" id="research_group" {$disabled}>
                     <option value="">-- Pilih Kelompok Penelitian --</option>
                     {foreach $research_groups as $research_group}
                         {if !empty($member)}
@@ -198,9 +202,11 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("[data-mask]").inputmask();
-            $("#state").chained("#province");
-            $("#research").chained("#researcher");
-            $("#research_group").chained("#researcher, #research");
+            {if !in_array("kelitian", $groups)}
+                $("#state").chained("#province");
+                $("#research").chained("#researcher");
+                $("#research_group").chained("#researcher, #research");
+            {/if}
         });
     </script>
 {/block}

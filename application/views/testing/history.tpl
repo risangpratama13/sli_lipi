@@ -91,21 +91,23 @@
                                         {/if}                                                                           
                                         {if $test->status eq "P"}
                                             <td><span class="label label-warning">Pending</span></td>
-                                        {else if $test->status eq "O"}
-                                            <td><span class="label label-success">Ok</span></td>
+                                        {else if $test->status eq "AL"}
+                                            <td><span class="label label-success">Disetujui Ketua Kelitian</span></td>
+                                        {else if $test->status eq "AO"}
+                                            <td><span class="label label-success">Disetujui Operator</span></td>                                        
                                         {else if $test->status eq "D"}
                                             <td><span class="label label-danger">Denied</span></td>
                                         {else if $test->status eq "F"}
                                             <td><span class="label label-info">Finish</span></td>
                                         {/if}                                        
                                         <td>
-                                            {if $test->status eq "P"}
+                                            {if $test->status eq "AL"}
                                                 {if $type eq "operator"}
                                                     <a href="{base_url()}confirm/{$test->id}" class="btn btn-flat btn-sm btn-primary">Konfirmasi</a>
                                                 {else}
                                                     &nbsp;
                                                 {/if}
-                                            {else if $test->status eq "O"}
+                                            {else if $test->status eq "AO"}
                                                 {if $type eq "operator"}
                                                     <button onclick="ubahStatus({$test->id}, 'F')" class="btn btn-flat btn-sm btn-default" title="Pengujian Selesai"><i class="fa fa-flag-checkered"></i></button>
                                                 {else}

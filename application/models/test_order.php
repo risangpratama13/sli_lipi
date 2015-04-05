@@ -57,6 +57,23 @@ class Test_order extends CI_Model {
         return $query->result();
     }
     
+    function find_byleader($leader_id) {
+        $this->db->select('test_orders.*, tests.testing_name, m.full_name as anggota, o.full_name as operator');
+        $this->db->from($this->table);
+        $this->db->join('orders','orders.id = test_orders.order_id');
+        $this->db->join('tests','tests.id = test_orders.test_id');
+        $this->db->join('research_groups','research_groups.id = tests.research_group_id');
+        $this->db->join('operators','operators.id = test_orders.operator_id');
+        $this->db->join('users m','orders.user_id = m.id');
+        $this->db->join('users o','operators.user_id = o.id');
+        $this->db->where('research_groups.user_id', $leader_id);
+        $this->db->where('test_orders.status', 'P');
+        $this->db->where('test_orders.status', 'AL');
+        $this->db->order_by('test_orders.status', 'DESC');
+        $query = $this->db->get();
+        return $query->result();
+    }
+            
     function count_test_orders($user_id = NULL) {
         if($user_id) {
             $this->db->from($this->table);

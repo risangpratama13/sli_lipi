@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-25 04:35:11
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-05 07:06:16
          compiled from "application\views\layouts\menu_member.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:143295487a9d939a3c4-15757029%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '44c59d7c28323712b9863af90a55e99343f978fa' => 
     array (
       0 => 'application\\views\\layouts\\menu_member.tpl',
-      1 => 1424736426,
+      1 => 1428192370,
       2 => 'file',
     ),
   ),
@@ -81,17 +81,39 @@ history_pengujian">
             </a>
             <ul class="treeview-menu">            
                 <li><a href="<?php echo base_url();?>
-pengujian_member"><i class="fa fa-angle-double-right"></i> Laporan Pengujian </a></li>     
+pengujian_member"><i class="fa fa-angle-double-right"></i> Laporan Pengujian </a></li>
+                    <?php if (in_array("kelitian",$_smarty_tpl->tpl_vars['groups']->value)) {?>
+                    <li><a href="<?php echo base_url();?>
+konfirmasi_pengujian"><i class="fa fa-angle-double-right"></i> Konfirmasi Pengujian </a></li>
+                    <?php }?>
                 <li><a href="<?php echo base_url();?>
 pengujian_operator"><i class="fa fa-angle-double-right"></i> Permohonan Pengujian </a></li>
             </ul>
         </li>
     <?php } elseif (in_array("members",$_smarty_tpl->tpl_vars['groups']->value)) {?>
-        <li>
-            <a href="<?php echo base_url();?>
+        <?php if (in_array("kelitian",$_smarty_tpl->tpl_vars['groups']->value)) {?>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-tasks"></i>
+                    <span> Laporan Pengujian </span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">            
+                    <li><a href="<?php echo base_url();?>
+pengujian_member"><i class="fa fa-angle-double-right"></i> Laporan Pengujian </a></li>
+                    <?php if (in_array("kelitian",$_smarty_tpl->tpl_vars['groups']->value)) {?>
+                        <li><a href="<?php echo base_url();?>
+konfirmasi_pengujian"><i class="fa fa-angle-double-right"></i> Konfirmasi Pengujian </a></li>
+                    <?php }?>
+                </ul>
+            </li>
+        <?php } else { ?>
+            <li>
+                <a href="<?php echo base_url();?>
 pengujian_member">
-                <i class="fa fa-tasks"></i> <span> Laporan Pengujian </span>
-            </a>
-        </li>        
+                    <i class="fa fa-tasks"></i> <span> Laporan Pengujian </span>
+                </a>
+            </li>
+        <?php }?>        
     <?php }?>
 </ul><?php }} ?>
