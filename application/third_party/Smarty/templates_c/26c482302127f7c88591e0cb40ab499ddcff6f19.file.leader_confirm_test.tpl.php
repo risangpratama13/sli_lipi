@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-05 02:07:53
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-05 03:58:02
          compiled from "application\views\testing\leader_confirm_test.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2188755207cd99f2cb5-32374689%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '26c482302127f7c88591e0cb40ab499ddcff6f19' => 
     array (
       0 => 'application\\views\\testing\\leader_confirm_test.tpl',
-      1 => 1428192075,
+      1 => 1428195831,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -21,9 +21,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
   'unifunc' => 'content_55207cd9ab61e5_60006773',
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_55207cd9ab61e5_60006773')) {function content_55207cd9ab61e5_60006773($_smarty_tpl) {?><!DOCTYPE html>
 <html>
@@ -138,12 +138,13 @@ $_smarty_tpl->tpl_vars['test']->_loop = true;
                                         <td>
                                             <?php if ($_smarty_tpl->tpl_vars['test']->value->status=="P") {?>
                                                 <a href="<?php echo base_url();?>
-confirm/<?php echo $_smarty_tpl->tpl_vars['test']->value->id;?>
-" class="btn btn-flat btn-sm btn-primary">Konfirmasi</a>
-                                            <?php }?>
-                                            <a href="<?php echo base_url();?>
 view_test/<?php echo $_smarty_tpl->tpl_vars['test']->value->id;?>
-" class="btn btn-flat btn-sm btn-info" title="Lihat Pengujian"><i class="fa fa-eye"></i></a>
+" class="btn btn-flat btn-sm btn-info" title="Konfirmasi Pengujian"><i class="fa fa-flag"></i></a>
+                                            <?php } else { ?>
+                                                <a href="<?php echo base_url();?>
+view_test/<?php echo $_smarty_tpl->tpl_vars['test']->value->id;?>
+" class="btn btn-flat btn-sm btn-info" title="Lihat Pengujian"><i class="fa fa-eye"></i></a>                                            
+                                            <?php }?>
                                         </td>
                                     </tr>
                                 <?php } ?>

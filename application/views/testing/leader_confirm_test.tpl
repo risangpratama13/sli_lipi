@@ -53,9 +53,10 @@
                                         {/if}                                        
                                         <td>
                                             {if $test->status eq "P"}
-                                                <a href="{base_url()}confirm/{$test->id}" class="btn btn-flat btn-sm btn-primary">Konfirmasi</a>
+                                                <a href="{base_url()}view_test/{$test->id}" class="btn btn-flat btn-sm btn-info" title="Konfirmasi Pengujian"><i class="fa fa-flag"></i></a>
+                                            {else}
+                                                <a href="{base_url()}view_test/{$test->id}" class="btn btn-flat btn-sm btn-info" title="Lihat Pengujian"><i class="fa fa-eye"></i></a>                                            
                                             {/if}
-                                            <a href="{base_url()}view_test/{$test->id}" class="btn btn-flat btn-sm btn-info" title="Lihat Pengujian"><i class="fa fa-eye"></i></a>
                                         </td>
                                     </tr>
                                 {/foreach}

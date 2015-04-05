@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-10 00:12:01
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-05 04:02:20
          compiled from "application\views\testing\view_test.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2558954d76cdf785498-14061738%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'aa236b7a7091e9cb6f261b0c6d53bbbd2b2e4b66' => 
     array (
       0 => 'application\\views\\testing\\view_test.tpl',
-      1 => 1423521212,
+      1 => 1428199337,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1423521212,
+      1 => 1423218267,
       2 => 'file',
     ),
   ),
@@ -146,13 +146,15 @@ view_test/<?php echo $_smarty_tpl->tpl_vars['test_order']->value->id;?>
                                 <td>Status Pengujian</td>
                                 <?php if ($_smarty_tpl->tpl_vars['test_order']->value->status=="P") {?>
                                     <td><span class="label label-warning">Pending</span></td>
-                                <?php } elseif ($_smarty_tpl->tpl_vars['test_order']->value->status=="O") {?>
-                                    <td><span class="label label-success">Ok</span></td>
+                                <?php } elseif ($_smarty_tpl->tpl_vars['test_order']->value->status=="AL") {?>
+                                    <td><span class="label label-success">Disetujui Ketua Kelitian</span></td>
+                                <?php } elseif ($_smarty_tpl->tpl_vars['test_order']->value->status=="AO") {?>
+                                    <td><span class="label label-success">Disetujui Operator</span></td>                                        
                                 <?php } elseif ($_smarty_tpl->tpl_vars['test_order']->value->status=="D") {?>
                                     <td><span class="label label-danger">Denied</span></td>
                                 <?php } elseif ($_smarty_tpl->tpl_vars['test_order']->value->status=="F") {?>
                                     <td><span class="label label-info">Finish</span></td>
-                                <?php }?>
+                                <?php }?> 
                             </tr>                            
                             <?php if (!empty($_smarty_tpl->tpl_vars['tools']->value)) {?>
                                 <tr>
@@ -167,13 +169,23 @@ $_smarty_tpl->tpl_vars['tool']->_loop = true;
                                                 <li><?php echo $_smarty_tpl->tpl_vars['tool']->value->tool_name;?>
  (<?php echo $_smarty_tpl->tpl_vars['tool']->value->qty;?>
 )</li>
-                                            <?php } ?>
+                                                <?php } ?>
                                         </ul>
                                     </td>
                                 </tr>
                             <?php }?>
                         </table>
                     </div><!-- /.box-body -->
+                    <?php if (in_array("kelitian",$_smarty_tpl->tpl_vars['groups']->value)) {?>
+                        <?php if ($_smarty_tpl->tpl_vars['test_order']->value->status=="P") {?>
+                            <div class="box-footer">
+                                <button onclick="ubahStatus(<?php echo $_smarty_tpl->tpl_vars['test_order']->value->id;?>
+, 'AL')" class="btn btn-flat btn-sm btn-success"><i class="fa fa-check"></i> Setujui Pengujian</button>
+                                <button onclick="ubahStatus(<?php echo $_smarty_tpl->tpl_vars['test_order']->value->id;?>
+, 'D')" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-times"></i> Tolak Pengujian</button>
+                            </div>
+                        <?php }?>                    
+                    <?php }?>
                 </div><!-- /.box -->
             </div><!-- ./col -->      
         </div><!-- /.row -->                
@@ -206,5 +218,26 @@ asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
 >
         <!-- Addons Scripts -->
         
+    <?php echo '<script'; ?>
+ type="text/javascript">
+        function ubahStatus(id, status) {
+            $.ajax({
+                url: "<?php echo base_url();?>
+testing/update_status",
+                type: "POST",
+                data: "id=" + id + "&status=" + status,
+                success: function (data) {
+                    if (data == "Success") {
+                        location.href = "<?php echo base_url();?>
+konfirmasi_pengujian";
+                    } else {
+                        alert("Gagal Mengubah Status");
+                    }
+                }
+            });
+        }
+    <?php echo '</script'; ?>
+>
+
     </body>
 </html><?php }} ?>

@@ -381,6 +381,12 @@ class Testing extends CI_Controller {
             $status = $this->input->post('status');
             $id = $this->input->post('id');
             switch ($status) {
+                case 'AL' : 
+                    $data = array('status' => 'AL');
+                    break;
+                case 'D' :
+                    $data = array('status' => 'D');
+                    break;
                 case 'F':
                     $data = array(
                         'status' => 'F',

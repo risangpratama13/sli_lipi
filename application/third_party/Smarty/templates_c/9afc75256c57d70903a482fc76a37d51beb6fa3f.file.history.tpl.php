@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-05 01:32:53
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-05 03:57:52
          compiled from "application\views\testing\history.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:8472549a1e8a8c8b89-83129481%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9afc75256c57d70903a482fc76a37d51beb6fa3f' => 
     array (
       0 => 'application\\views\\testing\\history.tpl',
-      1 => 1428143110,
+      1 => 1428191705,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -196,7 +196,7 @@ $_smarty_tpl->tpl_vars['test']->_loop = true;
                                             <td><span class="label label-info">Finish</span></td>
                                         <?php }?>                                        
                                         <td>
-                                            <?php if ($_smarty_tpl->tpl_vars['test']->value->status=="P") {?>
+                                            <?php if ($_smarty_tpl->tpl_vars['test']->value->status=="AL") {?>
                                                 <?php if ($_smarty_tpl->tpl_vars['type']->value=="operator") {?>
                                                     <a href="<?php echo base_url();?>
 confirm/<?php echo $_smarty_tpl->tpl_vars['test']->value->id;?>
@@ -204,7 +204,7 @@ confirm/<?php echo $_smarty_tpl->tpl_vars['test']->value->id;?>
                                                 <?php } else { ?>
                                                     &nbsp;
                                                 <?php }?>
-                                            <?php } elseif ($_smarty_tpl->tpl_vars['test']->value->status=="O") {?>
+                                            <?php } elseif ($_smarty_tpl->tpl_vars['test']->value->status=="AO") {?>
                                                 <?php if ($_smarty_tpl->tpl_vars['type']->value=="operator") {?>
                                                     <button onclick="ubahStatus(<?php echo $_smarty_tpl->tpl_vars['test']->value->id;?>
 , 'F')" class="btn btn-flat btn-sm btn-default" title="Pengujian Selesai"><i class="fa fa-flag-checkered"></i></button>

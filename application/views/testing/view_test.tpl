@@ -63,13 +63,15 @@
                                 <td>Status Pengujian</td>
                                 {if $test_order->status eq "P"}
                                     <td><span class="label label-warning">Pending</span></td>
-                                {else if $test_order->status eq "O"}
-                                    <td><span class="label label-success">Ok</span></td>
+                                {else if $test_order->status eq "AL"}
+                                    <td><span class="label label-success">Disetujui Ketua Kelitian</span></td>
+                                {else if $test_order->status eq "AO"}
+                                    <td><span class="label label-success">Disetujui Operator</span></td>                                        
                                 {else if $test_order->status eq "D"}
                                     <td><span class="label label-danger">Denied</span></td>
                                 {else if $test_order->status eq "F"}
                                     <td><span class="label label-info">Finish</span></td>
-                                {/if}
+                                {/if} 
                             </tr>                            
                             {if !empty($tools)}
                                 <tr>
@@ -78,15 +80,42 @@
                                         <ul>
                                             {foreach $tools as $tool}
                                                 <li>{$tool->tool_name} ({$tool->qty})</li>
-                                            {/foreach}
+                                                {/foreach}
                                         </ul>
                                     </td>
                                 </tr>
                             {/if}
                         </table>
                     </div><!-- /.box-body -->
+                    {if in_array("kelitian", $groups)}
+                        {if $test_order->status eq "P"}
+                            <div class="box-footer">
+                                <button onclick="ubahStatus({$test_order->id}, 'AL')" class="btn btn-flat btn-sm btn-success"><i class="fa fa-check"></i> Setujui Pengujian</button>
+                                <button onclick="ubahStatus({$test_order->id}, 'D')" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-times"></i> Tolak Pengujian</button>
+                            </div>
+                        {/if}                    
+                    {/if}
                 </div><!-- /.box -->
             </div><!-- ./col -->      
         </div><!-- /.row -->                
     </section><!-- /.content -->
+{/block}
+
+{block name="addon_scripts"}
+    <script type="text/javascript">
+        function ubahStatus(id, status) {
+            $.ajax({
+                url: "{base_url()}testing/update_status",
+                type: "POST",
+                data: "id=" + id + "&status=" + status,
+                success: function (data) {
+                    if (data == "Success") {
+                        location.href = "{base_url()}konfirmasi_pengujian";
+                    } else {
+                        alert("Gagal Mengubah Status");
+                    }
+                }
+            });
+        }
+    </script>
 {/block}
