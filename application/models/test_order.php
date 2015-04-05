@@ -68,7 +68,7 @@ class Test_order extends CI_Model {
         $this->db->join('users o','operators.user_id = o.id');
         $this->db->where('research_groups.user_id', $leader_id);
         $this->db->where('test_orders.status', 'P');
-        $this->db->where('test_orders.status', 'AL');
+        $this->db->or_where('test_orders.status', 'AL');
         $this->db->order_by('test_orders.status', 'DESC');
         $query = $this->db->get();
         return $query->result();
