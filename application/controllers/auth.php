@@ -293,14 +293,16 @@ class Auth extends CI_Controller {
                 $leaders = $this->ion_auth->users($group_id)->result();
                 $add_data = array();
 
-                foreach ($leaders as $leader) {
-                    if ($leader->user_id != NULL) {
-                        $member = $this->member->by_user_id($leader->user_id);
-                        $research_group = $this->research_group->find_byuser($leader->user_id);
-                        $add_data['res_group_id_' . $leader->user_id] = $research_group->id;
-                        $add_data['research_group_' . $leader->user_id] = $member->res_group_name;
-                        $add_data['researcher_' . $leader->user_id] = $member->researcher_name;
-                        $add_data['research_' . $leader->user_id] = $member->research_name;
+                if (!empty($leaders)) {
+                    foreach ($leaders as $leader) {
+                        if ($leader->user_id != NULL) {
+                            $member = $this->member->by_user_id($leader->user_id);
+                            $research_group = $this->research_group->find_byuser($leader->user_id);
+                            $add_data['res_group_id_' . $leader->user_id] = $research_group->id;
+                            $add_data['research_group_' . $leader->user_id] = $member->res_group_name;
+                            $add_data['researcher_' . $leader->user_id] = $member->researcher_name;
+                            $add_data['research_' . $leader->user_id] = $member->research_name;
+                        }
                     }
                 }
 
