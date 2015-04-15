@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-08 06:18:26
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-16 05:52:47
          compiled from "application\views\account\form_item.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:173035492119672c1f5-49354121%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'e8a808f2a2f2a2d130823bf17e160cd67163f71e' => 
     array (
       0 => 'application\\views\\account\\form_item.tpl',
-      1 => 1425770287,
+      1 => 1429138365,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -179,8 +179,7 @@ $_smarty_tpl->tpl_vars['message']->_loop = true;
                                             <div class="input-group-btn">
                                                 <button type="button" class="btn btn-primary" onclick="$('#paper').click();"><i class="fa fa-file-text"></i> Pilih Berkas</button>
                                             </div><!-- /btn-group -->
-                                            <input type="file" name="paper" id="paper" value="<?php echo $_smarty_tpl->tpl_vars['data']->value['url'];?>
-" style="display: none;">
+                                            <input type="file" name="paper" id="paper" style="display: none;">
                                             <?php echo form_input($_smarty_tpl->tpl_vars['data']->value['paper_path']);?>
 
                                         </div>
@@ -262,7 +261,7 @@ asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
 
             return true;
         }
-        
+
         $(document).ready(function () {
             $("select").attr("class", "form-control");
         });

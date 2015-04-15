@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2014-12-16 09:43:23
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-16 04:40:56
          compiled from "application\views\configuration\add_member.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:27633548836ae036e30-28494044%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9bc586f68bd539d542679023ce200b7bea537e11' => 
     array (
       0 => 'application\\views\\configuration\\add_member.tpl',
-      1 => 1418697794,
+      1 => 1429134052,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1418622047,
+      1 => 1423218267,
       2 => 'file',
     ),
   ),
@@ -144,6 +144,57 @@ anggota">Anggota</a></li>
                                 Perempuan
                             </label>                           
                         </div>
+                        <div class="form-group">
+                            <select class="form-control" name="researcher" id="researcher">
+                                <option value="">-- Pilih Deputi Bidang --</option>
+                                <?php  $_smarty_tpl->tpl_vars['researcher'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['researcher']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['data']->value['researchers']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['researcher']->key => $_smarty_tpl->tpl_vars['researcher']->value) {
+$_smarty_tpl->tpl_vars['researcher']->_loop = true;
+?>                            
+                                    <option value="<?php echo $_smarty_tpl->tpl_vars['researcher']->value->id;?>
+"><?php echo $_smarty_tpl->tpl_vars['researcher']->value->researcher_name;?>
+</option>                                                
+                                <?php } ?>
+                            </select>
+                            <?php echo form_error('researcher','<p class="help-block text-red">','</p>');?>
+
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" name="research" id="research">
+                                <option value="">-- Pilih Satuan Kerja --</option>
+                                <?php  $_smarty_tpl->tpl_vars['research'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['research']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['data']->value['researches']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['research']->key => $_smarty_tpl->tpl_vars['research']->value) {
+$_smarty_tpl->tpl_vars['research']->_loop = true;
+?>                            
+                                    <option value="<?php echo $_smarty_tpl->tpl_vars['research']->value->id;?>
+" class="<?php echo $_smarty_tpl->tpl_vars['research']->value->researcher_id;?>
+"><?php echo $_smarty_tpl->tpl_vars['research']->value->research_name;?>
+</option>                                                   
+                                <?php } ?>
+                            </select>
+                            <?php echo form_error('research','<p class="help-block text-red">','</p>');?>
+
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" name="research_group" id="research_group">
+                                <option value="">-- Pilih Kelompok Penelitian --</option>
+                                <?php  $_smarty_tpl->tpl_vars['research_group'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['research_group']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['data']->value['research_groups']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['research_group']->key => $_smarty_tpl->tpl_vars['research_group']->value) {
+$_smarty_tpl->tpl_vars['research_group']->_loop = true;
+?>                            
+                                    <option value="<?php echo $_smarty_tpl->tpl_vars['research_group']->value->id;?>
+" class="<?php echo $_smarty_tpl->tpl_vars['research_group']->value->researcher_id;?>
+\<?php echo $_smarty_tpl->tpl_vars['research_group']->value->research_id;?>
+"><?php echo $_smarty_tpl->tpl_vars['research_group']->value->res_group_name;?>
+</option>                                                   
+                                <?php } ?>
+                            </select>
+                            <?php echo form_error('research_group','<p class="help-block text-red">','</p>');?>
+
+                        </div>
                     </div><!-- /.box-body -->
                     <div class="box-footer">
                         <?php echo form_submit('submit',"Tambahkan Anggota",'class="btn btn-flat btn-success"');?>
@@ -164,8 +215,10 @@ anggota">Anggota</a></li>
         <!-- End Modal -->
         
         <!-- jQuery 2.0.2 -->
+
         <?php echo '<script'; ?>
- src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"><?php echo '</script'; ?>
+ src="<?php echo base_url();?>
+asset/js/jquery-2.0.2.min.js"><?php echo '</script'; ?>
 >
         <!-- Bootstrap -->
         <?php echo '<script'; ?>
@@ -173,7 +226,12 @@ anggota">Anggota</a></li>
 asset/js/bootstrap.min.js" type="text/javascript"><?php echo '</script'; ?>
 >
         <!-- Addons Plugins -->
-        
+            
+    <?php echo '<script'; ?>
+ src="<?php echo base_url();?>
+asset/js/plugins/jquery-chained/jquery.chained.min.js" type="text/javascript"><?php echo '</script'; ?>
+>
+
         <!-- SLI LIPI App -->
         <?php echo '<script'; ?>
  src="<?php echo base_url();?>
@@ -181,5 +239,14 @@ asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
 >
         <!-- Addons Scripts -->
         
+    <?php echo '<script'; ?>
+ type="text/javascript">
+        $(document).ready(function () {           
+            $("#research").chained("#researcher");
+            $("#research_group").chained("#researcher, #research");
+        });
+    <?php echo '</script'; ?>
+>
+
     </body>
 </html><?php }} ?>

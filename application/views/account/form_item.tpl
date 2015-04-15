@@ -89,7 +89,7 @@
                                             <div class="input-group-btn">
                                                 <button type="button" class="btn btn-primary" onclick="$('#paper').click();"><i class="fa fa-file-text"></i> Pilih Berkas</button>
                                             </div><!-- /btn-group -->
-                                            <input type="file" name="paper" id="paper" value="{$data.url}" style="display: none;">
+                                            <input type="file" name="paper" id="paper" style="display: none;">
                                             {form_input($data.paper_path)}
                                         </div>
                                     </div>
@@ -137,7 +137,7 @@
 
             return true;
         }
-        
+
         $(document).ready(function () {
             $("select").attr("class", "form-control");
         });

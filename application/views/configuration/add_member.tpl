@@ -57,6 +57,33 @@
                                 Perempuan
                             </label>                           
                         </div>
+                        <div class="form-group">
+                            <select class="form-control" name="researcher" id="researcher">
+                                <option value="">-- Pilih Deputi Bidang --</option>
+                                {foreach $data.researchers as $researcher}                            
+                                    <option value="{$researcher->id}">{$researcher->researcher_name}</option>                                                
+                                {/foreach}
+                            </select>
+                            {form_error('researcher','<p class="help-block text-red">','</p>')}
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" name="research" id="research">
+                                <option value="">-- Pilih Satuan Kerja --</option>
+                                {foreach $data.researches as $research}                            
+                                    <option value="{$research->id}" class="{$research->researcher_id}">{$research->research_name}</option>                                                   
+                                {/foreach}
+                            </select>
+                            {form_error('research','<p class="help-block text-red">','</p>')}
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" name="research_group" id="research_group">
+                                <option value="">-- Pilih Kelompok Penelitian --</option>
+                                {foreach $data.research_groups as $research_group}                            
+                                    <option value="{$research_group->id}" class="{$research_group->researcher_id}\{$research_group->research_id}">{$research_group->res_group_name}</option>                                                   
+                                {/foreach}
+                            </select>
+                            {form_error('research_group','<p class="help-block text-red">','</p>')}
+                        </div>
                     </div><!-- /.box-body -->
                     <div class="box-footer">
                         {form_submit('submit', "Tambahkan Anggota", 'class="btn btn-flat btn-success"')}
@@ -66,4 +93,17 @@
             </div>
         </div>
     </section><!-- /.content -->
+{/block}
+
+{block name="addon_plugins"}    
+    <script src="{base_url()}asset/js/plugins/jquery-chained/jquery.chained.min.js" type="text/javascript"></script>
+{/block}
+
+{block name="addon_scripts"}
+    <script type="text/javascript">
+        $(document).ready(function () {           
+            $("#research").chained("#researcher");
+            $("#research_group").chained("#researcher, #research");
+        });
+    </script>
 {/block}

@@ -442,8 +442,14 @@ class Auth extends CI_Controller {
             $this->form_validation->set_rules('username', 'Username', 'required|xss_clean|is_unique[' . $tables['users'] . '.username]');
             $this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
             $this->form_validation->set_rules('password_confirm', 'Konfirmasi Password', 'required');
+            $this->form_validation->set_rules('researcher', 'Deputi Bidang', 'required');
+            $this->form_validation->set_rules('research', 'Satuan Kerja', 'required');
+            $this->form_validation->set_rules('research_group', 'Kelompok Penelitian', 'required');
 
             if ($this->form_validation->run() == true) {
+                $this->load->model('kurs_point');
+                $this->load->model('balance_log');
+
                 $username = $this->input->post('username');
                 $password = $this->input->post('password');
 
@@ -452,18 +458,42 @@ class Auth extends CI_Controller {
                 } else if ($this->input->post('sex') == "F") {
                     $photo = "avatar_female.png";
                 }
-                $this->db->insert('balances', array('value' => 0));
+                $config = $this->kurs_point->get_kurs();
+                $init_balance = (double) $config->init_point / $config->idr;
+                $this->db->insert('balances', array('value' => $init_balance));
+                $balance_id = $this->db->insert_id();
 
                 $additional_data = array(
                     'full_name' => $this->input->post('full_name'),
                     'sex' => $this->input->post('sex'),
                     'photo' => $photo,
-                    'balance_id' => $this->db->insert_id()
+                    'balance_id' => $balance_id
                 );
-            }
-            if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $additional_data)) {
+
+                $user_id = $this->ion_auth->register($username, $password, $additional_data);
+                $this->balance_log->save(array(
+                    'user_id' => $user_id,
+                    'trans_date' => date('Y-m-d H:i:s'),
+                    'trans_type' => 'D',
+                    'trans_type_detail' => 'Saldo Awal',
+                    'amount' => $config->init_point,
+                    'desc' => 'Saldo Awal Anggota'
+                ));
+
+                $data_member = array(
+                    'user_id' => $user_id,
+                    'researcher_id' => $this->input->post('researcher'),
+                    'research_id' => $this->input->post('research'),
+                    'research_group_id' => $this->input->post('research_group')
+                );
+
+                $this->member->create_member($data_member);
                 redirect("anggota", 'refresh');
             } else {
+                $this->load->model('research');
+                $this->load->model('researcher');
+                $this->load->model('research_group');
+
                 $data['message'] = ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message'));
 
                 $data['full_name'] = array(
@@ -492,6 +522,10 @@ class Auth extends CI_Controller {
                     'placeholder' => 'Konfirmasi Password',
                     'value' => $this->form_validation->set_value('password_confirm'),
                 );
+
+                $data['researches'] = $this->research->get_all();
+                $data['researchers'] = $this->researcher->get_all();
+                $data['research_groups'] = $this->research_group->get_all();
 
                 $this->basic_data();
                 $this->smartyci->assign('data', $data);
