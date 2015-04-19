@@ -22,7 +22,7 @@
                         <h3 class="box-title">Grafik Statistik Penggunaan Alat Pengujian</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
-                        <div id="graphic" style="height: 600px;">
+                        <div id="graphic" style="width: 100%; height: 600px;">
 
                         </div>
                     </div><!-- /.box-body -->

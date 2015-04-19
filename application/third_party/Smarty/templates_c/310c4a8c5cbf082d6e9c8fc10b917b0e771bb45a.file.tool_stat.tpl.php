@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-19 02:50:31
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-19 03:13:12
          compiled from "application\views\statistic\tool_stat.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:16087553280716c7866-21706881%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '310c4a8c5cbf082d6e9c8fc10b917b0e771bb45a' => 
     array (
       0 => 'application\\views\\statistic\\tool_stat.tpl',
-      1 => 1429404625,
+      1 => 1429405971,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -96,7 +96,7 @@ tool_stat">Alat Pengujian</a></li>
                         <h3 class="box-title">Grafik Statistik Penggunaan Alat Pengujian</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
-                        <div id="graphic" style="height: 600px;">
+                        <div id="graphic" style="width: 100%; height: 600px;">
 
                         </div>
                     </div><!-- /.box-body -->
@@ -155,7 +155,7 @@ asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
                     categories: [<?php echo $_smarty_tpl->tpl_vars['label_tools']->value;?>
 ],
                     title: {
-                        text: "Nama Alat"
+                        text: "Alat Pengujian"
                     }
                 },
                 yAxis: {
