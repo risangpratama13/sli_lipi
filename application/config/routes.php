@@ -92,5 +92,8 @@ $route['history_pengujian'] = "testing/history/all";
 $route['view_test/(:num)'] = "testing/view_test_order/$1";
 $route['konfirmasi_pengujian'] = "testing/leader_confirm_test";
 
+$route['tool_stat'] = "statistics/tool_statistic";
+$route['operator_stat'] = "statistics/operator_statistic";
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

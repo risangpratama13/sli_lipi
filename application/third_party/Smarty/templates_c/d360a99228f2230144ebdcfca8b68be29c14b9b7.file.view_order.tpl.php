@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-20 11:14:01
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-18 22:19:27
          compiled from "application\views\order\view_order.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:298075497e6499e6a10-52466132%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd360a99228f2230144ebdcfca8b68be29c14b9b7' => 
     array (
       0 => 'application\\views\\order\\view_order.tpl',
-      1 => 1424405615,
+      1 => 1429370364,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1423521212,
+      1 => 1423218267,
       2 => 'file',
     ),
   ),
@@ -164,18 +164,20 @@ $_smarty_tpl->tpl_vars['test_order']->_loop = true;
                                 <?php }?>
                                 <?php if ($_smarty_tpl->tpl_vars['test_order']->value->status=="P") {?>
                                     <td><span class="label label-warning">Pending</span></td>
-                                <?php } elseif ($_smarty_tpl->tpl_vars['test_order']->value->status=="O") {?>
-                                    <td><span class="label label-success">Ok</span></td>
+                                <?php } elseif ($_smarty_tpl->tpl_vars['test_order']->value->status=="AL") {?>
+                                    <td><span class="label label-success">Disetujui Ketua Kelitian</span></td>
+                                <?php } elseif ($_smarty_tpl->tpl_vars['test_order']->value->status=="AO") {?>
+                                    <td><span class="label label-success">Disetujui Operator</span></td>                                        
                                 <?php } elseif ($_smarty_tpl->tpl_vars['test_order']->value->status=="D") {?>
                                     <td><span class="label label-danger">Denied</span></td>
                                 <?php } elseif ($_smarty_tpl->tpl_vars['test_order']->value->status=="F") {?>
                                     <td><span class="label label-info">Finish</span></td>
-                                <?php }?>
+                                <?php }?>                                     
                                 <td>Rp. <?php echo number_format($_smarty_tpl->tpl_vars['test_order']->value->subtotal,'2',',','.');?>
 </td>
                             </tr>
                             <tr>
-                                <td colspan="6"><b>Penjelasan : </b><?php echo $_smarty_tpl->tpl_vars['test_order']->value->description;?>
+                                <td colspan="5"><b>Penjelasan : </b><?php echo $_smarty_tpl->tpl_vars['test_order']->value->description;?>
 </td>
                             </tr>
                         <?php } ?>

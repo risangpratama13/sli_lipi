@@ -71,17 +71,19 @@
                                 {/if}
                                 {if $test_order->status eq "P"}
                                     <td><span class="label label-warning">Pending</span></td>
-                                {else if $test_order->status eq "O"}
-                                    <td><span class="label label-success">Ok</span></td>
+                                {else if $test_order->status eq "AL"}
+                                    <td><span class="label label-success">Disetujui Ketua Kelitian</span></td>
+                                {else if $test_order->status eq "AO"}
+                                    <td><span class="label label-success">Disetujui Operator</span></td>                                        
                                 {else if $test_order->status eq "D"}
                                     <td><span class="label label-danger">Denied</span></td>
                                 {else if $test_order->status eq "F"}
                                     <td><span class="label label-info">Finish</span></td>
-                                {/if}
+                                {/if}                                     
                                 <td>Rp. {number_format($test_order->subtotal, '2', ',', '.')}</td>
                             </tr>
                             <tr>
-                                <td colspan="6"><b>Penjelasan : </b>{$test_order->description}</td>
+                                <td colspan="5"><b>Penjelasan : </b>{$test_order->description}</td>
                             </tr>
                         {/foreach}
                     </tbody>

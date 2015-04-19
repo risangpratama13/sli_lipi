@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-21 06:25:31
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-18 18:04:01
          compiled from "application\views\layouts\menu_admin.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:16035548714f01505b9-17899961%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f151c3e8c2764cc3ccd8e3aecd1c874f844230b4' => 
     array (
       0 => 'application\\views\\layouts\\menu_admin.tpl',
-      1 => 1426893888,
+      1 => 1429372543,
       2 => 'file',
     ),
   ),
@@ -35,6 +35,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 profil">
             <i class="fa fa-user"></i> <span> Profil </span>
         </a>
+    </li>
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-bar-chart-o"></i>
+            <span>Statistik</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">            
+            <li><a href="<?php echo base_url();?>
+tool_stat"><i class="fa fa-angle-double-right"></i> Alat Pengujian</a></li>     
+            <li><a href="<?php echo base_url();?>
+operator_stat"><i class="fa fa-angle-double-right"></i> Operator</a></li>
+        </ul>
     </li>
     <li class="treeview">
         <a href="#">

@@ -42,6 +42,8 @@ $(function () {
             $(this).parent().parent().parent().addClass('active');
         }
     });
+    
+    $("form").attr('autocomplete', 'off');
 
     //Add hover support for touch devices
     $('.btn').bind('touchstart', function () {

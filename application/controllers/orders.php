@@ -18,6 +18,7 @@ class Orders extends CI_Controller {
         $this->load->model('operator');
         $this->load->model('category');
         $this->load->model('balance');
+        $this->load->model('balance_log');
         $this->load->model('kurs_point');
 
         if ($this->ion_auth->in_group(2)) {
@@ -199,6 +200,18 @@ class Orders extends CI_Controller {
                                 'subtotal' => $items['subtotal']
                             );
                             $this->test_order->save($data);
+                            
+                            $test = $this->test->find_by_id($items['id']);
+                            $data_log = array(
+                                'user_id' => $user->id,
+                                'item_test_id' => $items['id'],
+                                'trans_date' => date('Y-m-d H:i:s'),
+                                'trans_type' => 'K',
+                                'trans_type_detail' => "test_order",
+                                'amount' => $items['subtotal'],
+                                'desc' => $test->testing_name
+                            );
+                            $this->balance_log->save($data_log);
                         }
                         $this->cart->destroy();
                         redirect('order', 'refresh');

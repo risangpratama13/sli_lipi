@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-08 06:59:51
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-19 06:34:44
          compiled from "application\views\configuration\profile\change_password.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:27762548a26f417e827-58675489%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -19,7 +19,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1423218267,
+      1 => 1429400076,
       2 => 'file',
     ),
   ),
@@ -49,11 +49,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <!-- Ionicons -->
         <?php echo link_tag('asset/css/ionicons.min.css');?>
 
-        <!-- Addons Style -->
-        
         <!-- Theme style -->
         <?php echo link_tag('asset/css/sli_lipi.css');?>
 
+        <!-- Addons Style -->
+        
+        
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -226,18 +227,18 @@ asset/js/jquery-2.0.2.min.js"><?php echo '</script'; ?>
  src="<?php echo base_url();?>
 asset/js/bootstrap.min.js" type="text/javascript"><?php echo '</script'; ?>
 >
+        <!-- SLI LIPI App -->
+        <?php echo '<script'; ?>
+ src="<?php echo base_url();?>
+asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
+>
         <!-- Addons Plugins -->
         
     <?php echo '<script'; ?>
  type="text/javascript" src="<?php echo base_url();?>
 asset/js/plugins/jquery-form/jquery.form.min.js"><?php echo '</script'; ?>
 >
-
-        <!-- SLI LIPI App -->
-        <?php echo '<script'; ?>
- src="<?php echo base_url();?>
-asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
->
+       
         <!-- Addons Scripts -->
         
     <?php echo '<script'; ?>

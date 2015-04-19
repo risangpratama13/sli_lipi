@@ -27,7 +27,13 @@ class Test_tool extends CI_Model {
         $this->db->group_by('tests_tools.tool_id');
         $query = $this->db->get();
         return $query->result();
-    } 
+    }
+    
+    function count_hours() {
+        $query = "SELECT tests_tools.tool_id, SUM(TIMESTAMPDIFF(HOUR, test_orders.start_date, test_orders.finish_date)) as total_hours FROM (tests_tools) JOIN test_orders ON test_orders.id = tests_tools.test_order_id GROUP BY tests_tools.tool_id";        
+        $result = $this->db->query($query);
+        return $result->result();
+    }
     
     function save($data) {
         return $this->db->insert($this->table, $data);

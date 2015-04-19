@@ -313,7 +313,7 @@ class Testing extends CI_Controller {
                     $tanggal_mulai = date('Y-m-d H:i', strtotime($tanggal[0]));
                     $tanggal_selesai = date('Y-m-d H:i', strtotime($tanggal[1]));
                     $data = array(
-                        'status' => 'O',
+                        'status' => 'AO',
                         'start_date' => $tanggal_mulai,
                         'finish_date' => $tanggal_selesai
                     );
