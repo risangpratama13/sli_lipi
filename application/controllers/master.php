@@ -177,6 +177,13 @@ class Master extends CI_Controller {
                     $this->kurs_point->update($data);
                     redirect('config_point', 'refresh');
                 }
+            } else if ($this->input->post('ubah_min_saldo')) {
+                $this->form_validation->set_rules('min_saldo', 'Minimum Saldo', 'required|xss_clean|numeric|is_natural_no_zero');
+                if ($this->form_validation->run() == true) {
+                    $data = array("min_saldo" => $this->input->post('min_saldo'));
+                    $this->kurs_point->update($data);
+                    redirect('config_point', 'refresh');
+                }
             }
 
 
@@ -205,12 +212,21 @@ class Master extends CI_Controller {
                 'value' => $config->test_percent,
                 'onkeypress' => 'return isNumberKey(event)'
             );
+            $form_min_saldo = array(
+                'name' => 'min_saldo',
+                'class' => 'form-control',
+                'placeholder' => 'Konfigurasi Minimum Saldo',
+                'type' => 'text',
+                'value' => $config->min_saldo,
+                'onkeypress' => 'return isNumberKey(event)'
+            );
 
             $this->basic_data();
             $this->smartyci->assign('kurs', $config);
             $this->smartyci->assign('form_kurs', $form_kurs);
             $this->smartyci->assign('form_init_saldo', $form_init_saldo);
             $this->smartyci->assign('form_test_percent', $form_test_percent);
+            $this->smartyci->assign('form_min_saldo', $form_min_saldo);
             $this->smartyci->display('master-data/kurs_point.tpl');
         } else {
             redirect('/', 'refresh');

@@ -74,7 +74,12 @@
                 </tr>
                 <tr>
                     <td>Kelompok Penelitian</td>
-                    <td>{if !empty($member)}{$member->res_group_name}{/if}</td>
+                    <td>
+                        {if !empty($member)}{$member->res_group_name}{/if}
+                        {if in_array("kelitian", $groups)}
+                            <span class="label label-info">Ketua Kelitian</span>
+                        {/if}
+                    </td>
                 </tr>
             {/if}
             <tr>

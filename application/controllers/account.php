@@ -93,8 +93,13 @@ class Account extends CI_Controller {
                     'description' => $this->input->post('description')
                 );
 
-                $this->item->save($data);
-                redirect('item', 'refresh');
+                if($this->item->save($data)) {
+                    redirect('item', 'refresh');
+                } else {
+                    $error = array('error' => "Data Tidak Berhasil Disimpan");
+                    $this->session->set_flashdata('message', $error);
+                    redirect('tambah_item', 'refresh');
+                }        
             } else {
                 $item_types = $this->item_type->get_all();
                 $kategori_item = array();

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-19 06:34:39
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-21 06:52:55
          compiled from "application\views\configuration\profile\personal.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:307235489837a29c369-09293533%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '46eae25c8982e2ed1f8bc5bf3face1bcf36226fe' => 
     array (
       0 => 'application\\views\\configuration\\profile\\personal.tpl',
-      1 => 1425858922,
+      1 => 1429573972,
       2 => 'file',
     ),
     '68cc9180bc6fb0dd465914a3c57d03a07aa9bace' => 
@@ -19,7 +19,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1429400076,
+      1 => 1429400112,
       2 => 'file',
     ),
   ),
@@ -49,12 +49,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <!-- Ionicons -->
         <?php echo link_tag('asset/css/ionicons.min.css');?>
 
+        <!-- Addons Style -->
+        
         <!-- Theme style -->
         <?php echo link_tag('asset/css/sli_lipi.css');?>
 
-        <!-- Addons Style -->
-        
-        
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -236,9 +235,14 @@ echo $_smarty_tpl->tpl_vars['member']->value->research_name;
                 </tr>
                 <tr>
                     <td>Kelompok Penelitian</td>
-                    <td><?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {
+                    <td>
+                        <?php if (!empty($_smarty_tpl->tpl_vars['member']->value)) {
 echo $_smarty_tpl->tpl_vars['member']->value->res_group_name;
-}?></td>
+}?>
+                        <?php if (in_array("kelitian",$_smarty_tpl->tpl_vars['groups']->value)) {?>
+                            <span class="label label-info">Ketua Kelitian</span>
+                        <?php }?>
+                    </td>
                 </tr>
             <?php }?>
             <tr>
@@ -329,18 +333,18 @@ asset/js/jquery-2.0.2.min.js"><?php echo '</script'; ?>
  src="<?php echo base_url();?>
 asset/js/bootstrap.min.js" type="text/javascript"><?php echo '</script'; ?>
 >
-        <!-- SLI LIPI App -->
-        <?php echo '<script'; ?>
- src="<?php echo base_url();?>
-asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
->
         <!-- Addons Plugins -->
         
     <?php echo '<script'; ?>
  type="text/javascript" src="<?php echo base_url();?>
 asset/js/plugins/jquery-form/jquery.form.min.js"><?php echo '</script'; ?>
 >
-       
+
+        <!-- SLI LIPI App -->
+        <?php echo '<script'; ?>
+ src="<?php echo base_url();?>
+asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
+>
         <!-- Addons Scripts -->
         
     <?php echo '<script'; ?>

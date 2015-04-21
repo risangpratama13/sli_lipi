@@ -67,7 +67,7 @@
                 </div><!-- /.box -->
             </div><!-- ./col -->
             <div class="col-md-4">
-                <div class="box box-danger">
+                <div class="box">
                     <div class="box-header">
                         <i class="fa fa-keyboard-o"></i>
                         <h3 class="box-title">Kalkulator Kurs</h3>
@@ -90,7 +90,7 @@
             </div><!-- ./col -->
         </div><!-- /.row -->
         <div class="row">                
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="box box-success">
                     <div class="box-header">
                         <i class="fa fa-money"></i>
@@ -112,7 +112,7 @@
                     {form_close()}
                 </div><!-- /.box -->
             </div><!-- ./col -->
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="box box-primary">
                     <div class="box-header">
                         <i class="fa fa-ruble"></i>
@@ -129,6 +129,28 @@
                     </div><!-- /.box-body -->
                     <div class="box-footer">
                         {form_submit('ubah_test_percent', "Ubah Persentase Poin", 'class="btn btn-flat btn-warning"')}
+                    </div>
+                    {form_close()}
+                </div><!-- /.box -->
+            </div><!-- ./col -->
+            <div class="col-md-4">
+                <div class="box box-danger">
+                    <div class="box-header">
+                        <i class="fa fa-exclamation-triangle"></i>
+                        <h3 class="box-title">Konfigurasi Minimum Saldo</h3>
+                    </div><!-- /.box-header -->
+                    {form_open('master/config_point')}
+                    <div class="box-body">
+                        <label for="min_saldo">Minimum Saldo</label>                            
+                        <div class="input-group">
+                            <span class="input-group-addon">Rp</span>
+                            {form_input($form_min_saldo)}
+                            <span class="input-group-addon">.00</span>                            
+                        </div>
+                        {form_error('test_percent','<p class="help-block text-red">','</p>')}
+                    </div><!-- /.box-body -->
+                    <div class="box-footer">
+                        {form_submit('ubah_min_saldo', "Ubah Minimum Saldo", 'class="btn btn-flat btn-warning"')}
                     </div>
                     {form_close()}
                 </div><!-- /.box -->

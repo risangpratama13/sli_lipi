@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-02-24 00:33:46
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-21 06:37:00
          compiled from "application\views\master-data\kurs_point.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5050548eb09971e046-90697013%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8f212f62d07ec39112dbeaa02f3f43e621323665' => 
     array (
       0 => 'application\\views\\master-data\\kurs_point.tpl',
-      1 => 1424734420,
+      1 => 1429573018,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1423218267,
+      1 => 1429400112,
       2 => 'file',
     ),
   ),
@@ -149,7 +149,7 @@ config_point">Konfigurasi Poin</a></li>
                 </div><!-- /.box -->
             </div><!-- ./col -->
             <div class="col-md-4">
-                <div class="box box-danger">
+                <div class="box">
                     <div class="box-header">
                         <i class="fa fa-keyboard-o"></i>
                         <h3 class="box-title">Kalkulator Kurs</h3>
@@ -172,7 +172,7 @@ config_point">Konfigurasi Poin</a></li>
             </div><!-- ./col -->
         </div><!-- /.row -->
         <div class="row">                
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="box box-success">
                     <div class="box-header">
                         <i class="fa fa-money"></i>
@@ -199,7 +199,7 @@ config_point">Konfigurasi Poin</a></li>
 
                 </div><!-- /.box -->
             </div><!-- ./col -->
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="box box-primary">
                     <div class="box-header">
                         <i class="fa fa-ruble"></i>
@@ -219,6 +219,33 @@ config_point">Konfigurasi Poin</a></li>
                     </div><!-- /.box-body -->
                     <div class="box-footer">
                         <?php echo form_submit('ubah_test_percent',"Ubah Persentase Poin",'class="btn btn-flat btn-warning"');?>
+
+                    </div>
+                    <?php echo form_close();?>
+
+                </div><!-- /.box -->
+            </div><!-- ./col -->
+            <div class="col-md-4">
+                <div class="box box-danger">
+                    <div class="box-header">
+                        <i class="fa fa-exclamation-triangle"></i>
+                        <h3 class="box-title">Konfigurasi Minimum Saldo</h3>
+                    </div><!-- /.box-header -->
+                    <?php echo form_open('master/config_point');?>
+
+                    <div class="box-body">
+                        <label for="min_saldo">Minimum Saldo</label>                            
+                        <div class="input-group">
+                            <span class="input-group-addon">Rp</span>
+                            <?php echo form_input($_smarty_tpl->tpl_vars['form_min_saldo']->value);?>
+
+                            <span class="input-group-addon">.00</span>                            
+                        </div>
+                        <?php echo form_error('test_percent','<p class="help-block text-red">','</p>');?>
+
+                    </div><!-- /.box-body -->
+                    <div class="box-footer">
+                        <?php echo form_submit('ubah_min_saldo',"Ubah Minimum Saldo",'class="btn btn-flat btn-warning"');?>
 
                     </div>
                     <?php echo form_close();?>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-19 03:02:40
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-21 01:26:29
          compiled from "application\views\statistic\tool_operator.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:278225532feb0f33e10-19397018%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7601803971c4aee4cbe43aa3fe4e63e459de6dac' => 
     array (
       0 => 'application\\views\\statistic\\tool_operator.tpl',
-      1 => 1429405355,
+      1 => 1429405986,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -21,9 +21,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
   'unifunc' => 'content_5532feb10a8712_49471909',
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5532feb10a8712_49471909')) {function content_5532feb10a8712_49471909($_smarty_tpl) {?><!DOCTYPE html>
 <html>
@@ -96,7 +96,7 @@ operator_stat">Operator</a></li>
                         <h3 class="box-title">Grafik Statistik Operator Pengujian</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive">
-                        <div id="graphic" style="height: 600px;">
+                        <div id="graphic" style="width: 100%; height: 600px;">
 
                         </div>
                     </div><!-- /.box-body -->
