@@ -497,7 +497,7 @@ class Testing extends CI_Controller {
     }
 
     function colorStatus($status) {
-        if ($status == "O") {
+        if ($status == "AO") {
             $color = "green";
         } else if ($status == "F") {
             $color = "blue";
