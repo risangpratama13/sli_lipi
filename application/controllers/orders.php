@@ -27,7 +27,7 @@ class Orders extends CI_Controller {
             $this->point = $this->balance->get_value($user->balance_id);
             $this->kurs = $kurs->idr;
             (int) $this->idr = (double) $this->point * (double) $this->kurs;
-        }        
+        }
     }
 
     function basic_data() {
@@ -76,7 +76,7 @@ class Orders extends CI_Controller {
                 redirect('keranjang_belanja', 'refresh');
             }
 
-            $tests = $this->test->get_all();
+            $tests = $this->test->get_all(TRUE);
 
             $this->basic_data();
             $this->smartyci->assign('tests', $tests);
@@ -200,7 +200,8 @@ class Orders extends CI_Controller {
                                 'subtotal' => $items['subtotal']
                             );
                             $this->test_order->save($data);
-                            
+                            $test_order_id = $this->db->insert_id();
+
                             $test = $this->test->find_by_id($items['id']);
                             $data_log = array(
                                 'user_id' => $user->id,
@@ -212,6 +213,23 @@ class Orders extends CI_Controller {
                                 'desc' => $test->testing_name
                             );
                             $this->balance_log->save($data_log);
+                            $operator = $this->operator->get_byid($items['options']['operator']);
+
+                            $param = array(
+                                'notif_to' => $operator->user_id,
+                                'message' => $user->full_name . " Mengajukan Pengujian",
+                                'notif_cat' => 8,
+                                'notif_link' => base_url() . "view_test/".$test_order_id
+                            );
+                            $this->create_notif($param);
+                            
+                            $param = array(
+                                'notif_to' => $test->user_id,
+                                'message' => $user->full_name . " Mengajukan Pengujian",
+                                'notif_cat' => 8,
+                                'notif_link' => base_url() . "view_test/".$test_order_id
+                            );
+                            $this->create_notif($param);
                         }
                         $this->cart->destroy();
                         redirect('order', 'refresh');
@@ -284,5 +302,21 @@ class Orders extends CI_Controller {
         } else {
             redirect('/', 'refresh');
         }
-    }    
+    }
+
+    function create_notif($param) {
+        $expireDate = date("Y-m-d H:i:s", strtotime("+1 month", now()));
+        $mongExpireAt = new MongoDate(strtotime($expireDate));
+        $data_notif = array(
+            'expireAt' => $mongExpireAt,
+            'notif_to' => $param['notif_to'],
+            'message' => $param['message'],
+            'notif_date' => date("Y-m-d H:i:s"),
+            'read_status' => 0,
+            'notif_cat' => $param['notif_cat'],
+            'notif_link' => $param['notif_link']
+        );
+        $this->mongo_db->db->insert($data_notif);
+    }
+
 }

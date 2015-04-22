@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database','session','smartyci','ion_auth','cart');
+$autoload['libraries'] = array('database','session','smartyci','ion_auth','cart','mongo_db');
 
 
 /*

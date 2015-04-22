@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-05 07:06:16
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-22 06:24:23
          compiled from "application\views\layouts\menu_member.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:143295487a9d939a3c4-15757029%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '44c59d7c28323712b9863af90a55e99343f978fa' => 
     array (
       0 => 'application\\views\\layouts\\menu_member.tpl',
-      1 => 1428192370,
+      1 => 1429658660,
       2 => 'file',
     ),
   ),
@@ -47,8 +47,7 @@ profil">
             <li><a href="<?php echo base_url();?>
 rincian_saldo"><i class="fa fa-angle-double-right"></i> Rincian Saldo </a></li>     
             <li><a href="<?php echo base_url();?>
-item"><i class="fa fa-angle-double-right"></i> Tambah Saldo <small class="badge pull-right bg-yellow"><?php echo $_smarty_tpl->tpl_vars['shopping_carts']->value;?>
-</small></a></li>
+item"><i class="fa fa-angle-double-right"></i> Tambah Saldo </a></li>
         </ul>
     </li>    
     <li class="treeview">

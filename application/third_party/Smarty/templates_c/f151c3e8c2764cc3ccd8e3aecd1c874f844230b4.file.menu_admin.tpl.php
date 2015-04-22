@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-18 18:04:01
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-22 06:01:33
          compiled from "application\views\layouts\menu_admin.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:16035548714f01505b9-17899961%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f151c3e8c2764cc3ccd8e3aecd1c874f844230b4' => 
     array (
       0 => 'application\\views\\layouts\\menu_admin.tpl',
-      1 => 1429372543,
+      1 => 1429657289,
       2 => 'file',
     ),
   ),
@@ -115,7 +115,7 @@ anggota"><i class="fa fa-angle-double-right"></i> Anggota</a></li>
             <li><a href="<?php echo base_url();?>
 operator"><i class="fa fa-angle-double-right"></i> Operator</a></li>
             <li><a href="<?php echo base_url();?>
-leader"><i class="fa fa-angle-double-right"></i> Kelompok Kelitian</a></li>
+leader"><i class="fa fa-angle-double-right"></i> Ketua Kelitian</a></li>
         </ul>
     </li>
 </ul><?php }} ?>

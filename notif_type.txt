@@ -1,0 +1,11 @@
+1) New Member
+2) New Operator
+3) Edit Operator
+4) New Kelitian
+5) New Item
+6) Confirm Item
+7) Minimum Saldo
+8) Mengajukan Pengujian
+9) Pengujian Setujui
+10) Pengujian Ditolak
+11) Pengujian Selesai

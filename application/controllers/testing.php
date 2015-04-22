@@ -292,7 +292,7 @@ class Testing extends CI_Controller {
         if (!$this->ion_auth->logged_in()) {
             redirect('login', 'refresh');
         }
-
+        $user = $this->ion_auth->user()->row();
         if ($this->ion_auth->in_group(4)) {
             if ($test_order_id != "") {
                 $test_order = $this->test_order->find_byid($test_order_id);
@@ -318,6 +318,15 @@ class Testing extends CI_Controller {
                         'finish_date' => $tanggal_selesai
                     );
                     $this->test_order->update($test_order_id, $data);
+                    $test_order = $this->test_order->find_byid($test_order_id);
+                    $param = array(
+                        'notif_to' => $test_order->user_id,
+                        'message' => $user->full_name . " Menyetujui Pengujian Anda",
+                        'notif_cat' => 9,
+                        'notif_link' => base_url() . "view_test/" . $test_order_id
+                    );
+                    $this->create_notif($param);
+
                     if ($this->input->post('tools')) {
                         $tools = $this->input->post('tools');
                         for ($i = 0; $i < count($tools); $i++) {
@@ -367,7 +376,7 @@ class Testing extends CI_Controller {
         $user = $this->ion_auth->user()->row();
         if ($this->ion_auth->in_group(5)) {
             $tests = $this->test_order->find_byleader($user->id);
-            
+
             $this->basic_data();
             $this->smartyci->assign('tests', $tests);
             $this->smartyci->display('testing/leader_confirm_test.tpl');
@@ -378,23 +387,39 @@ class Testing extends CI_Controller {
 
     function update_status() {
         if ($_SERVER['HTTP_REFERER']) {
+            $user = $this->ion_auth->user()->row();
+            
             $status = $this->input->post('status');
             $id = $this->input->post('id');
+            $test_order = $this->test_order->find_byid($id);
             switch ($status) {
-                case 'AL' : 
+                case 'AL' :
                     $data = array('status' => 'AL');
+                    $message = $user->full_name. " Menyetujui Pengujian Anda";
+                    $category = 9;
                     break;
                 case 'D' :
                     $data = array('status' => 'D');
+                    $message = $user->full_name. " Tidak Menyetujui Pengujian Anda";
+                    $category = 10;
                     break;
                 case 'F':
                     $data = array(
                         'status' => 'F',
                         'finish_date' => date('Y-m-d H:i:s')
                     );
+                    $message = "Pengujian Anda Telah Selesai";
+                    $category = 11;
                     break;
             }
             if ($this->test_order->update($id, $data)) {
+                $param = array(
+                    'notif_to' => $test_order->user_id,
+                    'message' => $message,
+                    'notif_cat' => $category,
+                    'notif_link' => base_url() . "view_test/" . $id
+                );
+                $this->create_notif($param);
                 echo "Success";
             } else {
                 echo 'Failed';
@@ -478,6 +503,21 @@ class Testing extends CI_Controller {
             $color = "blue";
         }
         return $color;
+    }
+
+    function create_notif($param) {
+        $expireDate = date("Y-m-d H:i:s", strtotime("+1 month", now()));
+        $mongExpireAt = new MongoDate(strtotime($expireDate));
+        $data_notif = array(
+            'expireAt' => $mongExpireAt,
+            'notif_to' => $param['notif_to'],
+            'message' => $param['message'],
+            'notif_date' => date("Y-m-d H:i:s"),
+            'read_status' => 0,
+            'notif_cat' => $param['notif_cat'],
+            'notif_link' => $param['notif_link']
+        );
+        $this->mongo_db->db->insert($data_notif);
     }
 
 }

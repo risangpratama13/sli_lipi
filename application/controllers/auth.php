@@ -12,7 +12,6 @@ class Auth extends CI_Controller {
         $this->load->model('category');
 
         $this->load->library('form_validation');
-        $this->load->library('mongo_db');
         $this->load->helper('language');
         $this->load->helper('getextension');
         $this->lang->load('auth');
@@ -50,6 +49,16 @@ class Auth extends CI_Controller {
             $kurs = $this->kurs_point->get_kurs();
             $point = $this->balance->get_value($user->balance_id);
             (int) $saldo = (double) $point * (double) $kurs->idr;
+
+            if ($saldo <= $kurs->min_saldo) {
+                $param = array(
+                    'notif_to' => $user->id,
+                    'message' => "Saldo Anda Di Bawah Minimum",
+                    'notif_cat' => 7,
+                    'notif_link' => base_url() . "rincian_saldo"
+                );
+                $this->create_notif($param);
+            }
 
             $this->smartyci->assign('saldo', $saldo);
         } else if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
@@ -977,7 +986,7 @@ class Auth extends CI_Controller {
                 $data = array('user_id' => $user_id);
                 $this->research_group->update($research_group, $data);
                 $this->ion_auth->add_to_group(5, $user_id);
-                
+
                 $param = array(
                     'notif_to' => $user_id,
                     'message' => "Anda Ditambahkan Sebagai Ketua Kelitian",

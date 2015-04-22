@@ -17,7 +17,7 @@
         </a>
         <ul class="treeview-menu">            
             <li><a href="{base_url()}rincian_saldo"><i class="fa fa-angle-double-right"></i> Rincian Saldo </a></li>     
-            <li><a href="{base_url()}item"><i class="fa fa-angle-double-right"></i> Tambah Saldo <small class="badge pull-right bg-yellow">{$shopping_carts}</small></a></li>
+            <li><a href="{base_url()}item"><i class="fa fa-angle-double-right"></i> Tambah Saldo </a></li>
         </ul>
     </li>    
     <li class="treeview">

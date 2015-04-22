@@ -93,13 +93,23 @@ class Account extends CI_Controller {
                     'description' => $this->input->post('description')
                 );
 
-                if($this->item->save($data)) {
+                if ($this->item->save($data)) {
+                    $admins = $this->ion_auth->users(array(1, 3))->result();
+                    foreach ($admins as $admin) {
+                        $param = array(
+                            'notif_to' => $admin->id,
+                            'message' => $user->full_name . " Mengajukan Penambahan Saldo",
+                            'notif_cat' => 5,
+                            'notif_link' => base_url() . "item"
+                        );
+                        $this->create_notif($param);
+                    }
                     redirect('item', 'refresh');
                 } else {
                     $error = array('error' => "Data Tidak Berhasil Disimpan");
                     $this->session->set_flashdata('message', $error);
                     redirect('tambah_item', 'refresh');
-                }        
+                }
             } else {
                 $item_types = $this->item_type->get_all();
                 $kategori_item = array();
@@ -115,12 +125,12 @@ class Account extends CI_Controller {
                 );
 
                 $data['author_num'] = array(
-                'name' => 'author_num',
-                'type' => 'number',
-                'class' => 'form-control',
-                'placeholder' => 'Jumlah Penulis',
-                'min' => 1,
-                'onkeypress' => 'return isNumberKey(event)'                
+                    'name' => 'author_num',
+                    'type' => 'number',
+                    'class' => 'form-control',
+                    'placeholder' => 'Jumlah Penulis',
+                    'min' => 1,
+                    'onkeypress' => 'return isNumberKey(event)'
                 );
 
                 $data['description'] = array(
@@ -167,7 +177,7 @@ class Account extends CI_Controller {
                 if ($_FILES['paper']['name'] == "" and $this->input->post('paper_url') == "") {
                     $error = array('error' => "Kolom URL Berkas Harus Diisi atau Unggah Berkas");
                     $this->session->set_flashdata('message', $error);
-                    redirect('ubah_item/'.$this->input->post('id'), 'refresh');
+                    redirect('ubah_item/' . $this->input->post('id'), 'refresh');
                 } else {
                     if ($_FILES['paper']['name'] == "") {
                         $url = $this->input->post('paper_url');
@@ -215,15 +225,15 @@ class Account extends CI_Controller {
                     'placeholder' => 'Judul Paper',
                     'value' => $item->item_title
                 );
-                
+
                 $data['author_num'] = array(
-                'name' => 'author_num',
-                'type' => 'number',
-                'class' => 'form-control',
-                'placeholder' => 'Jumlah Penulis',
-                'min' => 1,
-                'onkeypress' => 'return isNumberKey(event)', 
-                'value' => $item->author_num
+                    'name' => 'author_num',
+                    'type' => 'number',
+                    'class' => 'form-control',
+                    'placeholder' => 'Jumlah Penulis',
+                    'min' => 1,
+                    'onkeypress' => 'return isNumberKey(event)',
+                    'value' => $item->author_num
                 );
 
                 $data['description'] = array(
@@ -260,7 +270,7 @@ class Account extends CI_Controller {
                         'type' => 'url'
                     );
                 }
-                
+
                 $data['url'] = $item->url;
                 $data['item_id'] = $item->id;
                 $data['select_option'] = $item->item_type_id;
@@ -274,10 +284,25 @@ class Account extends CI_Controller {
         } else if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
             if ($_SERVER['HTTP_REFERER']) {
                 $data = array('status' => $this->input->post('status'));
+                $item = $this->item->find_by_id($this->input->post('id'));
                 if ($this->item->update($this->input->post('id'), $data)) {
                     if ($this->input->post('status') == "O") {
+                        $param = array(
+                            'notif_to' => $item->user_id,
+                            'message' => "Pengajuan Penambahan Saldo Disetujui",
+                            'notif_cat' => 6,
+                            'notif_link' => base_url() . "item"
+                        );
+                        $this->create_notif($param);
                         echo "Item Telah Disetujui";
                     } else {
+                        $param = array(
+                            'notif_to' => $item->user_id,
+                            'message' => "Pengajuan Penambahan Saldo Tidak Disetujui",
+                            'notif_cat' => 6,
+                            'notif_link' => base_url() . "item"
+                        );
+                        $this->create_notif($param);
                         echo "Item Tidak Disetujui";
                     }
                 } else {
@@ -328,6 +353,21 @@ class Account extends CI_Controller {
         } else {
             redirect('/', 'refresh');
         }
+    }
+
+    function create_notif($param) {
+        $expireDate = date("Y-m-d H:i:s", strtotime("+1 month", now()));
+        $mongExpireAt = new MongoDate(strtotime($expireDate));
+        $data_notif = array(
+            'expireAt' => $mongExpireAt,
+            'notif_to' => $param['notif_to'],
+            'message' => $param['message'],
+            'notif_date' => date("Y-m-d H:i:s"),
+            'read_status' => 0,
+            'notif_cat' => $param['notif_cat'],
+            'notif_link' => $param['notif_link']
+        );
+        $this->mongo_db->db->insert($data_notif);
     }
 
 }
