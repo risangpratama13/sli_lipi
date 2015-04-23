@@ -17,7 +17,7 @@ class Mongo_db {
 
         //load the config file which we have created in 'config' directory
         $this->_ci->load->config('mongodb');
-        $config = 'default';
+        $config = 'localhost';
 
         //Fetch Mongo server and database configuration from config file which we have created in 'config' directory
         $config_data = $this->_ci->config->item($config);
@@ -25,14 +25,14 @@ class Mongo_db {
         try {
 
             //connect to the mongodb server
-            $this->mb = new MongoClient();
+            $this->mb = new MongoClient($config_data['mongo_hostbase']);
 
             //select the mongodb database      
             $this->db = $this->mb->selectCollection($config_data['mongo_database'], "notif_coll");
         } catch (MongoConnectionException $exception) {
 
             //if mongodb is not connect, then display the error
-            show_error('Unable to connect to Database', 500);
+            show_error($exception, 500);
         }
     }
 
