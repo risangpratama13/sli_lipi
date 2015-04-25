@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 12:23:22
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 13:36:16
          compiled from "application\views\master-data\kurs_point.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5050548eb09971e046-90697013%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -13,7 +13,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1429939367,
+      1 => 1429939767,
       2 => 'file',
     ),
   ),
@@ -259,10 +259,10 @@ config_point">Konfigurasi Poin</a></li>
         </div><!-- /.row -->
     </section><!-- /.content -->
 
-        <div class="main-footer">
+        <footer class="main-footer">
             <strong>Copyright &copy; <?php echo date('Y');?>
  <a href="#">Bahasa Langit</a>.</strong> &nbsp;&nbsp;All rights reserved.
-        </div>
+        </footer>
     </aside>
     <!-- End Content -->
 

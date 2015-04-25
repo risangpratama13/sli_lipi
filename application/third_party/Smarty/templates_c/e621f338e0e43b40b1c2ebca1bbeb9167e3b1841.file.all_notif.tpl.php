@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 13:22:39
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 13:41:26
          compiled from "application\views\notification\all_notif.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5724553b192ed45ab8-98365423%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'e621f338e0e43b40b1c2ebca1bbeb9167e3b1841' => 
     array (
       0 => 'application\\views\\notification\\all_notif.tpl',
-      1 => 1429942909,
+      1 => 1429944077,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -128,10 +128,15 @@ $_smarty_tpl->tpl_vars['notif']->_loop = true;
                                 </div>
                             </li>
                         <?php } ?>
-                    <?php }?>
-                    <li>
-                        <i class="fa fa-clock-o"></i>
-                    </li>
+                        <li>
+                            <i class="fa fa-clock-o"></i>
+                        </li>
+                    <?php } else { ?>
+                        <div class="callout callout-danger">
+                            <h4>Pemberitahuan Kosong</h4>
+                            <p>Anda Tidak Memiliki Pemberitahuan.</p>
+                        </div>
+                    <?php }?>                    
                 </ul>
             </div><!-- /.col -->
         </div><!-- /.row -->

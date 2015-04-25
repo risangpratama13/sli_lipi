@@ -40,10 +40,15 @@
                                 </div>
                             </li>
                         {/foreach}
-                    {/if}
-                    <li>
-                        <i class="fa fa-clock-o"></i>
-                    </li>
+                        <li>
+                            <i class="fa fa-clock-o"></i>
+                        </li>
+                    {else}
+                        <div class="callout callout-danger">
+                            <h4>Pemberitahuan Kosong</h4>
+                            <p>Anda Tidak Memiliki Pemberitahuan.</p>
+                        </div>
+                    {/if}                    
                 </ul>
             </div><!-- /.col -->
         </div><!-- /.row -->
