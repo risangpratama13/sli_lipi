@@ -50,15 +50,15 @@ class Auth extends CI_Controller {
             $point = $this->balance->get_value($user->balance_id);
             (int) $saldo = (double) $point * (double) $kurs->idr;
 
-            if ($saldo <= $kurs->min_saldo) {
-                $param = array(
-                    'notif_to' => $user->id,
-                    'message' => "Saldo Anda Di Bawah Minimum",
-                    'notif_cat' => 7,
-                    'notif_link' => base_url() . "rincian_saldo"
-                );
-                $this->create_notif($param);
-            }
+//            if ($saldo <= $kurs->min_saldo) {
+//                $param = array(
+//                    'notif_to' => $user->id,
+//                    'message' => "Saldo Anda Di Bawah Minimum",
+//                    'notif_cat' => 7,
+//                    'notif_link' => base_url() . "rincian_saldo"
+//                );
+//                $this->create_notif($param);
+//            }
 
             $this->smartyci->assign('saldo', $saldo);
         } else if ($this->ion_auth->in_group(3) or $this->ion_auth->is_admin()) {
@@ -1084,20 +1084,20 @@ class Auth extends CI_Controller {
         }
     }
 
-    function create_notif($param) {
-        $expireDate = date("Y-m-d H:i:s", strtotime("+1 month", now()));
-        $mongExpireAt = new MongoDate(strtotime($expireDate));
-        $data_notif = array(
-            'expireAt' => $mongExpireAt,
-            'notif_to' => $param['notif_to'],
-            'message' => $param['message'],
-            'notif_date' => date("Y-m-d H:i:s"),
-            'read_status' => 0,
-            'notif_cat' => $param['notif_cat'],
-            'notif_link' => $param['notif_link']
-        );
-        $this->mongo_db->db->insert($data_notif);
-    }
+//    function create_notif($param) {
+//        $expireDate = date("Y-m-d H:i:s", strtotime("+1 month", now()));
+//        $mongExpireAt = new MongoDate(strtotime($expireDate));
+//        $data_notif = array(
+//            'expireAt' => $mongExpireAt,
+//            'notif_to' => $param['notif_to'],
+//            'message' => $param['message'],
+//            'notif_date' => date("Y-m-d H:i:s"),
+//            'read_status' => 0,
+//            'notif_cat' => $param['notif_cat'],
+//            'notif_link' => $param['notif_link']
+//        );
+//        $this->mongo_db->db->insert($data_notif);
+//    }
     
     function not_found() {
         if (!$this->ion_auth->logged_in()) {

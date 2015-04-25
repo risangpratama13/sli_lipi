@@ -215,21 +215,21 @@ class Orders extends CI_Controller {
                             $this->balance_log->save($data_log);
                             $operator = $this->operator->get_byid($items['options']['operator']);
 
-                            $param = array(
-                                'notif_to' => $operator->user_id,
-                                'message' => $user->full_name . " Mengajukan Pengujian",
-                                'notif_cat' => 8,
-                                'notif_link' => base_url() . "view_test/".$test_order_id
-                            );
-                            $this->create_notif($param);
-                            
-                            $param = array(
-                                'notif_to' => $test->user_id,
-                                'message' => $user->full_name . " Mengajukan Pengujian",
-                                'notif_cat' => 8,
-                                'notif_link' => base_url() . "view_test/".$test_order_id
-                            );
-                            $this->create_notif($param);
+//                            $param = array(
+//                                'notif_to' => $operator->user_id,
+//                                'message' => $user->full_name . " Mengajukan Pengujian",
+//                                'notif_cat' => 8,
+//                                'notif_link' => base_url() . "view_test/".$test_order_id
+//                            );
+//                            $this->create_notif($param);
+//                            
+//                            $param = array(
+//                                'notif_to' => $test->user_id,
+//                                'message' => $user->full_name . " Mengajukan Pengujian",
+//                                'notif_cat' => 8,
+//                                'notif_link' => base_url() . "view_test/".$test_order_id
+//                            );
+//                            $this->create_notif($param);
                         }
                         $this->cart->destroy();
                         redirect('order', 'refresh');
@@ -304,19 +304,19 @@ class Orders extends CI_Controller {
         }
     }
 
-    function create_notif($param) {
-        $expireDate = date("Y-m-d H:i:s", strtotime("+1 month", now()));
-        $mongExpireAt = new MongoDate(strtotime($expireDate));
-        $data_notif = array(
-            'expireAt' => $mongExpireAt,
-            'notif_to' => $param['notif_to'],
-            'message' => $param['message'],
-            'notif_date' => date("Y-m-d H:i:s"),
-            'read_status' => 0,
-            'notif_cat' => $param['notif_cat'],
-            'notif_link' => $param['notif_link']
-        );
-        $this->mongo_db->db->insert($data_notif);
-    }
+//    function create_notif($param) {
+//        $expireDate = date("Y-m-d H:i:s", strtotime("+1 month", now()));
+//        $mongExpireAt = new MongoDate(strtotime($expireDate));
+//        $data_notif = array(
+//            'expireAt' => $mongExpireAt,
+//            'notif_to' => $param['notif_to'],
+//            'message' => $param['message'],
+//            'notif_date' => date("Y-m-d H:i:s"),
+//            'read_status' => 0,
+//            'notif_cat' => $param['notif_cat'],
+//            'notif_link' => $param['notif_link']
+//        );
+//        $this->mongo_db->db->insert($data_notif);
+//    }
 
 }

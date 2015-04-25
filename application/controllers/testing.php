@@ -319,13 +319,13 @@ class Testing extends CI_Controller {
                     );
                     $this->test_order->update($test_order_id, $data);
                     $test_order = $this->test_order->find_byid($test_order_id);
-                    $param = array(
-                        'notif_to' => $test_order->user_id,
-                        'message' => $user->full_name . " Menyetujui Pengujian Anda",
-                        'notif_cat' => 9,
-                        'notif_link' => base_url() . "view_test/" . $test_order_id
-                    );
-                    $this->create_notif($param);
+//                    $param = array(
+//                        'notif_to' => $test_order->user_id,
+//                        'message' => $user->full_name . " Menyetujui Pengujian Anda",
+//                        'notif_cat' => 9,
+//                        'notif_link' => base_url() . "view_test/" . $test_order_id
+//                    );
+//                    $this->create_notif($param);
 
                     if ($this->input->post('tools')) {
                         $tools = $this->input->post('tools');
@@ -413,13 +413,13 @@ class Testing extends CI_Controller {
                     break;
             }
             if ($this->test_order->update($id, $data)) {
-                $param = array(
-                    'notif_to' => $test_order->user_id,
-                    'message' => $message,
-                    'notif_cat' => $category,
-                    'notif_link' => base_url() . "view_test/" . $id
-                );
-                $this->create_notif($param);
+//                $param = array(
+//                    'notif_to' => $test_order->user_id,
+//                    'message' => $message,
+//                    'notif_cat' => $category,
+//                    'notif_link' => base_url() . "view_test/" . $id
+//                );
+//                $this->create_notif($param);
                 echo "Success";
             } else {
                 echo 'Failed';
@@ -505,19 +505,19 @@ class Testing extends CI_Controller {
         return $color;
     }
 
-    function create_notif($param) {
-        $expireDate = date("Y-m-d H:i:s", strtotime("+1 month", now()));
-        $mongExpireAt = new MongoDate(strtotime($expireDate));
-        $data_notif = array(
-            'expireAt' => $mongExpireAt,
-            'notif_to' => $param['notif_to'],
-            'message' => $param['message'],
-            'notif_date' => date("Y-m-d H:i:s"),
-            'read_status' => 0,
-            'notif_cat' => $param['notif_cat'],
-            'notif_link' => $param['notif_link']
-        );
-        $this->mongo_db->db->insert($data_notif);
-    }
+//    function create_notif($param) {
+//        $expireDate = date("Y-m-d H:i:s", strtotime("+1 month", now()));
+//        $mongExpireAt = new MongoDate(strtotime($expireDate));
+//        $data_notif = array(
+//            'expireAt' => $mongExpireAt,
+//            'notif_to' => $param['notif_to'],
+//            'message' => $param['message'],
+//            'notif_date' => date("Y-m-d H:i:s"),
+//            'read_status' => 0,
+//            'notif_cat' => $param['notif_cat'],
+//            'notif_link' => $param['notif_link']
+//        );
+//        $this->mongo_db->db->insert($data_notif);
+//    }
 
 }
