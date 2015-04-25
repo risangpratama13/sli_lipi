@@ -16,7 +16,7 @@
         <div class="navbar-right">
             <ul class="nav navbar-nav">
                 <!-- Notifications: style can be found in dropdown.less -->
-                <li class="dropdown notifications-menu">
+                {*<li class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="notif">
                         <i class="fa fa-warning"></i>
                         <span class="label label-warning" id="notif_count"></span>
@@ -31,7 +31,7 @@
                         </li>
                         <li class="footer"><a href="{base_url()}all_notif/{$user->id}">Lihat Semua</a></li>
                     </ul>
-                </li>
+                </li>*}
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">

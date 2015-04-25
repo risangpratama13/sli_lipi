@@ -56,7 +56,7 @@
 <!-- SLI LIPI App -->
 <script src="{base_url()}asset/js/Sli_Lipi/app.js" type="text/javascript"></script>
 <!-- Addons Scripts -->
-<script type="text/javascript">
+{*<script type="text/javascript">
     $(document).ready(function () {
         check();
         $("#notif").click(function () {
@@ -135,7 +135,7 @@
             }
         });
     }    
-</script>
+</script>*}
 {block name="addon_scripts"}{/block}
 </body>
 </html>
