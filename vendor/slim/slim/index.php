@@ -7,12 +7,12 @@ $app = new \Slim\Slim();
 
 function getConnection() {
     $url = "mongodb://";
-    $dbhost = "localhost:27017";
-    $dbuser = "sli_lipi_user";
-    $dbpass = "slilipi2014";
-    $dbname = "sli_lipi";
-    $url .= $url . $dbuser . ":" . $dbpass . "@" . $dbhost;
-    $dbh = new MongoClient("mongodb://localhost:27017");
+    $dbhost = "ds041380.mongolab.com:41380";
+    $dbuser = "locatm2014";
+    $dbpass = "locatm2010";
+    $dbname = "locatm";
+    $url .= $url . $dbuser . ":" . $dbpass . "@" . $dbhost."/".$dbname;
+    $dbh = new MongoClient("mongodb://locatm2014:locatm2010@ds041380.mongolab.com:41380/locatm");
     $db = $dbh->selectDB($dbname);
     $collection = new MongoCollection($db, 'notif_coll');
     return $collection;

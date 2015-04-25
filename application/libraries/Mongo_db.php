@@ -17,7 +17,7 @@ class Mongo_db {
 
         //load the config file which we have created in 'config' directory
         $this->_ci->load->config('mongodb');
-        $config = 'localhost';
+        $config = 'default';
 
         //Fetch Mongo server and database configuration from config file which we have created in 'config' directory
         $config_data = $this->_ci->config->item($config);
