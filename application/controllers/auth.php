@@ -217,16 +217,16 @@ class Auth extends CI_Controller {
             );
             $this->member->create_member($data_member);
 
-            $admins = $this->ion_auth->users(array(1, 3))->result();
-            foreach ($admins as $admin) {
-                $param = array(
-                    'notif_to' => $admin->id,
-                    'message' => $this->input->post('full_name') . " Ditambahkan Sebagai Anggota",
-                    'notif_cat' => 1,
-                    'notif_link' => base_url() . "anggota/" . $username
-                );
-                $this->create_notif($param);
-            }
+//            $admins = $this->ion_auth->users(array(1, 3))->result();
+//            foreach ($admins as $admin) {
+//                $param = array(
+//                    'notif_to' => $admin->id,
+//                    'message' => $this->input->post('full_name') . " Ditambahkan Sebagai Anggota",
+//                    'notif_cat' => 1,
+//                    'notif_link' => base_url() . "anggota/" . $username
+//                );
+//                $this->create_notif($param);
+//            }
             $this->ion_auth->login($this->input->post('username'), $this->input->post('password'), $remember);
             redirect("/", 'refresh');
         } else {
@@ -510,16 +510,16 @@ class Auth extends CI_Controller {
 
                 $this->member->create_member($data_member);
 
-                $admins = $this->ion_auth->users(array(1, 3))->result();
-                foreach ($admins as $admin) {
-                    $param = array(
-                        'notif_to' => $admin->id,
-                        'message' => $this->input->post('full_name') . " Ditambahkan Sebagai Anggota",
-                        'notif_cat' => 1,
-                        'notif_link' => base_url() . "anggota/" . $username
-                    );
-                    $this->create_notif($param);
-                }
+//                $admins = $this->ion_auth->users(array(1, 3))->result();
+//                foreach ($admins as $admin) {
+//                    $param = array(
+//                        'notif_to' => $admin->id,
+//                        'message' => $this->input->post('full_name') . " Ditambahkan Sebagai Anggota",
+//                        'notif_cat' => 1,
+//                        'notif_link' => base_url() . "anggota/" . $username
+//                    );
+//                    $this->create_notif($param);
+//                }
                 redirect("anggota", 'refresh');
             } else {
                 $this->load->model('research');
@@ -585,13 +585,13 @@ class Auth extends CI_Controller {
                     $this->operator->save($data);
                 }
                 $this->ion_auth->add_to_group(4, $user_id);
-                $param = array(
-                    'notif_to' => $user_id,
-                    'message' => "Anda Ditambahkan Sebagai Operator",
-                    'notif_cat' => 2,
-                    'notif_link' => base_url() . "profil"
-                );
-                $this->create_notif($param);
+//                $param = array(
+//                    'notif_to' => $user_id,
+//                    'message' => "Anda Ditambahkan Sebagai Operator",
+//                    'notif_cat' => 2,
+//                    'notif_link' => base_url() . "profil"
+//                );
+//                $this->create_notif($param);
                 redirect('operator', 'refresh');
             } else {
                 $members = $this->ion_auth->users(2)->result();
@@ -634,13 +634,13 @@ class Auth extends CI_Controller {
                     );
                     $this->operator->save($data);
                 }
-                $param = array(
-                    'notif_to' => $user_id,
-                    'message' => "Data Operator Anda Mengalami Perubahan",
-                    'notif_cat' => 3,
-                    'notif_link' => base_url() . "profil"
-                );
-                $this->create_notif($param);
+//                $param = array(
+//                    'notif_to' => $user_id,
+//                    'message' => "Data Operator Anda Mengalami Perubahan",
+//                    'notif_cat' => 3,
+//                    'notif_link' => base_url() . "profil"
+//                );
+//                $this->create_notif($param);
                 redirect('operator', 'refresh');
             } else {
                 $member = $this->ion_auth->user($id)->row();
@@ -987,13 +987,13 @@ class Auth extends CI_Controller {
                 $this->research_group->update($research_group, $data);
                 $this->ion_auth->add_to_group(5, $user_id);
 
-                $param = array(
-                    'notif_to' => $user_id,
-                    'message' => "Anda Ditambahkan Sebagai Ketua Kelitian",
-                    'notif_cat' => 4,
-                    'notif_link' => base_url() . "profil"
-                );
-                $this->create_notif($param);
+//                $param = array(
+//                    'notif_to' => $user_id,
+//                    'message' => "Anda Ditambahkan Sebagai Ketua Kelitian",
+//                    'notif_cat' => 4,
+//                    'notif_link' => base_url() . "profil"
+//                );
+//                $this->create_notif($param);
                 redirect('leader', 'refresh');
             } else {
                 $researchers = $this->researcher->get_all();
