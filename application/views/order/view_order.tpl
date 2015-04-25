@@ -116,6 +116,23 @@
                 </div>
             </div><!-- /.col -->
         </div><!-- /.row -->
+        <div class="row" style="margin-bottom: 30px;">
+            <div class="col-xs-4 pull-right">
+                <p align="center"><strong>Ketua Kelitian</strong></p>
+                <br/><br/><br/><br/><br/>
+                <p align="center">(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    )</p>
+            </div><!-- /.col -->
+        </div>
 
         <!-- this row will not appear when printing -->
         <div class="row no-print">

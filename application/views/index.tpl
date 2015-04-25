@@ -30,25 +30,27 @@
 
 {block name="addon_scripts"}
     <script type="text/javascript">
-        $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            buttonText: {
-                prev: "<span class='fa fa-caret-left'></span>",
-                next: "<span class='fa fa-caret-right'></span>",
-                today: 'today',
-                month: 'month',
-                week: 'week',
-                day: 'day'
-            },
-            //Random default events
-            eventSources: [{
-                    url: '{base_url()}testing/calendar'
-                }
-            ]
+        $(document).ready(function () {
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                buttonText: {
+                    prev: "<span class='fa fa-caret-left'></span>",
+                    next: "<span class='fa fa-caret-right'></span>",
+                    today: 'today',
+                    month: 'month',
+                    week: 'week',
+                    day: 'day'
+                },
+                //Random default events
+                eventSources: [{
+                        url: '{base_url()}testing/calendar'
+                    }
+                ]
+            });
         });
     </script>
 {/block}

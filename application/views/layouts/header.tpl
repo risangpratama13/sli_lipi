@@ -15,6 +15,23 @@
         </a>
         <div class="navbar-right">
             <ul class="nav navbar-nav">
+                <!-- Notifications: style can be found in dropdown.less -->
+                <li class="dropdown notifications-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="notif">
+                        <i class="fa fa-warning"></i>
+                        <span class="label label-warning" id="notif_count"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header" id="notif_header"></li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu" id="header_content">
+                                
+                            </ul>
+                        </li>
+                        <li class="footer"><a href="#">Lihat Semua</a></li>
+                    </ul>
+                </li>
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">

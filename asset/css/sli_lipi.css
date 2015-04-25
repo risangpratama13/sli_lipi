@@ -56,6 +56,13 @@ body > .header {
   width: 220px;
   top: 0;
 }
+
+.main-footer {
+    background: #FFF none repeat scroll 0% 0%;
+    padding: 15px;
+    color: #444;
+    border-top: 1px solid #EEE;
+}
 @media screen and (min-width: 992px) {
   .left-side {
     top: 50px;

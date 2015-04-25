@@ -29,54 +29,42 @@ $authKey = function ($route) {
 $app->get('/notif/:id', $authKey, function($id) use($app) {
     try {
         $db = getConnection();
-        $query = array("notif_to" => $id);
-        $cursor = $db->find($query);
-        $data = array();
-        foreach ($cursor as $doc) {
-            $data[] = array(
-                'message' => $doc['message'],
-                'category' => $doc['notif_cat'],
-                'link' => $doc['notif_link']
-            );
-        }
-        echo json_encode($data);
-    } catch (MongoException $e) {
-        $data = array("status" => "error", "message" => $e->getMessage());
-        echo json_encode($data);
-    }    
-});
-
-$app->post('/notif/', function() use ($app)  {
-    try {
-        $request = $app->request();
-        $input = json_decode($request->getBody());
-        $db = getConnection();
-        $query = array("notif_to" => $input->id, "read_status" => 0);
+        $query = array("notif_to" => $id, "read_status" => 0);
         $cursor = $db->find($query);
         $total_notif = $db->count($query);
         $data = array();
-        foreach ($cursor as $doc) {
-            $data[] = array(
-                'message' => $doc['message'],
-                'category' => $doc['notif_cat'],
-                'link' => $doc['notif_link']
-            );
+        if (!empty($cursor)) {
+            foreach ($cursor as $doc) {
+                $data[] = array(
+                    'id' => $doc["_id"]->{'$id'},
+                    'message' => $doc['message'],
+                    'category' => $doc['notif_cat'],
+                    'link' => $doc['notif_link']
+                );
+            }
         }
-        echo '{"total":'.$total_notif.', "data": ' . json_encode($data) . '}';
+        echo '{"total":' . $total_notif . ', "notifikasi": ' . json_encode($data) . '}';
     } catch (MongoException $e) {
         $data = array("status" => "error", "message" => $e->getMessage());
         echo json_encode($data);
     }
 });
 
-$app->post('/notif/check', function() use ($app)  {
+$app->get('/notif/old/:id', $authKey, function($id) use($app) {
     try {
-        $request = $app->request();
-        $input = json_decode($request->getBody());
         $db = getConnection();
-        $query = array("notif_to" => $input->id, "read_status" => 0);
-        $total_notif = $db->count($query);
-        $data = array("status" => "success", "total" => $total_notif);        
+        $query = array("notif_to" => $id, "read_status" => 1);
+        $cursor = $db->find($query)->sort(array('notif_date' => -1))->limit(5);
+        $data = array();
+        if (!empty($cursor)) {
+            foreach ($cursor as $doc) {
+                $data[] = array(                    
+                    'message' => $doc['message'],
+                    'category' => $doc['notif_cat'],
+                    'link' => $doc['notif_link']
+                );
+            }
+        }
         echo json_encode($data);
     } catch (MongoException $e) {
         $data = array("status" => "error", "message" => $e->getMessage());
@@ -84,15 +72,26 @@ $app->post('/notif/check', function() use ($app)  {
     }
 });
 
-$app->put('/notif/update', function() use ($app)  {
+$app->get('/notif/check/:id', $authKey, function($id) use ($app) {
     try {
-        $request = $app->request();
-        $input = json_decode($request->getBody());
+        $db = getConnection();
+        $query = array("notif_to" => $id, "read_status" => 0);
+        $total_notif = $db->count($query);
+        $data = array("status" => "success", "total" => $total_notif);
+        echo json_encode($data);
+    } catch (MongoException $e) {
+        $data = array("status" => "error", "message" => $e->getMessage());
+        echo json_encode($data);
+    }
+});
+
+$app->get('/notif/update/:id', function($id) use ($app) {
+    try {
         $db = getConnection();
         $new_data = array('$set' => array("read_status" => 1));
-        $where = array("notif_to" => $input->id);
+        $where = array("_id" => new MongoId($id));
         $db->update($where, $new_data);
-        $data = array("status" => "success");        
+        $data = array("status" => "success");
         echo json_encode($data);
     } catch (MongoException $e) {
         $data = array("status" => "error", "message" => $e->getMessage());

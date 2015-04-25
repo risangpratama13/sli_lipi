@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-19 06:39:45
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 10:38:18
          compiled from "application\views\index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:218035487144de015c5-93114714%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'f20be9d75da2a5d3a1584a5f4d0ef20be7f26100' => 
     array (
       0 => 'application\\views\\index.tpl',
-      1 => 1424822289,
+      1 => 1429931451,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1429400112,
+      1 => 1429933094,
       2 => 'file',
     ),
     '668c70bfc32ed27c742429d00bb2307df1fd048a' => 
@@ -35,6 +35,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'version' => 'Smarty-3.1.21-dev',
   'unifunc' => 'content_5487144de4f7c4_96202581',
+  'variables' => 
+  array (
+    'user' => 0,
+  ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5487144de4f7c4_96202581')) {function content_5487144de4f7c4_96202581($_smarty_tpl) {?><!DOCTYPE html>
@@ -106,20 +110,26 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <?php /*  Call merged included template "home/tiles.tpl" */
 $_tpl_stack[] = $_smarty_tpl;
  $_smarty_tpl = $_smarty_tpl->setupInlineSubTemplate('home/tiles.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0, '218035487144de015c5-93114714');
-content_5532eb416d45b1_61003666($_smarty_tpl);
+content_553b0c2ad53f20_59660868($_smarty_tpl);
 $_smarty_tpl = array_pop($_tpl_stack); 
 /*  End of included template "home/tiles.tpl" */?>            
         </div><!-- /.row -->
         <?php /*  Call merged included template "home/calendar.tpl" */
 $_tpl_stack[] = $_smarty_tpl;
  $_smarty_tpl = $_smarty_tpl->setupInlineSubTemplate('home/calendar.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0, '218035487144de015c5-93114714');
-content_5532eb416ff548_17869704($_smarty_tpl);
+content_553b0c2ad7eeb6_90792899($_smarty_tpl);
 $_smarty_tpl = array_pop($_tpl_stack); 
 /*  End of included template "home/calendar.tpl" */?>
     </section><!-- /.content -->
 
+                <footer class="footer">
+    <strong>Copyright &copy; <?php echo '<?'; ?>
+=  date('Y');<?php echo '?>'; ?>
+ <a href="http://mylemariage.com">Le Mariage Indonesia</a>.</strong> All rights reserved.
+</footer>
             </aside>
             <!-- End Content -->
+            
         </div>
         <!-- Modal -->    
         
@@ -149,38 +159,168 @@ asset/js/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"><?php 
 asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
 >
         <!-- Addons Scripts -->
+        <?php echo '<script'; ?>
+ type="text/javascript">
+            $(document).ready(function () {
+                check();
+                $("#notif").click(function () {
+                    var i;
+                    var html = "";
+                    $.ajax({
+                        url: "<?php echo base_url();?>
+vendor/slim/slim/notif/<?php echo $_smarty_tpl->tpl_vars['user']->value->id;?>
+",
+                        dataType: "json",
+                        success: function (data) {
+                            if(data.status != "error") {
+                                if(parseInt(data.total) > 0) {
+                                    var string_header = "Ada "+data.total+" Pemberitahuan Baru";
+                                    $("#notif_header").text(string_header);
+                                    for (i in data.notifikasi) {
+                                        html += "<li>";
+                                        html += "<a href='"+data.notifikasi[i].link+"'>";
+                                        html += "<i class='"+notif_category(data.notifikasi[i].category)+"'></i> "+data.notifikasi[i].message;
+                                        html += "</a>";
+                                        html += "</li>";
+                                        
+                                        $.ajax({
+                                            url: "<?php echo base_url();?>
+vendor/slim/slim/notif/update/"+data.notifikasi[i].id,
+                                            success: function(data) {
+                                            }
+                                        });
+                                    }
+                                    
+                                    $.ajax({
+                                        url: "<?php echo base_url();?>
+vendor/slim/slim/notif/update/<?php echo $_smarty_tpl->tpl_vars['user']->value->id;?>
+",
+                                        success: function(data) {
+                                        }
+                                    });
+
+                                    $("#header_content").empty();
+                                    $("#header_content").append(html);
+                                } else {
+                                    $("#notif_header").empty();
+                                    $.ajax({
+                                        url: "<?php echo base_url();?>
+vendor/slim/slim/notif/old/<?php echo $_smarty_tpl->tpl_vars['user']->value->id;?>
+",
+                                        dataType: "json",
+                                        success: function (data) {
+                                            if(data.length != 0) {                                            
+                                                for (i in data) {
+                                                    html += "<li>";
+                                                    html += "<a href='"+data[i].link+"'>";
+                                                    html += "<i class='"+notif_category(data[i].category)+"'></i>"
+                                                    html += data[i].message;
+                                                    html += "</a>";
+                                                    html += "</li>";
+                                                }
+                                                $("#header_content").empty();
+                                                $("#header_content").append(html);
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    });
+                });
+            });
+
+            function check() {
+                $.ajax({
+                    url: "<?php echo base_url();?>
+vendor/slim/slim/notif/check/<?php echo $_smarty_tpl->tpl_vars['user']->value->id;?>
+",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == "success") {
+                            if(data.total == 0) {
+                                $("#notif_count").empty();                            
+                            } else {
+                                $("#notif_count").empty();
+                                $("#notif_count").text(data.total);
+                            }
+                        }
+                    }
+                });
+                var waktu = setTimeout("check()", 5000);
+            }
+
+            function notif_category(category) {
+                var iclass;
+                switch(category) {
+                    case 1:
+                    case 2:
+                    case 4:
+                        iclass = "fa fa-users info";
+                        break;
+                    case 3:
+                        iclass = "ion ion-ios7-people warning";
+                        break;
+                    case 5:
+                        iclass = "fa fa-money info";
+                        break;
+                    case 6:
+                        iclass = "fa fa-money success";
+                        break;
+                    case 7:
+                        iclass = "fa fa-money danger";
+                        break;
+                    case 8:
+                        iclass = "fa fa-book info";
+                        break;
+                    case 9:
+                        iclass = "fa fa-book success";
+                        break;
+                    case 10:
+                        iclass = "fa fa-book danger";
+                        break;
+                    case 11:
+                        iclass = "fa fa-flag-checkered";
+                        break;
+                }
+                return iclass;
+            }
+        <?php echo '</script'; ?>
+>
         
     <?php echo '<script'; ?>
  type="text/javascript">
-        $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            buttonText: {
-                prev: "<span class='fa fa-caret-left'></span>",
-                next: "<span class='fa fa-caret-right'></span>",
-                today: 'today',
-                month: 'month',
-                week: 'week',
-                day: 'day'
-            },
-            //Random default events
-            eventSources: [{
-                    url: '<?php echo base_url();?>
+        $(document).ready(function () {
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                buttonText: {
+                    prev: "<span class='fa fa-caret-left'></span>",
+                    next: "<span class='fa fa-caret-right'></span>",
+                    today: 'today',
+                    month: 'month',
+                    week: 'week',
+                    day: 'day'
+                },
+                //Random default events
+                eventSources: [{
+                        url: '<?php echo base_url();?>
 testing/calendar'
-                }
-            ]
+                    }
+                ]
+            });
         });
     <?php echo '</script'; ?>
 >
 
     </body>
 </html><?php }} ?>
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-19 06:39:45
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 10:38:18
          compiled from "application\views\home\tiles.tpl" */ ?>
-<?php if ($_valid && !is_callable('content_5532eb416d45b1_61003666')) {function content_5532eb416d45b1_61003666($_smarty_tpl) {?><?php if (in_array("admin",$_smarty_tpl->tpl_vars['groups']->value)||in_array("superadmin",$_smarty_tpl->tpl_vars['groups']->value)) {?>
+<?php if ($_valid && !is_callable('content_553b0c2ad53f20_59660868')) {function content_553b0c2ad53f20_59660868($_smarty_tpl) {?><?php if (in_array("admin",$_smarty_tpl->tpl_vars['groups']->value)||in_array("superadmin",$_smarty_tpl->tpl_vars['groups']->value)) {?>
     <div class="col-lg-3 col-xs-6">            
         <div class="small-box bg-aqua-gradient">
             <div class="inner">
@@ -299,9 +439,9 @@ rincian_saldo" class="small-box-footer">
         </div>
     </div><!-- ./col -->
 <?php }?><?php }} ?>
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-19 06:39:45
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 10:38:18
          compiled from "application\views\home\calendar.tpl" */ ?>
-<?php if ($_valid && !is_callable('content_5532eb416ff548_17869704')) {function content_5532eb416ff548_17869704($_smarty_tpl) {?><div class="row">    
+<?php if ($_valid && !is_callable('content_553b0c2ad7eeb6_90792899')) {function content_553b0c2ad7eeb6_90792899($_smarty_tpl) {?><div class="row">    
     <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header">

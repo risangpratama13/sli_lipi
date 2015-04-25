@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-03 08:06:37
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 09:59:55
          compiled from "application\views\layouts\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:6407548714861bd111-13683789%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ca6d73ec5e8d5926ca661a34939d1c33e07c27b1' => 
     array (
       0 => 'application\\views\\layouts\\header.tpl',
-      1 => 1428022834,
+      1 => 1429929073,
       2 => 'file',
     ),
   ),
@@ -42,6 +42,23 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         </a>
         <div class="navbar-right">
             <ul class="nav navbar-nav">
+                <!-- Notifications: style can be found in dropdown.less -->
+                <li class="dropdown notifications-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="notif">
+                        <i class="fa fa-warning"></i>
+                        <span class="label label-warning" id="notif_count"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header" id="notif_header"></li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu" id="header_content">
+                                
+                            </ul>
+                        </li>
+                        <li class="footer"><a href="#">Lihat Semua</a></li>
+                    </ul>
+                </li>
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
