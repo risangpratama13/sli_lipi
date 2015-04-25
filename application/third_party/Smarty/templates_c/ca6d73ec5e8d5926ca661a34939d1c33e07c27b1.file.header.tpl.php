@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 09:59:55
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 11:33:44
          compiled from "application\views\layouts\header.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:6407548714861bd111-13683789%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ca6d73ec5e8d5926ca661a34939d1c33e07c27b1' => 
     array (
       0 => 'application\\views\\layouts\\header.tpl',
-      1 => 1429929073,
+      1 => 1429936415,
       2 => 'file',
     ),
   ),
@@ -19,8 +19,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'unifunc' => 'content_548714861e4211_39987402',
   'variables' => 
   array (
-    'groups' => 0,
     'user' => 0,
+    'groups' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -56,7 +56,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                                 
                             </ul>
                         </li>
-                        <li class="footer"><a href="#">Lihat Semua</a></li>
+                        <li class="footer"><a href="<?php echo base_url();?>
+all_notif/<?php echo $_smarty_tpl->tpl_vars['user']->value->id;?>
+">Lihat Semua</a></li>
                     </ul>
                 </li>
                 <!-- User Account: style can be found in dropdown.less -->

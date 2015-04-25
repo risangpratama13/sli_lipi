@@ -1098,5 +1098,13 @@ class Auth extends CI_Controller {
         );
         $this->mongo_db->db->insert($data_notif);
     }
+    
+    function not_found() {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('login', 'refresh');
+        }
+        $this->basic_data();
+        $this->smartyci->display('404_error.tpl');
+    }
 
 }

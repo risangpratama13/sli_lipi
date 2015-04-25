@@ -1,13 +1,13 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 12:33:21
-         compiled from "application\views\master-data\research_group\lists.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:967154fa71e1ba4772-49114902%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 13:22:39
+         compiled from "application\views\notification\all_notif.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:5724553b192ed45ab8-98365423%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '7f16c693a0bd8b77b01aec0d5d338b98f63f811b' => 
+    'e621f338e0e43b40b1c2ebca1bbeb9167e3b1841' => 
     array (
-      0 => 'application\\views\\master-data\\research_group\\lists.tpl',
-      1 => 1425774965,
+      0 => 'application\\views\\notification\\all_notif.tpl',
+      1 => 1429942909,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -17,19 +17,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '967154fa71e1ba4772-49114902',
+  'nocache_hash' => '5724553b192ed45ab8-98365423',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_54fa71e1c54424_11549920',
+  'unifunc' => 'content_553b192ee0ce64_30739778',
   'variables' => 
   array (
     'user' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_54fa71e1c54424_11549920')) {function content_54fa71e1c54424_11549920($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_553b192ee0ce64_30739778')) {function content_553b192ee0ce64_30739778($_smarty_tpl) {?><!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -49,9 +49,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
         <!-- Addons Style -->
     
-    <?php echo link_tag('asset/css/datatables/dataTables.bootstrap.css');?>
-
-
     <!-- Theme style -->
     <?php echo link_tag('asset/css/sli_lipi.css');?>
 
@@ -83,80 +80,61 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Master Data
-            <small>Kelompok Penelitian</small>
+            Pemberitahuan
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="#">Master Data</a></li>
             <li class="active"><a href="<?php echo base_url();?>
-research_group">Kelompok Penelitian</a></li>
+all_notif/<?php echo $_smarty_tpl->tpl_vars['user']->value->id;?>
+">Pemberitahuan</a></li>
         </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
+        <!-- row -->
         <div class="row">
-            <div class="col-xs-12">
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Daftar Kelompok Penelitian</h3>
-                    </div><!-- /.box-header -->
-                    <div class="box-body table-responsive">
-                        <a class="btn btn-flat btn-primary" href="<?php echo base_url();?>
-research_group/add">
-                            <i class="fa fa-plus-circle"></i> Tambah Kelompok Penelitian
-                        </a>
-                        <br/><br/>
-                        <table id="tableResearchGroup" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Kelompok Penelitian</th>
-                                    <th>Deputi Bidang</th>
-                                    <th>Satuan Kerja</th>
-                                    <th>Ketua Ketelitian</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $_smarty_tpl->tpl_vars['no'] = new Smarty_variable(1, null, 0);?>
-                                <?php  $_smarty_tpl->tpl_vars['research_group'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['research_group']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['research_groups']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['research_group']->key => $_smarty_tpl->tpl_vars['research_group']->value) {
-$_smarty_tpl->tpl_vars['research_group']->_loop = true;
+            <div class="col-md-12">
+                <!-- The time line -->
+                <ul class="timeline">
+                    <?php if (!empty($_smarty_tpl->tpl_vars['notifications']->value)) {?>
+                        <?php $_smarty_tpl->tpl_vars['notif_date'] = new Smarty_variable('', null, 0);?>
+                        <?php  $_smarty_tpl->tpl_vars['notif'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['notif']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['notifications']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['notif']->key => $_smarty_tpl->tpl_vars['notif']->value) {
+$_smarty_tpl->tpl_vars['notif']->_loop = true;
 ?>
-                                    <tr>
-                                        <td><?php echo $_smarty_tpl->tpl_vars['no']->value;?>
-</td>
-                                        <td><?php echo $_smarty_tpl->tpl_vars['research_group']->value->res_group_name;?>
-</td>
-                                        <td><?php echo $_smarty_tpl->tpl_vars['research_group']->value->researcher_name;?>
-</td>
-                                        <td><?php echo $_smarty_tpl->tpl_vars['research_group']->value->research_name;?>
-</td>
-                                        <td>
-                                            <?php if ($_smarty_tpl->tpl_vars['research_group']->value->user_id!=null) {?>
-                                                <?php echo $_smarty_tpl->tpl_vars['users']->value[$_smarty_tpl->tpl_vars['research_group']->value->user_id];?>
+                            <?php if ($_smarty_tpl->tpl_vars['notif_date']->value!=date('Y-m-d',strtotime($_smarty_tpl->tpl_vars['notif']->value['notif_date']))) {?>
+                                <li class="time-label">
+                                    <span class="bg-red">
+                                        <?php echo date('j F Y',strtotime($_smarty_tpl->tpl_vars['notif']->value['notif_date']));?>
 
-                                            <?php }?>
-                                        </td>
-                                        <td>
-                                            <a href="<?php echo base_url();?>
-research_group/edit/<?php echo $_smarty_tpl->tpl_vars['research_group']->value->id;?>
-" title="Ubah Kelompok Penelitian" class="btn btn-flat btn-sm btn-warning"><i class="fa fa-edit"></i></a>
-                                            <button type="button" onclick="deleteResearchGroup(<?php echo $_smarty_tpl->tpl_vars['research_group']->value->id;?>
-)" title="Hapus Kelompok Penelitian" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
-                                        </td>
-                                    </tr>
-                                    <?php $_smarty_tpl->tpl_vars['no'] = new Smarty_variable($_smarty_tpl->tpl_vars['no']->value+1, null, 0);?>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                    </div><!-- /.box-body -->
-                </div><!-- /.box -->               
-            </div>            
-        </div>
+                                    </span>
+                                </li>
+                                <?php $_smarty_tpl->tpl_vars['notif_date'] = new Smarty_variable(date('Y-m-d',strtotime($_smarty_tpl->tpl_vars['notif']->value['notif_date'])), null, 0);?>
+                            <?php }?>
+                            <li>
+                                <i class="<?php echo notif_category($_smarty_tpl->tpl_vars['notif']->value['notif_cat']);?>
+"></i>
+                                <div class="timeline-item">
+                                    <span class="time"><i class="fa fa-clock-o"></i> <?php echo date('H:i',strtotime($_smarty_tpl->tpl_vars['notif']->value['notif_date']));?>
+</span>
+                                    <h3 class="timeline-header no-border"><?php echo $_smarty_tpl->tpl_vars['notif']->value['message'];?>
+</h3>
+                                    <div class='timeline-footer'>
+                                        <a class="btn btn-primary btn-xs" href="<?php echo $_smarty_tpl->tpl_vars['notif']->value['notif_link'];?>
+">Lihat Detail</a>
+                                    </div>
+                                </div>
+                            </li>
+                        <?php } ?>
+                    <?php }?>
+                    <li>
+                        <i class="fa fa-clock-o"></i>
+                    </li>
+                </ul>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
     </section><!-- /.content -->
 
         <footer class="main-footer">
@@ -183,15 +161,6 @@ asset/js/jquery-2.0.2.min.js"><?php echo '</script'; ?>
 asset/js/bootstrap.min.js" type="text/javascript"><?php echo '</script'; ?>
 >
 <!-- Addons Plugins -->
-
-    <?php echo '<script'; ?>
- src="<?php echo base_url();?>
-asset/js/plugins/datatables/jquery.dataTables.js" type="text/javascript"><?php echo '</script'; ?>
->
-    <?php echo '<script'; ?>
- src="<?php echo base_url();?>
-asset/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"><?php echo '</script'; ?>
->
 
 <!-- SLI LIPI App -->
 <?php echo '<script'; ?>
@@ -289,39 +258,6 @@ vendor/slim/slim/notif/check/<?php echo $_smarty_tpl->tpl_vars['user']->value->i
         });
     }    
 <?php echo '</script'; ?>
->
-
-    <?php echo '<script'; ?>
- type="text/javascript">
-        function deleteResearchGroup(id) {
-            var konfirmasi = confirm("Hapus Kelompok Penelitian ?");
-            if (konfirmasi == true) {
-                $.ajax({
-                    type: "POST",
-                    url: "<?php echo base_url();?>
-master/delete_research_group",
-                    data: "id="+id,
-                    success: function (data) {
-                        if (data == "Success") {
-                            alert(" Kelompok Penelitian Berhasil Dihapus");
-                            location.reload();
-                        } else {
-                            alert(" Kelompok Penelitian Tidak Berhasil Dihapus");
-                        }
-                    }
-                });
-            }
-        }
-        
-        $(function () {
-            var tableResearchGroup = $("#tableResearchGroup").dataTable({
-                oLanguage: {
-                    sUrl: '<?php echo base_url();?>
-asset/js/plugins/datatables/Indonesian.json'
-                }
-            });
-        });
-    <?php echo '</script'; ?>
 >
 
 </body>

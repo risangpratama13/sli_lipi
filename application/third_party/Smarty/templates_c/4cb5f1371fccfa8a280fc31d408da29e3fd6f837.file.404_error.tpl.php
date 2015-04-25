@@ -1,35 +1,35 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 12:33:21
-         compiled from "application\views\master-data\research_group\lists.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:967154fa71e1ba4772-49114902%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 11:54:56
+         compiled from "application\views\404_error.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:22697553b1d748718e7-81435020%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '7f16c693a0bd8b77b01aec0d5d338b98f63f811b' => 
+    '4cb5f1371fccfa8a280fc31d408da29e3fd6f837' => 
     array (
-      0 => 'application\\views\\master-data\\research_group\\lists.tpl',
-      1 => 1425774965,
+      0 => 'application\\views\\404_error.tpl',
+      1 => 1429937693,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1429939767,
+      1 => 1429936775,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '967154fa71e1ba4772-49114902',
+  'nocache_hash' => '22697553b1d748718e7-81435020',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_54fa71e1c54424_11549920',
+  'unifunc' => 'content_553b1d74909e93_27448293',
   'variables' => 
   array (
     'user' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_54fa71e1c54424_11549920')) {function content_54fa71e1c54424_11549920($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_553b1d74909e93_27448293')) {function content_553b1d74909e93_27448293($_smarty_tpl) {?><!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -49,9 +49,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
         <!-- Addons Style -->
     
-    <?php echo link_tag('asset/css/datatables/dataTables.bootstrap.css');?>
-
-
     <!-- Theme style -->
     <?php echo link_tag('asset/css/sli_lipi.css');?>
 
@@ -83,83 +80,29 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Master Data
-            <small>Kelompok Penelitian</small>
+            404 Error Page
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="#">Master Data</a></li>
-            <li class="active"><a href="<?php echo base_url();?>
-research_group">Kelompok Penelitian</a></li>
+            <li class="active"><a href="#"><i class="fa fa-home"></i> Home</a></li>
         </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Daftar Kelompok Penelitian</h3>
-                    </div><!-- /.box-header -->
-                    <div class="box-body table-responsive">
-                        <a class="btn btn-flat btn-primary" href="<?php echo base_url();?>
-research_group/add">
-                            <i class="fa fa-plus-circle"></i> Tambah Kelompok Penelitian
-                        </a>
-                        <br/><br/>
-                        <table id="tableResearchGroup" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Kelompok Penelitian</th>
-                                    <th>Deputi Bidang</th>
-                                    <th>Satuan Kerja</th>
-                                    <th>Ketua Ketelitian</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $_smarty_tpl->tpl_vars['no'] = new Smarty_variable(1, null, 0);?>
-                                <?php  $_smarty_tpl->tpl_vars['research_group'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['research_group']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['research_groups']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['research_group']->key => $_smarty_tpl->tpl_vars['research_group']->value) {
-$_smarty_tpl->tpl_vars['research_group']->_loop = true;
-?>
-                                    <tr>
-                                        <td><?php echo $_smarty_tpl->tpl_vars['no']->value;?>
-</td>
-                                        <td><?php echo $_smarty_tpl->tpl_vars['research_group']->value->res_group_name;?>
-</td>
-                                        <td><?php echo $_smarty_tpl->tpl_vars['research_group']->value->researcher_name;?>
-</td>
-                                        <td><?php echo $_smarty_tpl->tpl_vars['research_group']->value->research_name;?>
-</td>
-                                        <td>
-                                            <?php if ($_smarty_tpl->tpl_vars['research_group']->value->user_id!=null) {?>
-                                                <?php echo $_smarty_tpl->tpl_vars['users']->value[$_smarty_tpl->tpl_vars['research_group']->value->user_id];?>
-
-                                            <?php }?>
-                                        </td>
-                                        <td>
-                                            <a href="<?php echo base_url();?>
-research_group/edit/<?php echo $_smarty_tpl->tpl_vars['research_group']->value->id;?>
-" title="Ubah Kelompok Penelitian" class="btn btn-flat btn-sm btn-warning"><i class="fa fa-edit"></i></a>
-                                            <button type="button" onclick="deleteResearchGroup(<?php echo $_smarty_tpl->tpl_vars['research_group']->value->id;?>
-)" title="Hapus Kelompok Penelitian" class="btn btn-flat btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
-                                        </td>
-                                    </tr>
-                                    <?php $_smarty_tpl->tpl_vars['no'] = new Smarty_variable($_smarty_tpl->tpl_vars['no']->value+1, null, 0);?>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                    </div><!-- /.box-body -->
-                </div><!-- /.box -->               
-            </div>            
-        </div>
+        <div class="error-page">
+            <h2 class="headline text-info"> 404</h2>
+            <div class="error-content">
+                <h3><i class="fa fa-warning text-yellow"></i> Oops! Page not found.</h3>
+                <p>
+                    We could not find the page you were looking for.
+                    Meanwhile, you may <a href="<?php echo base_url();?>
+">return to dashboard</a>.
+                </p>
+            </div><!-- /.error-content -->
+        </div><!-- /.error-page -->
     </section><!-- /.content -->
 
-        <footer class="main-footer">
+        <footer class="main-footer no-print">
             <strong>Copyright &copy; <?php echo date('Y');?>
  <a href="#">Bahasa Langit</a>.</strong> &nbsp;&nbsp;All rights reserved.
         </footer>
@@ -183,15 +126,6 @@ asset/js/jquery-2.0.2.min.js"><?php echo '</script'; ?>
 asset/js/bootstrap.min.js" type="text/javascript"><?php echo '</script'; ?>
 >
 <!-- Addons Plugins -->
-
-    <?php echo '<script'; ?>
- src="<?php echo base_url();?>
-asset/js/plugins/datatables/jquery.dataTables.js" type="text/javascript"><?php echo '</script'; ?>
->
-    <?php echo '<script'; ?>
- src="<?php echo base_url();?>
-asset/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"><?php echo '</script'; ?>
->
 
 <!-- SLI LIPI App -->
 <?php echo '<script'; ?>
@@ -289,39 +223,6 @@ vendor/slim/slim/notif/check/<?php echo $_smarty_tpl->tpl_vars['user']->value->i
         });
     }    
 <?php echo '</script'; ?>
->
-
-    <?php echo '<script'; ?>
- type="text/javascript">
-        function deleteResearchGroup(id) {
-            var konfirmasi = confirm("Hapus Kelompok Penelitian ?");
-            if (konfirmasi == true) {
-                $.ajax({
-                    type: "POST",
-                    url: "<?php echo base_url();?>
-master/delete_research_group",
-                    data: "id="+id,
-                    success: function (data) {
-                        if (data == "Success") {
-                            alert(" Kelompok Penelitian Berhasil Dihapus");
-                            location.reload();
-                        } else {
-                            alert(" Kelompok Penelitian Tidak Berhasil Dihapus");
-                        }
-                    }
-                });
-            }
-        }
-        
-        $(function () {
-            var tableResearchGroup = $("#tableResearchGroup").dataTable({
-                oLanguage: {
-                    sUrl: '<?php echo base_url();?>
-asset/js/plugins/datatables/Indonesian.json'
-                }
-            });
-        });
-    <?php echo '</script'; ?>
 >
 
 </body>

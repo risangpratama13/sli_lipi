@@ -29,7 +29,7 @@
                                 
                             </ul>
                         </li>
-                        <li class="footer"><a href="#">Lihat Semua</a></li>
+                        <li class="footer"><a href="{base_url()}all_notif/{$user->id}">Lihat Semua</a></li>
                     </ul>
                 </li>
                 <!-- User Account: style can be found in dropdown.less -->

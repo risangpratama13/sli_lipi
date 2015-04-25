@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-21 06:52:55
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 12:33:29
          compiled from "application\views\configuration\profile\personal.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:307235489837a29c369-09293533%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -19,7 +19,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1429400112,
+      1 => 1429939767,
       2 => 'file',
     ),
   ),
@@ -29,6 +29,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'version' => 'Smarty-3.1.21-dev',
   'unifunc' => 'content_5489837a3b1929_28948546',
+  'variables' => 
+  array (
+    'user' => 0,
+  ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5489837a3b1929_28948546')) {function content_5489837a3b1929_28948546($_smarty_tpl) {?><!DOCTYPE html>
@@ -50,35 +54,35 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <?php echo link_tag('asset/css/ionicons.min.css');?>
 
         <!-- Addons Style -->
-        
-        <!-- Theme style -->
-        <?php echo link_tag('asset/css/sli_lipi.css');?>
+    
+    <!-- Theme style -->
+    <?php echo link_tag('asset/css/sli_lipi.css');?>
 
 
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-          <?php echo '<script'; ?>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <?php echo '<script'; ?>
  src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"><?php echo '</script'; ?>
 >
-          <?php echo '<script'; ?>
+      <?php echo '<script'; ?>
  src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"><?php echo '</script'; ?>
 >
-        <![endif]-->
-    </head>
-    <body class="skin-blue">
-        <!-- Header -->
-        <?php echo $_smarty_tpl->getSubTemplate ('layouts/header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+    <![endif]-->
+</head>
+<body class="skin-blue">
+    <!-- Header -->
+    <?php echo $_smarty_tpl->getSubTemplate ('layouts/header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
+
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+        <!-- Menu Sidebar -->
+        <?php echo $_smarty_tpl->getSubTemplate ('layouts/menu.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+
+        <!-- End Menu Sidebar -->
+        <!-- Content -->
+        <aside class="right-side">
         
-        <div class="wrapper row-offcanvas row-offcanvas-left">
-            <!-- Menu Sidebar -->
-            <?php echo $_smarty_tpl->getSubTemplate ('layouts/menu.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
-
-            <!-- End Menu Sidebar -->
-            <!-- Content -->
-            <aside class="right-side">
-                
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <?php if (in_array("admin",$_smarty_tpl->tpl_vars['groups']->value)||in_array("superadmin",$_smarty_tpl->tpl_vars['groups']->value)) {?>
@@ -315,38 +319,134 @@ $_smarty_tpl->tpl_vars['operator']->_loop = true;
 <!-- MAILBOX END -->
 </section><!-- /.content -->
 
-            </aside>
-            <!-- End Content -->
-        </div>
-        <!-- Modal -->    
-        
-        <!-- End Modal -->
-        
-        <!-- jQuery 2.0.2 -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; <?php echo date('Y');?>
+ <a href="#">Bahasa Langit</a>.</strong> &nbsp;&nbsp;All rights reserved.
+        </footer>
+    </aside>
+    <!-- End Content -->
 
-        <?php echo '<script'; ?>
+</div>
+<!-- Modal -->    
+
+<!-- End Modal -->
+
+<!-- jQuery 2.0.2 -->
+
+<?php echo '<script'; ?>
  src="<?php echo base_url();?>
 asset/js/jquery-2.0.2.min.js"><?php echo '</script'; ?>
 >
-        <!-- Bootstrap -->
-        <?php echo '<script'; ?>
+<!-- Bootstrap -->
+<?php echo '<script'; ?>
  src="<?php echo base_url();?>
 asset/js/bootstrap.min.js" type="text/javascript"><?php echo '</script'; ?>
 >
-        <!-- Addons Plugins -->
-        
+<!-- Addons Plugins -->
+
     <?php echo '<script'; ?>
  type="text/javascript" src="<?php echo base_url();?>
 asset/js/plugins/jquery-form/jquery.form.min.js"><?php echo '</script'; ?>
 >
 
-        <!-- SLI LIPI App -->
-        <?php echo '<script'; ?>
+<!-- SLI LIPI App -->
+<?php echo '<script'; ?>
  src="<?php echo base_url();?>
 asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
 >
-        <!-- Addons Scripts -->
-        
+<!-- Addons Scripts -->
+<?php echo '<script'; ?>
+ type="text/javascript">
+    $(document).ready(function () {
+        check();
+        $("#notif").click(function () {
+            var i;
+            var html = "";
+            $.ajax({
+                url: "<?php echo base_url();?>
+vendor/slim/slim/notif/<?php echo $_smarty_tpl->tpl_vars['user']->value->id;?>
+",
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "error") {
+                        if (parseInt(data.total) > 0) {
+                            var string_header = "Ada " + data.total + " Pemberitahuan Baru";
+                            $("#notif_header").text(string_header);
+                            for (i in data.notifikasi) {
+                                html += "<li>";
+                                html += "<a href='" + data.notifikasi[i].link + "'>";
+                                html += data.notifikasi[i].message;
+                                html += "</a>";
+                                html += "</li>";
+
+                                $.ajax({
+                                    url: "<?php echo base_url();?>
+vendor/slim/slim/notif/update/" + data.notifikasi[i].id,
+                                    success: function (data) {
+                                    }
+                                });
+                            }
+
+                            $.ajax({
+                                url: "<?php echo base_url();?>
+vendor/slim/slim/notif/update/<?php echo $_smarty_tpl->tpl_vars['user']->value->id;?>
+",
+                                success: function (data) {
+                                }
+                            });
+
+                            $("#header_content").empty();
+                            $("#header_content").append(html);
+                    } else {
+                        $("#notif_header").empty();
+                        $("#notif_header").text("Tidak Ada Pemberitahuan Baru");
+                        $.ajax({
+                            url: "<?php echo base_url();?>
+vendor/slim/slim/notif/old/<?php echo $_smarty_tpl->tpl_vars['user']->value->id;?>
+",
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.length != 0) {
+                                    for (i in data) {
+                                        html += "<li>";
+                                        html += "<a href='" + data[i].link + "'>";
+                                        html += "<p style='padding-left: 10px;padding-top: 2px;'>"+data[i].message+"</p>";
+                                        html += "</a>";
+                                        html += "</li>";
+                                    }
+                                    $("#header_content").empty();
+                                    $("#header_content").append(html);
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    });
+});
+
+    function check() {
+        $.ajax({
+            url: "<?php echo base_url();?>
+vendor/slim/slim/notif/check/<?php echo $_smarty_tpl->tpl_vars['user']->value->id;?>
+",
+            dataType: "json",
+            success: function (data) {
+                if (data.status == "success") {
+                    if (data.total == 0) {
+                        $("#notif_count").empty();
+                    } else {
+                        $("#notif_count").empty();
+                        $("#notif_count").text(data.total);
+                    }
+                }
+            }
+        });
+    }    
+<?php echo '</script'; ?>
+>
+
     <?php echo '<script'; ?>
  type="text/javascript">
         function beforeSubmitAvatar() {
@@ -402,5 +502,5 @@ asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
     <?php echo '</script'; ?>
 >
 
-    </body>
+</body>
 </html><?php }} ?>

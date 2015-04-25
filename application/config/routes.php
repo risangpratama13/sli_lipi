@@ -39,7 +39,7 @@
 */
 
 $route['default_controller'] = "auth/index";
-$route['404_override'] = '';
+$route['404_override'] = 'auth/not_found';
 
 $route['login'] = "auth/login";
 $route['logout'] = "auth/logout";
@@ -94,6 +94,8 @@ $route['konfirmasi_pengujian'] = "testing/leader_confirm_test";
 
 $route['tool_stat'] = "statistics/tool_statistic";
 $route['operator_stat'] = "statistics/operator_statistic";
+
+$route['all_notif/(:num)'] = "notifications/index/$1";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
