@@ -37,7 +37,7 @@ $app->get('/notif/:id', $authKey, function($id) use($app) {
             foreach ($cursor as $doc) {
                 $data[] = array(
                     'id' => $doc["_id"]->{'$id'},
-                    'message' => $doc['message'],
+                    'message' => word_wrap($doc['message'], 20, "<br />\n"),
                     'category' => $doc['notif_cat'],
                     'link' => $doc['notif_link']
                 );
@@ -59,7 +59,7 @@ $app->get('/notif/old/:id', $authKey, function($id) use($app) {
         if (!empty($cursor)) {
             foreach ($cursor as $doc) {
                 $data[] = array(                    
-                    'message' => $doc['message'],
+                    'message' => word_wrap($doc['message'], 20, "<br />\n"),
                     'category' => $doc['notif_cat'],
                     'link' => $doc['notif_link']
                 );
