@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 12:29:32
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-28 05:29:51
          compiled from "application\views\index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:218035487144de015c5-93114714%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -13,7 +13,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1429939767,
+      1 => 1429949464,
       2 => 'file',
     ),
     '668c70bfc32ed27c742429d00bb2307df1fd048a' => 
@@ -35,10 +35,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'version' => 'Smarty-3.1.21-dev',
   'unifunc' => 'content_5487144de4f7c4_96202581',
-  'variables' => 
-  array (
-    'user' => 0,
-  ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5487144de4f7c4_96202581')) {function content_5487144de4f7c4_96202581($_smarty_tpl) {?><!DOCTYPE html>
@@ -110,14 +106,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <?php /*  Call merged included template "home/tiles.tpl" */
 $_tpl_stack[] = $_smarty_tpl;
  $_smarty_tpl = $_smarty_tpl->setupInlineSubTemplate('home/tiles.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0, '218035487144de015c5-93114714');
-content_553b263cb75640_53253879($_smarty_tpl);
+content_553eb85f60a3d5_76055020($_smarty_tpl);
 $_smarty_tpl = array_pop($_tpl_stack); 
 /*  End of included template "home/tiles.tpl" */?>            
         </div><!-- /.row -->
         <?php /*  Call merged included template "home/calendar.tpl" */
 $_tpl_stack[] = $_smarty_tpl;
  $_smarty_tpl = $_smarty_tpl->setupInlineSubTemplate('home/calendar.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0, '218035487144de015c5-93114714');
-content_553b263cba05d3_54010867($_smarty_tpl);
+content_553eb85f6391e1_83515948($_smarty_tpl);
 $_smarty_tpl = array_pop($_tpl_stack); 
 /*  End of included template "home/calendar.tpl" */?>
     </section><!-- /.content -->
@@ -158,97 +154,7 @@ asset/js/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"><?php 
 asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
 >
 <!-- Addons Scripts -->
-<?php echo '<script'; ?>
- type="text/javascript">
-    $(document).ready(function () {
-        check();
-        $("#notif").click(function () {
-            var i;
-            var html = "";
-            $.ajax({
-                url: "<?php echo base_url();?>
-vendor/slim/slim/notif/<?php echo $_smarty_tpl->tpl_vars['user']->value->id;?>
-",
-                dataType: "json",
-                success: function (data) {
-                    if (data.status != "error") {
-                        if (parseInt(data.total) > 0) {
-                            var string_header = "Ada " + data.total + " Pemberitahuan Baru";
-                            $("#notif_header").text(string_header);
-                            for (i in data.notifikasi) {
-                                html += "<li>";
-                                html += "<a href='" + data.notifikasi[i].link + "'>";
-                                html += data.notifikasi[i].message;
-                                html += "</a>";
-                                html += "</li>";
 
-                                $.ajax({
-                                    url: "<?php echo base_url();?>
-vendor/slim/slim/notif/update/" + data.notifikasi[i].id,
-                                    success: function (data) {
-                                    }
-                                });
-                            }
-
-                            $.ajax({
-                                url: "<?php echo base_url();?>
-vendor/slim/slim/notif/update/<?php echo $_smarty_tpl->tpl_vars['user']->value->id;?>
-",
-                                success: function (data) {
-                                }
-                            });
-
-                            $("#header_content").empty();
-                            $("#header_content").append(html);
-                    } else {
-                        $("#notif_header").empty();
-                        $("#notif_header").text("Tidak Ada Pemberitahuan Baru");
-                        $.ajax({
-                            url: "<?php echo base_url();?>
-vendor/slim/slim/notif/old/<?php echo $_smarty_tpl->tpl_vars['user']->value->id;?>
-",
-                            dataType: "json",
-                            success: function (data) {
-                                if (data.length != 0) {
-                                    for (i in data) {
-                                        html += "<li>";
-                                        html += "<a href='" + data[i].link + "'>";
-                                        html += "<p style='padding-left: 10px;padding-top: 2px;'>"+data[i].message+"</p>";
-                                        html += "</a>";
-                                        html += "</li>";
-                                    }
-                                    $("#header_content").empty();
-                                    $("#header_content").append(html);
-                                }
-                            }
-                        });
-                    }
-                }
-            }
-        });
-    });
-});
-
-    function check() {
-        $.ajax({
-            url: "<?php echo base_url();?>
-vendor/slim/slim/notif/check/<?php echo $_smarty_tpl->tpl_vars['user']->value->id;?>
-",
-            dataType: "json",
-            success: function (data) {
-                if (data.status == "success") {
-                    if (data.total == 0) {
-                        $("#notif_count").empty();
-                    } else {
-                        $("#notif_count").empty();
-                        $("#notif_count").text(data.total);
-                    }
-                }
-            }
-        });
-    }    
-<?php echo '</script'; ?>
->
 
     <?php echo '<script'; ?>
  type="text/javascript">
@@ -280,9 +186,9 @@ testing/calendar'
 
 </body>
 </html><?php }} ?>
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 12:29:32
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-28 05:29:51
          compiled from "application\views\home\tiles.tpl" */ ?>
-<?php if ($_valid && !is_callable('content_553b263cb75640_53253879')) {function content_553b263cb75640_53253879($_smarty_tpl) {?><?php if (in_array("admin",$_smarty_tpl->tpl_vars['groups']->value)||in_array("superadmin",$_smarty_tpl->tpl_vars['groups']->value)) {?>
+<?php if ($_valid && !is_callable('content_553eb85f60a3d5_76055020')) {function content_553eb85f60a3d5_76055020($_smarty_tpl) {?><?php if (in_array("admin",$_smarty_tpl->tpl_vars['groups']->value)||in_array("superadmin",$_smarty_tpl->tpl_vars['groups']->value)) {?>
     <div class="col-lg-3 col-xs-6">            
         <div class="small-box bg-aqua-gradient">
             <div class="inner">
@@ -401,9 +307,9 @@ rincian_saldo" class="small-box-footer">
         </div>
     </div><!-- ./col -->
 <?php }?><?php }} ?>
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 12:29:32
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-28 05:29:51
          compiled from "application\views\home\calendar.tpl" */ ?>
-<?php if ($_valid && !is_callable('content_553b263cba05d3_54010867')) {function content_553b263cba05d3_54010867($_smarty_tpl) {?><div class="row">    
+<?php if ($_valid && !is_callable('content_553eb85f6391e1_83515948')) {function content_553eb85f6391e1_83515948($_smarty_tpl) {?><div class="row">    
     <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header">

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-25 07:33:33
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-28 00:33:09
          compiled from "application\views\testing\history.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:8472549a1e8a8c8b89-83129481%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9afc75256c57d70903a482fc76a37d51beb6fa3f' => 
     array (
       0 => 'application\\views\\testing\\history.tpl',
-      1 => 1428191705,
+      1 => 1430173984,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
     array (
       0 => 'application\\views\\layouts\\master.tpl',
-      1 => 1429939767,
+      1 => 1429949464,
       2 => 'file',
     ),
   ),
@@ -23,10 +23,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'version' => 'Smarty-3.1.21-dev',
   'unifunc' => 'content_549a1e8aba33b7_11466323',
-  'variables' => 
-  array (
-    'user' => 0,
-  ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_549a1e8aba33b7_11466323')) {function content_549a1e8aba33b7_11466323($_smarty_tpl) {?><?php if (!is_callable('smarty_function_date_diff')) include 'C:\\xampp\\htdocs\\sli_lipi\\application\\third_party\\Smarty\\libs\\plugins\\function.date_diff.php';
@@ -298,101 +294,12 @@ asset/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"><?ph
 asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
 >
 <!-- Addons Scripts -->
-<?php echo '<script'; ?>
- type="text/javascript">
-    $(document).ready(function () {
-        check();
-        $("#notif").click(function () {
-            var i;
-            var html = "";
-            $.ajax({
-                url: "<?php echo base_url();?>
-vendor/slim/slim/notif/<?php echo $_smarty_tpl->tpl_vars['user']->value->id;?>
-",
-                dataType: "json",
-                success: function (data) {
-                    if (data.status != "error") {
-                        if (parseInt(data.total) > 0) {
-                            var string_header = "Ada " + data.total + " Pemberitahuan Baru";
-                            $("#notif_header").text(string_header);
-                            for (i in data.notifikasi) {
-                                html += "<li>";
-                                html += "<a href='" + data.notifikasi[i].link + "'>";
-                                html += data.notifikasi[i].message;
-                                html += "</a>";
-                                html += "</li>";
 
-                                $.ajax({
-                                    url: "<?php echo base_url();?>
-vendor/slim/slim/notif/update/" + data.notifikasi[i].id,
-                                    success: function (data) {
-                                    }
-                                });
-                            }
-
-                            $.ajax({
-                                url: "<?php echo base_url();?>
-vendor/slim/slim/notif/update/<?php echo $_smarty_tpl->tpl_vars['user']->value->id;?>
-",
-                                success: function (data) {
-                                }
-                            });
-
-                            $("#header_content").empty();
-                            $("#header_content").append(html);
-                    } else {
-                        $("#notif_header").empty();
-                        $("#notif_header").text("Tidak Ada Pemberitahuan Baru");
-                        $.ajax({
-                            url: "<?php echo base_url();?>
-vendor/slim/slim/notif/old/<?php echo $_smarty_tpl->tpl_vars['user']->value->id;?>
-",
-                            dataType: "json",
-                            success: function (data) {
-                                if (data.length != 0) {
-                                    for (i in data) {
-                                        html += "<li>";
-                                        html += "<a href='" + data[i].link + "'>";
-                                        html += "<p style='padding-left: 10px;padding-top: 2px;'>"+data[i].message+"</p>";
-                                        html += "</a>";
-                                        html += "</li>";
-                                    }
-                                    $("#header_content").empty();
-                                    $("#header_content").append(html);
-                                }
-                            }
-                        });
-                    }
-                }
-            }
-        });
-    });
-});
-
-    function check() {
-        $.ajax({
-            url: "<?php echo base_url();?>
-vendor/slim/slim/notif/check/<?php echo $_smarty_tpl->tpl_vars['user']->value->id;?>
-",
-            dataType: "json",
-            success: function (data) {
-                if (data.status == "success") {
-                    if (data.total == 0) {
-                        $("#notif_count").empty();
-                    } else {
-                        $("#notif_count").empty();
-                        $("#notif_count").text(data.total);
-                    }
-                }
-            }
-        });
-    }    
-<?php echo '</script'; ?>
->
 
     <?php echo '<script'; ?>
  type="text/javascript">
         function ubahStatus(id, status) {
+            alert("aaa");
             $.ajax({
                 url : "<?php echo base_url();?>
 testing/update_status",

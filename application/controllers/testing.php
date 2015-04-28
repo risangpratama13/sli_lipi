@@ -395,21 +395,21 @@ class Testing extends CI_Controller {
             switch ($status) {
                 case 'AL' :
                     $data = array('status' => 'AL');
-                    $message = $user->full_name. " Menyetujui Pengujian Anda";
-                    $category = 9;
+//                    $message = $user->full_name. " Menyetujui Pengujian Anda";
+//                    $category = 9;
                     break;
                 case 'D' :
                     $data = array('status' => 'D');
-                    $message = $user->full_name. " Tidak Menyetujui Pengujian Anda";
-                    $category = 10;
+//                    $message = $user->full_name. " Tidak Menyetujui Pengujian Anda";
+//                    $category = 10;
                     break;
                 case 'F':
                     $data = array(
                         'status' => 'F',
                         'finish_date' => date('Y-m-d H:i:s')
                     );
-                    $message = "Pengujian Anda Telah Selesai";
-                    $category = 11;
+//                    $message = "Pengujian Anda Telah Selesai";
+//                    $category = 11;
                     break;
             }
             if ($this->test_order->update($id, $data)) {
