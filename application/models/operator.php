@@ -23,11 +23,14 @@ class Operator extends CI_Model {
         return $query->result();
     }
             
-    function get_all() {
+    function get_all($group = NULL) {
         $this->db->select('operators.*, users.full_name, categories.cat_name');
         $this->db->from($this->table);
         $this->db->join('categories','operators.category_id = categories.id');
         $this->db->join('users', 'operators.user_id = users.id');
+        if($group) {
+            $this->db->group_by($group);
+        }
         $query = $this->db->get();
         return $query->result();
     }

@@ -103,7 +103,7 @@ class Test_order extends CI_Model {
     function count_hours() {
         $query = "SELECT operator_id, SUM(TIMESTAMPDIFF(HOUR, start_date, finish_date)) as total_hours "
                 . "FROM test_orders "
-                . "WHERE status = 'AO' "
+                . "WHERE status = 'F' "
                 . "GROUP BY operator_id";        
         $result = $this->db->query($query);
         return $result->result();

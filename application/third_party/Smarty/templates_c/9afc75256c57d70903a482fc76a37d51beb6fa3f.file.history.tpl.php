@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-28 00:33:09
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-01 00:46:41
          compiled from "application\views\testing\history.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:8472549a1e8a8c8b89-83129481%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9afc75256c57d70903a482fc76a37d51beb6fa3f' => 
     array (
       0 => 'application\\views\\testing\\history.tpl',
-      1 => 1430173984,
+      1 => 1430260984,
       2 => 'file',
     ),
     '5303d7aeafdcc8afd4652ad8c2cc04e723109c39' => 
@@ -299,7 +299,6 @@ asset/js/Sli_Lipi/app.js" type="text/javascript"><?php echo '</script'; ?>
     <?php echo '<script'; ?>
  type="text/javascript">
         function ubahStatus(id, status) {
-            alert("aaa");
             $.ajax({
                 url : "<?php echo base_url();?>
 testing/update_status",

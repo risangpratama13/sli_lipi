@@ -78,7 +78,7 @@ class Statistics extends CI_Controller {
             $this->load->model('operator');
             $this->load->model('test_order');
 
-            $operators = $this->operator->get_all();
+            $operators = $this->operator->get_all("operators.user_id");
             $total_hours = $this->test_order->count_hours();
 
             $total = array();
